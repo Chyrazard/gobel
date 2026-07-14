@@ -10,7 +10,7 @@ function belctech_asset_version( $relative_path ) {
 
 // The theme's visual layer is global, independently of the swatch provider.
 add_action( 'wp_enqueue_scripts', static function () {
-	wp_enqueue_style( 'belctech-native', BELCTECH_THEME_URI . '/assets/css/belctech.css', array( 'belctech-core' ), belctech_asset_version( 'assets/css/belctech.css' ) );
+	wp_enqueue_style( 'belctech-native', BELCTECH_THEME_URI . '/assets/css/belctech.css', array( 'belctech-ecommerce' ), belctech_asset_version( 'assets/css/belctech.css' ) );
 	wp_add_inline_style( 'belctech-native', belctech_design_css() );
 }, 30 );
 

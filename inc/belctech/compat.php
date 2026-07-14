@@ -68,12 +68,6 @@ function belctech_migrate_legacy_namespace() {
 		if ( null !== $value ) update_option( $option_name, belctech_replace_legacy_namespace( $value ), false );
 	}
 
-	foreach ( array( 'post_content', 'post_excerpt' ) as $column ) {
-		foreach ( array( strtoupper( $legacy ) => 'BELCTECH', ucfirst( $legacy ) => 'Belctech', $legacy => 'belctech' ) as $old => $new ) {
-			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->posts} SET {$column} = REPLACE({$column}, %s, %s) WHERE {$column} LIKE %s", $old, $new, '%' . $wpdb->esc_like( $old ) . '%' ) );
-		}
-	}
-
 	update_option( 'belctech_namespace_migrated_1036', time(), false );
 }
 add_action( 'after_setup_theme', 'belctech_migrate_legacy_namespace', 0 );

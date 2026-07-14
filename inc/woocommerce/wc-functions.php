@@ -1741,7 +1741,8 @@ if( ! belctech_wc_active() ) {
 			$product_id = $parent_id;
 		}
 
-		echo apply_filters( 'belctech_product_quickview_link', '<a href=' . get_permalink( $product_id ) . ' title="'. esc_html__( 'Quick View', 'belctech-ecommerce' ) .'" data-product_id="' . esc_attr( $product_id ) . '" class="et-quickview-btn et-tooltip product_type_' . esc_attr( $product_type ) . '"><span class="text">'. esc_html__( 'Quick View', 'belctech-ecommerce' ) . '</span><span class="icon"><span class="et-icon et-maximize-2"></span></span></a>' );
+		$quick_view_label = esc_html__( 'Vista rápida', 'belctech-ecommerce' );
+		echo apply_filters( 'belctech_product_quickview_link', '<a href="' . esc_url( get_permalink( $product_id ) ) . '" title="' . $quick_view_label . '" data-product_id="' . esc_attr( $product_id ) . '" class="et-quickview-btn et-tooltip product_type_' . esc_attr( $product_type ) . '"><span class="text">' . $quick_view_label . '</span><span class="icon"><span class="et-icon et-maximize-2"></span></span></a>' );
 	}
 
 	function belctech_quick_view_show_product_images () {
@@ -1816,4 +1817,3 @@ if ( version_compare( WC_VERSION, '7.0', '<' ) ) {
 	}
   }
 }
-

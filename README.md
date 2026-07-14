@@ -1,6 +1,6 @@
 # Belctech Ecommerce
 
-Current version: 1.0.36.
+Current version: 1.0.37.
 
 Belctech Ecommerce is an installable WooCommerce theme derived from the existing
 site contract while replacing its setup framework and optional feature plugins

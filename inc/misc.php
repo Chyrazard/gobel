@@ -520,7 +520,7 @@ add_action( 'belctech_quick_search_button', 'belctech_quick_search_button' );
 function belctech_social_share() {
 	if ( function_exists( 'belctech_social_share_links' ) ) {?>
 		<div class="post-share">
-			<?php belctech_social_share_links(); // From plugin belctech-core  ?>
+			<?php belctech_social_share_links(); // Built-in theme module. ?>
 		</div>
 	<?php }
 }

@@ -96,8 +96,8 @@ function belctech_customize_register( WP_Customize_Manager $customizer ) {
 	belctech_customize_field( $customizer, 'campaign_autoplay_speed', 'Rotation speed (ms)', 'belctech_header_campaign', 'number', 3000, array( 'min' => 1500, 'max' => 12000, 'step' => 250 ) );
 	belctech_customize_field( $customizer, 'campaign_slider_transition', 'Transition', 'belctech_header_campaign', 'select', 'slide', array( 'slide' => 'Slide', 'fade' => 'Fade' ) );
 	belctech_customize_field( $customizer, 'campaign_bar_dismissible', 'Allow visitors to close it', 'belctech_header_campaign', 'checkbox', false );
-	belctech_customize_field( $customizer, 'campaign_bar_background', 'Background color', 'belctech_header_campaign', 'color', '#e97a7e' );
-	belctech_customize_field( $customizer, 'campaign_bar_text_color', 'Text color', 'belctech_header_campaign', 'color', '#ffffff' );
+	belctech_customize_field( $customizer, 'campaign_bar_background_color', 'Background color', 'belctech_header_campaign', 'color', '#e97a7e' );
+	belctech_customize_field( $customizer, 'campaign_bar_font_color', 'Text color', 'belctech_header_campaign', 'color', '#ffffff' );
 
 	belctech_customize_field( $customizer, 'shop_product_listing', 'Card style', 'belctech_shop_cards', 'select', 'style1', array( 'style1' => 'Style 1', 'style2' => 'Style 2', 'style3' => 'Style 3', 'style4' => 'Style 4' ) );
 	belctech_customize_field( $customizer, 'shop_product_img_hover', 'Additional image on hover', 'belctech_shop_cards', 'checkbox', true );
@@ -245,8 +245,8 @@ function belctech_design_css() {
 	$logo          = max( 16, min( 90, absint( get_theme_mod( 'logo_height', 42 ) ) ) );
 	$logo_sticky   = max( 14, min( 70, absint( get_theme_mod( 'logo_height_sticky', 28 ) ) ) );
 	$logo_mobile   = max( 14, min( 60, absint( get_theme_mod( 'logo_height_mobile', 30 ) ) ) );
-	$campaign_bg   = sanitize_hex_color( get_theme_mod( 'campaign_bar_background', '#e97a7e' ) ) ?: '#e97a7e';
-	$campaign_text = sanitize_hex_color( get_theme_mod( 'campaign_bar_text_color', '#ffffff' ) ) ?: '#ffffff';
+	$campaign_bg   = sanitize_hex_color( get_theme_mod( 'campaign_bar_background_color', get_theme_mod( 'campaign_bar_background', '#e97a7e' ) ) ) ?: '#e97a7e';
+	$campaign_text = sanitize_hex_color( get_theme_mod( 'campaign_bar_font_color', get_theme_mod( 'campaign_bar_text_color', '#ffffff' ) ) ) ?: '#ffffff';
 	$button_radius = max( 0, min( 24, absint( get_theme_mod( 'product_button_radius', 6 ) ) ) );
 
 	return ':root{--belctech-header-height:' . $header . 'px;--belctech-sticky-height:' . $sticky . 'px;--belctech-campaign-bg:' . $campaign_bg . ';--belctech-campaign-text:' . $campaign_text . ';--belctech-product-button-radius:' . $button_radius . 'px;}'

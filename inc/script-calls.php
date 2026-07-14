@@ -158,8 +158,8 @@
 			wp_localize_script( 'belctech-app', 'belctech_theme_vars', array(
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'l10n' => array (
-					'back' => esc_html__("Back", 'belctech-ecommerce'),
-					'view_cart' => esc_html__("View cart", 'belctech-ecommerce')
+					'back' => esc_html__( 'Volver', 'belctech-ecommerce' ),
+					'view_cart' => esc_html__( 'Ver carrito', 'belctech-ecommerce' )
 				),
 				'icons' => array(
 					'prev_arrow' => belctech_load_template_part('assets/img/svg/chevron-left.svg'),
@@ -344,5 +344,4 @@
 
 		}
 		add_action( 'wp_print_styles', 'belctech_deregister_styles', 100 );
-
 

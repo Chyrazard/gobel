@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.37
+
+- Restored the native visual stylesheet after the namespace migration by
+  linking it to the registered Belctech theme handle.
+- Restored the Spanish quick-view label without relying on an external theme
+  translation package.
+- Restored the existing campaign-bar color settings from the inherited
+  Customizer keys.
+- Limited stored-data migration to internal identifiers so visible page and
+  product copy is never rewritten.
+
 ## 1.0.36
 
 - Replaced the inherited theme namespace across PHP, JavaScript, CSS, asset
