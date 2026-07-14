@@ -18,12 +18,13 @@ define( 'BELCTECH_INC_URI', get_template_directory_uri() . '/inc' );
 define( 'BELCTECH_NAMESPACE', 'belctech-ecommerce' );
 
 // Constant: Theme version
-define( 'BELCTECH_THEME_VERSION', '1.0.37' );
+define( 'BELCTECH_THEME_VERSION', '1.0.38' );
 define( 'BELCTECH_FEATURES_DIR', BELCTECH_INC_DIR . '/belctech' );
 
 
 // Native feature layer. Stored data is migrated before frontend templates render.
 require BELCTECH_FEATURES_DIR . '/compat.php';
+require BELCTECH_FEATURES_DIR . '/frontend-i18n.php';
 require BELCTECH_FEATURES_DIR . '/customizer.php';
 require BELCTECH_FEATURES_DIR . '/product-meta.php';
 require BELCTECH_FEATURES_DIR . '/content-meta.php';

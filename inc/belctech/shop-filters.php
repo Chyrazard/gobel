@@ -13,12 +13,22 @@ function belctech_filter_widget_args() {
 }
 
 function belctech_render_active_filters() {
-	if ( ! class_exists( 'WC_Widget_Layered_Nav_Filters' ) ) return;
-	the_widget(
-		'WC_Widget_Layered_Nav_Filters',
-		array( 'title' => __( 'Filtros activos', 'belctech-ecommerce' ) ),
-		belctech_filter_widget_args()
-	);
+	$chips = belctech_get_active_filter_chips();
+	if ( ! $chips ) return;
+	?>
+	<li class="widget widget_layered_nav_filters belctech-active-filters-widget">
+		<h6 class="widgettitle"><span><?php esc_html_e( 'Filtros activos', 'belctech-ecommerce' ); ?></span></h6>
+		<ul class="belctech-active-filter-chips">
+			<?php foreach ( $chips as $chip ) : ?>
+				<li>
+					<a href="<?php echo esc_url( $chip['url'] ); ?>" rel="nofollow" aria-label="<?php echo esc_attr( sprintf( __( 'Quitar filtro: %s', 'belctech-ecommerce' ), $chip['label'] ) ); ?>">
+						<span><?php echo esc_html( $chip['label'] ); ?></span><span class="belctech-filter-chip-remove" aria-hidden="true">&times;</span>
+					</a>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+	</li>
+	<?php
 }
 
 function belctech_filter_current_url() {
@@ -37,9 +47,106 @@ function belctech_filter_query_keys() {
 	return array_unique( $keys );
 }
 
-function belctech_sale_filter_is_active() {
-	return isset( $_GET['on_sale'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['on_sale'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+function belctech_filter_value( $key ) {
+	if ( ! isset( $_GET[ $key ] ) ) return ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$value = wp_unslash( $_GET[ $key ] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	return is_scalar( $value ) ? sanitize_text_field( (string) $value ) : '';
 }
+
+function belctech_filter_price_label( $value ) {
+	if ( '' === $value ) return '';
+	if ( function_exists( 'wc_price' ) ) {
+		return trim( html_entity_decode( wp_strip_all_tags( wc_price( (float) $value ) ), ENT_QUOTES, get_bloginfo( 'charset' ) ) );
+	}
+	return number_format_i18n( (float) $value );
+}
+
+function belctech_get_active_filter_chips() {
+	$chips       = array();
+	$filter_keys = belctech_filter_query_keys();
+	$current_url = remove_query_arg( array( 'product-page', 'paged' ), belctech_filter_current_url() );
+
+	if ( belctech_sale_filter_is_active() ) {
+		$chips[] = array(
+			'label' => __( 'En descuento', 'belctech-ecommerce' ),
+			'url'   => remove_query_arg( 'on_sale', $current_url ),
+		);
+	}
+
+	foreach ( $filter_keys as $key ) {
+		if ( 'on_sale' === $key || 0 === strpos( $key, 'query_type_' ) ) continue;
+
+		if ( 0 === strpos( $key, 'filter_' ) ) {
+			$attribute = substr( $key, 7 );
+			$taxonomy  = 0 === strpos( $attribute, 'pa_' ) ? $attribute : ( function_exists( 'wc_attribute_taxonomy_name' ) ? wc_attribute_taxonomy_name( $attribute ) : 'pa_' . $attribute );
+			$values    = array_values( array_unique( array_filter( array_map( 'sanitize_title', explode( ',', belctech_filter_value( $key ) ) ) ) ) );
+			$heading   = function_exists( 'wc_attribute_label' ) ? wc_attribute_label( $taxonomy ) : ucfirst( str_replace( array( '-', '_' ), ' ', $attribute ) );
+
+			foreach ( $values as $value ) {
+				$term      = taxonomy_exists( $taxonomy ) ? get_term_by( 'slug', $value, $taxonomy ) : false;
+				$name      = $term instanceof WP_Term ? $term->name : ucfirst( str_replace( '-', ' ', $value ) );
+				$remaining = array_values( array_diff( $values, array( $value ) ) );
+				$url       = $remaining ? add_query_arg( $key, implode( ',', $remaining ), $current_url ) : remove_query_arg( array( $key, 'query_type_' . $attribute ), $current_url );
+				$chips[]   = array(
+					'label' => trim( $heading . ': ' . $name ),
+					'url'   => $url,
+				);
+			}
+			continue;
+		}
+
+		if ( 'min_price' === $key || 'max_price' === $key ) {
+			if ( 'max_price' === $key && in_array( 'min_price', $filter_keys, true ) ) continue;
+			$minimum = belctech_filter_price_label( belctech_filter_value( 'min_price' ) );
+			$maximum = belctech_filter_price_label( belctech_filter_value( 'max_price' ) );
+			if ( $minimum || $maximum ) {
+				$chips[] = array(
+					'label' => sprintf( __( 'Precio: %1$s - %2$s', 'belctech-ecommerce' ), $minimum ?: '0', $maximum ?: __( 'sin límite', 'belctech-ecommerce' ) ),
+					'url'   => remove_query_arg( array( 'min_price', 'max_price' ), $current_url ),
+				);
+			}
+			continue;
+		}
+
+		if ( 'rating_filter' === $key ) {
+			$rating = absint( belctech_filter_value( $key ) );
+			if ( $rating ) {
+				$chips[] = array(
+					'label' => sprintf( _n( '%s estrella o más', '%s estrellas o más', $rating, 'belctech-ecommerce' ), $rating ),
+					'url'   => remove_query_arg( $key, $current_url ),
+				);
+			}
+		}
+	}
+
+	return $chips;
+}
+
+function belctech_render_toolbar_active_filters() {
+	$chips = belctech_get_active_filter_chips();
+	if ( ! $chips ) return;
+	?>
+	<div class="belctech-toolbar-active-filters" aria-label="<?php esc_attr_e( 'Filtros activos', 'belctech-ecommerce' ); ?>">
+		<?php foreach ( $chips as $chip ) : ?>
+			<a href="<?php echo esc_url( $chip['url'] ); ?>" rel="nofollow" aria-label="<?php echo esc_attr( sprintf( __( 'Quitar filtro: %s', 'belctech-ecommerce' ), $chip['label'] ) ); ?>">
+				<span><?php echo esc_html( $chip['label'] ); ?></span><span class="belctech-filter-chip-remove" aria-hidden="true">&times;</span>
+			</a>
+		<?php endforeach; ?>
+	</div>
+	<?php
+}
+
+function belctech_sale_filter_is_active() {
+	return '1' === belctech_filter_value( 'on_sale' );
+}
+
+function belctech_preserve_sale_filter_in_layered_nav( $link ) {
+	if ( belctech_sale_filter_is_active() ) {
+		$link = add_query_arg( 'on_sale', '1', $link );
+	}
+	return remove_query_arg( array( 'product-page', 'paged' ), $link );
+}
+add_filter( 'woocommerce_layered_nav_link', 'belctech_preserve_sale_filter_in_layered_nav', 20 );
 
 function belctech_render_sale_filter() {
 	$active = belctech_sale_filter_is_active();

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.38
+
+- Added removable active-filter tags beside the catalog filter control and
+  inside the filter panel.
+- Preserved the native `on_sale` filter when combining it with colors, sizes,
+  prices, ratings, or other product attributes.
+- Kept the sale checkbox synchronized with the actual catalog query.
+- Added built-in Spanish translations for the public theme interface without
+  requiring Loco Translate.
+
 ## 1.0.37
 
 - Restored the native visual stylesheet after the namespace migration by

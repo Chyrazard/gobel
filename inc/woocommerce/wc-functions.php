@@ -255,13 +255,14 @@ if( ! belctech_wc_active() ) {
 						<?php
 						// Used for mobile filters
 						if ( $filters ) : ?>
+							<?php belctech_render_toolbar_active_filters(); ?>
 							<div class="filter-trigger-box">
-								<button id="et-shop-filters" class="filter-trigger filter-popup"><span class="icon-filter"><?php echo belctech_load_template_part('assets/img/svg/sliders.svg'); ?></span> <?php esc_html_e('Filters', 'belctech-ecommerce'); ?><span class="et-active-filters-count"></span></button>
+								<button id="et-shop-filters" class="filter-trigger filter-popup"><span class="icon-filter"><?php echo belctech_load_template_part('assets/img/svg/sliders.svg'); ?></span> <?php esc_html_e( 'Filtros', 'belctech-ecommerce' ); ?><span class="et-active-filters-count"></span></button>
 
 								<?php
 								// Header filters button
 								if ($filter_position == 'header') : ?>
-									<button id="et-shop-filters-header" class="filter-trigger filter-top"><span class="icon-filter"><?php echo belctech_load_template_part('assets/img/svg/sliders.svg'); ?></span> <span class="icon-close"><?php echo belctech_load_template_part('assets/img/svg/x.svg'); ?></span> <?php esc_html_e('Filters', 'belctech-ecommerce'); ?><span class="et-active-filters-count"></span></button>
+									<button id="et-shop-filters-header" class="filter-trigger filter-top"><span class="icon-filter"><?php echo belctech_load_template_part('assets/img/svg/sliders.svg'); ?></span> <span class="icon-close"><?php echo belctech_load_template_part('assets/img/svg/x.svg'); ?></span> <?php esc_html_e( 'Filtros', 'belctech-ecommerce' ); ?><span class="et-active-filters-count"></span></button>
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>

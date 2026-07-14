@@ -91,6 +91,16 @@
 		showFilterFeedback('Aplicando filtro...', true);
 	}
 
+	function preserveSaleFilterInForm($form) {
+		try {
+			var params = new URLSearchParams(window.location.search);
+			if (params.get('on_sale') !== '1' || $form.find('input[name="on_sale"]').length) return;
+			$form.append('<input type="hidden" name="on_sale" value="1">');
+		} catch (error) {
+			return;
+		}
+	}
+
 	function orderProductAttributes() {
 		$('.single-product .product-showcase form.variations_form table.variations tbody').each(function () {
 			var $body = $(this);
@@ -216,7 +226,10 @@
 	});
 
 	$(document).on('click', '#side-filters a[href]:not(.et-close)', rememberFilterPanel);
-	$(document).on('submit', '#side-filters form', rememberFilterPanel);
+	$(document).on('submit', '#side-filters form', function () {
+		preserveSaleFilterInForm($(this));
+		rememberFilterPanel();
+	});
 	$(document).on('click', '#side-filters .et-close, .click-capture', function () {
 		filterStorage('remove', filterPanelKey);
 		filterStorage('remove', filterNoticeKey);
@@ -241,6 +254,7 @@
 			if (summary) new ResizeObserver(updateTallProductLayout).observe(summary);
 		}
 		updateFilterCount();
+		window.setTimeout(updateFilterCount, 350);
 		if (filterStorage('get', filterPanelKey)) {
 			var notice = filterStorage('get', filterNoticeKey) || 'Filtros actualizados.';
 			filterStorage('remove', filterPanelKey);
