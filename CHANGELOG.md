@@ -1,0 +1,74 @@
+# Changelog
+
+## 1.0.35
+
+- Reduced desktop navigation hit testing to the visible anchor text while
+  preserving native hover continuity inside full-width mega menus.
+- Removed the navigation workaround script; the behavior is now CSS-native.
+- Versioned Belctech assets from their modification times so LiteSpeed cannot
+  keep serving an older theme stylesheet after an update.
+- Added the small navigation rule to the inline critical CSS so it is active
+  before asynchronously loaded stylesheets finish.
+
+## 1.0.34
+
+- Replaced Goya's full-list-item mega-menu mouseenter handler with an
+  anchor-only trigger.
+- Added delayed submenu handoff so moving from the label into the dropdown
+  remains smooth without restoring the accidental full-header hover zone.
+
+## 1.0.33
+
+- Overrode Goya's desktop `height: 100%` rule on primary-menu list items so
+  both the real hover box and the anchor box now match the text line.
+
+## 1.0.32
+
+- Removed inherited flex stretching from desktop primary-menu anchors so their
+  actual clickable boxes match the visible text line.
+
+## 1.0.31
+
+- Restricted desktop navigation hover and click targets to the visible menu
+  links instead of the complete header-height list-item boxes.
+- Preserved full-width mega-menu positioning and submenu hover continuity.
+
+## 1.0.30
+
+- Added a native, dependency-free "En descuento" catalog filter that combines
+  correctly with price and attribute filters.
+- Included the sale criterion in active-filter clearing, counting and the
+  persistent mobile filter workflow.
+- Added mobile spacing below the header on shop, category and catalog search
+  pages without changing the single-product layout.
+
+## 1.0.29
+
+- Kept quick-view galleries inside the existing modal height while displaying
+  complete product images without bottom cropping.
+- Centered quick-view slider arrows inside the visible image stage.
+- Added a direct "Ver producto completo" action above the quick-view title.
+
+## 1.0.28
+
+- Removed the header bottom divider in normal and sticky states.
+- Forced WooCommerce account, login and registration screens below an opaque
+  header on desktop and mobile.
+
+## 1.0.1
+
+- Prevented fatal `Cannot redeclare` errors while Goya Core remains active
+  during or after the theme switch.
+- Added multisite and renamed-plugin-safe class detection for Goya Core.
+- Removed the simulated Woo Variation Swatches class that could collide while
+  activating the real plugin.
+- Added explicit native/external swatch provider selection to prevent duplicate
+  variation markup.
+- Replaced PHP 7.4 arrow functions and validated the complete theme as PHP 7.2
+  compatible.
+- Namespaced internal portfolio and widget bootstrap symbols to reduce global
+  collision risk.
+
+## 1.0.0
+
+- Initial Belctech Ecommerce build.
