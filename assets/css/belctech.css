@@ -28,7 +28,7 @@
 }
 
 /* Keep the header edge clean in every layout, including inherited pages that
-   still carry Goya's header-border-1 body class. */
+   still carry Belctech's header-border-1 body class. */
 .site-header,
 #header {
 	border-bottom: 0 !important;
@@ -1108,7 +1108,7 @@ select[data-belctech-native-select="1"] {
 }
 
 @media (min-width: 992px) {
-	/* Goya stretches every top-level item to the complete header height. Mega
+	/* Belctech stretches every top-level item to the complete header height. Mega
 	   dropdowns are positioned from the header, so the item itself can safely
 	   match its label and avoid a large accidental hover target. */
 	.site-header .main-navigation .et-header-menu > li {
@@ -1364,7 +1364,7 @@ select[data-belctech-native-select="1"] {
 		padding-top: 40px !important;
 	}
 
-	/* Gift Card forms can be much taller than the viewport. Goya's showcase
+	/* Gift Card forms can be much taller than the viewport. Belctech's showcase
 	   gives every gallery wrapper 100% height, which vertically centers the
 	   image against the complete form. Keep this product gallery at the top. */
 	.single-product .et-product-detail.product-type-wgm_gift_card .showcase-active .product-gallery,

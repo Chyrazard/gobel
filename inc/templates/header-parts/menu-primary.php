@@ -2,16 +2,16 @@
 /**
  * Template part for display primary menu
  *
- * @package Goya
+ * @package Belctech
  */
 ?>
 
 <nav id="primary-menu" class="main-navigation navigation">
 	<?php if (has_nav_menu('primary-menu')) { ?>
 	  <?php wp_nav_menu( array(
-	  	'theme_location' => 'primary-menu',
-	  	'container' => false,
-	  	'menu_class' => 'primary-menu et-header-menu',
+		'theme_location' => 'primary-menu',
+		'container' => false,
+		'menu_class' => 'primary-menu et-header-menu',
 	  ) ); ?>
 	<?php } ?>
 </nav>

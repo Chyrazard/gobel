@@ -19,10 +19,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$product_layout = goya_meta_config('product','layout_single','regular');
+$product_layout = belctech_meta_config('product','layout_single','regular');
 $is_showcase = ($product_layout == 'showcase') ? true : false;
-$details_style = goya_meta_config('product','details_style','tabs');
-$description_layout = goya_meta_config('product','description_layout','boxed');
+$details_style = belctech_meta_config('product','details_style','tabs');
+$description_layout = belctech_meta_config('product','description_layout','boxed');
 $accordion_scroll = (get_theme_mod('product_accordion_scrollbars', false) == true) ? 'custom_scroll' : '';
 
 /**
@@ -34,10 +34,10 @@ $accordion_scroll = (get_theme_mod('product_accordion_scrollbars', false) == tru
  */
 $product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
 
-if ( ! empty( $product_tabs ) ) : 
+if ( ! empty( $product_tabs ) ) :
 
 	if ($details_style != 'accordion' || $is_showcase) : ?>
-	
+
 			<div class="woocommerce-tabs wc-tabs-wrapper product-details-<?php echo esc_attr( $details_style ); ?> desc-layout-<?php echo esc_attr( $description_layout ); ?>">
 				<div class="container">
 					<div class="row justify-content-md-center">
@@ -70,9 +70,9 @@ if ( ! empty( $product_tabs ) ) :
 					</div>
 				<?php endforeach; ?>
 			</div>
-		
+
 		<?php else: ?>
-			
+
 			<div class="woocommerce-tabs tabs-accordion wc-tabs-wrapper">
 				<?php foreach ( $product_tabs as $key => $product_tab ) : ?>
 					<div class="<?php echo esc_attr( $key ); ?>_tab tab-title" id="tab-title-<?php echo esc_attr( $key ); ?>" role="tab" aria-controls="tab-<?php echo esc_attr( $key ); ?>">
@@ -80,7 +80,7 @@ if ( ! empty( $product_tabs ) ) :
 							<?php echo wp_kses_post( apply_filters( 'woocommerce_product_' . $key . '_tab_title', $product_tab['title'], $key ) ); ?>
 						</a>
 					</div>
-		
+
 					<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--<?php echo esc_attr( $key ); ?> panel entry-content wc-tab <?php echo esc_attr($accordion_scroll); ?>" id="tab-<?php echo esc_attr( $key ); ?>" class="tab-content" role="tabpanel" aria-labelledby="tab-title-<?php echo esc_attr( $key ); ?>">
 						<?php if ( isset( $product_tab['callback'] ) ) { call_user_func( $product_tab['callback'], $key, $product_tab ); } ?>
 					</div>
@@ -89,5 +89,5 @@ if ( ! empty( $product_tabs ) ) :
 		<?php do_action( 'woocommerce_product_after_tabs' ); ?>
 			</div>
 
-	<?php endif; ?>		
+	<?php endif; ?>
 <?php endif; ?>

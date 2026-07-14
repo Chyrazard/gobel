@@ -1,5 +1,5 @@
-<?php 
-	add_filter( 'excerpt_length', 'goya_short_excerpt_length' );
+<?php
+	add_filter( 'excerpt_length', 'belctech_short_excerpt_length' );
 	if (is_sticky(get_the_ID()) ) {
 		$class = 'col-lg-12';
 		$class2 = 'col-lg-12';
@@ -19,7 +19,7 @@
 			<?php if ( has_post_thumbnail() ) : ?>
 			<figure class="post-gallery">
 				<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">
-					<?php goya_post_format_icon( get_the_ID() ); ?>
+					<?php belctech_post_format_icon( get_the_ID() ); ?>
 					<?php the_post_thumbnail($img_size); ?>
 				</a>
 			</figure>

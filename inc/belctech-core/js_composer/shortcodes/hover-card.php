@@ -1,25 +1,25 @@
-<?php function goya_shortcode_hovercard( $atts, $content = null ) {
+<?php function belctech_shortcode_hovercard( $atts, $content = null ) {
 
   extract( shortcode_atts( array(
-  	'icon_type'           => 'icon',
-  	'icon_library'        => 'pixeden',
-  	'icon_pixeden'        => '',
-  	'icon_fontawesome'    => '',
-  	'image_id'            => '',
-  	'normal_title'        => '',
-  	'normal_title_color'  => '',
-  	'normal_bg_color'     => '',
-  	'hover_title'         => '',
-  	'hover_content'       => '',
-  	'hover_icon_color'    => '',
-  	'hover_title_color'   => '',
-  	'hover_content_color' => '',
-  	'normal_bg_image'     => '',
-  	'hover_bg_color'      => '',
-  	'animation'           => '',
-  	'link'                => '',
-  	'min_height'          => '300',
-  	'extra_class'         => '',
+	'icon_type'           => 'icon',
+	'icon_library'        => 'pixeden',
+	'icon_pixeden'        => '',
+	'icon_fontawesome'    => '',
+	'image_id'            => '',
+	'normal_title'        => '',
+	'normal_title_color'  => '',
+	'normal_bg_color'     => '',
+	'hover_title'         => '',
+	'hover_content'       => '',
+	'hover_icon_color'    => '',
+	'hover_title_color'   => '',
+	'hover_content_color' => '',
+	'normal_bg_image'     => '',
+	'hover_bg_color'      => '',
+	'animation'           => '',
+	'link'                => '',
+	'min_height'          => '300',
+	'extra_class'         => '',
   ), $atts ) );
 
   $element_id = uniqid('et-hovercard-');
@@ -32,14 +32,14 @@
 	$styles = '';
 
 	if(strlen( $normal_bg_image ) > 0) {
-  	$normal_image = wp_get_attachment_image_src($normal_bg_image, 'full');
-  	if (!empty($normal_image)) {
-  		$styles .= '.' . $element_id . ' .et-hovercard-front { background-image: url(' . $normal_image[0] . ')' . '}';
-  	}
+	$normal_image = wp_get_attachment_image_src($normal_bg_image, 'full');
+	if (!empty($normal_image)) {
+		$styles .= '.' . $element_id . ' .et-hovercard-front { background-image: url(' . $normal_image[0] . ')' . '}';
+	}
   }
 
 	$styles .= '.' . $element_id . ' { min-height: ' . $min_height . 'px' . '}';
-	
+
 	if ($normal_title_color) {
 		$styles .= '.' . $element_id . ' .et-hovercard-front .et-pricing-head { color: ' . $normal_title_color . '}';
 	}
@@ -60,11 +60,11 @@
 	}
 
 	//Add inline styles
-  if (class_exists('Goya_Layout')) {
-		Goya_Layout::append_to_shortcodes_css_buffer( $styles );
+  if (class_exists('Belctech_Layout')) {
+		Belctech_Layout::append_to_shortcodes_css_buffer( $styles );
 	}
-  
- 	$out = $icon = $image_src = '';
+
+	$out = $icon = $image_src = '';
 	ob_start();
 
 	if ( $icon_type == 'icon' ) {
@@ -81,7 +81,7 @@
 			}
 		}
 	} else {
-		
+
 		if ( strlen( $image_id ) > 0 ) {
 			$image_src = wp_get_attachment_image_src( $image_id, 'full' );
 		}
@@ -89,13 +89,13 @@
 
 	$link = ( $link == '||' ) ? '' : $link;
 	$link = vc_build_link( $link  );
-	
+
 	$link_to = $link['url'];
 	$a_title = $link['title'];
 	$a_target = $link['target'] ? $link['target'] : '_self';
-	
+
 	?>
-	
+
 	<div class="<?php echo esc_attr(implode(' ', $classes)); ?>">
 		<?php if ( strlen( $link['url'] ) > 0 ) { ?><a class="et-hovercard-link" href="<?php echo esc_url($link_to); ?>" target="<?php echo sanitize_text_field( $a_target ); ?>"><?php } ?>
 		<div class="et-hovercard-front et-hovercard-side">
@@ -130,4 +130,4 @@
   return $out;
 
 }
-add_shortcode('et_hovercard', 'goya_shortcode_hovercard');
+add_shortcode('et_hovercard', 'belctech_shortcode_hovercard');

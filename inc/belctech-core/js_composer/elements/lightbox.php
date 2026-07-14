@@ -2,42 +2,42 @@
 
 // VC element: et_lightbox
 vc_map( array(
- 'name' => esc_html__( 'Lightbox', 'goya-core' ),
- 'description' => esc_html__( 'Lightbox modal with custom content', 'goya-core' ),
- 'category' => esc_html__('Goya', 'goya-core'),
+ 'name' => esc_html__( 'Lightbox', 'belctech-ecommerce' ),
+ 'description' => esc_html__( 'Lightbox modal with custom content', 'belctech-ecommerce' ),
+ 'category' => esc_html__('Belctech', 'belctech-ecommerce'),
  'base' => 'et_lightbox',
  'icon' => 'et_lightbox',
  'params' => array(
 		array(
 			'type' => 'dropdown',
-			'heading' => __('Link Type', 'goya-core' ),
+			'heading' => __('Link Type', 'belctech-ecommerce' ),
 			'param_name' => 'link_type',
-			'description' => __( 'Select lightbox link type.', 'goya-core' ),
+			'description' => __( 'Select lightbox link type.', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Link', 'goya-core' ) => 'link',
-				__( 'Button', 'goya-core' ) => 'btn',
-				__( 'Image', 'goya-core' ) => 'image'
+				__( 'Link', 'belctech-ecommerce' ) => 'link',
+				__( 'Button', 'belctech-ecommerce' ) => 'btn',
+				__( 'Image', 'belctech-ecommerce' ) => 'image'
 			),
 			'std' => 'link'
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => __( 'Title', 'goya-core' ),
+			'heading' => __( 'Title', 'belctech-ecommerce' ),
 			'param_name' => 'title',
-			'description' => __( 'Enter a lightbox link/button title.', 'goya-core' )
+			'description' => __( 'Enter a lightbox link/button title.', 'belctech-ecommerce' )
 		),
 		// Dependency: link_type - btn
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Button Style', 'goya-core' ),
+			'heading' => __( 'Button Style', 'belctech-ecommerce' ),
 			'param_name' => 'button_style',
-			'description' => __( 'Select button style.', 'goya-core' ),
+			'description' => __( 'Select button style.', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Solid', 'goya-core' ) => 'solid',
-				__( 'Solid Rounded', 'goya-core' ) => 'solid rounded',
-				__( 'Outlined', 'goya-core' ) => 'outlined',
-				__( 'Outlined Rounded', 'goya-core' ) => 'outlined rounded',
-				__( 'Link', 'goya-core' ) => 'link'
+				__( 'Solid', 'belctech-ecommerce' ) => 'solid',
+				__( 'Solid Rounded', 'belctech-ecommerce' ) => 'solid rounded',
+				__( 'Outlined', 'belctech-ecommerce' ) => 'outlined',
+				__( 'Outlined Rounded', 'belctech-ecommerce' ) => 'outlined rounded',
+				__( 'Link', 'belctech-ecommerce' ) => 'link'
 			),
 			'std' => 'solid',
 			'dependency' => array(
@@ -47,12 +47,12 @@ vc_map( array(
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Button Align', 'goya-core' ),
+			'heading' => __( 'Button Align', 'belctech-ecommerce' ),
 			'param_name' => 'button_align',
 			'value' => array(
-				__( 'Left', 'goya-core' ) => 'left',
-				__( 'Center', 'goya-core' ) => 'center',
-				__( 'Right', 'goya-core' ) => 'right'
+				__( 'Left', 'belctech-ecommerce' ) => 'left',
+				__( 'Center', 'belctech-ecommerce' ) => 'center',
+				__( 'Right', 'belctech-ecommerce' ) => 'right'
 			),
 			'std' => 'center',
 			'dependency' => array(
@@ -62,14 +62,14 @@ vc_map( array(
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Button Size', 'goya-core' ),
+			'heading' => __( 'Button Size', 'belctech-ecommerce' ),
 			'param_name' => 'button_size',
-			'description' => __( 'Select button size.', 'goya-core' ),
+			'description' => __( 'Select button size.', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Mini', 'goya-core' ) => 'xs',
-				__( 'Small', 'goya-core' ) => 'sm',
-				__( 'Normal', 'goya-core' ) => 'md',
-				__( 'Large', 'goya-core' ) => 'lg'
+				__( 'Mini', 'belctech-ecommerce' ) => 'xs',
+				__( 'Small', 'belctech-ecommerce' ) => 'sm',
+				__( 'Normal', 'belctech-ecommerce' ) => 'md',
+				__( 'Large', 'belctech-ecommerce' ) => 'lg'
 			),
 			'std' => 'lg',
 			'dependency' => array(
@@ -79,9 +79,9 @@ vc_map( array(
 		),
 		array(
 			'type' => 'colorpicker',
-			'heading' => __( 'Button Color', 'goya-core' ),
+			'heading' => __( 'Button Color', 'belctech-ecommerce' ),
 			'param_name' => 'button_color',
-			'description' => __( 'Select button color.', 'goya-core' ),
+			'description' => __( 'Select button color.', 'belctech-ecommerce' ),
 			'dependency' => array(
 				'element' => 'link_type',
 				'value' => array( 'btn' )
@@ -91,86 +91,86 @@ vc_map( array(
 		// Dependency: link_type - image
 		array(
 			'type' => 'attach_image',
-			'heading' => __( 'Link Image', 'goya-core' ),
+			'heading' => __( 'Link Image', 'belctech-ecommerce' ),
 			'param_name' => 'link_image_id',
-			'description' => __( 'Select image from the media library.', 'goya-core' ),
+			'description' => __( 'Select image from the media library.', 'belctech-ecommerce' ),
 			'dependency' => array(
 				'element' => 'link_type',
 				'value' => array( 'image' )
 			),
-			'group' => __( 'Source','goya-core' ),
+			'group' => __( 'Source','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __('Lightbox Type', 'goya-core' ),
+			'heading' => __('Lightbox Type', 'belctech-ecommerce' ),
 			'param_name' => 'content_type',
-			'description' => __( 'Select content type.', 'goya-core' ),
+			'description' => __( 'Select content type.', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Image', 'goya-core' ) => 'image',
-				__( 'Video', 'goya-core' ) => 'iframe',
-				__( 'HTML', 'goya-core' ) => 'inline'
+				__( 'Image', 'belctech-ecommerce' ) => 'image',
+				__( 'Video', 'belctech-ecommerce' ) => 'iframe',
+				__( 'HTML', 'belctech-ecommerce' ) => 'inline'
 			),
 			'std' => 'image',
-			'group' => __( 'Source','goya-core' ),
+			'group' => __( 'Source','belctech-ecommerce' ),
 		),
 		// Dependency: content_type - image
 		array(
 			'type' => 'attach_image',
-			'heading' => __( 'Lightbox Image', 'goya-core' ),
+			'heading' => __( 'Lightbox Image', 'belctech-ecommerce' ),
 			'param_name' => 'content_image_id',
-			'description' => __( 'Select image from the media library.', 'goya-core' ),
+			'description' => __( 'Select image from the media library.', 'belctech-ecommerce' ),
 			'dependency' => array(
 				'element' => 'content_type',
 				'value' => array( 'image' )
 			),
-			'group' => __( 'Source','goya-core' ),
+			'group' => __( 'Source','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'checkbox',
-			'heading' => __( 'Lightbox Image Caption', 'goya-core' ),
+			'heading' => __( 'Lightbox Image Caption', 'belctech-ecommerce' ),
 			'param_name' => 'content_image_caption',
-			'description' => __( 'Display image caption.', 'goya-core' ),
+			'description' => __( 'Display image caption.', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Enable', 'goya-core' ) => '1'
+				__( 'Enable', 'belctech-ecommerce' ) => '1'
 			),
 			'dependency' => array(
 				'element' => 'content_type',
 				'value' => array( 'image' )
 			),
-			'group' => __( 'Source','goya-core' ),
+			'group' => __( 'Source','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => __( 'Video URL', 'goya-core' ),
+			'heading' => __( 'Video URL', 'belctech-ecommerce' ),
 			'param_name' => 'content_url',
-			'description' => __( 'Insert a Video URL. <strong>YouTube video:</strong> http://www.youtube.com/watch?v=xxxx', 'goya-core' ),
+			'description' => __( 'Insert a Video URL. <strong>YouTube video:</strong> http://www.youtube.com/watch?v=xxxx', 'belctech-ecommerce' ),
 			'dependency' => array(
 				'element' => 'content_type',
 				'value' => array( 'iframe' )
 			),
-			'group' => __( 'Source','goya-core' ),
+			'group' => __( 'Source','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => __( 'Source ID', 'goya-core' ),
+			'heading' => __( 'Source ID', 'belctech-ecommerce' ),
 			'param_name' => 'content_selector',
-			'description' => __( 'If the content is in another element of this page use the ID of that element(# included):<strong>#lightbox-id</strong><br>Or use the editor below to add the content.', 'goya-core' ),
+			'description' => __( 'If the content is in another element of this page use the ID of that element(# included):<strong>#lightbox-id</strong><br>Or use the editor below to add the content.', 'belctech-ecommerce' ),
 			'dependency' => array(
 				'element' => 'content_type',
 				'value' => array( 'inline' )
 			),
-			'group' => __( 'Source','goya-core' ),
+			'group' => __( 'Source','belctech-ecommerce' ),
 		),
 		array(
 		  'type' => 'textarea_html',
-		  'heading' => __( 'Custom Content', 'goya-core' ),
+		  'heading' => __( 'Custom Content', 'belctech-ecommerce' ),
 		  'param_name' => 'content',
-		  'description' => __( 'Add the custom content for the ligthbox', 'goya-core' ),
+		  'description' => __( 'Add the custom content for the ligthbox', 'belctech-ecommerce' ),
 		  'dependency' => array(
-		  	'element' => 'content_type',
-		  	'value' => array( 'inline' )
+			'element' => 'content_type',
+			'value' => array( 'inline' )
 		  ),
-		  'group' => __( 'Source','goya-core' ),
+		  'group' => __( 'Source','belctech-ecommerce' ),
 		),
 	)
 ) );

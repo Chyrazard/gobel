@@ -2,46 +2,46 @@
 
 // VC element: et_product
 vc_map( array(
-	'name' => esc_html__('Products Grid/Carousel', 'goya-core'),
-	'description' => esc_html__('Add WooCommerce products', 'goya-core'),
-	'category' => esc_html__('Goya', 'goya-core'),
+	'name' => esc_html__('Products Grid/Carousel', 'belctech-ecommerce'),
+	'description' => esc_html__('Add WooCommerce products', 'belctech-ecommerce'),
+	'category' => esc_html__('Belctech', 'belctech-ecommerce'),
 	'base' => 'et_product_slider',
 	'icon' => 'et_product_slider',
 	'admin_label' => true,
 	'params'	=> array(
 		array(
 			'type' => 'dropdown',
-			'heading' => esc_html__('Products', 'goya-core'),
+			'heading' => esc_html__('Products', 'belctech-ecommerce'),
 			'param_name' => 'product_sort',
 			'value' => array(
-				__( 'Latest Products', 'goya-core' ) => 'latest-products',
-				__( 'Best Sellers', 'goya-core' ) => 'best-sellers',
-				__( 'Top Rated', 'goya-core' ) => 'top-rated',
-				__( 'Featured Products', 'goya-core' ) => 'featured-products',
-				__( 'Sale Products', 'goya-core' ) => 'sale-products',
-				__( 'By Category', 'goya-core' ) => 'by-category',
-				__( 'By Tag', 'goya-core' ) => 'by-tag',
-				__( 'By Product ID', 'goya-core' ) => 'by-id',
+				__( 'Latest Products', 'belctech-ecommerce' ) => 'latest-products',
+				__( 'Best Sellers', 'belctech-ecommerce' ) => 'best-sellers',
+				__( 'Top Rated', 'belctech-ecommerce' ) => 'top-rated',
+				__( 'Featured Products', 'belctech-ecommerce' ) => 'featured-products',
+				__( 'Sale Products', 'belctech-ecommerce' ) => 'sale-products',
+				__( 'By Category', 'belctech-ecommerce' ) => 'by-category',
+				__( 'By Tag', 'belctech-ecommerce' ) => 'by-tag',
+				__( 'By Product ID', 'belctech-ecommerce' ) => 'by-id',
 				),
 			'admin_label' => true,
-			'description' => esc_html__('Select the batch of products to show.', 'goya-core')
+			'description' => esc_html__('Select the batch of products to show.', 'belctech-ecommerce')
 		),
 		array(
 			'type' => 'checkbox',
-			'heading' => esc_html__('Product Category', 'goya-core'),
+			'heading' => esc_html__('Product Category', 'belctech-ecommerce'),
 			'param_name' => 'cat',
-			'value' => goya_product_categories_array(),
-			'description' => esc_html__('Choose categories to show.', 'goya-core'),
+			'value' => belctech_product_categories_array(),
+			'description' => esc_html__('Choose categories to show.', 'belctech-ecommerce'),
 			'dependency' => array(
-				'element' => 'product_sort', 
+				'element' => 'product_sort',
 				'value' => array('by-category')
 			)
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => esc_html__('Product IDs', 'goya-core'),
+			'heading' => esc_html__('Product IDs', 'belctech-ecommerce'),
 			'param_name' => 'product_ids',
-			'description' => esc_html__('Enter the product IDs separated by comma', 'goya-core'),
+			'description' => esc_html__('Enter the product IDs separated by comma', 'belctech-ecommerce'),
 			'dependency' => array(
 				'element' => 'product_sort',
 				'value' => array('by-id')
@@ -49,9 +49,9 @@ vc_map( array(
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => esc_html__('Product Tags', 'goya-core'),
+			'heading' => esc_html__('Product Tags', 'belctech-ecommerce'),
 			'param_name' => 'product_tag',
-			'description' => esc_html__('Enter the product tags separated by comma', 'goya-core'),
+			'description' => esc_html__('Enter the product tags separated by comma', 'belctech-ecommerce'),
 			'dependency' => array(
 				'element' => 'product_sort',
 				'value' => array('by-tag')
@@ -62,7 +62,7 @@ vc_map( array(
 			'heading' => __( 'Order by', 'js_composer' ),
 			'param_name' => 'orderby',
 			'description' => sprintf( __( 'Select how to sort retrieved products. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
-			'value' 		=> array(
+			'value'		=> array(
 				__( 'Date', 'js_composer' ) => 'date',
 				__( 'ID', 'js_composer' ) => 'ID',
 				__( 'Author', 'js_composer' ) => 'author',
@@ -73,9 +73,9 @@ vc_map( array(
 				__( 'Menu order', 'js_composer' ) => 'menu_order'
 			),
 			'std' => 'date',
-			'save_always' 	=> true,
+			'save_always'	=> true,
 			'dependency' => array(
-				'element' => 'product_sort', 
+				'element' => 'product_sort',
 				'value' => array(
 					'by-category',
 					'by-tag',
@@ -89,14 +89,14 @@ vc_map( array(
 			'heading' => __( 'Sort order', 'js_composer' ),
 			'param_name' => 'order',
 			'description' => sprintf( __( 'Designates the ascending or descending order. More at %s.', 'js_composer' ), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">WordPress codex page</a>' ),
-			'value' 		=> array(
+			'value'		=> array(
 				__( 'Descending', 'js_composer' )	=> 'DESC',
 				__( 'Ascending', 'js_composer' )	=> 'ASC'
 			),
 			'std' => 'DESC',
-			'save_always' 	=> true,
+			'save_always'	=> true,
 			'dependency' => array(
-				'element' => 'product_sort', 
+				'element' => 'product_sort',
 				'value' => array(
 					'by-category',
 					'by-tag',
@@ -107,12 +107,12 @@ vc_map( array(
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => esc_html__('Limit', 'goya-core'),
+			'heading' => esc_html__('Limit', 'belctech-ecommerce'),
 			'param_name' => 'item_count',
 			'value' => '4',
-			'description' => esc_html__('The number of products to show.', 'goya-core'),
+			'description' => esc_html__('The number of products to show.', 'belctech-ecommerce'),
 			'dependency' => array(
-				'element' => 'product_sort', 
+				'element' => 'product_sort',
 				'value' => array(
 					'by-category',
 					'by-tag',
@@ -126,166 +126,166 @@ vc_map( array(
 		),
 		array(
 	    'type' => 'dropdown',
-	    'heading' => esc_html__('Product Style', 'goya-core' ),
+	    'heading' => esc_html__('Product Style', 'belctech-ecommerce' ),
 	    'param_name' => 'item_style',
-	    'group' => __( 'Styling','goya-core' ),
-	    'std'=> 'style1', 
+	    'group' => __( 'Styling','belctech-ecommerce' ),
+	    'std'=> 'style1',
 	    'value' => array(
-	    	__( 'Style 1', 'goya-core' ) => 'style1',
-	    	__( 'Style 2', 'goya-core' ) => 'style2',
-	    	__( 'Style 3', 'goya-core' ) => 'style3',
-	    	__( 'Style 4', 'goya-core' ) => 'style4'
+		__( 'Style 1', 'belctech-ecommerce' ) => 'style1',
+		__( 'Style 2', 'belctech-ecommerce' ) => 'style2',
+		__( 'Style 3', 'belctech-ecommerce' ) => 'style3',
+		__( 'Style 4', 'belctech-ecommerce' ) => 'style4'
 	    ),
-	    'description' => esc_html__('Select Items Style', 'goya-core' )
+	    'description' => esc_html__('Select Items Style', 'belctech-ecommerce' )
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => esc_html__('Columns', 'goya-core'),
+			'heading' => esc_html__('Columns', 'belctech-ecommerce'),
 			'param_name' => 'columns',
 			'value' => array(
-				__( '5 Columns', 'goya-core' ) => '5',
-				__( '4 Columns', 'goya-core' ) => '4',
-				__( '3 Columns', 'goya-core' ) => '3',
-				__( '2 Columns', 'goya-core' ) => '2',
-				__( '1 Columns', 'goya-core' ) => '1'
+				__( '5 Columns', 'belctech-ecommerce' ) => '5',
+				__( '4 Columns', 'belctech-ecommerce' ) => '4',
+				__( '3 Columns', 'belctech-ecommerce' ) => '3',
+				__( '2 Columns', 'belctech-ecommerce' ) => '2',
+				__( '1 Columns', 'belctech-ecommerce' ) => '1'
 			),
-			'description' => esc_html__('Number of columns on desktops.', 'goya-core'),
-			'std' 			=> '4'
+			'description' => esc_html__('Number of columns on desktops.', 'belctech-ecommerce'),
+			'std'			=> '4'
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => esc_html__('Mobile Columns', 'goya-core'),
+			'heading' => esc_html__('Mobile Columns', 'belctech-ecommerce'),
 			'param_name' => 'columns_mobile',
 			'value' => array(
-				__( '2 Columns', 'goya-core' ) => '2',
-				__( '1 Columns', 'goya-core' ) => '1'
+				__( '2 Columns', 'belctech-ecommerce' ) => '2',
+				__( '1 Columns', 'belctech-ecommerce' ) => '1'
 			),
-			'description' => esc_html__('Number of columns on mobiles.', 'goya-core'),
-			'std' 			=> '2'
+			'description' => esc_html__('Number of columns on mobiles.', 'belctech-ecommerce'),
+			'std'			=> '2'
 		),
 
 		array(
 			'type' => 'dropdown',
-			'heading' => esc_html__('Carousel', 'goya-core'),
+			'heading' => esc_html__('Carousel', 'belctech-ecommerce'),
 			'param_name' => 'carousel',
 			'admin_label' => true,
 			'value' => array(
-				__( 'Yes', 'goya-core' ) => 'yes',
-				__( 'No', 'goya-core' ) => 'no'
+				__( 'Yes', 'belctech-ecommerce' ) => 'yes',
+				__( 'No', 'belctech-ecommerce' ) => 'no'
 			),
-			'description' => esc_html__('Select yes to display the products in a carousel.', 'goya-core'),
-			'std' 			=> 'yes',
-			'group' => __( 'Carousel','goya-core' ),
+			'description' => esc_html__('Select yes to display the products in a carousel.', 'belctech-ecommerce'),
+			'std'			=> 'yes',
+			'group' => __( 'Carousel','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => esc_html__('Columns to scroll', 'goya-core'),
+			'heading' => esc_html__('Columns to scroll', 'belctech-ecommerce'),
 			'param_name' => 'scroll',
 			'value' => array(
-				__( 'Same as columns', 'goya-core' ) => 'columns',
+				__( 'Same as columns', 'belctech-ecommerce' ) => 'columns',
 				'1' => '1'
 			),
-			'description' => esc_html__('Number of columns to scroll.', 'goya-core'),
-			'std' 			=> 'columns',
+			'description' => esc_html__('Number of columns to scroll.', 'belctech-ecommerce'),
+			'std'			=> 'columns',
 			'dependency'	=> array(
 				'element'	=> 'carousel',
 				'value'   => array( 'yes' ),
 			),
-			'group' => __( 'Carousel','goya-core' ),
+			'group' => __( 'Carousel','belctech-ecommerce' ),
 		),
 		array(
-			'type' 			=> 'checkbox',
-			'heading' 		=> __( 'Infinite Loop', 'goya-core' ),
-			'param_name' 	=> 'infinite',
-			'description'	=> __( 'Infinite loop sliding.', 'goya-core' ),
+			'type'			=> 'checkbox',
+			'heading'		=> __( 'Infinite Loop', 'belctech-ecommerce' ),
+			'param_name'	=> 'infinite',
+			'description'	=> __( 'Infinite loop sliding.', 'belctech-ecommerce' ),
 			'value'			=> array(
-				__( 'Enable', 'goya-core' )	=> 'true'
+				__( 'Enable', 'belctech-ecommerce' )	=> 'true'
 			),
 			'dependency' => array(
 				'element' => 'carousel',
 				'value' => 'yes'
 			),
-			'group' => __( 'Carousel','goya-core' ),
+			'group' => __( 'Carousel','belctech-ecommerce' ),
 		),
 		array(
-			'type' 			=> 'checkbox',
-			'heading' => __('Center Slides', 'goya-core'),
+			'type'			=> 'checkbox',
+			'heading' => __('Center Slides', 'belctech-ecommerce'),
 			'param_name' => 'center',
 			'value' => array(
-				__( 'Yes', 'goya-core' ) => 'true'
+				__( 'Yes', 'belctech-ecommerce' ) => 'true'
 			),
-			'group' => __( 'Carousel','goya-core' ),
+			'group' => __( 'Carousel','belctech-ecommerce' ),
 		),
 		array(
-			'type' 			=> 'checkbox',
-			'heading' 		=> __( 'Autoplay', 'goya-core' ),
-			'param_name' 	=> 'autoplay',
+			'type'			=> 'checkbox',
+			'heading'		=> __( 'Autoplay', 'belctech-ecommerce' ),
+			'param_name'	=> 'autoplay',
 			'value'			=> array(
-				__( 'Enable', 'goya-core' )	=> '1'
+				__( 'Enable', 'belctech-ecommerce' )	=> '1'
 			),
 			'dependency' => array(
 				'element' => 'carousel',
 				'value' => 'yes'
 			),
-			'group' => __( 'Carousel','goya-core' ),
+			'group' => __( 'Carousel','belctech-ecommerce' ),
 		),
 		array(
 			'type'      => 'textfield',
-			'heading'     => __( 'Autoplay Speed', 'goya-core' ),
+			'heading'     => __( 'Autoplay Speed', 'belctech-ecommerce' ),
 			'param_name'  => 'autoplay_speed',
-			'description' => __( 'Enter autoplay interval in milliseconds (1 second = 1000 milliseconds).', 'goya-core' ),
-			'std' 			=> '2500',
+			'description' => __( 'Enter autoplay interval in milliseconds (1 second = 1000 milliseconds).', 'belctech-ecommerce' ),
+			'std'			=> '2500',
 			'dependency' => array(
 				'element' => 'autoplay',
 				'value' => array( '1' )
 			),
-			'group' => __( 'Carousel','goya-core' ),
+			'group' => __( 'Carousel','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'checkbox',
-			'heading' => esc_html__('Pause on hover', 'goya-core'),
+			'heading' => esc_html__('Pause on hover', 'belctech-ecommerce'),
 			'param_name' => 'pause',
-			'description' => esc_html__('Pause autoplay on hover.', 'goya-core'),
+			'description' => esc_html__('Pause autoplay on hover.', 'belctech-ecommerce'),
 			'value' => array(
-				__( 'Enable', 'goya-core' )	=> '1'
+				__( 'Enable', 'belctech-ecommerce' )	=> '1'
 			),
 			'dependency' => array(
 				'element' => 'autoplay',
 				'value' => array( '1' )
 			),
-			'group' => __( 'Carousel','goya-core' ),
+			'group' => __( 'Carousel','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'checkbox',
-			'heading' 		=> __( 'Navigation Dots', 'goya-core' ),
+			'heading'		=> __( 'Navigation Dots', 'belctech-ecommerce' ),
 			'param_name' => 'pagination',
-			'description'	=> __( 'Display pagination dots.', 'goya-core' ),
+			'description'	=> __( 'Display pagination dots.', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Enable', 'goya-core' ) => 'true'
+				__( 'Enable', 'belctech-ecommerce' ) => 'true'
 			),
 			'dependency'	=> array(
 				'element'	=> 'carousel',
 				'value'   => array( 'yes' ),
 			),
-			'group' => __( 'Carousel','goya-core' ),
+			'group' => __( 'Carousel','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'checkbox',
-			'heading' => __('Hide Out of Stock', 'goya-core'),
+			'heading' => __('Hide Out of Stock', 'belctech-ecommerce'),
 			'param_name' => 'hide_out_of_stock',
 			'value' => array(
-				__( 'Yes', 'goya-core' ) => 'yes'
+				__( 'Yes', 'belctech-ecommerce' ) => 'yes'
 			),
 		),
 		array(
 			'type' => 'checkbox',
-			'heading' => esc_html__('Show Variations', 'goya-core'),
+			'heading' => esc_html__('Show Variations', 'belctech-ecommerce'),
 			'param_name' => 'show_variations',
 			'value' => array(
-				__( 'Yes', 'goya-core' ) => 'true'
+				__( 'Yes', 'belctech-ecommerce' ) => 'true'
 			),
-			'description' => esc_html__('Show variations (requires "WooCommerce Variation Swatches" plugin) .', 'goya-core'),
+			'description' => esc_html__('Show variations (requires "WooCommerce Variation Swatches" plugin) .', 'belctech-ecommerce'),
 		),
 	),
-	
+
 ) );

@@ -22,11 +22,11 @@ $attribute_keys  = array_keys( $attributes );
 $variations_json = wp_json_encode( $available_variations );
 $variations_attr = function_exists( 'wc_esc_json' ) ? wc_esc_json( $variations_json ) : _wp_specialchars( $variations_json, ENT_QUOTES, 'UTF-8', true );
 
-// Color/image swatches 
-$check_stock = apply_filters( 'goya_loop_variation_check_stock', get_theme_mod('archive_check_variants_stock', false) );
+// Color/image swatches
+$check_stock = apply_filters( 'belctech_loop_variation_check_stock', get_theme_mod('archive_check_variants_stock', false) );
 $hide_out_stock = get_option( 'woocommerce_hide_out_of_stock_items' );
-$show_all_variants = apply_filters( 'goya_loop_variation_display_all', get_theme_mod('archive_show_all_variants', false) );
-$autoselect_options = apply_filters( 'goya_loop_autoselect_options', false );
+$show_all_variants = apply_filters( 'belctech_loop_variation_display_all', get_theme_mod('archive_show_all_variants', false) );
+$autoselect_options = apply_filters( 'belctech_loop_autoselect_options', false );
 $classes[] = $check_stock && $hide_out_stock == 'yes' ? 'check-stock' : '';
 $classes[] = $show_all_variants ? 'show-all-variants' : '';
 $classes[] = $autoselect_options ? 'autoselect-options' : '';
@@ -72,7 +72,7 @@ $classes[] = $autoselect_options ? 'autoselect-options' : '';
 			<input type="hidden" name="product_id" value="<?php echo absint( $product->get_id() ); ?>" />
 			<input type="hidden" name="variation_id" class="variation_id" value="0" />
 		</div>
-			
+
 	<?php endif; ?>
 
 </form>

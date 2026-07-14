@@ -9,65 +9,64 @@
  */
 
 // Constants: Folder directories/uri's
-define( 'GOYA_THEME_DIR', get_template_directory() );
-define( 'GOYA_DIR', get_template_directory() . '/inc' );
-define( 'GOYA_THEME_URI', get_template_directory_uri() );
-define( 'GOYA_URI', get_template_directory_uri() . '/inc' );
+define( 'BELCTECH_THEME_DIR', get_template_directory() );
+define( 'BELCTECH_INC_DIR', get_template_directory() . '/inc' );
+define( 'BELCTECH_THEME_URI', get_template_directory_uri() );
+define( 'BELCTECH_INC_URI', get_template_directory_uri() . '/inc' );
 
 // Constant: Framework namespace
-define( 'GOYA_NAMESPACE', 'belctech-ecommerce' );
+define( 'BELCTECH_NAMESPACE', 'belctech-ecommerce' );
 
 // Constant: Theme version
-define( 'GOYA_THEME_VERSION', '1.0.35' );
-define( 'BELCTECH_THEME_VERSION', GOYA_THEME_VERSION );
-define( 'BELCTECH_DIR', GOYA_DIR . '/belctech' );
+define( 'BELCTECH_THEME_VERSION', '1.0.36' );
+define( 'BELCTECH_FEATURES_DIR', BELCTECH_INC_DIR . '/belctech' );
 
 
-// Native feature layer. Legacy function and data keys remain for seamless migration.
-require BELCTECH_DIR . '/compat.php';
-require BELCTECH_DIR . '/customizer.php';
-require BELCTECH_DIR . '/product-meta.php';
-require BELCTECH_DIR . '/content-meta.php';
-require BELCTECH_DIR . '/swatches.php';
-require BELCTECH_DIR . '/shop-filters.php';
-require BELCTECH_DIR . '/footer-blocks.php';
-require BELCTECH_DIR . '/performance.php';
+// Native feature layer. Stored data is migrated before frontend templates render.
+require BELCTECH_FEATURES_DIR . '/compat.php';
+require BELCTECH_FEATURES_DIR . '/customizer.php';
+require BELCTECH_FEATURES_DIR . '/product-meta.php';
+require BELCTECH_FEATURES_DIR . '/content-meta.php';
+require BELCTECH_FEATURES_DIR . '/swatches.php';
+require BELCTECH_FEATURES_DIR . '/shop-filters.php';
+require BELCTECH_FEATURES_DIR . '/footer-blocks.php';
+require BELCTECH_FEATURES_DIR . '/performance.php';
 
 // Store-specific modules migrated from the previous site functions file.
-require GOYA_DIR . '/vaam-custom.php';
+require BELCTECH_INC_DIR . '/vaam-custom.php';
 
 // Frontend Functions
-require GOYA_DIR .'/misc.php';
-require GOYA_DIR .'/frontend/header.php';
-require GOYA_DIR .'/frontend/footer.php';
-require GOYA_DIR .'/frontend/panels.php';
-require GOYA_DIR .'/frontend/entry.php';
+require BELCTECH_INC_DIR .'/misc.php';
+require BELCTECH_INC_DIR .'/frontend/header.php';
+require BELCTECH_INC_DIR .'/frontend/footer.php';
+require BELCTECH_INC_DIR .'/frontend/panels.php';
+require BELCTECH_INC_DIR .'/frontend/entry.php';
 
 // Script Calls
-require GOYA_DIR .'/script-calls.php';
+require BELCTECH_INC_DIR .'/script-calls.php';
 
 // Ajax
-require GOYA_DIR .'/ajax.php';
+require BELCTECH_INC_DIR .'/ajax.php';
 
 // Add Menu Support
-require GOYA_DIR .'/mega-menu.php';
+require BELCTECH_INC_DIR .'/mega-menu.php';
 
 // Enable Sidebars
-require GOYA_DIR .'/sidebar.php';
+require BELCTECH_INC_DIR .'/sidebar.php';
 
 // Language/Currency switchers
-require GOYA_DIR .'/switchers.php';
+require BELCTECH_INC_DIR .'/switchers.php';
 
 // WooCommerce related functions
-require GOYA_DIR .'/woocommerce/wc-functions.php';
-require GOYA_DIR .'/woocommerce/wc-elements.php';
-require GOYA_DIR .'/woocommerce/category-image.php';
+require BELCTECH_INC_DIR .'/woocommerce/wc-functions.php';
+require BELCTECH_INC_DIR .'/woocommerce/wc-elements.php';
+require BELCTECH_INC_DIR .'/woocommerce/category-image.php';
 
 // Gutenberg related functions
-require GOYA_DIR .'/gutenberg.php';
+require BELCTECH_INC_DIR .'/gutenberg.php';
 
 // CSS Output of Theme Options
-require GOYA_DIR .'/custom-styles.php';
+require BELCTECH_INC_DIR .'/custom-styles.php';
 
-// Built-in WPBakery elements keep existing Goya/VC page content renderable.
-require GOYA_DIR . '/belctech-core/bootstrap.php';
+// Built-in WPBakery elements keep existing Belctech/VC page content renderable.
+require BELCTECH_INC_DIR . '/belctech-core/bootstrap.php';

@@ -1,7 +1,7 @@
 <?php
-	
+
 // Shortcode: et_iconbox
-function goya_shortcode_iconbox( $atts, $content = NULL ) {
+function belctech_shortcode_iconbox( $atts, $content = NULL ) {
 	extract( shortcode_atts( array(
 		'title'					=> '',
 		'subtitle'				=> '',
@@ -23,9 +23,9 @@ function goya_shortcode_iconbox( $atts, $content = NULL ) {
 		'animation' => 'animation bottom-to-top',
 		'bottom_spacing'		=> 'none',
 		'extra_class'			=> '',
-		'link' 					=> ''
+		'link'					=> ''
 	), $atts ) );
-	
+
 	// Prepare icon/image
 	if ( $icon_type === 'icon' ) {
 
@@ -78,8 +78,8 @@ function goya_shortcode_iconbox( $atts, $content = NULL ) {
 		$styles .= '#' . $element_id . ' .subtitle { color: ' . $subtitle_color . '}';
 	}
 
-  if (class_exists('Goya_Layout')) {
-  	Goya_Layout::append_to_shortcodes_css_buffer( $styles );
+  if (class_exists('Belctech_Layout')) {
+	Belctech_Layout::append_to_shortcodes_css_buffer( $styles );
   }
 
 	$out = '';
@@ -93,7 +93,7 @@ function goya_shortcode_iconbox( $atts, $content = NULL ) {
 
 	?>
 
-	<div id="<?php echo esc_attr( $element_id ); ?>" class="<?php echo esc_attr(implode(' ', $class)); ?>"> 
+	<div id="<?php echo esc_attr( $element_id ); ?>" class="<?php echo esc_attr(implode(' ', $class)); ?>">
 		<div class="et-icon-inner">
 			<?php if ( strlen( $link ) > 0 ) { ?>
 				<a href="<?php echo esc_url( $vclink['url'] ); ?>" title="<?php echo esc_attr( $vclink['title'] ); ?>" target="<?php echo esc_attr( $vclink['target'] ); ?>" rel="<?php echo esc_attr( $vclink['rel'] ); ?>">
@@ -108,7 +108,7 @@ function goya_shortcode_iconbox( $atts, $content = NULL ) {
 			<?php if ( strlen( $link ) > 0 ) { ?>
 				</a>
 			<?php } ?>
-			<div class="et-feature-content"> 
+			<div class="et-feature-content">
 				<?php if ( strlen( $link ) > 0 ) { ?>
 					<a href="<?php echo esc_url( $vclink['url'] ); ?>" title="<?php echo esc_attr( $vclink['title'] ); ?>" target="<?php echo esc_attr( $vclink['target'] ); ?>" rel="<?php echo esc_attr( $vclink['rel'] ); ?>">
 				<?php } ?>
@@ -133,4 +133,4 @@ function goya_shortcode_iconbox( $atts, $content = NULL ) {
 
 }
 
-add_shortcode( 'et_iconbox', 'goya_shortcode_iconbox' );
+add_shortcode( 'et_iconbox', 'belctech_shortcode_iconbox' );

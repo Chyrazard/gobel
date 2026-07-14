@@ -25,30 +25,30 @@ $is_main_shop = is_shop();
 
 // OnSale page plugin
 if ( $is_sale_page || $is_latest_page ) {
-	$is_main_shop = false;	
+	$is_main_shop = false;
 }
 
 $show_filters_sidebar = $show_filters_popup = $show_filters_header = false;
 $shop_class[] = 'shop-container';
 
 // Full Width Catalog
-$shop_full_width = goya_meta_config('','shop_full_width', false );
+$shop_full_width = belctech_meta_config('','shop_full_width', false );
 $shop_class[] = ($shop_full_width) ? 'shop-full-width' : '';
 
 $filter_scroll = ( get_theme_mod( 'shop_filters_scrollbar', true ) == true) ? 'shop-widget-scroll' : '';
 
 // Sidebar/Filters
 $filters = get_theme_mod('shop_filters', true);
-$filter_position = goya_meta_config('shop','filter_position','header');
+$filter_position = belctech_meta_config('shop','filter_position','header');
 
 if ( $filters ) {
-	if ( $filter_position == 'sidebar' ) {	
+	if ( $filter_position == 'sidebar' ) {
 		$show_filters_sidebar  = true;
 		$shop_class[] = 'shop-sidebar-' . $filter_position . ' shop-sidebar-position-' . get_theme_mod('shop_filters_sidebar_position', 'left');
 	} else {
 		$shop_class[] = 'shop-sidebar-' . $filter_position;
-		
-		if ( $filter_position == 'popup' ) {     
+
+		if ( $filter_position == 'popup' ) {
 			$show_filters_popup = true;
 		}
 		if ( $filter_position == 'header' ) {
@@ -81,12 +81,12 @@ get_header( 'shop' ); ?>
 	?>
 
 	<div class="<?php echo esc_attr(implode(' ', $shop_class)); ?>">
-					
+
 		<div id="shop-products" class="shop-products container">
 			<div class="row">
 
-				<?php 
-					if ( $show_filters_sidebar ) { 
+				<?php
+					if ( $show_filters_sidebar ) {
 						/**
 						 * woocommerce_sidebar hook.
 						 *
@@ -96,16 +96,16 @@ get_header( 'shop' ); ?>
 						<div class="shop-sidebar-col col <?php echo esc_attr( $filter_scroll ) ?>">
 							<?php
 							// Otherwise, display sidebar filters
-							do_action( 'goya_shop_filters' ); ?>
+							do_action( 'belctech_shop_filters' ); ?>
 						</div>
 					 <?php }
 				?>
-				
+
 				<div class="shop-products-col col">
 
-					<?php do_action( 'goya_shop_toolbar' ); ?>
+					<?php do_action( 'belctech_shop_toolbar' ); ?>
 
-					<?php 
+					<?php
 					if ( woocommerce_product_loop() ) {
 
 						/**
@@ -118,13 +118,13 @@ get_header( 'shop' ); ?>
 						do_action( 'woocommerce_before_shop_loop' );
 
 						global $woocommerce_loop;
-						
+
 						// Set column sizes (large column is set via theme setting)
 						$woocommerce_loop['columns_small'] = '2';
 						$woocommerce_loop['columns_medium'] = '3';
 
 						$woocommerce_loop['shop_archive'] = true;
-						
+
 						woocommerce_product_loop_start();
 
 						if ( wc_get_loop_prop( 'total' ) ) {
@@ -155,12 +155,12 @@ get_header( 'shop' ); ?>
 							 * @hooked wc_no_products_found - 10
 							 */
 							do_action( 'woocommerce_no_products_found' );
-						} 
+						}
 						?>
 				</div>
 
 			</div>
-			
+
 			<?php
 				/**
 				 * Hook: woocommerce_after_main_content.
@@ -169,9 +169,9 @@ get_header( 'shop' ); ?>
 				 */
 				do_action( 'woocommerce_after_main_content' );
 			?>
-			
+
 		</div>
-		
+
 	</div>
 
 <?php get_footer('shop'); ?>

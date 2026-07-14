@@ -1,4 +1,4 @@
-<?php function goya_shortcode_image( $atts, $content = null ) {
+<?php function belctech_shortcode_image( $atts, $content = null ) {
 
 	extract( shortcode_atts( array(
 		'image'        => '',
@@ -14,22 +14,22 @@
 		'box_shadow'    => '',
 		'max_width'    => '',
 	), $atts ) );
-	
+
 	$element_id = 'et-image-' . mt_rand(10, 999);
-	
+
 	$img_id = preg_replace('/[^\d]/', '', $image);
-	
+
 	$full = $full_width === 'true' ? 'full' : '';
 	$img_size = ($img_size === '' ? 'full' : $img_size);
 	$final_image = wpb_getImageBySize( array( 'attach_id' => $img_id, 'thumb_size' => $img_size ) );
 
 	$image_title = (!empty($image)) ? get_the_title( $image ) : '';
-  
+
   $link_to = $c_lightbox = $a_title = $a_target = '';
   $image_post = get_post($img_id);
   $image_caption = ( isset($image_post->post_excerpt) ) ? $image_post->post_excerpt : $image_title;
   $c_lightbox = '';
-  
+
   if ($lightbox == true) {
     $link = wp_get_attachment_image_src( $img_id, 'full');
     $link_to = $link[0];
@@ -38,12 +38,12 @@
   } else {
 		$img_link = ( $img_link == '||' ) ? '' : $img_link;
 		$link = vc_build_link( $img_link );
-		
+
     $link_to = $link['url'];
     $a_title = $link['title'];
-    $a_target = $link['target'] ? $link['target'] : '_self';	
+    $a_target = $link['target'] ? $link['target'] : '_self';
   }
-  
+
   $classes[] = $element_id;
 	$classes[] = 'et-image';
 	$classes[] = $alignment;
@@ -59,11 +59,11 @@
 	}
 
 	//Add inline styles
-  if (class_exists('Goya_Layout')) {
-  	Goya_Layout::append_to_shortcodes_css_buffer( $styles );
+  if (class_exists('Belctech_Layout')) {
+	Belctech_Layout::append_to_shortcodes_css_buffer( $styles );
   }
 
-	
+
 	$out ='';
 	ob_start();
 	?>
@@ -94,8 +94,8 @@
 		</div>
 	</div>
   <?php
-  
+
 	$out = ob_get_clean();
 	return $out;
 }
-add_shortcode('et_image', 'goya_shortcode_image');
+add_shortcode('et_image', 'belctech_shortcode_image');

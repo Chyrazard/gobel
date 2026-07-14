@@ -2,7 +2,7 @@
 /**
  * Template part for displaying the logo
  *
- * @package Goya
+ * @package Belctech
  */
 
 $wp_logo_id = get_theme_mod( 'custom_logo' ); // Default WordPress Customizer option
@@ -10,7 +10,7 @@ $wp_logo_id = get_theme_mod( 'custom_logo' ); // Default WordPress Customizer op
 $logo = get_theme_mod( 'site_logo' );
 $logo_dark = get_theme_mod( 'site_logo_dark' );
 $logo_alt = get_theme_mod( 'site_logo_alt' );
-		
+
 // Logo
 if ( !empty( $wp_logo_id ) ) {
 	$image = wp_get_attachment_image_src( $wp_logo_id , 'full' );
@@ -35,20 +35,20 @@ $logo_alt_class =  get_theme_mod( 'site_logo_alt_use', '' );
 	<?php
 		// Default Logo
 		if ( !empty( $logo ) ) {
-			goya_site_logo($logo,'light');
+			belctech_site_logo($logo,'light');
 		} else { ?>
 			<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
 		<?php }
 		// Dark Scheme Logo
 		if ( !empty( $logo_dark ) ) {
-			goya_site_logo($logo_dark,'dark');
+			belctech_site_logo($logo_dark,'dark');
 		}
 		// Alternative Logo
 		if ( !empty( $logo_alt && $logo_alt_class != '') ) {
-			goya_site_logo($logo_alt,'alt');
+			belctech_site_logo($logo_alt,'alt');
 		} ?>
 
-		<?php do_action( 'goya_logo_image' ); ?>
+		<?php do_action( 'belctech_logo_image' ); ?>
 
 	</a>
 </div>

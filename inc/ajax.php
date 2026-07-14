@@ -3,12 +3,12 @@
 /* Blog: Ajax load posts
 ---------------------------------------------------------- */
 
-function goya_ajax_load_blog_posts() {
-	$page = isset($_POST['page']) ? sanitize_key( wp_unslash($_POST['page']) ) : "1";  
+function belctech_ajax_load_blog_posts() {
+	$page = isset($_POST['page']) ? sanitize_key( wp_unslash($_POST['page']) ) : "1";
 	$ppp = get_option('posts_per_page');
 	$blog_style = isset($_POST['blog_style']) ? sanitize_key( wp_unslash($_POST['blog_style']) ) : get_theme_mod('blog_style','masonry');
 	$category_id = isset($_POST['category_id']) ? sanitize_key( wp_unslash($_POST['category_id']) ) : false;
-	
+
 	$args = array(
 		'posts_per_page'	 => $ppp,
 		'paged' => $page,
@@ -16,23 +16,23 @@ function goya_ajax_load_blog_posts() {
 		'post_status' => 'publish'
 	);
 
-	$more_query = new WP_Query( apply_filters('goya_load_more_blog_args', $args) );
-		
-	if ($more_query->have_posts()) :  while ($more_query->have_posts()) : $more_query->the_post(); 
+	$more_query = new WP_Query( apply_filters('belctech_load_more_blog_args', $args) );
+
+	if ($more_query->have_posts()) :  while ($more_query->have_posts()) : $more_query->the_post();
 		echo '<h1>'.$category_id.'</h1>';
-		get_template_part( 'inc/templates/blogbit/'.$blog_style); 
+		get_template_part( 'inc/templates/blogbit/'.$blog_style);
 	endwhile; else : endif;
 	wp_die();
 }
 
-add_action('wp_ajax_nopriv_goya_blog_ajax', 'goya_ajax_load_blog_posts');
-add_action('wp_ajax_goya_blog_ajax', 'goya_ajax_load_blog_posts');
+add_action('wp_ajax_nopriv_belctech_blog_ajax', 'belctech_ajax_load_blog_posts');
+add_action('wp_ajax_belctech_blog_ajax', 'belctech_ajax_load_blog_posts');
 
 
 /* Portfolio: Ajax load portfolio
 ---------------------------------------------------------- */
 
-function goya_ajax_load_portfolio() {
+function belctech_ajax_load_portfolio() {
 	$keyword = isset($_POST['keyword']) ? sanitize_key( wp_unslash($_POST['keyword']) ) : false;
 	$aspect = isset($_POST['aspect']) ? sanitize_key( wp_unslash($_POST['aspect']) ) : false;
 	$animation = isset($_POST['animation']) ? sanitize_key( wp_unslash($_POST['animation']) ) : false;
@@ -69,27 +69,27 @@ function goya_ajax_load_portfolio() {
 		WPBMap::addAllMappedShortcodes();
 	}
 
-	if ($more_query->have_posts()) :  while ($more_query->have_posts()) : $more_query->the_post(); 
+	if ($more_query->have_posts()) :  while ($more_query->have_posts()) : $more_query->the_post();
 
-		set_query_var( 'goya_port_layout', $masonry );
-		set_query_var( 'goya_port_aspect', $aspect );
-		set_query_var( 'goya_port_columns', $columns );
-		set_query_var( 'goya_port_animation', $animation );
+		set_query_var( 'belctech_port_layout', $masonry );
+		set_query_var( 'belctech_port_aspect', $aspect );
+		set_query_var( 'belctech_port_columns', $columns );
+		set_query_var( 'belctech_port_animation', $animation );
 		get_template_part( 'inc/templates/portfolio/'.$style );
-		
+
 	endwhile; else : endif;
 
 	wp_reset_postdata();
 	wp_die();
 }
-add_action('wp_ajax_nopriv_goya_portfolio_ajax', 'goya_ajax_load_portfolio');
-add_action('wp_ajax_goya_portfolio_ajax', 'goya_ajax_load_portfolio');
+add_action('wp_ajax_nopriv_belctech_portfolio_ajax', 'belctech_ajax_load_portfolio');
+add_action('wp_ajax_belctech_portfolio_ajax', 'belctech_ajax_load_portfolio');
 
 
 /* WooCommerce: Quick View
 ---------------------------------------------------------- */
 
-function goya_ajax_load_product() {
+function belctech_ajax_load_product() {
 	global $post;
 
 	$product_id = isset( $_POST['product_id'] ) ? absint( wp_unslash( $_POST['product_id'] ) ) : 0;
@@ -98,29 +98,29 @@ function goya_ajax_load_product() {
 		wp_die( '', '', array( 'response' => 404 ) );
 	}
 	$output = '';
-	
+
 	setup_postdata( $post );
-		
+
 	ob_start();
 		wc_get_template_part( 'quickview/content', 'quickview' );
 	$output = ob_get_clean();
-	
+
 	wp_reset_postdata();
-			
+
 	echo esc_attr('') . $output;
-			
+
 	exit;
 }
 
-add_action( 'wp_ajax_nopriv_goya_product_ajax', 'goya_ajax_load_product' );
-add_action( 'wc_ajax_goya_product_ajax', 'goya_ajax_load_product' );
+add_action( 'wp_ajax_nopriv_belctech_product_ajax', 'belctech_ajax_load_product' );
+add_action( 'wc_ajax_belctech_product_ajax', 'belctech_ajax_load_product' );
 
 
 
 /* Ajax Products Search
 ---------------------------------------------------------- */
 
-function goya_ajax_search_products() {
+function belctech_ajax_search_products() {
 	$search_keyword = wp_unslash( $_REQUEST['query'] );
 	$time_start = microtime(true);
 	$product_visibility_term_ids = wc_get_product_visibility_term_ids();
@@ -141,7 +141,7 @@ function goya_ajax_search_products() {
 
 	// For Translatepress
 	add_filter('trp_force_search', '__return_true');
-	
+
 	$args = array(
 		's'                   => $search_keyword,
 		'post_type'           => 'product',
@@ -158,7 +158,7 @@ function goya_ajax_search_products() {
 				'terms'    => $product_visibility_term_ids['exclude-from-search'],
 				'operator' => 'NOT IN',
 			),
-			
+
 		),
 	);
 
@@ -181,22 +181,22 @@ function goya_ajax_search_products() {
 	}
 
 	$products = get_posts( $args );
-	
-	if ( ! empty( $products ) ) {	
+
+	if ( ! empty( $products ) ) {
 		$counter = 0;
 		foreach ( $products as $post ) {
 			if ($counter == 5) {
 				$suggestions[] = array(
 					'id'    => -2,
 					'value' => $search_keyword,
-					'url'   => esc_html__( 'View All', 'goya' ),
+					'url'   => esc_html__( 'View All', 'belctech-ecommerce' ),
 					'thumbnail' => '',
 					'price' => ''
 				);
 			} else {
 				$product = wc_get_product( $post );
 				$catalog_mode = get_theme_mod('shop_catalog_mode', false);
-				$price = apply_filters('goya_ajax_search_price', $product->get_price_html(), $product);
+				$price = apply_filters('belctech_ajax_search_price', $product->get_price_html(), $product);
 
 				$suggestions[] = array(
 					'id'    => $product->get_id(),
@@ -212,12 +212,12 @@ function goya_ajax_search_products() {
 		$suggestions[] = array(
 			'id'    => -1,
 			'value' => '',
-			'url'   => esc_html__( 'No results', 'goya' ),
+			'url'   => esc_html__( 'No results', 'belctech-ecommerce' ),
 			'thumbnail' => '',
 			'price' => ''
 		);
 	}
-	
+
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
 	$suggestions = array(
@@ -228,5 +228,5 @@ function goya_ajax_search_products() {
 	wp_die();
 }
 
-add_action('wp_ajax_nopriv_goya_search_products_ajax', 'goya_ajax_search_products');
-add_action('wp_ajax_goya_search_products_ajax', 'goya_ajax_search_products');
+add_action('wp_ajax_nopriv_belctech_search_products_ajax', 'belctech_ajax_search_products');
+add_action('wp_ajax_belctech_search_products_ajax', 'belctech_ajax_search_products');

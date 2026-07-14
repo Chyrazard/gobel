@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 
 global $product;
 
-if ( apply_filters('goya_catalog_mode_single_product', get_theme_mod('shop_catalog_mode', false)) == true ) {
+if ( apply_filters('belctech_catalog_mode_single_product', get_theme_mod('shop_catalog_mode', false)) == true ) {
 	if ( !$product->is_type( 'variable' ) ) {
 		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
 	} else {
@@ -27,30 +27,30 @@ if ( apply_filters('goya_catalog_mode_single_product', get_theme_mod('shop_catal
 	}
 }
 
-add_action( 'woocommerce_single_product_summary', 'goya_product_summary_open', 1 );
-add_action( 'woocommerce_single_product_summary', 'goya_product_summary_divider', 21 );
-add_action( 'woocommerce_single_product_summary', 'goya_extra_div_close', 100 );
+add_action( 'woocommerce_single_product_summary', 'belctech_product_summary_open', 1 );
+add_action( 'woocommerce_single_product_summary', 'belctech_product_summary_divider', 21 );
+add_action( 'woocommerce_single_product_summary', 'belctech_extra_div_close', 100 );
 
 // Action: woocommerce_before_single_product
 remove_action( 'woocommerce_before_single_product', 'wc_print_notices', 10 );
 remove_action( 'woocommerce_before_single_product', 'woocommerce_output_all_notices', 10 );
 
 // Action: woocommerce_single_product_summary
-add_action( 'woocommerce_single_product_summary', 'goya_single_product_price_clearfix', 11 );
+add_action( 'woocommerce_single_product_summary', 'belctech_single_product_price_clearfix', 11 );
 
 $classes[] = 'et-product-detail';
 
 // Single Product Layout
-$product_layout = goya_meta_config('product','layout_single','regular');
+$product_layout = belctech_meta_config('product','layout_single','regular');
 $classes[] = 'et-product-layout-'.$product_layout;
 
-$transparent_header = goya_meta_config('product','transparent_header',false);
+$transparent_header = belctech_meta_config('product','transparent_header',false);
 $is_showcase = ($product_layout == 'showcase') ? true : false;
 
 if ($is_showcase) {
 	$classes[] = 'et-product-layout-no-padding';
 
-	$transparent_header = apply_filters( 'goya_showcase_transparent_header', true );
+	$transparent_header = apply_filters( 'belctech_showcase_transparent_header', true );
 
 	// Move product meta
 	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
@@ -69,33 +69,33 @@ $cart_layout = get_theme_mod( 'product_cart_buttons_layout','mixed');
 $classes[] = ($is_showcase) ? 'et-cart-horizontal' : 'et-cart-' . $cart_layout;
 
 if ( defined( 'YITH_WCWL_PREMIUM' ) && !$is_showcase ) {
-	add_action('woocommerce_single_product_summary', 'goya_wishlist_button_product', 31);
+	add_action('woocommerce_single_product_summary', 'belctech_wishlist_button_product', 31);
 } else {
 	// Remove YITH Wishlist default button
 	remove_action('woocommerce_single_product_summary', 'yith_wcwl_add_to_wishlist', 31);
 	// Add custom Wishlist shortcode
-	add_action('woocommerce_after_add_to_cart_button', 'goya_wishlist_button_product', 1);
+	add_action('woocommerce_after_add_to_cart_button', 'belctech_wishlist_button_product', 1);
 }
 
 // Add video link after product summary
 if ( get_theme_mod('featured_video', 'gallery') == 'summary' || ( get_theme_mod('featured_video', 'gallery') == 'gallery' && $is_showcase == 1 ) ) {
-	add_action( 'woocommerce_single_product_summary', 'goya_woocommerce_featured_video',20 );	
+	add_action( 'woocommerce_single_product_summary', 'belctech_woocommerce_featured_video',20 );
 }
 
 // If accordion mode move description to right section
-$details_style = goya_meta_config('product','details_style','tabs');
+$details_style = belctech_meta_config('product','details_style','tabs');
 
 $classes[] = 'product-details-' . $details_style;
 
-// Ajax Add to Cart 
-$ajax_atc = apply_filters('goya_ajax_atc_single_product', get_theme_mod( 'product_single_ajax_addtocart', true ));
+// Ajax Add to Cart
+$ajax_atc = apply_filters('belctech_ajax_atc_single_product', get_theme_mod( 'product_single_ajax_addtocart', true ));
 if ($ajax_atc) {
-	$classes[] = 'single-ajax-atc';	
+	$classes[] = 'single-ajax-atc';
 }
 
 
 if ($details_style == 'accordion' && !$is_showcase) {
-	
+
 	// Move tabs section to right
 	remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
 	add_action( 'woocommerce_single_product_summary', 'woocommerce_output_product_data_tabs', 36);
@@ -106,31 +106,31 @@ if ($details_style == 'accordion' && !$is_showcase) {
 	}
 
 	// Remove reviews and description from tabs
-	add_filter( 'woocommerce_product_tabs', 'goya_woocommerce_remove_tabs', 98 );
+	add_filter( 'woocommerce_product_tabs', 'belctech_woocommerce_remove_tabs', 98 );
 
 	// Remove short description
 	$swap_description = get_theme_mod('product_accordion_swap_description', true);
-	
+
 	if( $swap_description == true ) {
 
-		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);	
+		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
 
 		// Add full description to original position
-	$show_full_desc = apply_filters( 'goya_show_full_description_accordion', true );
+	$show_full_desc = apply_filters( 'belctech_show_full_description_accordion', true );
 	if ($show_full_desc == true) {
-		add_action( 'woocommerce_after_single_product_summary', 'goya_full_description_product', 10 );
+		add_action( 'woocommerce_after_single_product_summary', 'belctech_full_description_product', 10 );
 	}
 
 	}
 
-	$classes[] =  (get_theme_mod('product_short_desc_open', true) == true ) ? 'first-tab-open' : false;	
+	$classes[] =  (get_theme_mod('product_short_desc_open', true) == true ) ? 'first-tab-open' : false;
 }
 
 // Options style
 $classes[] = 'et-variation-style-' . get_theme_mod('product_variations_style','table');
 
 // Gallery Style
-$gallery_style = goya_meta_config('product','gallery_style','carousel');
+$gallery_style = belctech_meta_config('product','gallery_style','carousel');
 
 $classes[] = 'et-product-gallery-'.$gallery_style;
 
@@ -138,9 +138,9 @@ $classes[] = 'et-product-gallery-'.$gallery_style;
 // Navigation Thumbnails only with Carousel gallery
 if($gallery_style == 'carousel') {
 
-	$product_thumbnails_position = goya_meta_config('product','thumbnails_position','side');
+	$product_thumbnails_position = belctech_meta_config('product','thumbnails_position','side');
 	$swap_hover = get_theme_mod('product_thumbnails_swap_hover', false);
-	
+
 	if ( $product_thumbnails_position == 'side' && $product_layout != 'full-width' ) {
 		$classes[] = 'thumbnails-vertical';
 	} else {
@@ -148,7 +148,7 @@ if($gallery_style == 'carousel') {
 	}
 
 	if ($swap_hover == true) {
-		$classes[] = 'thumbnails-hover-swap';	
+		$classes[] = 'thumbnails-hover-swap';
 	}
 
 }
@@ -162,19 +162,19 @@ if ( $product->is_sold_individually() ) {
 }
 
 
-$sticky_section = goya_meta_config('product','sticky_section','summary');
+$sticky_section = belctech_meta_config('product','sticky_section','summary');
 
 if ($sticky_section != 'none') {
 	if ($gallery_style == 'carousel' && $product_layout != 'full-width' ) {
 		$classes[] = 'sticky-section sticky-' . $sticky_section;
 	} else {
 		$classes[] = 'sticky-section sticky-summary';
-	}	
+	}
 }
 
 
 // Sizing guide: If position is changed also update content-quickview.php */
-add_action('woocommerce_single_product_summary', 'goya_sizing_guide', 29);
+add_action('woocommerce_single_product_summary', 'belctech_sizing_guide', 29);
 
 // Breadcrumbs
 $has_breadcrumbs = get_theme_mod('product_breadcrumbs', true);
@@ -196,8 +196,8 @@ if ($has_breadcrumbs == true) {
 		 do_action( 'woocommerce_before_single_product' );
 
 		 if ( post_password_required() ) {
-		 	echo get_the_password_form(); // WPCS: XSS ok.
-		 	return;
+			echo get_the_password_form(); // WPCS: XSS ok.
+			return;
 		 }
 	?>
 
@@ -213,7 +213,7 @@ if ($has_breadcrumbs == true) {
 
 	<div class="summary entry-summary">
 
-		<?php goya_wc_print_notices(); ?>
+		<?php belctech_wc_print_notices(); ?>
 
 		<?php
 			/**

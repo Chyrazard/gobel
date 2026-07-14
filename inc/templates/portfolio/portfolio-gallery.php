@@ -1,7 +1,7 @@
-<?php if ( rwmb_meta( 'goya_portfolio_featured_gallery') !== '' ) {
+<?php if ( rwmb_meta( 'belctech_portfolio_featured_gallery') !== '' ) {
 
-	$gallery = rwmb_meta( 'goya_portfolio_featured_gallery', array( 'size' => 'full' ) );
-	
+	$gallery = rwmb_meta( 'belctech_portfolio_featured_gallery', array( 'size' => 'full' ) );
+
 ?>
 <div class="et-banner-slider slick slick-slider post-featured-section post-featured-gallery slick-dotted slick-dots-inside slick-dots-centered" data-pagination="true" data-navigation="true" data-columns="1" data-autoplay="false" data-infinite="true">
 	<?php foreach ( $gallery as $gallery_image ) { ?>

@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-function goya_custom_styles() {
+function belctech_custom_styles() {
 
 	$id = get_queried_object_id();
 
@@ -26,7 +26,7 @@ function goya_custom_styles() {
 
 
 	/* Typography */
-	
+
 	<?php if ( get_theme_mod('main_font_source', '1') === '2' && !empty($main_font_family)) { ?>
 	body,
 	blockquote cite,
@@ -67,7 +67,7 @@ function goya_custom_styles() {
 	<?php if ( $second_font_enabled ) { ?>
 
 		<?php if ( get_theme_mod('second_font_source', '1') === '2' && !empty($second_font_family) ) { ?>
-	
+
 			<?php if (in_array('main-menu', $second_font_elements)) { ?>
 			.site-header .main-navigation,
 			.site-header .secondary-navigation,
@@ -89,11 +89,11 @@ function goya_custom_styles() {
 			.revslider-slide-title,
 			<?php } ?>
 			<?php if (in_array('blockquotes', $second_font_elements)) { ?>
-			blockquote h1, 
-			blockquote h2, 
-			blockquote h3, 
-			blockquote h4, 
-			blockquote h5, 
+			blockquote h1,
+			blockquote h2,
+			blockquote h3,
+			blockquote h4,
+			blockquote h5,
 			blockquote h6,
 			blockquote p,
 			<?php } ?>
@@ -155,94 +155,94 @@ function goya_custom_styles() {
 		<?php } else { ?>
 
 			<?php if (! in_array('main-menu', $second_font_elements)) { ?>
-			.theme-goya .site-header .main-navigation,
-			.theme-goya .site-header .secondary-navigation,
+			.theme-belctech-ecommerce .site-header .main-navigation,
+			.theme-belctech-ecommerce .site-header .secondary-navigation,
 			<?php } ?>
 			<?php if (! in_array('titles', $second_font_elements)) { ?>
-			.theme-goya h1,
-			.theme-goya .page-header .page-title,
-			.theme-goya .entry-header .entry-title,
-			.theme-goya .et-shop-title,
-			.theme-goya .product-showcase.product-title-top .product_title,
-			.theme-goya .et-product-detail .summary h1.product_title,
-			.theme-goya .entry-title.blog-title,
-			.theme-goya .post.post-detail .entry-header .entry-title,
-			.theme-goya .post.post-detail .post-featured .entry-header .entry-title,
-			.theme-goya .wp-block-cover .wp-block-cover-text,
-			.theme-goya .wp-block-cover .wp-block-cover__inner-container,
-			.theme-goya .wp-block-cover-image .wp-block-cover-image-text,
-			.theme-goya .wp-block-cover-image h2,
-			.theme-goya .revslider-slide-title,
+			.theme-belctech-ecommerce h1,
+			.theme-belctech-ecommerce .page-header .page-title,
+			.theme-belctech-ecommerce .entry-header .entry-title,
+			.theme-belctech-ecommerce .et-shop-title,
+			.theme-belctech-ecommerce .product-showcase.product-title-top .product_title,
+			.theme-belctech-ecommerce .et-product-detail .summary h1.product_title,
+			.theme-belctech-ecommerce .entry-title.blog-title,
+			.theme-belctech-ecommerce .post.post-detail .entry-header .entry-title,
+			.theme-belctech-ecommerce .post.post-detail .post-featured .entry-header .entry-title,
+			.theme-belctech-ecommerce .wp-block-cover .wp-block-cover-text,
+			.theme-belctech-ecommerce .wp-block-cover .wp-block-cover__inner-container,
+			.theme-belctech-ecommerce .wp-block-cover-image .wp-block-cover-image-text,
+			.theme-belctech-ecommerce .wp-block-cover-image h2,
+			.theme-belctech-ecommerce .revslider-slide-title,
 			<?php } ?>
 			<?php if (! in_array('blockquotes', $second_font_elements)) { ?>
-			.theme-goya blockquote h1, 
-			.theme-goya blockquote h2, 
-			.theme-goya blockquote h3, 
-			.theme-goya blockquote h4, 
-			.theme-goya blockquote h5, 
-			.theme-goya blockquote h6,
-			.theme-goya blockquote p,
+			.theme-belctech-ecommerce blockquote h1,
+			.theme-belctech-ecommerce blockquote h2,
+			.theme-belctech-ecommerce blockquote h3,
+			.theme-belctech-ecommerce blockquote h4,
+			.theme-belctech-ecommerce blockquote h5,
+			.theme-belctech-ecommerce blockquote h6,
+			.theme-belctech-ecommerce blockquote p,
 			<?php } ?>
 			<?php if (! in_array('widgets', $second_font_elements)) { ?>
-			.theme-goya .post-sidebar .widget > .widgettitle,
+			.theme-belctech-ecommerce .post-sidebar .widget > .widgettitle,
 			<?php } ?>
 			<?php if (! in_array('h2', $second_font_elements)) { ?>
-			.theme-goya .entry-content h2,
-			.theme-goya .hentry h2,
-			.theme-goya .mfp-content h2,
-			.theme-goya .footer h2,
+			.theme-belctech-ecommerce .entry-content h2,
+			.theme-belctech-ecommerce .hentry h2,
+			.theme-belctech-ecommerce .mfp-content h2,
+			.theme-belctech-ecommerce .footer h2,
 			<?php } ?>
 			<?php if (! in_array('h3', $second_font_elements)) { ?>
-			.theme-goya .entry-content h3,
-			.theme-goya .hentry h3,
-			.theme-goya .mfp-content h3,
-			.theme-goya .footer h3,
+			.theme-belctech-ecommerce .entry-content h3,
+			.theme-belctech-ecommerce .hentry h3,
+			.theme-belctech-ecommerce .mfp-content h3,
+			.theme-belctech-ecommerce .footer h3,
 			<?php } ?>
 			<?php if (! in_array('h4', $second_font_elements)) { ?>
-			.theme-goya .entry-content h4,
-			.theme-goya .hentry h4,
-			.theme-goya .mfp-content h4,
-			.theme-goya .footer h4,
+			.theme-belctech-ecommerce .entry-content h4,
+			.theme-belctech-ecommerce .hentry h4,
+			.theme-belctech-ecommerce .mfp-content h4,
+			.theme-belctech-ecommerce .footer h4,
 			<?php } ?>
 			<?php if (! in_array('posts', $second_font_elements)) { ?>
-			.theme-goya .post .post-title h3,
+			.theme-belctech-ecommerce .post .post-title h3,
 			<?php } ?>
 			<?php if (! in_array('products', $second_font_elements)) { ?>
-			.theme-goya .products .product .product-title h2,
+			.theme-belctech-ecommerce .products .product .product-title h2,
 			<?php } ?>
 			<?php if (! in_array('portfolio', $second_font_elements)) { ?>
-			.theme-goya .et-portfolio .type-portfolio h3,
+			.theme-belctech-ecommerce .et-portfolio .type-portfolio h3,
 			<?php } ?>
 			<?php if (! in_array('modules', $second_font_elements)) { ?>
-			.theme-goya .et-banner-text .et-banner-title,
-			.theme-goya .woocommerce-order-received h2,
-			.theme-goya .woocommerce-MyAccount-content h2,
-			.theme-goya .woocommerce-MyAccount-content h3,
-			.theme-goya .woocommerce-checkout h3,
-			.theme-goya .order_review_heading,
-			.theme-goya .woocommerce-MyAccount-content legend,
-			.theme-goya .et-portfolio .type-portfolio h3,
-			.theme-goya .related h2,
-			.theme-goya .up-sells h2,
-			.theme-goya .cross-sells h2,
-			.theme-goya .cart-collaterals h5,
-			.theme-goya .cart-collaterals h3,
-			.theme-goya .cart-collaterals h2,
-			.theme-goya .related-posts .related-title,
-			.theme-goya .et_post_nav .post_nav_link h3,
-			.theme-goya .comments-container .comments-title,
-			.theme-goya .comment-reply-title,
-			.theme-goya .product-details-accordion .woocommerce-Reviews-title,
+			.theme-belctech-ecommerce .et-banner-text .et-banner-title,
+			.theme-belctech-ecommerce .woocommerce-order-received h2,
+			.theme-belctech-ecommerce .woocommerce-MyAccount-content h2,
+			.theme-belctech-ecommerce .woocommerce-MyAccount-content h3,
+			.theme-belctech-ecommerce .woocommerce-checkout h3,
+			.theme-belctech-ecommerce .order_review_heading,
+			.theme-belctech-ecommerce .woocommerce-MyAccount-content legend,
+			.theme-belctech-ecommerce .et-portfolio .type-portfolio h3,
+			.theme-belctech-ecommerce .related h2,
+			.theme-belctech-ecommerce .up-sells h2,
+			.theme-belctech-ecommerce .cross-sells h2,
+			.theme-belctech-ecommerce .cart-collaterals h5,
+			.theme-belctech-ecommerce .cart-collaterals h3,
+			.theme-belctech-ecommerce .cart-collaterals h2,
+			.theme-belctech-ecommerce .related-posts .related-title,
+			.theme-belctech-ecommerce .et_post_nav .post_nav_link h3,
+			.theme-belctech-ecommerce .comments-container .comments-title,
+			.theme-belctech-ecommerce .comment-reply-title,
+			.theme-belctech-ecommerce .product-details-accordion .woocommerce-Reviews-title,
 			.et-hovercard .et-pricing-head,
 			<?php } ?>
-			.theme-goya .font-catcher {
+			.theme-belctech-ecommerce .font-catcher {
 				font-family: inherit;
 				font-weight: inherit;
 				font-style: inherit;
 			}
 
 		<?php } ?>
-	
+
 	<?php } ?>
 
 
@@ -253,7 +253,7 @@ function goya_custom_styles() {
 	div.vc_toggle_size_sm .vc_toggle_title h4 {
 		font-size: <?php echo intval( get_theme_mod('font_size_medium', 16 ) ); ?>px;
 	}
-	
+
 	/* Input fields size for mobiles */
 	<?php if (intval( get_theme_mod('font_size_medium', 16 )) < 16 ) { ?>
 	@media all and (max-width: 767px) {
@@ -262,7 +262,7 @@ function goya_custom_styles() {
 		}
 	}
 	<?php } ?>
-	
+
 	.wp-caption-text,
 	.woocommerce-breadcrumb,
 	.post.listing .listing_content .post-meta,
@@ -297,7 +297,7 @@ function goya_custom_styles() {
 	/* Accent color */
 
 	/* Shortcodes */
-		
+
 	/* Banners */
 	.et-banner .et-banner-content .et-banner-title.color-accent,
 	.et-banner .et-banner-content .et-banner-subtitle.color-accent,
@@ -340,7 +340,7 @@ function goya_custom_styles() {
 	/* Type Effects */
 	.et-animatype.color-accent .et-animated-entry,
 	.et-stroketype.color-accent *  {
-		color: <?php echo esc_attr( get_theme_mod('accent_color', '#b9a16b') ); ?>;	
+		color: <?php echo esc_attr( get_theme_mod('accent_color', '#b9a16b') ); ?>;
 	}
 
 	/* General */
@@ -437,7 +437,7 @@ function goya_custom_styles() {
 	h6.fancy-title {
 		color: <?php echo esc_attr( get_theme_mod('fancy_title_color', '#b9a16b') ); ?>
 	}
-	
+
 	/* Fancy Tag default color */
 	.fancy-tag,
 	h1.fancy-tag,
@@ -460,9 +460,9 @@ function goya_custom_styles() {
 			display: none !important;
 		}
 	}
-	
+
 	/* Header Height */
-	
+
 	@media only screen and (min-width: 992px) {
 		.site-header,
 		.header-spacer,
@@ -472,7 +472,7 @@ function goya_custom_styles() {
 		.page-header-transparent .hero-header .hero-title {
 			padding-top: <?php echo esc_attr( get_theme_mod('header_height', 90) ); ?>px;
 		}
-		
+
 		.et-product-detail.et-product-layout-no-padding.product-header-transparent .showcase-inner .product-information {
 			padding-top: <?php echo esc_attr( get_theme_mod('header_height', 90) ); ?>px;
 		}
@@ -506,7 +506,7 @@ function goya_custom_styles() {
 		}
 	}
 
-	<?php if ( goya_wc_active() ) { 
+	<?php if ( belctech_wc_active() ) {
 
 		global $wp_query;
 
@@ -514,7 +514,7 @@ function goya_custom_styles() {
 		$is_latest_page = $wp_query->is_latest_page;
 
 		$shop_header_bg = get_theme_mod('shop_header_bg_color', '#f8f8f8');
-		$shop_hero_title = goya_meta_config('shop','hero_title','none');
+		$shop_hero_title = belctech_meta_config('shop','hero_title','none');
 		?>
 		<?php if (! is_shop() ) { ?>
 			<?php if ( $shop_hero_title === 'all-hero' ) { ?>
@@ -541,7 +541,7 @@ function goya_custom_styles() {
 				}
 			<?php }
 		} ?>
-		<?php if ( is_tax() ) { 
+		<?php if ( is_tax() ) {
 			$term = get_queried_object();
 			$term_id = $term->term_id;
 			$header_id = get_term_meta( $term_id, 'header_id', true );
@@ -552,20 +552,20 @@ function goya_custom_styles() {
 					background-color:<?php echo esc_attr( $shop_header_bg ); ?>;
 				<?php } ?>
 				<?php if (! empty($image)) { ?>
-					background-image: url('<?php echo esc_url($image); ?>');	
+					background-image: url('<?php echo esc_url($image); ?>');
 				<?php } ?>
 			}
 		<?php } ?>
 	<?php } ?>
-	
+
 	/* Top bar */
 	<?php $topbar_mobile =  get_theme_mod('top_bar_mobiles', array());
 	$tp_sections = '';
-	foreach($topbar_mobile as $i => $section) { 
+	foreach($topbar_mobile as $i => $section) {
 		if ($tp_sections != '') {
 			$tp_sections .= ',';
 	}
-		$tp_sections .= '.top-bar .topbar-' . $section; 
+		$tp_sections .= '.top-bar .topbar-' . $section;
 	} ?>
 	<?php if ($tp_sections != '') { ?>
 		@media only screen and (max-width: 991px) {
@@ -573,7 +573,7 @@ function goya_custom_styles() {
 			<?php echo esc_attr($tp_sections); ?> { display: flex; }
 	}
 	<?php } ?>
-	
+
 
 	/* Header */
 	.page-header-regular .site-header,
@@ -588,12 +588,12 @@ function goya_custom_styles() {
 	}
 	.site-header a,
 	.site-header .menu-toggle,
-	.site-header .goya-search button {
+	.site-header .belctech-search button {
 		color:<?php echo esc_attr( get_theme_mod('header_navigation_color', '#282828') ); ?>;
 	}
-	
+
 	@media only screen and (max-width: 767px) {
-		
+
 		.sticky-header-light .site-header .menu-toggle:hover,
 		.header-transparent-mobiles.sticky-header-light.header_on_scroll .site-header a.icon,
 		.header-transparent-mobiles.sticky-header-light.header_on_scroll .site-header .menu-toggle,
@@ -640,16 +640,16 @@ function goya_custom_styles() {
 
 	/* Mobile menu */
 	.side-mobile-menu,
-	.side-mobile-menu.dark {   
+	.side-mobile-menu.dark {
 		background:<?php echo esc_attr( get_theme_mod('menu_mobile_background_color', '#ffffff') ); ?>;
 	}
 
 	/* Full Screen menu */
 	.side-fullscreen-menu,
-	.side-fullscreen-menu.dark {   
+	.side-fullscreen-menu.dark {
 		background:<?php echo esc_attr( get_theme_mod('menu_fullscreen_background_color', '#ffffff') ); ?>;
 	}
-	
+
 	/* Footer widgets */
 	.site-footer,
 	.site-footer.dark {
@@ -677,10 +677,10 @@ function goya_custom_styles() {
 	}
 
 	/* Single product */
-	<?php 
-		$showcase_bg = get_post_meta( $id, 'goya_product_showcase_background', true);
+	<?php
+		$showcase_bg = get_post_meta( $id, 'belctech_product_showcase_background', true);
 
-		if ( get_theme_mod('single_product_background', false) == true || $showcase_bg ) { 
+		if ( get_theme_mod('single_product_background', false) == true || $showcase_bg ) {
 			if (! $showcase_bg) { // use global value instead
 			$showcase_bg = get_theme_mod('single_product_background_color', '#f8f8f8');
 			}
@@ -699,7 +699,7 @@ function goya_custom_styles() {
 	}
 
 	/* Single Product: Meta */
-	<?php 
+	<?php
 	$meta_sku = get_theme_mod('product_meta_sku', true);
 	$meta_cat = get_theme_mod('product_meta_categories', true);
 	$meta_tag = get_theme_mod('product_meta_tags', true);
@@ -778,7 +778,7 @@ function goya_custom_styles() {
 
 	/* WooCommerce Blocks */
 
-	
+
 	@media screen and (min-width: 768px) {
 		<?php if (get_theme_mod('shop_product_animation_hover', 'zoom-jump') == 'jump' || get_theme_mod('shop_product_animation_hover', 'zoom-jump') == 'zoom-jump') { ?>
 		.wc-block-grid__products .wc-block-grid__product .wc-block-grid__product-image {
@@ -797,7 +797,7 @@ function goya_custom_styles() {
 	  }
 	  <?php } ?>
 	}
-	
+
 
 	/* Blog: Title */
 
@@ -805,52 +805,52 @@ function goya_custom_styles() {
 		background-color:<?php echo esc_attr( get_theme_mod('blog_hero_title_bg', '#f8f8f8') ); ?>;
 	}
 
-	<?php 
+	<?php
   if ( is_home() && ! is_front_page() ) {
     $page = get_queried_object();
 
     if ( !is_null( $page ) && $page->ID == get_option( 'page_for_posts' ) ) {
 
     if ( ! empty (get_theme_mod('blog_header_bg_image', '') ) ) { ?>
-    	.et-blog.hero-header .hero-title {
+	.et-blog.hero-header .hero-title {
 				background-image: url('<?php echo esc_attr( get_theme_mod('blog_header_bg_image', '') ); ?>');
 			}
 			<?php }
     }
   } else if (is_category()) {
-  		$cat = get_queried_object();
-  		$cat_id = $cat->term_id;
-  		$header_id = get_term_meta( $cat_id, 'header_id', true );
-  		
-  		$image = wp_get_attachment_url($header_id, 'full');
-  	?>
-  		.category.category-<?php echo esc_attr($cat_id); ?> .hero-header .hero-title {
-  			<?php if ( get_theme_mod('shop_hero_title', 'none') != 'none' ) { ?>
-  				background-color:<?php echo esc_attr( get_theme_mod('blog_hero_title_bg', '#f8f8f8') ); ?>;
-  			<?php } ?>
-  			<?php if (! empty($image)) { ?>
-  				background-image: url('<?php echo esc_url($image); ?>');	
-  			<?php } ?>
-  		}
-  	<?php } ?>
+		$cat = get_queried_object();
+		$cat_id = $cat->term_id;
+		$header_id = get_term_meta( $cat_id, 'header_id', true );
+
+		$image = wp_get_attachment_url($header_id, 'full');
+	?>
+		.category.category-<?php echo esc_attr($cat_id); ?> .hero-header .hero-title {
+			<?php if ( get_theme_mod('shop_hero_title', 'none') != 'none' ) { ?>
+				background-color:<?php echo esc_attr( get_theme_mod('blog_hero_title_bg', '#f8f8f8') ); ?>;
+			<?php } ?>
+			<?php if (! empty($image)) { ?>
+				background-image: url('<?php echo esc_url($image); ?>');
+			<?php } ?>
+		}
+	<?php } ?>
 
 	/* Single post */
-	<?php $hero_bg = get_post_meta( $id, 'goya_post_hero_background', true); ?>
-	
+	<?php $hero_bg = get_post_meta( $id, 'belctech_post_hero_background', true); ?>
+
 	.post.post-detail.hero-title .post-featured.title-wrap {
 		background-color:<?php echo esc_attr( get_theme_mod('blog_hero_title_bg', '#f8f8f8') ); ?>;
 		<?php if ( $hero_bg ) echo 'background-color: ' . esc_attr($hero_bg).';'; ?>
 	}
 
 	/* Pages/Portfolio background */
-	<?php $page_bg = get_post_meta( $id, 'goya_page_page_background', true);
-	$portfolio_bg = get_post_meta( $id, 'goya_portfolio_page_background', true);
+	<?php $page_bg = get_post_meta( $id, 'belctech_page_page_background', true);
+	$portfolio_bg = get_post_meta( $id, 'belctech_portfolio_page_background', true);
 
 	if ($page_bg) { ?>
 		.page-id-<?php echo esc_attr($id); ?> #wrapper div[role="main"] {
 			background-color: <?php echo esc_attr( $page_bg ); ?>
 		}
-	<?php } 
+	<?php }
 	if ($portfolio_bg) { ?>
 		.postid-<?php echo esc_attr($id); ?> #wrapper div[role="main"] {
 			background-color: <?php echo esc_attr( $portfolio_bg ); ?>
@@ -858,8 +858,8 @@ function goya_custom_styles() {
 	<?php } ?>
 
 	/* Page hero title background */
-	<?php $hero_bg = get_post_meta( $id, 'goya_page_hero_title_background', true);
-	$title_style = get_post_meta(get_queried_object_id(), 'goya_page_title_style', true);
+	<?php $hero_bg = get_post_meta( $id, 'belctech_page_hero_title_background', true);
+	$title_style = get_post_meta(get_queried_object_id(), 'belctech_page_title_style', true);
 
 	if ($title_style == 'hero' && $hero_bg) { ?>
 	.page-id-<?php echo esc_attr($id); ?> .hero-header .hero-title {
@@ -868,8 +868,8 @@ function goya_custom_styles() {
 	<?php } ?>
 
 	/* Portfolio hero title background */
-	<?php $hero_bg = get_post_meta( $id, 'goya_portfolio_hero_title_background', true);
-	$portfolio_layout = goya_meta_config('portfolio','layout_single','regular');;
+	<?php $hero_bg = get_post_meta( $id, 'belctech_portfolio_hero_title_background', true);
+	$portfolio_layout = belctech_meta_config('portfolio','layout_single','regular');;
 
 	if ($portfolio_layout == 'hero' && $hero_bg) { ?>
 	.postid-<?php echo esc_attr($id); ?> .post-detail.hero-title .post-featured.title-wrap {
@@ -878,7 +878,7 @@ function goya_custom_styles() {
 	<?php } ?>
 
 	/* Gutenberg Styles */
-	<?php 
+	<?php
 	// Retrieve the accent color from the Customizer.
 	$gutstyles = array(
 		'white' => '#ffffff',
@@ -888,23 +888,23 @@ function goya_custom_styles() {
 		'accent' => get_theme_mod( 'accent_color', '#b9a16b' ),
 	);
 
-	goya_gutenberg_colors($gutstyles);
+	belctech_gutenberg_colors($gutstyles);
 
 	?>
 
 	/* Translation Styles */
 	.commentlist .bypostauthor > .comment-body .fn:after {
-		content: '<?php echo esc_html__( 'Post Author', 'goya' ); ?>';
+		content: '<?php echo esc_html__( 'Post Author', 'belctech-ecommerce' ); ?>';
 	}
 	.et-inline-validation-notices .form-row.woocommerce-invalid-required-field:after{
-		content: '<?php echo esc_html__( 'Required field', 'goya' ); ?>';
+		content: '<?php echo esc_html__( 'Required field', 'belctech-ecommerce' ); ?>';
 	}
 	.post.type-post.sticky .entry-title a:after {
-		content: '<?php echo esc_html__( 'Featured', 'goya' ); ?>';
+		content: '<?php echo esc_html__( 'Featured', 'belctech-ecommerce' ); ?>';
 	}
 
 	/* Custom CSS */
-	<?php 
+	<?php
 	if( get_theme_mod('custom_css_status', false) == true ) {
 		echo get_theme_mod('custom_css_code', '');
 	}
@@ -912,14 +912,14 @@ function goya_custom_styles() {
 	$styles = ob_get_contents();
 	if (ob_get_contents()) ob_end_clean();
 
-	$styles = goya_clean_custom_css($styles);
+	$styles = belctech_clean_custom_css($styles);
 
 	return $styles;
 }
 
 
 /* Add custom colors to Gutenberg. */
-function goya_gutenberg_colors($gutstyles) {
+function belctech_gutenberg_colors($gutstyles) {
 
 	// Build styles.
 	$css  = '';
@@ -928,29 +928,29 @@ function goya_gutenberg_colors($gutstyles) {
 		$css .= '.has-gutenberg-'.$name.'-background-color { background-color: ' . esc_attr( $color ) . '; }';
 		$css .= '.wp-block-button.outlined .has-gutenberg-'.$name.'-color { border-color: ' . esc_attr( $color ) . ' !important; background-color: transparent !important; }';
 	}
-	
+
 	echo wp_strip_all_tags( $css );
 }
 
 /* Process background field from array */
-function goya_bg_output($array) {
+function belctech_bg_output($array) {
 	if(!empty($array)) {
-		if (!empty($array['background-color'])) { 
+		if (!empty($array['background-color'])) {
 			echo "background-color: " . $array['background-color'] . " !important;\n";
 		}
-		if (!empty($array['background-image'])) { 
+		if (!empty($array['background-image'])) {
 			echo "background-image: url(" . $array['background-image'] . ") !important;\n";
 		}
-		if (!empty($array['background-repeat'])) { 
+		if (!empty($array['background-repeat'])) {
 			echo "background-repeat: " . $array['background-repeat'] . " !important;\n";
 		}
-		if (!empty($array['background-attachment'])) { 
+		if (!empty($array['background-attachment'])) {
 			echo "background-attachment: " . $array['background-attachment'] . " !important;\n";
 		}
-		if (!empty($array['background-position'])) { 
+		if (!empty($array['background-position'])) {
 			echo "background-position: " . $array['background-position'] . " !important;\n";
 		}
-		if (!empty($array['background-size'])) { 
+		if (!empty($array['background-size'])) {
 			echo "background-size: " . $array['background-size'] . " !important;\n";
 		}
 	}

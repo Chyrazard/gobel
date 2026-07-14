@@ -3,7 +3,7 @@
  * Integrate with WPBakery Page Builder.
  */
 
-class Goya_Core_JS_Composer {
+class Belctech_Core_JS_Composer {
 
 	/**
 	 * Initialize.
@@ -27,53 +27,41 @@ class Goya_Core_JS_Composer {
 	public static function init_shortcodes() {
 
 		if ( ! function_exists('wpbakery')) return;
-		
-		include( GOYA_VC_DIR . 'shortcodes/banner-slider.php' );
-		include( GOYA_VC_DIR . 'shortcodes/banner.php' );
-		include( GOYA_VC_DIR . 'shortcodes/blog-posts.php' );
-		include( GOYA_VC_DIR . 'shortcodes/button.php' );
-		include( GOYA_VC_DIR . 'shortcodes/content-carousel.php' );
-		include( GOYA_VC_DIR . 'shortcodes/countdown.php' );
-		include( GOYA_VC_DIR . 'shortcodes/counter.php' );
-		include( GOYA_VC_DIR . 'shortcodes/gmap.php' );
-		include( GOYA_VC_DIR . 'shortcodes/gmap-parent.php' );
-		include( GOYA_VC_DIR . 'shortcodes/hover-card.php' );
-		include( GOYA_VC_DIR . 'shortcodes/icon-holder.php' );
-		include( GOYA_VC_DIR . 'shortcodes/icon-box.php' );
-		include( GOYA_VC_DIR . 'shortcodes/image.php' );
-		include( GOYA_VC_DIR . 'shortcodes/image-slider.php' );
-		include( GOYA_VC_DIR . 'shortcodes/lightbox.php' );
-		include( GOYA_VC_DIR . 'shortcodes/pricing-table.php' );
-		include( GOYA_VC_DIR . 'shortcodes/pricing-column.php' );
-		include( GOYA_VC_DIR . 'shortcodes/team-member.php' );
-		include( GOYA_VC_DIR . 'shortcodes/testimonial-slider.php' );
-		include( GOYA_VC_DIR . 'shortcodes/testimonial.php' );
-		include( GOYA_VC_DIR . 'shortcodes/type-auto.php' );
-		include( GOYA_VC_DIR . 'shortcodes/type-stroke.php' );
-		include( GOYA_VC_DIR . 'shortcodes/video-lightbox.php' );
+
+		include( BELCTECH_VC_DIR . 'shortcodes/banner-slider.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/banner.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/blog-posts.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/button.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/content-carousel.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/countdown.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/counter.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/gmap.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/gmap-parent.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/hover-card.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/icon-holder.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/icon-box.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/image.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/image-slider.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/lightbox.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/pricing-table.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/pricing-column.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/team-member.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/testimonial-slider.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/testimonial.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/type-auto.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/type-stroke.php' );
+		include( BELCTECH_VC_DIR . 'shortcodes/video-lightbox.php' );
 
 		if ( post_type_exists( 'portfolio' ) ) {
-			include( GOYA_VC_DIR . 'shortcodes/portfolio.php' );
+			include( BELCTECH_VC_DIR . 'shortcodes/portfolio.php' );
 		}
 
-		if (goya_wc_exists()) {
-			include( GOYA_VC_DIR . 'shortcodes/product-masonry.php' );
-			include( GOYA_VC_DIR . 'shortcodes/product-slider.php' );
-			include( GOYA_VC_DIR . 'shortcodes/product-category-grid.php' );
+		if (belctech_wc_exists()) {
+			include( BELCTECH_VC_DIR . 'shortcodes/product-masonry.php' );
+			include( BELCTECH_VC_DIR . 'shortcodes/product-slider.php' );
+			include( BELCTECH_VC_DIR . 'shortcodes/product-category-grid.php' );
 		}
 
-		/* Ajax Action */
-		add_action( 'wp_ajax_nopriv_goya_load_vc_template', array( __CLASS__, 'goya_load_vc_template' ) );
-		add_action( 'wp_ajax_goya_load_vc_template', array( __CLASS__, 'goya_load_vc_template' ) );
-		
-	}
-
-	public static function goya_load_vc_template() {
-		$id = isset($_POST['template_unique_id']) ? wp_unslash($_POST['template_unique_id']) : false;
-		
-	  $template = goya_template_get_list($id);
-	  echo wp_kses_post( $template['sc'] );
-		wp_die();
 	}
 
 	/**
@@ -81,7 +69,7 @@ class Goya_Core_JS_Composer {
 	 */
 	public static function customize_elements() {
 
-		include( GOYA_VC_DIR . 'vc_elements.php' );
+		include( BELCTECH_VC_DIR . 'vc_elements.php' );
 	}
 
 	/**
@@ -95,16 +83,16 @@ class Goya_Core_JS_Composer {
 				if ( isset( wpbakery()->shared_templates ) ) {
 					remove_filter( 'vc_get_all_templates', array( wpbakery()->shared_templates, 'addTemplatesTab' ) );
 		}
-			}	
+			}
 		}
 
 		// Add new templates
-		$vc_element_templates_dir = GOYA_VC_DIR . 'vc_elements/';
+		$vc_element_templates_dir = BELCTECH_VC_DIR . 'vc_elements/';
 		vc_set_shortcodes_templates_dir( $vc_element_templates_dir );
 
 		// Belctech intentionally omits remote demo templates. Existing shortcodes
 		// and the custom VC element templates remain fully compatible.
-	
+
 	}
 
 
@@ -113,42 +101,42 @@ class Goya_Core_JS_Composer {
 	 */
 	public static function map_shortcodes() {
 		// Include new VC elements
-		include( GOYA_VC_DIR . 'elements/banner-slider.php' );
-		include( GOYA_VC_DIR . 'elements/banner.php' );
-		include( GOYA_VC_DIR . 'elements/blog-posts.php' );
-		include( GOYA_VC_DIR . 'elements/button.php' );
-		include( GOYA_VC_DIR . 'elements/content-carousel.php' );
-		include( GOYA_VC_DIR . 'elements/countdown.php' );
-		include( GOYA_VC_DIR . 'elements/counter.php' );
-		include( GOYA_VC_DIR . 'elements/gmap.php' );
-		include( GOYA_VC_DIR . 'elements/gmap-parent.php' );
-		include( GOYA_VC_DIR . 'elements/hover-card.php' );
-		include( GOYA_VC_DIR . 'elements/icon-holder.php' );
-		include( GOYA_VC_DIR . 'elements/icon-box.php' );
-		include( GOYA_VC_DIR . 'elements/image.php' );
-		include( GOYA_VC_DIR . 'elements/image-slider.php' );
-		include( GOYA_VC_DIR . 'elements/lightbox.php' );
-		include( GOYA_VC_DIR . 'elements/pricing-table.php' );
-		include( GOYA_VC_DIR . 'elements/pricing-column.php' );
-		include( GOYA_VC_DIR . 'elements/team-member.php' );
-		include( GOYA_VC_DIR . 'elements/testimonial-slider.php' );
-		include( GOYA_VC_DIR . 'elements/testimonial.php' );
-		include( GOYA_VC_DIR . 'elements/type-auto.php' );
-		include( GOYA_VC_DIR . 'elements/type-stroke.php' );
-		include( GOYA_VC_DIR . 'elements/video-lightbox.php' );
+		include( BELCTECH_VC_DIR . 'elements/banner-slider.php' );
+		include( BELCTECH_VC_DIR . 'elements/banner.php' );
+		include( BELCTECH_VC_DIR . 'elements/blog-posts.php' );
+		include( BELCTECH_VC_DIR . 'elements/button.php' );
+		include( BELCTECH_VC_DIR . 'elements/content-carousel.php' );
+		include( BELCTECH_VC_DIR . 'elements/countdown.php' );
+		include( BELCTECH_VC_DIR . 'elements/counter.php' );
+		include( BELCTECH_VC_DIR . 'elements/gmap.php' );
+		include( BELCTECH_VC_DIR . 'elements/gmap-parent.php' );
+		include( BELCTECH_VC_DIR . 'elements/hover-card.php' );
+		include( BELCTECH_VC_DIR . 'elements/icon-holder.php' );
+		include( BELCTECH_VC_DIR . 'elements/icon-box.php' );
+		include( BELCTECH_VC_DIR . 'elements/image.php' );
+		include( BELCTECH_VC_DIR . 'elements/image-slider.php' );
+		include( BELCTECH_VC_DIR . 'elements/lightbox.php' );
+		include( BELCTECH_VC_DIR . 'elements/pricing-table.php' );
+		include( BELCTECH_VC_DIR . 'elements/pricing-column.php' );
+		include( BELCTECH_VC_DIR . 'elements/team-member.php' );
+		include( BELCTECH_VC_DIR . 'elements/testimonial-slider.php' );
+		include( BELCTECH_VC_DIR . 'elements/testimonial.php' );
+		include( BELCTECH_VC_DIR . 'elements/type-auto.php' );
+		include( BELCTECH_VC_DIR . 'elements/type-stroke.php' );
+		include( BELCTECH_VC_DIR . 'elements/video-lightbox.php' );
 
 		if ( post_type_exists( 'portfolio' ) ) {
-			include( GOYA_VC_DIR . 'elements/portfolio.php' );
+			include( BELCTECH_VC_DIR . 'elements/portfolio.php' );
 		}
 
-		if (goya_wc_exists()) {
-			include( GOYA_VC_DIR . 'elements/product-masonry.php' );
-			include( GOYA_VC_DIR . 'elements/product-slider.php' );
-			include( GOYA_VC_DIR . 'elements/product-category-grid.php' );
+		if (belctech_wc_exists()) {
+			include( BELCTECH_VC_DIR . 'elements/product-masonry.php' );
+			include( BELCTECH_VC_DIR . 'elements/product-slider.php' );
+			include( BELCTECH_VC_DIR . 'elements/product-category-grid.php' );
 		}
 
 		// Include custom params
-		include( GOYA_VC_DIR . 'params/iconpicker.php' );
+		include( BELCTECH_VC_DIR . 'params/iconpicker.php' );
 
 	}
 

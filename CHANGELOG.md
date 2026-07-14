@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.36
+
+- Replaced the inherited theme namespace across PHP, JavaScript, CSS, asset
+  handles, translations, classes, hooks and filenames with Belctech naming.
+- Added a one-time storage migration for existing product/page metadata,
+  widgets, options, theme mods and WPBakery content.
+- Preserved safe coexistence during an update if the previous core plugin is
+  still active, without retaining its branded namespace in the source tree.
+
 ## 1.0.35
 
 - Reduced desktop navigation hit testing to the visible anchor text while
@@ -12,14 +21,14 @@
 
 ## 1.0.34
 
-- Replaced Goya's full-list-item mega-menu mouseenter handler with an
+- Replaced the inherited full-list-item mega-menu mouseenter handler with an
   anchor-only trigger.
 - Added delayed submenu handoff so moving from the label into the dropdown
   remains smooth without restoring the accidental full-header hover zone.
 
 ## 1.0.33
 
-- Overrode Goya's desktop `height: 100%` rule on primary-menu list items so
+- Overrode the inherited desktop `height: 100%` rule on primary-menu list items so
   both the real hover box and the anchor box now match the text line.
 
 ## 1.0.32
@@ -57,9 +66,9 @@
 
 ## 1.0.1
 
-- Prevented fatal `Cannot redeclare` errors while Goya Core remains active
+- Prevented fatal `Cannot redeclare` errors while the previous core plugin remains active
   during or after the theme switch.
-- Added multisite and renamed-plugin-safe class detection for Goya Core.
+- Added multisite and renamed-plugin-safe class detection for that transition.
 - Removed the simulated Woo Variation Swatches class that could collide while
   activating the real plugin.
 - Added explicit native/external swatch provider selection to prevent duplicate

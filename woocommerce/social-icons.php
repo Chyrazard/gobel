@@ -18,11 +18,11 @@ foreach ( $socials as $key => $value ) {
 				'ywsl_social' => $key,
 				'redirect'    => urlencode( ywsl_curPageURL() )
 			), site_url( 'wp-login.php' ) ) ),
-			'image_url' => GOYA_THEME_URI . '/assets/img/social/' . $key . '.png',
+			'image_url' => BELCTECH_THEME_URI . '/assets/img/social/' . $key . '.png',
 			'class'     => 'ywsl-social ywsl-' . $key
 		);
 
-		$caption  = sprintf( '<span class="et-icon et-'. $key .'"/></span> ' . esc_html__('Login with %s','goya'), '<span>'. $key . '</span>' );
+		$caption  = sprintf( '<span class="et-icon et-'. $key .'"/></span> ' . esc_html__('Login with %s','belctech-ecommerce'), '<span>'. $key . '</span>' );
 		$button = sprintf( '<a class="%s" href="%s">%s</a>', $args['class'], $args['url'], $caption );
 
 		echo apply_filters( 'yith_wc_social_login_icon', $button, $key, $args );

@@ -5,11 +5,11 @@
 *
 * This will allow us to play nicely with any other plugin that is adding the same hook
 *
-* @param  int $item_id 
+* @param  int $item_id
 * @params obj $item - the menu item
 * @params array $args
 */
-function goya_custom_fields( $item_id, $item ) {
+function belctech_custom_fields( $item_id, $item ) {
 
 	$menu_item_megamenu = get_post_meta( $item_id, '_menu_item_megamenu', true );
 	$menu_item_megamenu_columns = get_post_meta( $item_id, '_menu_item_megamenu_columns', true );
@@ -23,57 +23,57 @@ function goya_custom_fields( $item_id, $item ) {
 	<div class="et_menu_options">
 		<div class="et-field-link-mega description description-thin">
 		<label for="menu_item_megamenu-<?php echo esc_attr($item_id); ?>">
-			<?php esc_html_e( 'Show as Mega Menu', 'goya'  ); ?><br />
-		  <?php 
+			<?php esc_html_e( 'Show as Mega Menu', 'belctech-ecommerce'  ); ?><br />
+		  <?php
 			  $value = $menu_item_megamenu;
 			  if($value != "") $value = "checked='checked'";
 		  ?>
-	  	<input type="checkbox" value="enabled" id="menu_item_megamenu-<?php echo esc_attr($item_id); ?>" name="menu_item_megamenu[<?php echo esc_attr($item_id); ?>]" <?php echo esc_attr( $value ); ?> />
-	  	<?php esc_html_e( 'Enable', 'goya'  ); ?>
+		<input type="checkbox" value="enabled" id="menu_item_megamenu-<?php echo esc_attr($item_id); ?>" name="menu_item_megamenu[<?php echo esc_attr($item_id); ?>]" <?php echo esc_attr( $value ); ?> />
+		<?php esc_html_e( 'Enable', 'belctech-ecommerce'  ); ?>
 	  </label>
 	  </div>
 	   <div class="et-field-link-mega description description-thin">
-	  	<label for="menu_item_megamenu-columns-<?php echo esc_attr($item_id); ?>">
-	  		<?php esc_html_e( 'Main menu columns', 'goya'  ); ?><br />
-	  		<select class="widefat code edit-menu-item-custom" id="menu_item_megamenu_columns-<?php echo esc_attr($item_id); ?>" name="menu_item_megamenu_columns[<?php echo esc_attr($item_id); ?>]">
-	  			<?php $value = $menu_item_megamenu_columns;
-	  				if (!$value) {
-	  					$value = 5;
-	  				}
-	  			for ($i = 3; $i <= 9; $i++) { ?>
-	  				<option value="<?php echo esc_attr( $i ) ?>" <?php echo ($value == $i) ? "selected='selected'" : ''; ?>><?php echo esc_attr( $i ) ?></option>	
-	  			<?php } ?>
-	  		</select>
-	  	 </label>
+		<label for="menu_item_megamenu-columns-<?php echo esc_attr($item_id); ?>">
+			<?php esc_html_e( 'Main menu columns', 'belctech-ecommerce'  ); ?><br />
+			<select class="widefat code edit-menu-item-custom" id="menu_item_megamenu_columns-<?php echo esc_attr($item_id); ?>" name="menu_item_megamenu_columns[<?php echo esc_attr($item_id); ?>]">
+				<?php $value = $menu_item_megamenu_columns;
+					if (!$value) {
+						$value = 5;
+					}
+				for ($i = 3; $i <= 9; $i++) { ?>
+					<option value="<?php echo esc_attr( $i ) ?>" <?php echo ($value == $i) ? "selected='selected'" : ''; ?>><?php echo esc_attr( $i ) ?></option>
+				<?php } ?>
+			</select>
+		 </label>
 	    </div>
 	  <div class="et-field-link-title description description-wide">
-	  	<label for="menu_item_menutitle-<?php echo esc_attr($item_id); ?>">
-	  		<?php esc_html_e( 'Show as Title', 'goya'  ); ?><br />
-	  	  <?php 
-	  		  $value = $menu_item_menutitle;
-	  		  if($value != "") $value = "checked='checked'";
-	  	  ?>
-	  	  <input type="checkbox" value="enabled" id="menu_item_menutitle-<?php echo esc_attr($item_id); ?>" name="menu_item_menutitle[<?php echo esc_attr($item_id); ?>]" <?php echo esc_attr( $value ); ?> />
-	  	  <?php esc_html_e( 'Enable', 'goya'  ); ?>
-	  	</label>
+		<label for="menu_item_menutitle-<?php echo esc_attr($item_id); ?>">
+			<?php esc_html_e( 'Show as Title', 'belctech-ecommerce'  ); ?><br />
+		  <?php
+			  $value = $menu_item_menutitle;
+			  if($value != "") $value = "checked='checked'";
+		  ?>
+		  <input type="checkbox" value="enabled" id="menu_item_menutitle-<?php echo esc_attr($item_id); ?>" name="menu_item_menutitle[<?php echo esc_attr($item_id); ?>]" <?php echo esc_attr( $value ); ?> />
+		  <?php esc_html_e( 'Enable', 'belctech-ecommerce'  ); ?>
+		</label>
 	  </div>
     <div class="et-field-link-label description description-wide">
-  	<label for="menu_item_menulabel-<?php echo esc_attr($item_id); ?>">
-  		<?php esc_html_e( 'Highlight Label', 'goya'  ); ?> <span class="small-tag"><?php esc_html_e( 'label', 'goya'  ); ?></span><br />
-  	  <input type="text" class="widefat code edit-menu-item-custom" id="menu_item_menulabel-<?php echo esc_attr($item_id); ?>" name="menu_item_menulabel[<?php echo esc_attr($item_id); ?>]" value="<?php echo esc_attr( $menu_item_menulabel ); ?>"/>
-  	 </label>
+	<label for="menu_item_menulabel-<?php echo esc_attr($item_id); ?>">
+		<?php esc_html_e( 'Highlight Label', 'belctech-ecommerce'  ); ?> <span class="small-tag"><?php esc_html_e( 'label', 'belctech-ecommerce'  ); ?></span><br />
+	  <input type="text" class="widefat code edit-menu-item-custom" id="menu_item_menulabel-<?php echo esc_attr($item_id); ?>" name="menu_item_menulabel[<?php echo esc_attr($item_id); ?>]" value="<?php echo esc_attr( $menu_item_menulabel ); ?>"/>
+	 </label>
     </div>
     <div class="et-field-link-labelcolor description description-wide">
-    	<label for="menu_item_menulabelcolor-<?php echo esc_attr($item_id); ?>">
-  	  	<input type="text" class="widefat code edit-menu-item-custom et-color-field" id="menu_item_menulabelcolor-<?php echo esc_attr($item_id); ?>" name="menu_item_menulabelcolor[<?php echo esc_attr($item_id); ?>]" value="<?php echo esc_attr( $menu_item_menulabelcolor ); ?>"/>
-  	  </label>
+	<label for="menu_item_menulabelcolor-<?php echo esc_attr($item_id); ?>">
+		<input type="text" class="widefat code edit-menu-item-custom et-color-field" id="menu_item_menulabelcolor-<?php echo esc_attr($item_id); ?>" name="menu_item_menulabelcolor[<?php echo esc_attr($item_id); ?>]" value="<?php echo esc_attr( $menu_item_menulabelcolor ); ?>"/>
+	  </label>
     </div>
 	  <div class="et-field-link-image description description-wide">
-	  	
-	  	<?php wp_enqueue_media(); ?>
+
+		<?php wp_enqueue_media(); ?>
 
 			<label for="menu_item_menuimage-<?php echo esc_attr($item_id); ?>">
-				<?php esc_html_e( 'Menu Image', 'goya'  ); ?>
+				<?php esc_html_e( 'Menu Image', 'belctech-ecommerce'  ); ?>
 				</label>
 
 				<div class='image-preview-wrapper'>
@@ -82,42 +82,42 @@ function goya_custom_fields( $item_id, $item ) {
 						<img id='image-preview-<?php echo esc_attr($item_id); ?>' class="image-preview" src="<?php echo esc_attr( $image_attributes[0]); ?>" />
 					<?php } ?>
 				</div>
-				<input id="remove_image_button-<?php echo esc_attr($item_id); ?>" type="button" class="remove_image_button button" value="<?php esc_attr_e( 'Remove', 'goya' ); ?>" style="display: none;" />
-				<input id="upload_image_button-<?php echo esc_attr($item_id); ?>" type="button" class="upload_image_button button" value="<?php esc_attr_e( 'Select image', 'goya' ); ?>" />
+				<input id="remove_image_button-<?php echo esc_attr($item_id); ?>" type="button" class="remove_image_button button" value="<?php esc_attr_e( 'Remove', 'belctech-ecommerce' ); ?>" style="display: none;" />
+				<input id="upload_image_button-<?php echo esc_attr($item_id); ?>" type="button" class="upload_image_button button" value="<?php esc_attr_e( 'Select image', 'belctech-ecommerce' ); ?>" />
 
 				<input type="hidden" class="widefat code edit-menu-item-custom image_attachment_id" id="menu_item_menuimage-<?php echo esc_attr($item_id); ?>" name="menu_item_menuimage[<?php echo esc_attr($item_id); ?>]" value="<?php echo esc_attr( $menu_item_menuimage ); ?>"/>
 
-			
+
 		</div>
-	  
+
   </div>
 
 	<?php
 }
-add_action( 'wp_nav_menu_item_custom_fields', 'goya_custom_fields', 10, 2 );
+add_action( 'wp_nav_menu_item_custom_fields', 'belctech_custom_fields', 10, 2 );
 
 
 /**
 * Save the menu item meta
-* 
+*
 * @param int $menu_id
-* @param int $menu_item_db_id	
+* @param int $menu_item_db_id
 */
-function goya_nav_update( $menu_id, $menu_item_db_id ) {
+function belctech_nav_update( $menu_id, $menu_item_db_id ) {
 
 	// Megamenu
 	$menumega_enabled_value = '';
 	$menumega_columns_enabled_value = '';
 
   if (isset($_REQUEST['menu_item_megamenu'][$menu_item_db_id])) {
-  	$menumega_enabled_value = $_REQUEST['menu_item_megamenu'][$menu_item_db_id];
-  	if (isset($_REQUEST['menu_item_megamenu_columns']) && !empty($_REQUEST['menu_item_megamenu_columns'])) {
-  		$menumega_columns_enabled_value = $_REQUEST['menu_item_megamenu_columns'][$menu_item_db_id];
-  	}
+	$menumega_enabled_value = $_REQUEST['menu_item_megamenu'][$menu_item_db_id];
+	if (isset($_REQUEST['menu_item_megamenu_columns']) && !empty($_REQUEST['menu_item_megamenu_columns'])) {
+		$menumega_columns_enabled_value = $_REQUEST['menu_item_megamenu_columns'][$menu_item_db_id];
+	}
   }
   update_post_meta( $menu_item_db_id, '_menu_item_megamenu', $menumega_enabled_value );
 	  update_post_meta( $menu_item_db_id, '_menu_item_megamenu_columns', $menumega_columns_enabled_value );
-	
+
 	// Title
 	if (isset($_REQUEST['menu_item_menutitle'][$menu_item_db_id])) {
 		$menutitle_enabled_value = $_REQUEST['menu_item_menutitle'][$menu_item_db_id];
@@ -133,7 +133,7 @@ function goya_nav_update( $menu_id, $menu_item_db_id ) {
 		$menulabel_enabled_value = '';
 	}
 		update_post_meta( $menu_item_db_id, '_menu_item_menulabel', $menulabel_enabled_value );
-	
+
 	// Color
 	if (isset($_REQUEST['menu_item_menulabelcolor'][$menu_item_db_id]) && !empty($_REQUEST['menu_item_menulabelcolor'][$menu_item_db_id])) {
 		$menulabelcolor_enabled_value = $_REQUEST['menu_item_menulabelcolor'][$menu_item_db_id];
@@ -152,7 +152,7 @@ function goya_nav_update( $menu_id, $menu_item_db_id ) {
 
 }
 
-add_action( 'wp_update_nav_menu_item', 'goya_nav_update', 10, 2 );
+add_action( 'wp_update_nav_menu_item', 'belctech_nav_update', 10, 2 );
 
 
 /**
@@ -163,27 +163,27 @@ add_action( 'wp_update_nav_menu_item', 'goya_nav_update', 10, 2 );
  * @param stdClass $args    An object of wp_nav_menu() arguments.
  * @param int      $depth   Depth of menu item. Used for padding.
  */
-function goya_custom_nav_menu_css_class( $classes, $item, $args, $depth ) {
+function belctech_custom_nav_menu_css_class( $classes, $item, $args, $depth ) {
 
 	$item->active_megamenu = get_post_meta( $item->ID, '_menu_item_megamenu', true);
 
 	if ($depth === 0) {
 	  $mega_columns = get_post_meta( $item->ID, '_menu_item_megamenu_columns', true);
-	  if ($item->active_megamenu) { 
-	  	$classes[] = 'menu-item-mega-parent'; 
-	  	$classes[] = 'menu-item-mega-column-' . $mega_columns;
+	  if ($item->active_megamenu) {
+		$classes[] = 'menu-item-mega-parent';
+		$classes[] = 'menu-item-mega-column-' . $mega_columns;
 	  }
   } else {
 		$classes[] = get_post_meta( $item->ID, '_menu_item_menutitle', true) === 'enabled' ? ' title-item' : '';
   }
   if ($depth === 1 && $item->active_megamenu)  {
-  	$classes[] = 'mega-menu-title';
+	$classes[] = 'mega-menu-title';
   }
-  
+
 	return $classes;
 }
 
-add_filter( 'nav_menu_css_class', 'goya_custom_nav_menu_css_class', 10, 4 );
+add_filter( 'nav_menu_css_class', 'belctech_custom_nav_menu_css_class', 10, 4 );
 
 
 /**
@@ -191,9 +191,9 @@ add_filter( 'nav_menu_css_class', 'goya_custom_nav_menu_css_class', 10, 4 );
 *
 * @param string   $title The menu item's title.
 * @param WP_Post  $item  The current menu item.
-* @return string      
+* @return string
 */
-function goya_custom_nav_menu_item_title( $title, $item, $args, $depth ) {
+function belctech_custom_nav_menu_item_title( $title, $item, $args, $depth ) {
 
 	if( is_object( $item ) && isset( $item->ID ) ) {
 
@@ -218,5 +218,5 @@ function goya_custom_nav_menu_item_title( $title, $item, $args, $depth ) {
 	return $title;
 }
 
-add_filter( 'nav_menu_item_title', 'goya_custom_nav_menu_item_title', 10, 4 );
+add_filter( 'nav_menu_item_title', 'belctech_custom_nav_menu_item_title', 10, 4 );
 

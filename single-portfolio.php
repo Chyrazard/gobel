@@ -1,29 +1,29 @@
-<?php 
+<?php
 /**
  * The template for displaying all single portfolio
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Goya
+ * @package Belctech
  */
 
 
-$portfolio_layout = goya_meta_config('portfolio','title_style','parallax');
+$portfolio_layout = belctech_meta_config('portfolio','title_style','parallax');
 
 $gallery = array();
-if ( rwmb_meta( 'goya_portfolio_featured_gallery') !== '' ) {
-	$gallery = rwmb_meta( 'goya_portfolio_featured_gallery', array( 'size' => 'full' ) );
+if ( rwmb_meta( 'belctech_portfolio_featured_gallery') !== '' ) {
+	$gallery = rwmb_meta( 'belctech_portfolio_featured_gallery', array( 'size' => 'full' ) );
 }
-$multiple_gallery = ( !empty($gallery) && count($gallery) > 1 ) ? true :  false; 
+$multiple_gallery = ( !empty($gallery) && count($gallery) > 1 ) ? true :  false;
 
-$transparent_header = get_post_meta(get_queried_object_id(), 'goya_portfolio_transparent_header', true);
-$transparent_header = goya_meta_config('portfolio','transparent_header',false);
+$transparent_header = get_post_meta(get_queried_object_id(), 'belctech_portfolio_transparent_header', true);
+$transparent_header = belctech_meta_config('portfolio','transparent_header',false);
 
 $post = get_post();
 $vc = class_exists('WPBakeryVisualComposerAbstract');
 $vc_enabled =  $post && preg_match( '/vc_row/', $post->post_content );
 
-$enable_pagepadding = get_post_meta(get_the_ID(), 'goya_portfolio_transparent_header', true);
+$enable_pagepadding = get_post_meta(get_the_ID(), 'belctech_portfolio_transparent_header', true);
 
 $hero_title = $parallax_single = false;
 
@@ -32,7 +32,7 @@ if ($portfolio_layout == 'parallax' || $portfolio_layout == 'hero'  ) {
 	$classes[] = 'hero-header';
 	$classes[] = 'hero-title';
 	$header_bg_class = 'hero-title';
-	
+
 	if ($portfolio_layout == 'parallax') {
 		$classes[] = 'featured-gallery';
 
@@ -69,7 +69,7 @@ $title_class[] = 'post-featured';
 
 	<article <?php post_class($classes); ?>>
 
-		<?php 
+		<?php
 
 		if ( $portfolio_layout == 'parallax' ) {
 
@@ -93,13 +93,13 @@ $title_class[] = 'post-featured';
 		<?php } ?>
 
 		<?php if ($vc && $vc_enabled) { ?>
-			
+
 			<?php the_content(); ?>
-			
+
 			<div class="container">
-				
-				<?php do_action( 'goya_social_share' ); ?>
-			
+
+				<?php do_action( 'belctech_social_share' ); ?>
+
 			</div>
 
 		<?php } else { ?>
@@ -111,24 +111,24 @@ $title_class[] = 'post-featured';
 							<?php get_template_part( 'inc/templates/portfolio/portfolio-meta-single'); ?>
 							<?php the_content();?>
 						</div>
-							
-						<?php do_action( 'goya_social_share' ); ?>
+
+						<?php do_action( 'belctech_social_share' ); ?>
 
 					</div>
 				</div>
 			</div>
-			
+
 		<?php } ?>
 	</article>
 
 	<div class="post-navigation">
 		<?php
 		if ( get_theme_mod('portfolio_navigation', 'simple') != '' ) :
-		do_action('goya_post_navigation');
+		do_action('belctech_post_navigation');
 		endif;
 		?>
 	</div>
-	
+
 	<?php if ( comments_open() || get_comments_number() ) { comments_template('', true); } ?>
 	<?php
 		if ( get_theme_mod('portfolio_related', false) == true ) :

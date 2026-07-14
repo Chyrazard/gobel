@@ -2,7 +2,7 @@
 /**
  * Template part for display secondary menu
  *
- * @package Goya
+ * @package Belctech
  */
 ?>
 

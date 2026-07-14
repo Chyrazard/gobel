@@ -1,4 +1,4 @@
-<?php function goya_shortcode_counter( $atts, $content = null ) {
+<?php function belctech_shortcode_counter( $atts, $content = null ) {
 
 	extract( shortcode_atts( array(
 		'style' => 'counter-top',
@@ -15,8 +15,8 @@
 		'counter_color_custom'				=> '',
 		'icon_color_custom'				=> '',
 		'text_color_custom'				=> '',
-		'counter' 					=> '',
-		'speed' 					=> '2000',
+		'counter'					=> '',
+		'speed'					=> '2000',
 		'title'					=> '',
 		'description'				=> '',
 		'animation' => 'animation bottom-to-top',
@@ -42,7 +42,7 @@
 			} else {
 				wp_enqueue_style( 'font-awesome', vc_asset_url( 'lib/bower/font-awesome/css/font-awesome.min.css' ), array(), WPB_VC_VERSION );
 			}
-			
+
 		}
 	} else {
 		$classes[] = 'icon-style-image-' . esc_attr( $image_style );
@@ -74,10 +74,10 @@
 	}
 
 	//Add inline styles
-  if (class_exists('Goya_Layout')) {
-  	Goya_Layout::append_to_shortcodes_css_buffer( $styles );
+  if (class_exists('Belctech_Layout')) {
+	Belctech_Layout::append_to_shortcodes_css_buffer( $styles );
   }
-	
+
 	ob_start();
 	?>
 
@@ -126,12 +126,12 @@
 				</figure>
 			<?php } ?>
 		<?php } ?>
-		
+
 	</div>
 	<?php
-	
+
   $out = ob_get_clean();
-     
+
   return $out;
 }
-add_shortcode('et_counter', 'goya_shortcode_counter');
+add_shortcode('et_counter', 'belctech_shortcode_counter');

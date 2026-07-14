@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * ET: iconpicker 'pixeden' icons
  *
@@ -7,16 +7,16 @@
 
 
 /* Enqueue iconpicker icons */
-function goya_vc_iconpicker_base_register_css() {
+function belctech_vc_iconpicker_base_register_css() {
 	// Pixeden icons
 	wp_enqueue_style( 'pe-icons-filled', get_template_directory_uri() . '/assets/icons/pe-icon-7-filled/css/pe-icon-7-filled.css' );
 	wp_enqueue_style( 'pe-icons-stroke', get_template_directory_uri() . '/assets/icons/pe-icon-7-stroke/css/pe-icon-7-stroke.css' );
 };
-add_action( 'vc_base_register_admin_css', 'goya_vc_iconpicker_base_register_css' );
+add_action( 'vc_base_register_admin_css', 'belctech_vc_iconpicker_base_register_css' );
 
 
 /* Pixeden icons */
-function goya_vc_iconpicker_type_pixeden( $icons ) {
+function belctech_vc_iconpicker_type_pixeden( $icons ) {
 	$pixeden_icons = array(
 		'Pixeden Line Icons' => array(
 			array( 'pe-7s-close' => 'close' ),
@@ -298,8 +298,8 @@ function goya_vc_iconpicker_type_pixeden( $icons ) {
 			array( 'pe-7f-cloud-download' => 'loud download'  )
 		)
 	);
-		
+
 	return array_merge( $icons, $pixeden_icons );
 }
 
-add_filter( 'vc_iconpicker-type-pixeden', 'goya_vc_iconpicker_type_pixeden' );
+add_filter( 'vc_iconpicker-type-pixeden', 'belctech_vc_iconpicker_type_pixeden' );

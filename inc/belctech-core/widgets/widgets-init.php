@@ -23,16 +23,16 @@ function belctech_widgets_init() {
 
 	// Latest Posts with Images
 	include_once ( __DIR__ . '/latest-posts-images.php');
-	register_widget( 'Goya_Widget_Latest_Images' );
+	register_widget( 'Belctech_Widget_Latest_Images' );
 
 	include_once ( __DIR__ . '/social-media.php');
-	register_widget( 'Goya_Widget_Social_Media' );
+	register_widget( 'Belctech_Widget_Social_Media' );
 
 	// Custom WooCommerce widgets
 	if ( class_exists( 'WC_Widget' ) ) {
 
 	}
-	
+
 }
 
 add_action( 'widgets_init', 'belctech_widgets_init' ); // Register widget sidebars

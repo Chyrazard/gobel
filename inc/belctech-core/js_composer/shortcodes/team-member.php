@@ -1,4 +1,4 @@
-<?php function goya_shortcode_team_member( $atts, $content = null ) {
+<?php function belctech_shortcode_team_member( $atts, $content = null ) {
 
 	extract( shortcode_atts( array(
 		'image' => '',
@@ -23,15 +23,15 @@
 	if($image_url == '') {
 		$image_url = get_template_directory_uri() . '/assets/img/placeholder.png';
 	}
-	
+
 	$out ='';
 	ob_start();
-		
+
 	?>
   <div class="et-team-member <?php echo esc_attr( $animation ); ?>">
-  	<div class="et-team-member-image <?php echo esc_attr( $style ); ?>">
-	  	<figure style="background-image:url('<?php echo esc_url( $image_url ); ?>')">
-		 		<div class="overlay">
+	<div class="et-team-member-image <?php echo esc_attr( $style ); ?>">
+		<figure style="background-image:url('<?php echo esc_url( $image_url ); ?>')">
+				<div class="overlay">
 					<div class="et-member-social">
 						<?php if ($facebook != '') { ?>
 							<a href="<?php echo esc_url($facebook); ?>" class="facebook" target="_blank"><span class="et-icon et-facebook"></span></a>
@@ -53,19 +53,19 @@
 						<?php } ?>
 					</div>
 				</div>
-	  	</figure>
+		</figure>
 		</div>
 		<div class="et-member-information">
 			<?php if ($name) { ?>
 				<h5><?php echo esc_html($name); ?></h5>
 			<?php } ?>
-	  	<?php if ($position) { ?>
-	  		<p><?php echo esc_html($position); ?></p>
-	  	<?php } ?>
-  	</div>
+		<?php if ($position) { ?>
+			<p><?php echo esc_html($position); ?></p>
+		<?php } ?>
+	</div>
 	</div>
   <?php
   $out = ob_get_clean();
   return $out;
 }
-add_shortcode('et_team_member', 'goya_shortcode_team_member');
+add_shortcode('et_team_member', 'belctech_shortcode_team_member');

@@ -1,11 +1,11 @@
-<?php 
+<?php
 /**
  * Template file for displaying product sticky bar
  *
- * @package Goya
+ * @package Belctech
  */
 
-global $product;		
+global $product;
 
 $bar_status = get_theme_mod('product_sticky_bar', true);
 $catalog_mode = get_theme_mod('shop_catalog_mode', false);
@@ -26,13 +26,13 @@ remove_all_actions('woocommerce_after_add_to_cart_button');
 
 // Wrapper for quantity and add to cart button
 if ( $product->is_type( 'grouped' ) ) {
-	add_action('woocommerce_before_add_to_cart_button', 'goya_wishlist_div_open', 1);
+	add_action('woocommerce_before_add_to_cart_button', 'belctech_wishlist_div_open', 1);
 } else {
-	add_action('woocommerce_before_add_to_cart_quantity', 'goya_wishlist_div_open', 1);
+	add_action('woocommerce_before_add_to_cart_quantity', 'belctech_wishlist_div_open', 1);
 }
-add_action('woocommerce_after_add_to_cart_button', 'goya_extra_div_close', 2);
+add_action('woocommerce_after_add_to_cart_button', 'belctech_extra_div_close', 2);
 
-$trigger_only = apply_filters('goya_sticky_atc_trigger_only', get_theme_mod('product_sticky_bar_trigger_only', false) );
+$trigger_only = apply_filters('belctech_sticky_atc_trigger_only', get_theme_mod('product_sticky_bar_trigger_only', false) );
 
 $product_types = array();
 
@@ -42,7 +42,7 @@ if (!$trigger_only == true) {
 	$product_types[] = 'bundle';
 }
 
-$exclusions = apply_filters( 'goya_product_bar_exclusions', $product_types );
+$exclusions = apply_filters( 'belctech_product_bar_exclusions', $product_types );
 
 ?>
 
@@ -55,15 +55,15 @@ $exclusions = apply_filters( 'goya_product_bar_exclusions', $product_types );
 
 						<div class="sticky-product-bar-image">
 							<?php if ( has_post_thumbnail() ) {
-								$image = get_the_post_thumbnail( $post->ID, apply_filters( 'goya_sticky_product_thumbnail_size', 'woocommerce_thumbnail' ) );
-								echo apply_filters( 'goya_sticky_product_details_html', $image, $post->ID );
+								$image = get_the_post_thumbnail( $post->ID, apply_filters( 'belctech_sticky_product_thumbnail_size', 'woocommerce_thumbnail' ) );
+								echo apply_filters( 'belctech_sticky_product_details_html', $image, $post->ID );
 							} ?>
 						</div>
 
 						<div class="sticky-product-bar-title"><h4><?php echo esc_attr( $product->get_title() ); ?></h4></div>
 
 						<?php if ( $product->is_type( 'grouped' ) || $product->is_type( 'variable' ) || $trigger_only == true && !$product->is_type( 'external' )) { ?>
-							
+
 							<a href="#" class="sticky_add_to_cart add_to_cart add_to_cart_button button"><?php esc_html_e( 'Add to cart', 'woocommerce' ); ?></a>
 
 						<?php } ?>
@@ -75,9 +75,9 @@ $exclusions = apply_filters( 'goya_product_bar_exclusions', $product_types );
 							} ?>
 
 							<?php woocommerce_template_single_add_to_cart() ?>
-						
+
 						<?php } ?>
-					
+
 					</div>
 				</div>
 			</div>

@@ -4,7 +4,7 @@
  *
  * @link    https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Goya
+ * @package Belctech
  */
 ?>
 
@@ -13,6 +13,6 @@
 	$tag_list = get_the_tag_list( '', ', ' );
 
 	if ( $tag_list ) {
-		echo esc_html__( 'Tags:', 'goya' ) . '&nbsp;' . $tag_list . '';
+		echo esc_html__( 'Tags:', 'belctech-ecommerce' ) . '&nbsp;' . $tag_list . '';
 	} ?>
 </div>

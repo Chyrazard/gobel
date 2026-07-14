@@ -1,10 +1,10 @@
-<?php 
+<?php
 /**
  * The template for displaying the footer middle content
  *
  * @link    https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Goya
+ * @package Belctech
  */
 
 $footer_middle = apply_filters( 'footer_extra_section', get_theme_mod('footer_middle',false) );

@@ -1,31 +1,31 @@
-<?php 
+<?php
 
 /* Excerpt filters
 ---------------------------------------------------------- */
 
-add_filter( 'excerpt_length', 'goya_default_excerpt_length' );
-//add_filter( 'excerpt_more', 'goya_excerpt_more');
+add_filter( 'excerpt_length', 'belctech_default_excerpt_length' );
+//add_filter( 'excerpt_more', 'belctech_excerpt_more');
 
 
-function goya_default_excerpt_length( $length ) {
+function belctech_default_excerpt_length( $length ) {
 	return 50;
 }
-function goya_short_excerpt_length() {
+function belctech_short_excerpt_length() {
 	return 28;
 }
-function goya_mini_excerpt_length() {
+function belctech_mini_excerpt_length() {
 	return 10;
 }
-function goya_excerpt_more($more) {
+function belctech_excerpt_more($more) {
 	return '&hellip;';
 }
 
-function goya_excerpt($excerpt_length, $added = false) {
+function belctech_excerpt($excerpt_length, $added = false) {
 	$text = get_the_excerpt();
 	$text = str_replace('[...]', '', $text );
 	$text = mb_substr($text, 0, $excerpt_length, "utf-8");
 	$text = $text . $added;
-	$text = apply_filters('goya_excerpt_text', $text);
+	$text = apply_filters('belctech_excerpt_text', $text);
 	$text = apply_filters( 'the_excerpt', $text );
 	return $text;
 }
@@ -35,21 +35,21 @@ function goya_excerpt($excerpt_length, $added = false) {
 ---------------------------------------------------------- */
 
 /* Remove Empty P tags */
-function goya_remove_p($content){   
+function belctech_remove_p($content){
 	$to_remove = array(
-		'<p>[' => '[', 
-		']</p>' => ']', 
+		'<p>[' => '[',
+		']</p>' => ']',
 		']<br />' => ']'
 	);
-	
+
 	$content = strtr($content, $to_remove);
 	return $content;
 }
-add_filter('the_content', 'goya_remove_p');
+add_filter('the_content', 'belctech_remove_p');
 
 
 /* Parse video embeds */
-function goya_video_embed($embed) {
+function belctech_video_embed($embed) {
 	global $wp_embed;
 	$html = '';
 
@@ -59,33 +59,33 @@ function goya_video_embed($embed) {
 
 	return $html;
 }
-add_filter( 'goya_post_video_embed', 'goya_video_embed' );
+add_filter( 'belctech_post_video_embed', 'belctech_video_embed' );
 
 
 /* Post categories
 ---------------------------------------------------------- */
 
-function goya_the_category_list( $categories, $post_id ) {
+function belctech_the_category_list( $categories, $post_id ) {
   return array_slice( $categories, 0, 3, true );
 }
-add_filter( 'the_category_list', 'goya_the_category_list', 10, 2 );
+add_filter( 'the_category_list', 'belctech_the_category_list', 10, 2 );
 
 
 
 /* Blog categories menu
 ---------------------------------------------------------- */
 
-function goya_blog_category_menu() {
+function belctech_blog_category_menu() {
 	global $wp_query;
 
 	$current_cat = ( is_category() ) ? $wp_query->queried_object->cat_ID : '';
-	
+
 	// Categories order
 	$orderby = 'slug';
 	$order = 'asc';
 	$orderby = get_theme_mod('blog_categories_orderby', 'name');
 	$order = get_theme_mod('blog_categories_order', 'asc');
-	
+
 	$args = array(
 		'type'			=> 'post',
 		'orderby'		=> $orderby,
@@ -93,13 +93,13 @@ function goya_blog_category_menu() {
 		'hide_empty'	=> ( get_theme_mod('blog_categories_hide_empty', true ) == true ) ? 1 : 0,
 		'hierarchical'	=> 1,
 		'taxonomy'		=> 'category'
-	); 
-	
-	$categories = get_categories( apply_filters('goya_blog_category_menu_args', $args ));
-	
+	);
+
+	$categories = get_categories( apply_filters('belctech_blog_category_menu_args', $args ));
+
 	$current_class_set = false;
 	$categories_output = '';
-	
+
 	foreach ( $categories as $category ) {
 		if ( $current_cat == $category->cat_ID ) {
 			$current_class_set = true;
@@ -108,19 +108,19 @@ function goya_blog_category_menu() {
 			$current_class = '';
 		}
 		$category_link = get_category_link( $category->cat_ID );
-		
+
 		$categories_output .= '<li' . $current_class . '><a href="' . esc_url( $category_link ) . '">' . esc_attr( $category->name ) . '</a></li>';
 	}
-	
+
 	$categories_count = count( $categories );
-	
+
 	// "All" category class attr
 	$current_class = ( $current_class_set ) ? '' : ' class="current-cat"';
-	
+
 	$output = '<div class="et-blog-categories-wrap">';
-	$output .= '<ul id="et-blog-categories-list" class="et-blog-categories-list"><li' . $current_class . '><a href="' . esc_url( get_permalink( get_option( 'page_for_posts' ) ) ) . '">' . esc_html__( 'All', 'goya' ) . '</a></li>' . $categories_output . '</ul>';
+	$output .= '<ul id="et-blog-categories-list" class="et-blog-categories-list"><li' . $current_class . '><a href="' . esc_url( get_permalink( get_option( 'page_for_posts' ) ) ) . '">' . esc_html__( 'All', 'belctech-ecommerce' ) . '</a></li>' . $categories_output . '</ul>';
 	$output .= '</div>';
-	
+
 	return $output;
 }
 
@@ -128,8 +128,8 @@ function goya_blog_category_menu() {
 /* Blog Pagination
 ---------------------------------------------------------- */
 
-function goya_blog_pagination() {
-	
+function belctech_blog_pagination() {
+
 	$blog_pagination_style = get_theme_mod('blog_pagination_style','button');
 
 	if ($blog_pagination_style == 'regular') {
@@ -137,8 +137,8 @@ function goya_blog_pagination() {
 		<div class="row align-center">
 			<div class="col-12 col-md-10 col-lg-9">
 				<?php the_posts_pagination(array(
-					'prev_text' 	=> '<span>&larr; '.esc_html__( "Prev", 'goya' ).'</span>',
-					'next_text' 	=> '<span>'.esc_html__( "Next", 'goya' ).' &rarr;</span>',
+					'prev_text'	=> '<span>&larr; '.esc_html__( "Prev", 'belctech-ecommerce' ).'</span>',
+					'next_text'	=> '<span>'.esc_html__( "Next", 'belctech-ecommerce' ).' &rarr;</span>',
 					'mid_size'		=> 1
 				)); ?>
 			</div>
@@ -148,17 +148,17 @@ function goya_blog_pagination() {
 	?>
 	<div class="row pagination-space et-infload-controls et-blog-infload-controls <?php echo esc_attr( $blog_pagination_style ); ?>-mode">
 		<div class="col-12">
-			<a href="#" class="et-infload-btn et-blog-infload-btn button outlined" title="<?php esc_attr_e('Load More', 'goya'); ?>"><?php esc_html_e( 'Load More', 'goya' ); ?></a>
-			<a class="et-infload-to-top et-blog-infload-to-top"><?php esc_html_e( 'All posts loaded.', 'goya' ); ?></a>
+			<a href="#" class="et-infload-btn et-blog-infload-btn button outlined" title="<?php esc_attr_e('Load More', 'belctech-ecommerce'); ?>"><?php esc_html_e( 'Load More', 'belctech-ecommerce' ); ?></a>
+			<a class="et-infload-to-top et-blog-infload-to-top"><?php esc_html_e( 'All posts loaded.', 'belctech-ecommerce' ); ?></a>
 		</div>
 	</div>
 	<?php
 	}
 }
-add_action( 'goya_blog_pagination', 'goya_blog_pagination',3 );
+add_action( 'belctech_blog_pagination', 'belctech_blog_pagination',3 );
 
 
-function goya_pagination_style () {
+function belctech_pagination_style () {
 	$pagination_style = get_theme_mod('blog_pagination_style','button');
 	$infload = ($pagination_style !== 'regular') ? 'blog-infload' : '';
 	$pagination_style = 'pagination-'.$pagination_style. ' '. $infload;
@@ -171,12 +171,12 @@ function goya_pagination_style () {
 /* Posts Prev/Next
 ---------------------------------------------------------- */
 
-function goya_post_navigation() {
-	$prev = apply_filters('goya_get_previous_post', get_previous_post());
-	$next = apply_filters('goya_get_next_post', get_next_post());
+function belctech_post_navigation() {
+	$prev = apply_filters('belctech_get_previous_post', get_previous_post());
+	$next = apply_filters('belctech_get_next_post', get_next_post());
 	$class = ($prev && $next) ? 'col-md-6' : 'col-12';
 	$post_type = get_post_type( get_the_ID() );
-	$nav_style = apply_filters('goya_post_navigation_style', goya_meta_config($post_type,'navigation','simple'));
+	$nav_style = apply_filters('belctech_post_navigation_style', belctech_meta_config($post_type,'navigation','simple'));
 
 	?>
 	<div class="et_post_nav nav-style-<?php echo esc_attr( $nav_style ); ?>">
@@ -192,7 +192,7 @@ function goya_post_navigation() {
 						<?php get_template_part( 'assets/img/svg/arrow-left.svg' ); ?>
 						<div class="text">
 							<strong>
-								<?php esc_html_e('Previous', 'goya'); ?>
+								<?php esc_html_e('Previous', 'belctech-ecommerce'); ?>
 							</strong>
 							<h3><?php echo apply_filters( 'post_navigation', $prev->post_title); ?></h3>
 						</div>
@@ -210,7 +210,7 @@ function goya_post_navigation() {
 						<?php get_template_part( 'assets/img/svg/arrow-right.svg' ); ?>
 						<div class="text">
 							<strong>
-								<?php esc_html_e('Next', 'goya'); ?>
+								<?php esc_html_e('Next', 'belctech-ecommerce'); ?>
 							</strong>
 							<h3><?php echo apply_filters( 'post_navigation', $next->post_title); ?></h3>
 						</div>
@@ -221,13 +221,13 @@ function goya_post_navigation() {
 	</div>
 	<?php
 }
-add_action( 'goya_post_navigation', 'goya_post_navigation' );
+add_action( 'belctech_post_navigation', 'belctech_post_navigation' );
 
 
 /* Post Author
 ---------------------------------------------------------- */
 
-function goya_author_info($id) {
+function belctech_author_info($id) {
 	$id = $id ? $id : get_the_author_meta( 'ID' );
 	?>
 	<div id="authorpage" class="author_info">
@@ -253,52 +253,52 @@ function goya_author_info($id) {
 	</div>
 <?php
 }
-add_action( 'goya_author_info', 'goya_author_info',3 );
+add_action( 'belctech_author_info', 'belctech_author_info',3 );
 
 
 /* Blog slider on blog home/archive
 ---------------------------------------------------------- */
 
-add_filter( 'goya_get_blog_slider_output', 'goya_get_blog_slider' );
-function goya_get_blog_slider( $post_id, $image_size ) {
+add_filter( 'belctech_get_blog_slider_output', 'belctech_get_blog_slider' );
+function belctech_get_blog_slider( $post_id, $image_size ) {
 	$slider = get_post_gallery( $post_id, false );
-	
+
 	if ( $slider ) {
-					
+
 		$slider_id = "et-blog-slider-{$post_id}";
 		$image_ids = explode( ',', $slider['ids'] );
 		$post_permalink = get_permalink();
-		
+
 		$slider = "<div id='$slider_id' class='et-wp-gallery et-blog-slider carousel slick slick-slider slick-controls-gray slick-dots-inside slick-dots-centered slick-dots-active-small' data-columns='1' data-navigation='true' data-pagination='true'>";
-	
+
 		foreach ( $image_ids as $image_id ) {
 			$image_src = wp_get_attachment_image_src( $image_id, $image_size );
 			$slider .= '<div><a href="' . esc_url( $post_permalink ) . '"><img src="' . esc_url( $image_src[0] ) . '" width="' . esc_attr( $image_src[1] ) . '" height="' . esc_attr( $image_src[2] ) . '" /></a></div>';
 		}
-				
+
 		$slider .= "</div>\n";
 	}
-	
+
 	return $slider;
 }
 
 /* Post format icons
 ---------------------------------------------------------- */
 
-function goya_post_format_icon( $post_id ) {
+function belctech_post_format_icon( $post_id ) {
 
 	$format = get_post_format( $post_id );
 	$count = 0;
 	$gallery = array();
-	
+
 	if ( $format == 'video' ) {
 		$icon = 'play';
 	} else if ( $format == 'gallery' || $format == 'image') {
 		$icon = 'camera';
-		if ( rwmb_meta( 'goya_post_featured_gallery') !== '' ) {
-			$gallery = rwmb_meta( 'goya_post_featured_gallery', array( 'size' => 'full' ) );
+		if ( rwmb_meta( 'belctech_post_featured_gallery') !== '' ) {
+			$gallery = rwmb_meta( 'belctech_post_featured_gallery', array( 'size' => 'full' ) );
 			if (!empty($gallery) ) {
-				$count = count($gallery);	
+				$count = count($gallery);
 			}
 		}
 	} else {
@@ -313,7 +313,7 @@ function goya_post_format_icon( $post_id ) {
 		get_template_part('assets/img/svg/'. $icon .'.svg');
 		echo '</span>';
 	}
-	
+
 }
 
 /* Check if Metabox is active
@@ -321,7 +321,7 @@ function goya_post_format_icon( $post_id ) {
 
 if ( ! function_exists( 'rwmb_meta' ) ) {
   function rwmb_meta( $key, $args = '', $post_id = null ) {
-  	return false;
+	return false;
   }
 }
 
@@ -329,13 +329,13 @@ if ( ! function_exists( 'rwmb_meta' ) ) {
  *	WP gallery (override via action)
  *	Note: Code inside "// WP default" comments is located in: "../wp-includes/media.php" ("gallery_shortcode()" function)
  */
-function goya_wp_gallery( $val, $attr ) {
-	
+function belctech_wp_gallery( $val, $attr ) {
+
 	$post = get_post();
-	
+
 	static $instance = 0;
 	$instance++;
-	
+
 	$atts = shortcode_atts( array(
 		'order'      => 'ASC',
 		'orderby'    => 'menu_order ID',
@@ -344,12 +344,12 @@ function goya_wp_gallery( $val, $attr ) {
 		'icontag'    => '',
 		'captiontag' => '',
 		'columns'    => 2,
-		'size'       => 'goya-rectangle-x2',
+		'size'       => 'belctech-rectangle-x2',
 		'include'    => '',
 		'exclude'    => '',
 		'link'       => ''
 	), $attr, 'gallery' );
-	
+
 	$id = intval( $atts['id'] );
 
 	if ( ! empty( $atts['include'] ) ) {
@@ -376,17 +376,17 @@ function goya_wp_gallery( $val, $attr ) {
 		}
 		return $output;
 	}
-	
+
 	$gallery_id = "et-wp-gallery-{$instance}";
 	$slider_settings_data = ' data-pagination="true" data-navigation="true" data-autoplay="true" data-columns="' . intval( $atts['columns'] ) . '"';
-	
+
 	$output = "<div id='$gallery_id' class='et-wp-gallery et-blog-slider slick slick-slider slick-controls-gray slick-dots-inside'" . $slider_settings_data . ">";
-	
+
 	foreach ( $attachments as $id => $attachment ) {
 		$image_src = wp_get_attachment_image_src( $id, $atts['size'] );
 		$output .= '<div><img src="' . esc_url( $image_src[0] ) . '" width="' . esc_attr( $image_src[1] ) . '" height="' . esc_attr( $image_src[2] ) . '" /></div>';
 	}
-			
+
 	$output .= "</div>\n";
 
 	return $output;
@@ -398,7 +398,7 @@ function goya_wp_gallery( $val, $attr ) {
 
 // Related Blog Posts
 
-function goya_get_blog_posts_related_by_taxonomy($post_id, $args=array()) {
+function belctech_get_blog_posts_related_by_taxonomy($post_id, $args=array()) {
   $tags = wp_get_post_tags($post_id);
   $query = new WP_Query();
   if (count($tags)) {
@@ -411,8 +411,8 @@ function goya_get_blog_posts_related_by_taxonomy($post_id, $args=array()) {
 	    'tag__in' => $tagIDs,
 	    'post__not_in' => array($post_id),
 	    'ignore_sticky_posts'=> 1,
-	  	'posts_per_page' => get_theme_mod('single_post_related_per_page', 3),
-	  	'no_found_rows' => true
+		'posts_per_page' => get_theme_mod('single_post_related_per_page', 3),
+		'no_found_rows' => true
 	  ));
 	  $query = new WP_Query($args);
 	  wp_reset_postdata();
@@ -422,33 +422,33 @@ function goya_get_blog_posts_related_by_taxonomy($post_id, $args=array()) {
 
 
 // Related Posts by Category
-function goya_get_posts_related_by_category($post_id, $args=array()) {
+function belctech_get_posts_related_by_category($post_id, $args=array()) {
 	$post_type = get_post_type( $post_id );
-	
+
   $args = wp_parse_args($args,array(
-  	'post_type' 		=> $post_type,
+	'post_type'		=> $post_type,
     'post__not_in' => array($post_id),
     'ignore_sticky_posts'=> 1,
     'orderby' => 'rand',
-  	'posts_per_page' => get_theme_mod('single_post_related_per_page', 3),
-  	'no_found_rows' => true
+	'posts_per_page' => get_theme_mod('single_post_related_per_page', 3),
+	'no_found_rows' => true
   ));
 
   if ($post_type == 'portfolio') {
-  	$terms = get_the_terms( $post_id, 'portfolio-category');
-  	if (!empty($terms)) {
-  		foreach ($terms as $term) { 
-  			$post_categories[] = $term->slug;
-  		}
-  		$args['tax_query'] = array(array(
+	$terms = get_the_terms( $post_id, 'portfolio-category');
+	if (!empty($terms)) {
+		foreach ($terms as $term) {
+			$post_categories[] = $term->slug;
+		}
+		$args['tax_query'] = array(array(
 	      'taxonomy' => 'portfolio-category',
 	      'field'    => 'slug',
 	      'terms'    =>  $post_categories,
 	    ));
-  	}
+	}
   } else {
-  	$post_categories = wp_get_post_categories( $post_id );
-  	$args['category__in'] = $post_categories;
+	$post_categories = wp_get_post_categories( $post_id );
+	$args['category__in'] = $post_categories;
   }
 
   $query = new WP_Query($args);
@@ -460,8 +460,8 @@ function goya_get_posts_related_by_category($post_id, $args=array()) {
 /* Portfolio */
 
 // Portfolio: number of columns
-if (! function_exists('goya_get_portfolio_columns')) {
-	function goya_get_portfolio_columns($columns = 3) {
+if (! function_exists('belctech_get_portfolio_columns')) {
+	function belctech_get_portfolio_columns($columns = 3) {
 		switch($columns) {
 			case '6':
 				$columns = 'col-12 col-md-4 col-lg-2';
@@ -483,52 +483,52 @@ if (! function_exists('goya_get_portfolio_columns')) {
 }
 
 /* Register Elementor Locations */
-function goya_register_elementor_locations( $elementor_theme_manager ) {
+function belctech_register_elementor_locations( $elementor_theme_manager ) {
 	$elementor_theme_manager->register_location( 'header' );
 	$elementor_theme_manager->register_location( 'footer' );
 
 }
-add_action( 'elementor/theme/register_locations', 'goya_register_elementor_locations' );
+add_action( 'elementor/theme/register_locations', 'belctech_register_elementor_locations' );
 
 
 /* Translatable strings filters */
 
-add_filter( 'portfolio_all_translation', function(){ 
-	return $text = esc_html__('All', 'goya' );
+add_filter( 'portfolio_all_translation', function(){
+	return $text = esc_html__('All', 'belctech-ecommerce' );
 });
 
-add_filter( 'share_translation', function(){ 
-	return $text = esc_html__('Share', 'goya' );
+add_filter( 'share_translation', function(){
+	return $text = esc_html__('Share', 'belctech-ecommerce' );
 });
 
 /* WC Ajax Product Filter
- * Added here to make it easier to translate from goya.pot
+ * Added here to make it easier to translate from belctech.pot
  * instead of creating a new file for the plugin
 */
 
-add_filter( 'wcapf_min_price_text', function(){ 
-	return $text = esc_html__('Min Price:', 'goya' );
+add_filter( 'wcapf_min_price_text', function(){
+	return $text = esc_html__('Min Price:', 'belctech-ecommerce' );
 });
 
-add_filter( 'wcapf_max_price_text', function(){ 
-	return $text = esc_html__('Max Price:', 'goya' );
+add_filter( 'wcapf_max_price_text', function(){
+	return $text = esc_html__('Max Price:', 'belctech-ecommerce' );
 });
 
-add_filter( 'wcapf_search_for_text', function(){ 
-	return $text = esc_html__('Search For:', 'goya' );
+add_filter( 'wcapf_search_for_text', function(){
+	return $text = esc_html__('Search For:', 'belctech-ecommerce' );
 });
 
-add_filter( 'wcapf_order_by_text', function(){ 
-	return $text = esc_html__('Order By:', 'goya' );
+add_filter( 'wcapf_order_by_text', function(){
+	return $text = esc_html__('Order By:', 'belctech-ecommerce' );
 });
 
-add_filter( 'wcapf_order_by_values', function(){ 
+add_filter( 'wcapf_order_by_values', function(){
 	return $val = array(
-		'menu_order' => esc_html__( 'default', 'goya' ),
-	  'popularity' => esc_html__( 'popularity', 'goya' ),
-	  'rating'     => esc_html__( 'rating', 'goya' ),
-	  'date'       => esc_html__( 'latest', 'goya' ),
-	  'price'      => esc_html__( 'price low to high', 'goya' ),
-	  'price-desc' => esc_html__( 'price high to low', 'goya' ),
-	); 
+		'menu_order' => esc_html__( 'default', 'belctech-ecommerce' ),
+	  'popularity' => esc_html__( 'popularity', 'belctech-ecommerce' ),
+	  'rating'     => esc_html__( 'rating', 'belctech-ecommerce' ),
+	  'date'       => esc_html__( 'latest', 'belctech-ecommerce' ),
+	  'price'      => esc_html__( 'price low to high', 'belctech-ecommerce' ),
+	  'price-desc' => esc_html__( 'price high to low', 'belctech-ecommerce' ),
+	);
 });

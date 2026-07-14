@@ -1,4 +1,4 @@
-<?php function goya_shortcode_gmap_parent( $atts, $content = null ) {
+<?php function belctech_shortcode_gmap_parent( $atts, $content = null ) {
 
 	extract( shortcode_atts( array(
 		'height'		=> '50',
@@ -19,20 +19,20 @@
 
 	// Enqueue Google Map scripts
 	wp_enqueue_script( 'google-maps-api', '//maps.google.com/maps/api/js?' . $api_version . $api_key . '', FALSE, NULL, TRUE );
-	wp_enqueue_script( 'goya-google-maps', get_template_directory_uri() . '/assets/js/dev/goya-google-maps.js', array( 'jquery', 'google-maps-api' ), GOYA_CORE_VER, TRUE );
-	
+	wp_enqueue_script( 'belctech-google-maps', get_template_directory_uri() . '/assets/js/dev/belctech-google-maps.js', array( 'jquery', 'google-maps-api' ), BELCTECH_CORE_VER, TRUE );
+
 	$map_type = ($map_type == 'roadmap_custom') ? 'roadmap' : $map_type;
-	$custom_map_style = rawurldecode( goya_decode( strip_tags( $custom_map_style ) ) );
+	$custom_map_style = rawurldecode( belctech_decode( strip_tags( $custom_map_style ) ) );
 	$map_controls = explode( ',', $map_controls );
-	
+
 	$location_title = $location_description = '';
 	preg_match_all( '/marker_title=\"(.*?)\"\smarker_description=\"(.*?)\"/is', $content, $matches, PREG_OFFSET_CAPTURE );
-	
+
 	$locations = [];
 	if (isset($matches[1])) {
 		for ($i = 0; $i < sizeof($matches[1]); ++$i) {
 			$locations[] = [
-				'title' 				=> $matches[1][$i][0],
+				'title'				=> $matches[1][$i][0],
 				'description' => $matches[2][$i][0],
 			];
 		}
@@ -65,20 +65,20 @@
 	<div class="et_map_group <?php echo esc_attr($row_width); ?>">
 
 		<div class="et_map_parent <?php echo esc_attr($map_width); if ( $api_key === '' ) { ?> disabled<?php } ?>"
-			style="height:<?php echo esc_attr($height); ?>vh" 
-			data-map-style="<?php echo esc_attr($map_style); ?>" 
-			data-custom-map-style="<?php echo esc_attr($custom_map_style); ?>" 
-			data-map-zoom="<?php echo esc_attr($zoom); ?>" 
-			data-map-type="<?php echo esc_attr($map_type); ?>" 
-			data-pan-control="<?php echo esc_attr(in_array( 'panControl', $map_controls )); ?>" 
-			data-zoom-control="<?php echo esc_attr(in_array( 'zoomControl', $map_controls )); ?>" 
-			data-maptype-control="<?php echo esc_attr(in_array( 'mapTypeControl', $map_controls )); ?>" 
-			data-scale-control="<?php echo esc_attr(in_array( 'scaleControl', $map_controls )); ?>" 
+			style="height:<?php echo esc_attr($height); ?>vh"
+			data-map-style="<?php echo esc_attr($map_style); ?>"
+			data-custom-map-style="<?php echo esc_attr($custom_map_style); ?>"
+			data-map-zoom="<?php echo esc_attr($zoom); ?>"
+			data-map-type="<?php echo esc_attr($map_type); ?>"
+			data-pan-control="<?php echo esc_attr(in_array( 'panControl', $map_controls )); ?>"
+			data-zoom-control="<?php echo esc_attr(in_array( 'zoomControl', $map_controls )); ?>"
+			data-maptype-control="<?php echo esc_attr(in_array( 'mapTypeControl', $map_controls )); ?>"
+			data-scale-control="<?php echo esc_attr(in_array( 'scaleControl', $map_controls )); ?>"
 			data-streetview-control="<?php echo esc_attr(in_array( 'streetViewControl', $map_controls )); ?>">
 			<?php if ( $api_key !== '' ) { ?>
 				<?php echo wpb_js_remove_wpautop($content, false); ?>
 			<?php } else { ?>
-				<?php esc_html_e('Please fill out Google Maps API Key', 'goya-core'); ?>
+				<?php esc_html_e('Please fill out Google Maps API Key', 'belctech-ecommerce'); ?>
 			<?php } ?>
 		</div>
 
@@ -88,18 +88,18 @@
 					<div class="et_location_outer">
 						<div class="et_location">
 							<h5><?php echo esc_attr($i); ?>. <?php echo esc_html($location['title']); ?></h5>
-							<?php echo wp_kses_post(goya_remove_p($location['description'])); ?>
+							<?php echo wp_kses_post(belctech_remove_p($location['description'])); ?>
 						</div>
 					</div>
 				<?php $i++; } ?>
 			</div>
 		<?php } ?>
-	
+
 	</div>
 
-	<?php 
+	<?php
 
 	$out = ob_get_clean();
 	return $out;
 }
-add_shortcode('et_gmap_parent', 'goya_shortcode_gmap_parent');
+add_shortcode('et_gmap_parent', 'belctech_shortcode_gmap_parent');

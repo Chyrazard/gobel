@@ -10,9 +10,9 @@
 		$image_src = $image_url[0];
 	}
 
-	if ( rwmb_meta( 'goya_post_featured_gallery') !== '' ) {
+	if ( rwmb_meta( 'belctech_post_featured_gallery') !== '' ) {
 		$gallery = array();
-		$gallery = rwmb_meta( 'goya_post_featured_gallery', array( 'size' => 'full' ) );
+		$gallery = rwmb_meta( 'belctech_post_featured_gallery', array( 'size' => 'full' ) );
 		if (!empty($gallery) && count($gallery) > 0) {
 			$gallery = array_shift($gallery);
 			$image_src = $gallery['url'];

@@ -3,14 +3,14 @@
 /* Header Styles
 ---------------------------------------------------------- */
 
-function goya_header_styles() {
+function belctech_header_styles() {
 	global $wp_query;
 	global $wp;
 
 	/* Header Color Scheme */
 	$classes[] = '';
 	$header_color = '';
-	$page_header_border = goya_meta_config('page','header_border',true);
+	$page_header_border = belctech_meta_config('page','header_border',true);
 
 	$is_sale_page = $wp_query->is_sale_page;
 	$is_latest_page = $wp_query->is_latest_page;
@@ -24,32 +24,32 @@ function goya_header_styles() {
 
 	// Account forms must always start below an opaque, regular header. This also
 	// avoids inheriting the shop's transparent-header mode on registration/login.
-	if ( goya_is_woocommerce() && function_exists( 'is_account_page' ) && is_account_page() ) {
+	if ( belctech_is_woocommerce() && function_exists( 'is_account_page' ) && is_account_page() ) {
 		$header_mode  = 'regular';
 		$header_color = get_theme_mod( 'header_regular_mode', 'dark' ) . '-title';
 		$classes[]    = 'header-border-0';
 
 	// All Woocommerce pages but product page
-	} else if ( goya_is_woocommerce() && (! is_product() ) ) {
+	} else if ( belctech_is_woocommerce() && (! is_product() ) ) {
 
-		$shop_hero_title = goya_meta_config('shop','hero_title','none');
-		$shop_header_border = goya_meta_config('shop','header_border',true);
-		$header_mode = goya_meta_config('shop','transparent_header', true) == true ? 'transparent' : 'regular';
+		$shop_hero_title = belctech_meta_config('shop','hero_title','none');
+		$shop_header_border = belctech_meta_config('shop','header_border',true);
+		$header_mode = belctech_meta_config('shop','transparent_header', true) == true ? 'transparent' : 'regular';
 		$header_color = '';
 
 		//Color mode of the hero title
 		if ( $shop_hero_title != 'none' ) {
-			
-			$hero_style = goya_meta_config('shop','menu_color','dark-title');
+
+			$hero_style = belctech_meta_config('shop','menu_color','dark-title');
 
 			// Sale, Latest pages
 			if ( ( $is_sale_page || $is_latest_page ) && $shop_hero_title != 'main-hero') {
-				$header_style = get_post_meta(get_queried_object_id(), 'goya_page_header_style', true);
-				$hero_s = get_post_meta(get_queried_object_id(), 'goya_page_hero_title_style', true);
+				$header_style = get_post_meta(get_queried_object_id(), 'belctech_page_header_style', true);
+				$hero_s = get_post_meta(get_queried_object_id(), 'belctech_page_hero_title_style', true);
 
 				if ($hero_s && $hero_s != '') {
 					$hero_style = $hero_s;
-				}				
+				}
 				if ($header_style && $header_mode == 'transparent') {
 					$header_color = $header_style;
 				}
@@ -59,7 +59,7 @@ function goya_header_styles() {
 				$term = get_queried_object();
 				$term_id = $term->term_id;
 				$hero_s = get_term_meta( $term_id, 'shop_menu_color_cat', true );
-				
+
 				if ($hero_s && $hero_s != '') {
 					$hero_style = $hero_s;
 				}
@@ -69,15 +69,15 @@ function goya_header_styles() {
 
 			// All pages
 			} else if ( $shop_hero_title == 'all-hero' && is_page() ) {
-			
+
 			$request = explode( '/', $wp->request );
 
 			// Override options per page
-			$transparent_header = get_post_meta(get_queried_object_id(), 'goya_page_transparent_header', true);
-			$header_style = get_post_meta(get_queried_object_id(), 'goya_page_header_style', true);
-			$title_style = get_post_meta(get_queried_object_id(), 'goya_page_title_style', true);
-			$hero_style = get_post_meta(get_queried_object_id(), 'goya_page_hero_title_style', true);
-			
+			$transparent_header = get_post_meta(get_queried_object_id(), 'belctech_page_transparent_header', true);
+			$header_style = get_post_meta(get_queried_object_id(), 'belctech_page_header_style', true);
+			$title_style = get_post_meta(get_queried_object_id(), 'belctech_page_title_style', true);
+			$hero_style = get_post_meta(get_queried_object_id(), 'belctech_page_hero_title_style', true);
+
 			if (!is_user_logged_in() && is_account_page() && end($request) !== 'lost-password') {
 				$header_mode = 'regular';
 				$classes[] = 'header-border-' . $page_header_border;
@@ -86,24 +86,24 @@ function goya_header_styles() {
 				if ($title_style == 'hero') {
 					$classes[] = 'hero-' . $hero_style;
 				} else {
-					$classes[] = 'hero-' . goya_meta_config('shop','menu_color','dark-title');
+					$classes[] = 'hero-' . belctech_meta_config('shop','menu_color','dark-title');
 				}
 
 				if($transparent_header == 'transparent') {
 					$header_color = $header_style;
 				} else if ($header_mode == 'transparent') {
-					$header_color = $header_color = goya_meta_config('shop','menu_color','dark-title');
+					$header_color = $header_color = belctech_meta_config('shop','menu_color','dark-title');
 				}
 			}
 
 			// Search
 			} else if ( is_shop() && is_search() && $shop_hero_title != 'main-hero') {
-				$header_color = goya_meta_config('shop','menu_color','dark-title');
-			
+				$header_color = belctech_meta_config('shop','menu_color','dark-title');
+
 			// Shop
 			} else if ( is_shop() && !is_search() && !$is_sale_page && !$is_latest_page && $header_mode == 'transparent') {
-				$header_color = goya_meta_config('shop','menu_color','dark-title');
-			
+				$header_color = belctech_meta_config('shop','menu_color','dark-title');
+
 		} else {
 			$classes[] = 'header-border-' . $shop_header_border;
 			$header_mode = 'regular';
@@ -117,27 +117,27 @@ function goya_header_styles() {
 				}
 
 	// Single product page
-	} else if ( goya_is_woocommerce() && ( is_product() ) ) {
+	} else if ( belctech_is_woocommerce() && ( is_product() ) ) {
 
-		$product_layout = goya_meta_config('product','layout_single','regular');
+		$product_layout = belctech_meta_config('product','layout_single','regular');
 		$is_showcase = ($product_layout == 'showcase') ? true : false;
-		$transparent_header = goya_meta_config('product','transparent_header',false);
+		$transparent_header = belctech_meta_config('product','transparent_header',false);
 
 		// To override one product only on the demo site
-		$transparent_header_ex = goya_meta_config('product','transparent_header_ex',false);
-		
+		$transparent_header_ex = belctech_meta_config('product','transparent_header_ex',false);
+
 		if ($transparent_header_ex == 'border') {
 			$transparent_header = false;
 		}
 		if ($is_showcase) {
-			$transparent_header = apply_filters( 'goya_showcase_transparent_header', true );
+			$transparent_header = apply_filters( 'belctech_showcase_transparent_header', true );
 		}
 
-		$shop_header_border = goya_meta_config('shop','header_border',true);
+		$shop_header_border = belctech_meta_config('shop','header_border',true);
 
 		if ( $transparent_header == true ) {
-			$single_prod_header = get_post_meta(get_queried_object_id(), 'goya_product_header_style', true);
-			$single_prod_transparent = get_post_meta(get_queried_object_id(), 'goya_product_transparent_header', true);
+			$single_prod_header = get_post_meta(get_queried_object_id(), 'belctech_product_header_style', true);
+			$single_prod_transparent = get_post_meta(get_queried_object_id(), 'belctech_product_transparent_header', true);
 			$global_prod_header = get_theme_mod('product_header_color', 'dark-title');
 
 			$header_mode = 'transparent';
@@ -146,13 +146,13 @@ function goya_header_styles() {
 			$classes[] = 'header-border-' . $shop_header_border;
 			$header_mode = 'regular';
 		}
-		
+
 		/* Showcase Background */
-		$showcase_text = goya_meta_config('product','showcase_style','dark-text');
+		$showcase_text = belctech_meta_config('product','showcase_style','dark-text');
 		$classes[] = 'product-showcase-' . $showcase_text;
 
 		/* Sticky product bar */
-		if ( get_theme_mod( 'product_sticky_bar', true ) == true ) { 
+		if ( get_theme_mod( 'product_sticky_bar', true ) == true ) {
 			$classes[] = 'fixed-product-bar';
 			$classes[] = 'fixed-product-bar-' . get_theme_mod('product_sticky_bar_position', 'top' );
 			if ( get_theme_mod('product_sticky_bar_mobile', false ) == true ) {
@@ -163,10 +163,10 @@ function goya_header_styles() {
 	// Other pages
 	} else if ( is_page() ) {
 
-		$transparent_header = get_post_meta(get_queried_object_id(), 'goya_page_transparent_header', true);
-		$header_style = get_post_meta(get_queried_object_id(), 'goya_page_header_style', true);
-		$title_style = get_post_meta(get_queried_object_id(), 'goya_page_title_style', true);
-		$hero_style = get_post_meta(get_queried_object_id(), 'goya_page_hero_title_style', true);
+		$transparent_header = get_post_meta(get_queried_object_id(), 'belctech_page_transparent_header', true);
+		$header_style = get_post_meta(get_queried_object_id(), 'belctech_page_header_style', true);
+		$title_style = get_post_meta(get_queried_object_id(), 'belctech_page_title_style', true);
+		$hero_style = get_post_meta(get_queried_object_id(), 'belctech_page_hero_title_style', true);
 
 		if($title_style != 'hide') {
 			$classes[] = 'page-title-visible';
@@ -187,16 +187,16 @@ function goya_header_styles() {
 	// Single portfolio
 	} elseif ( is_singular('portfolio') ) {
 
-		$title_style = goya_meta_config('portfolio','title_style','parallax');
+		$title_style = belctech_meta_config('portfolio','title_style','parallax');
 		$header_style = get_theme_mod('portfolio_header_style','dark-title');
-		$transparent_header = goya_meta_config('portfolio','transparent_header',false);
+		$transparent_header = belctech_meta_config('portfolio','transparent_header',false);
 
-		$title_style_meta = get_post_meta(get_queried_object_id(), 'goya_portfolio_title_style', true);
-		$header_style_meta = get_post_meta(get_queried_object_id(), 'goya_portfolio_header_style', true);
-		$transparent_header_meta = get_post_meta(get_queried_object_id(), 'goya_portfolio_transparent_header', true);
+		$title_style_meta = get_post_meta(get_queried_object_id(), 'belctech_portfolio_title_style', true);
+		$header_style_meta = get_post_meta(get_queried_object_id(), 'belctech_portfolio_header_style', true);
+		$transparent_header_meta = get_post_meta(get_queried_object_id(), 'belctech_portfolio_transparent_header', true);
 
-		$hero_title_style = ($title_style_meta == false ) ? get_theme_mod('portfolio_header_style', 'dark-title') : get_post_meta(get_queried_object_id(), 'goya_portfolio_hero_title_style', true); 
-		
+		$hero_title_style = ($title_style_meta == false ) ? get_theme_mod('portfolio_header_style', 'dark-title') : get_post_meta(get_queried_object_id(), 'belctech_portfolio_hero_title_style', true);
+
 
 		if($title_style != 'hide') {
 			$classes[] = 'page-title-visible';
@@ -227,12 +227,12 @@ function goya_header_styles() {
 	} elseif ( is_single() ) {
 
 		$format = get_post_format();
-		$feat_gallery = goya_meta_config('post','featured_image','below');
-		$transparent_header = goya_meta_config('post','transparent_header',false);
-		$hero_title = goya_meta_config('blog','hero_title',false);
+		$feat_gallery = belctech_meta_config('post','featured_image','below');
+		$transparent_header = belctech_meta_config('post','transparent_header',false);
+		$hero_title = belctech_meta_config('blog','hero_title',false);
 		$hero_title = false;
-		$tcolor = get_post_meta(get_queried_object_id(), 'goya_post_header_style', true);
-		$title_color = (!empty($tcolor)) ? $tcolor : goya_meta_config('post','menu_color','dark-title');
+		$tcolor = get_post_meta(get_queried_object_id(), 'belctech_post_header_style', true);
+		$title_color = (!empty($tcolor)) ? $tcolor : belctech_meta_config('post','menu_color','dark-title');
 
 		if ( $transparent_header == true && ( ( $feat_gallery == 'parallax' && $format != 'video' ) || ( $hero_title == true && $feat_gallery == 'regular' ) ) ) {
 			$header_mode = 'transparent';
@@ -242,18 +242,18 @@ function goya_header_styles() {
 			$classes[] = 'header-border-' . $page_header_border;
 		}
 		$classes[] = 'hero-' . $title_color;
-	
-	// Blog
-	} elseif ( goya_is_blog() ) {
 
-		$hero_title = goya_meta_config('blog','hero_title',false);
-		$hero_style = goya_meta_config('blog','menu_color','dark-title');
+	// Blog
+	} elseif ( belctech_is_blog() ) {
+
+		$hero_title = belctech_meta_config('blog','hero_title',false);
+		$hero_style = belctech_meta_config('blog','menu_color','dark-title');
 		$transparent_header = get_theme_mod('blog_transparent_header',false);
 
 		$term = get_queried_object();
 		if ($term && isset($term->term_id)) {
 		$term_id = $term->term_id;
-			$hero_s = get_term_meta( $term_id, 'shop_menu_color_cat', true );	
+			$hero_s = get_term_meta( $term_id, 'shop_menu_color_cat', true );
 		if ($hero_s && $hero_s != '') {
 			$hero_style = $hero_s;
 		}
@@ -276,7 +276,7 @@ function goya_header_styles() {
 		$header_mode = 'regular';
 		$classes[] = 'header-border-' . $page_header_border;
 	}
-	
+
 	if ($header_color == '') {
 		$header_color = get_theme_mod('header_regular_mode', 'dark') . '-title';
 	}
@@ -287,9 +287,9 @@ function goya_header_styles() {
 	// Transparent header on mobiles
 	$header_transparent_mobiles = get_theme_mod('header_transparent_mobiles',true);
 	$classes[] = ( $header_transparent_mobiles == true ) ? 'header-transparent-mobiles' : '';
-	
 
-	if( goya_wc_active() ) {
+
+	if( belctech_wc_active() ) {
 		//Catalog Mode
 		$classes[] = ( get_theme_mod( 'shop_catalog_mode', false ) == true ) ? 'shop-catalog-mode' : '';
 
@@ -299,11 +299,11 @@ function goya_header_styles() {
 	}
 
 	// Header Mode
-	$classes[] = apply_filters('goya_page_header_mode','page-header-' . $header_mode);
+	$classes[] = apply_filters('belctech_page_header_mode','page-header-' . $header_mode);
 
 	// Title Color
 	$main_header_color = post_password_required() ? false : $header_color;
-	$classes[] = apply_filters('goya_page_header_color', $main_header_color);
+	$classes[] = apply_filters('belctech_page_header_color', $main_header_color);
 
 	return $classes;
 }
@@ -311,12 +311,12 @@ function goya_header_styles() {
 /* Header Classes
 ---------------------------------------------------------- */
 
-function goya_header_classes() {
+function belctech_header_classes() {
 
-	$header_layout = goya_meta_config('','header_layout','prebuild');
+	$header_layout = belctech_meta_config('','header_layout','prebuild');
 	if ($header_layout != 'custom') {
-		$version = goya_meta_config('','header_version','v6');
-		$header_layout = apply_filters( 'goya_header_version_meta', $version );
+		$version = belctech_meta_config('','header_version','v6');
+		$header_layout = apply_filters( 'belctech_header_version_meta', $version );
 	}
 
 	$sticky_section = 'top';
@@ -335,13 +335,13 @@ function goya_header_classes() {
 	return $classes;
 }
 
-add_filter( 'goya_header_class', 'goya_header_classes' );
+add_filter( 'belctech_header_class', 'belctech_header_classes' );
 
 
 /* Site Logo
 ---------------------------------------------------------- */
 
-function goya_site_logo_dimensions( $logo ) {
+function belctech_site_logo_dimensions( $logo ) {
 	static $cache = array();
 	if ( isset( $cache[ $logo ] ) ) return $cache[ $logo ];
 	$dimensions    = array();
@@ -363,13 +363,13 @@ function goya_site_logo_dimensions( $logo ) {
 	return $cache[ $logo ] = $dimensions;
 }
 
-function goya_site_logo($logo,$color) {
+function belctech_site_logo($logo,$color) {
 	$class = 'skip-lazy logoimg bg--'. esc_attr($color);
 	$site_name = get_bloginfo( 'name' );
 
 	if(is_string($logo)) { // Logo stored as string
 		$logo = ( is_ssl() ) ? str_replace( 'http://', 'https://', $logo ) : $logo;
-		$dimensions = goya_site_logo_dimensions( $logo );
+		$dimensions = belctech_site_logo_dimensions( $logo );
 		$size = $dimensions ? ' width="' . esc_attr( $dimensions[0] ) . '" height="' . esc_attr( $dimensions[1] ) . '"' : '';
 	echo '<img src="' . esc_url($logo) . '" class="skip-lazy logoimg bg--'. esc_attr($color) .'" alt="'. esc_attr($site_name) .'"' . $size . ' loading="eager" fetchpriority="high" decoding="async"/>';
 	} else {
@@ -381,8 +381,8 @@ function goya_site_logo($logo,$color) {
 /* Page Transition
 ---------------------------------------------------------- */
 
-function goya_page_transition() {
-	if ( goya_meta_config('','page_transition',false) == false ) {
+function belctech_page_transition() {
+	if ( belctech_meta_config('','page_transition',false) == false ) {
 		return;
 	}
 
@@ -400,13 +400,13 @@ function goya_page_transition() {
 
 <?php }
 
-add_action( 'goya_before_site', 'goya_page_transition' );
+add_action( 'belctech_before_site', 'belctech_page_transition' );
 
 
 /* Site Global Layout
 ---------------------------------------------------------- */
 
-function goya_site_layout() {
+function belctech_site_layout() {
 	if ( get_theme_mod('site_global_layout','regular') != 'framed' ) {
 		return;
 	}
@@ -415,46 +415,46 @@ function goya_site_layout() {
 
 }
 
-add_action( 'goya_before_site', 'goya_site_layout' );
+add_action( 'belctech_before_site', 'belctech_site_layout' );
 
 
 /* Campaign Bar
 ---------------------------------------------------------- */
 
-function goya_campaigns() {
-	if ( goya_meta_config('','campaign_bar',false) == false ) {
+function belctech_campaigns() {
+	if ( belctech_meta_config('','campaign_bar',false) == false ) {
 		return;
 	}
 
 	get_template_part( 'inc/templates/header-parts/campaigns' );
 
-	
+
 }
 
-add_action( 'goya_before_site', 'goya_campaigns', 99 );
+add_action( 'belctech_before_site', 'belctech_campaigns', 99 );
 
 
 
 /* Top Bar
 ---------------------------------------------------------- */
 
-function goya_topbar() {
-	if ( goya_meta_config('','top_bar',false) == false ) {
+function belctech_topbar() {
+	if ( belctech_meta_config('','top_bar',false) == false ) {
 		return;
 	}
 
 	get_template_part( 'inc/templates/header-parts/top-bar' );
 }
 
-add_action( 'goya_before_header', 'goya_topbar' );
+add_action( 'belctech_before_header', 'belctech_topbar' );
 
 
 
 /* Top Bar Items
 ---------------------------------------------------------- */
 
-function goya_topbar_elements( $item ) {
-	global $goya;
+function belctech_topbar_elements( $item ) {
+	global $belctech;
 
 	switch ( $item ) {
 		case 'menu':
@@ -469,47 +469,47 @@ function goya_topbar_elements( $item ) {
 			break;
 
 		case 'social':
-			echo goya_social_profiles( 'top-bar-social-icons' );
+			echo belctech_social_profiles( 'top-bar-social-icons' );
 			break;
 
 		case 'currency':
-			do_action( 'goya_currency_switcher' );
+			do_action( 'belctech_currency_switcher' );
 			break;
 
 		case 'language':
-			do_action( 'goya_language_switcher' );
+			do_action( 'belctech_language_switcher' );
 			break;
 
 		case 'hamburger':
-			do_action( 'goya_hamburger', 'fullscreen' );
-			$goya['panels'][] = 'hamburger';
+			do_action( 'belctech_hamburger', 'fullscreen' );
+			$belctech['panels'][] = 'hamburger';
 			break;
 
 		case 'wishlist':
-			do_action( 'goya_quick_wishlist' );
+			do_action( 'belctech_quick_wishlist' );
 			break;
 
 		case 'account':
-			do_action( 'goya_get_myaccount_link', true );
-			$goya['panels'][] = 'account';
+			do_action( 'belctech_get_myaccount_link', true );
+			$belctech['panels'][] = 'account';
 			break;
 
 		case 'search':
-			do_action( 'goya_quick_search' );
-			$goya['panels'][] = 'search';
+			do_action( 'belctech_quick_search' );
+			$belctech['panels'][] = 'search';
 			break;
 
 		case 'search-box':
-			do_action( 'goya_search_box' );
+			do_action( 'belctech_search_box' );
 			$template = '';
 			break;
-			
+
 		case 'cart':
 			if ( ! class_exists( 'WooCommerce' ) ) {
 				break;
 			}
-			do_action( 'goya_quick_cart' );
-			$goya['panels'][] = 'cart';
+			do_action( 'belctech_quick_cart' );
+			$belctech['panels'][] = 'cart';
 			break;
 
 		case 'text':
@@ -525,24 +525,24 @@ function goya_topbar_elements( $item ) {
 			break;
 
 		default:
-			do_action( 'goya_topbar_main_item', $item );
+			do_action( 'belctech_topbar_main_item', $item );
 			break;
 	}
 }
 
 /* Hamburger Menu */
-function goya_hamburger($menu) {
+function belctech_hamburger($menu) {
 ?>
 	<div class="hamburger-menu">
-		<button class="menu-toggle <?php echo esc_attr( $menu ) ?>-toggle" data-target="<?php echo esc_attr( $menu ) ?>-menu" aria-label="<?php esc_attr_e( 'Menu', 'goya' ); ?>"><span class="bars"><?php echo apply_filters( 'goya_menu_icon', goya_load_template_part('assets/img/svg/menu.svg') ); ?></span> <span class="name"><?php esc_attr_e( 'Menu', 'goya' ); ?></span></button>
+		<button class="menu-toggle <?php echo esc_attr( $menu ) ?>-toggle" data-target="<?php echo esc_attr( $menu ) ?>-menu" aria-label="<?php esc_attr_e( 'Menu', 'belctech-ecommerce' ); ?>"><span class="bars"><?php echo apply_filters( 'belctech_menu_icon', belctech_load_template_part('assets/img/svg/menu.svg') ); ?></span> <span class="name"><?php esc_attr_e( 'Menu', 'belctech-ecommerce' ); ?></span></button>
 	</div>
 <?php }
 
-add_action( 'goya_hamburger', 'goya_hamburger' );
+add_action( 'belctech_hamburger', 'belctech_hamburger' );
 
 
 /* Fullscreen menu check */
-function goya_load_menu_location($location) {
+function belctech_load_menu_location($location) {
 
 	if (has_nav_menu( $location )) {
 		$menu = $location;
@@ -560,24 +560,24 @@ function goya_load_menu_location($location) {
 ---------------------------------------------------------- */
 
 
-function goya_header() {
+function belctech_header() {
 	get_template_part( 'inc/templates/header/header-default' );
 }
 
-add_action( 'goya_header', 'goya_header' );
+add_action( 'belctech_header', 'belctech_header' );
 
 
-/* Header Layout 
+/* Header Layout
 */
-function goya_header_content() {
-	if ( 'prebuild' == goya_meta_config( '','header_layout','prebuild' ) ) {
+function belctech_header_content() {
+	if ( 'prebuild' == belctech_meta_config( '','header_layout','prebuild' ) ) {
 
-		$version = goya_meta_config( '','header_version','v6' );
-		$header_version = apply_filters( 'goya_header_version_meta', $version );
+		$version = belctech_meta_config( '','header_version','v6' );
+		$header_version = apply_filters( 'belctech_header_version_meta', $version );
 
 		$header_main = array();
 		$header_bottom = array();
-		
+
 		switch ( $header_version ) {
 
 			case 'v1':
@@ -652,7 +652,7 @@ function goya_header_content() {
 					),
 				);
 				break;
-			
+
 			default:
 				break;
 		}
@@ -668,33 +668,33 @@ function goya_header_content() {
 	} else {
 
 		$header_main = array(
-			'left'   => goya_meta_config( '','header_main_left','' ),
-			'center' => goya_meta_config( '','header_main_center','' ),
-			'right'  => goya_meta_config( '','header_main_right','' ),
+			'left'   => belctech_meta_config( '','header_main_left','' ),
+			'center' => belctech_meta_config( '','header_main_center','' ),
+			'right'  => belctech_meta_config( '','header_main_right','' ),
 		);
 
 		$header_bottom = array(
-			'left'   => goya_meta_config( '','header_bottom_left','' ),
-			'center' => goya_meta_config( '','header_bottom_center','' ),
-			'right'  => goya_meta_config( '','header_bottom_right','' ),
+			'left'   => belctech_meta_config( '','header_bottom_left','' ),
+			'center' => belctech_meta_config( '','header_bottom_center','' ),
+			'right'  => belctech_meta_config( '','header_bottom_right','' ),
 		);
-		
+
 	}
 
-	goya_header_sections( apply_filters('goya_header_elements_top', $header_main), 'header-main');
+	belctech_header_sections( apply_filters('belctech_header_elements_top', $header_main), 'header-main');
 	if (!empty($header_bottom) && get_theme_mod('header_show_bottom', true)) {
-		goya_header_sections( apply_filters('goya_header_elements_bottom', $header_bottom), 'header-bottom');
-	}	
+		belctech_header_sections( apply_filters('belctech_header_elements_bottom', $header_bottom), 'header-bottom');
+	}
 
 }
 
-add_action( 'goya_header_inner', 'goya_header_content' );
+add_action( 'belctech_header_inner', 'belctech_header_content' );
 
 
 /* Header Contents
 ---------------------------------------------------------- */
 
-function goya_header_sections( $groups, $class ) {
+function belctech_header_sections( $groups, $class ) {
 	if ( false == array_filter( $groups ) ) {
 		return;
 	}
@@ -739,7 +739,7 @@ function goya_header_sections( $groups, $class ) {
 		<div class="header-contents container">
 			<?php foreach ( $groups as $group => $items ) : ?>
 				<div class="header-<?php echo esc_attr( $group ); ?>-items header-items">
-					<?php goya_header_items( $items ); ?>
+					<?php belctech_header_items( $items ); ?>
 				</div>
 			<?php endforeach; ?>
 		</div>
@@ -751,54 +751,54 @@ function goya_header_sections( $groups, $class ) {
 /* Header Items
 ---------------------------------------------------------- */
 
-function goya_header_items( $items ) {
-	global $goya;
+function belctech_header_items( $items ) {
+	global $belctech;
 
 	if ( empty( $items ) ) {
 		return;
 	}
 
 	foreach ( $items as $item ) {
-		$item['item'] = $item['item'] ? $item['item'] : key( goya_header_elements_list() );
+		$item['item'] = $item['item'] ? $item['item'] : key( belctech_header_elements_list() );
 		$template = $item['item'];
 
 		switch ( $item['item'] ) {
-			
+
 			case 'hamburger':
-				do_action( 'goya_hamburger', 'fullscreen' );
+				do_action( 'belctech_hamburger', 'fullscreen' );
 				$template = '';
-				$goya['panels'][] = $item['item'];
+				$belctech['panels'][] = $item['item'];
 				break;
 
 			case 'account':
-				do_action( 'goya_get_myaccount_link', true );
+				do_action( 'belctech_get_myaccount_link', true );
 				$template = '';
-				$goya['panels'][] = $item['item'];
+				$belctech['panels'][] = $item['item'];
 				break;
 
 			case 'wishlist':
-				do_action( 'goya_quick_wishlist' );
+				do_action( 'belctech_quick_wishlist' );
 				$template = '';
 				break;
 
 			case 'search':
-				do_action( 'goya_quick_search' );
+				do_action( 'belctech_quick_search' );
 				$template = '';
-				$goya['panels'][] = $item['item'];
+				$belctech['panels'][] = $item['item'];
 				break;
-			
+
 			case 'search-box':
-				do_action( 'goya_search_box' );
+				do_action( 'belctech_search_box' );
 				$template = '';
 				break;
-			
+
 			case 'cart':
 				if ( ! class_exists( 'WooCommerce' ) ) {
 					break;
 				}
-				do_action( 'goya_quick_cart' );
+				do_action( 'belctech_quick_cart' );
 				$template = '';
-				$goya['panels'][] = $item['item'];
+				$belctech['panels'][] = $item['item'];
 				break;
 
 			case 'text':
@@ -814,19 +814,19 @@ function goya_header_items( $items ) {
 				break;
 
 			case 'social':
-				echo goya_social_profiles( 'header-social-icons' );
+				echo belctech_social_profiles( 'header-social-icons' );
 				break;
 
 			case 'currency':
-				do_action( 'goya_currency_switcher' );
+				do_action( 'belctech_currency_switcher' );
 				break;
 
 			case 'language':
-				do_action( 'goya_language_switcher' );
+				do_action( 'belctech_language_switcher' );
 				break;
 
 			default:
-				do_action( 'goya_header_items_action', $item['item'] );
+				do_action( 'belctech_header_items_action', $item['item'] );
 				break;
 		}
 
@@ -840,28 +840,28 @@ function goya_header_items( $items ) {
 /* Vertical Panel Bar
 ---------------------------------------------------------- */
 
-function goya_vertical_panel_bar() {
-	if ( goya_meta_config('','vertical_bar',true) == true ) {
-	
-		$bar_mode = ( goya_meta_config('','vertical_bar_mode', 'light') == 'dark' ) ? 'dark' : 'light';
-		$bar_style = apply_filters( 'goya_menu_style', $bar_mode );
+function belctech_vertical_panel_bar() {
+	if ( belctech_meta_config('','vertical_bar',true) == true ) {
+
+		$bar_mode = ( belctech_meta_config('','vertical_bar_mode', 'light') == 'dark' ) ? 'dark' : 'light';
+		$bar_style = apply_filters( 'belctech_menu_style', $bar_mode );
 		?>
 
 		<div class="mobile-bar <?php echo esc_attr( $bar_style ) ?>">
-			<button class="et-close" aria-label="<?php esc_attr_e('Close', 'goya'); ?>"></button>
+			<button class="et-close" aria-label="<?php esc_attr_e('Close', 'belctech-ecommerce'); ?>"></button>
 
 			<div class="action-icons">
-				<?php do_action( 'goya_vertical_bar_icons', 'vertical_bar' ); ?>
+				<?php do_action( 'belctech_vertical_bar_icons', 'vertical_bar' ); ?>
 			</div>
-			
+
 		</div>
-		
+
 	<?php } else { ?>
 
 		<header>
 		<div class="container">
 				<div class="panel-header-inner">
-				<button class="et-close" aria-label="<?php esc_attr_e('Close', 'goya'); ?>"></button>
+				<button class="et-close" aria-label="<?php esc_attr_e('Close', 'belctech-ecommerce'); ?>"></button>
 				</div>
 			</div>
 		</header>
@@ -870,7 +870,7 @@ function goya_vertical_panel_bar() {
 
 }
 
-add_action( 'goya_vertical_panel_bar', 'goya_vertical_panel_bar', 99 );
+add_action( 'belctech_vertical_panel_bar', 'belctech_vertical_panel_bar', 99 );
 
 
 
@@ -879,8 +879,8 @@ add_action( 'goya_vertical_panel_bar', 'goya_vertical_panel_bar', 99 );
 
 /* Mobile Header/Vertical Bar  Icons */
 
-function goya_panel_header_icons($position) {
-	global $goya;
+function belctech_panel_header_icons($position) {
+	global $belctech;
 
 	if ($position == 'mobile_header') {
 		$icons = get_theme_mod('mobile_header_icons', array( array( 'item' => 'cart' ) ));
@@ -896,9 +896,9 @@ function goya_panel_header_icons($position) {
 
 	foreach ( $icons as $icon ) {
 		if ($position == 'mobile_header') {
-			$this_icon = $icon['item'] ? $icon['item'] : key( goya_mobile_header_elements_list() );
+			$this_icon = $icon['item'] ? $icon['item'] : key( belctech_mobile_header_elements_list() );
 		} else {
-			$this_icon = $icon ? $icon : key( goya_mobile_header_elements_list() );
+			$this_icon = $icon ? $icon : key( belctech_mobile_header_elements_list() );
 		}
 
 		switch ( $this_icon ) {
@@ -906,30 +906,30 @@ function goya_panel_header_icons($position) {
 				if ( ! class_exists( 'WooCommerce' ) ) {
 					break;
 				}
-				do_action( 'goya_quick_cart' );
-				$goya['panels'][] = 'cart';
+				do_action( 'belctech_quick_cart' );
+				$belctech['panels'][] = 'cart';
 				break;
 
 			case'wishlist':
-				do_action( 'goya_quick_wishlist' );
+				do_action( 'belctech_quick_wishlist' );
 				break;
 
 			case 'search':
-				do_action( 'goya_quick_search' );
-				$goya['panels'][] = 'search';
+				do_action( 'belctech_quick_search' );
+				$belctech['panels'][] = 'search';
 				break;
 
 			case 'account':
-				do_action( 'goya_get_myaccount_link', $is_header );
-				$goya['panels'][] = 'account';
+				do_action( 'belctech_get_myaccount_link', $is_header );
+				$belctech['panels'][] = 'account';
 				break;
 
 			case 'language':
-				do_action( 'goya_language_switcher' );
+				do_action( 'belctech_language_switcher' );
 				break;
 
 			case 'currency':
-				do_action( 'goya_currency_switcher' );
+				do_action( 'belctech_currency_switcher' );
 				break;
 
 			case 'text':
@@ -937,19 +937,19 @@ function goya_panel_header_icons($position) {
 				break;
 
 			default:
-				do_action( 'goya_mobile_header_icon', $this_icon );
+				do_action( 'belctech_mobile_header_icon', $this_icon );
 				break;
 		}
 	}
 }
 
-add_action( 'goya_mobile_header_icons', 'goya_panel_header_icons' );
-add_action( 'goya_vertical_bar_icons', 'goya_panel_header_icons' );
+add_action( 'belctech_mobile_header_icons', 'belctech_panel_header_icons' );
+add_action( 'belctech_vertical_bar_icons', 'belctech_panel_header_icons' );
 
 
 /* Mobile header */
 
-function goya_mobile_header() {
+function belctech_mobile_header() {
 	$classes[] = 'logo-' . get_theme_mod('mobile_logo_position', 'center');
 	?>
 
@@ -962,13 +962,13 @@ function goya_mobile_header() {
 	<?php
 }
 
-add_action( 'goya_header_inner', 'goya_mobile_header', 99 );
+add_action( 'belctech_header_inner', 'belctech_mobile_header', 99 );
 
 
 /* Mobile menu */
 
-function goya_mobile_menu_extras() {
-	global $goya;
+function belctech_mobile_menu_extras() {
+	global $belctech;
 
 	$items = get_theme_mod('menu_mobile_items', array('account', 'divider1', 'currency', 'language', 'divider2', 'social') );
 
@@ -979,32 +979,32 @@ function goya_mobile_menu_extras() {
 				if ( ! class_exists( 'WooCommerce' ) ) {
 					break;
 				}
-				do_action( 'goya_quick_cart' );
-				$goya['panels'][] = 'cart';
+				do_action( 'belctech_quick_cart' );
+				$belctech['panels'][] = 'cart';
 				break;
 
 			case 'wishlist':
-				do_action( 'goya_quick_wishlist' );
+				do_action( 'belctech_quick_wishlist' );
 				break;
 
 			case 'account':
 				if ( ! class_exists( 'WooCommerce' ) ) {
 					break;
 				}
-				do_action( 'goya_quick_account' );
-				$goya['panels'][] = 'account';
+				do_action( 'belctech_quick_account' );
+				$belctech['panels'][] = 'account';
 				break;
 
 			case 'language':
-				do_action( 'goya_language_switcher' );
+				do_action( 'belctech_language_switcher' );
 				break;
 
 			case 'currency':
-				do_action( 'goya_currency_switcher' );
+				do_action( 'belctech_currency_switcher' );
 				break;
 
 			case 'social':
-				echo goya_social_profiles( 'mobile-social-icons' );
+				echo belctech_social_profiles( 'mobile-social-icons' );
 				break;
 
 			case 'divider1':
@@ -1027,10 +1027,10 @@ function goya_mobile_menu_extras() {
 				break;
 
 			default:
-				do_action( 'goya_mobile_menu_items', $item );
+				do_action( 'belctech_mobile_menu_items', $item );
 				break;
 		}
 	}
 }
 
-add_action( 'goya_after_mobile_menu', 'goya_mobile_menu_extras' );
+add_action( 'belctech_after_mobile_menu', 'belctech_mobile_menu_extras' );

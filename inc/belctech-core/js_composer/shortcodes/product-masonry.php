@@ -1,4 +1,4 @@
-<?php function goya_shortcode_product_masonry( $atts, $content = null ) {
+<?php function belctech_shortcode_product_masonry( $atts, $content = null ) {
 
 	extract( shortcode_atts( array(
 		'product_sort'        => '',
@@ -18,9 +18,9 @@
 	$categories = $cat ? explode(',',$cat) : false;
 
 	global $woocommerce, $woocommerce_loop;
-			
+
 	$args = array();
-	
+
 	if ($product_sort == 'featured-products') {
 		$args['tax_query'][] = array(
 					'taxonomy' => 'product_visibility',
@@ -30,11 +30,11 @@
 		);
 	} else if ($product_sort == 'top-rated') {
 		$ordering_args = WC()->query->get_catalog_ordering_args( 'rating', 'asc' );
-				
+
 		$args = array(
-			'meta_key' 				=> $ordering_args['meta_key'],
-			'orderby' 				=> $ordering_args['orderby'],
-			'order' 				=> $ordering_args['order'],
+			'meta_key'				=> $ordering_args['meta_key'],
+			'orderby'				=> $ordering_args['orderby'],
+			'order'				=> $ordering_args['order'],
 		);
 	} else if ($product_sort == 'sale-products') {
 		$args = array(
@@ -49,11 +49,11 @@
 		$product_id_array = explode(',', $product_ids);
 		$args = array(
 			'post__in'		=> $product_id_array
-		);	    
+		);
 	} else if ($product_sort == 'best-sellers') {
 		$args = array(
-			'meta_key' 		=> 'total_sales',
-			'orderby' 		=> 'meta_value_num',
+			'meta_key'		=> 'total_sales',
+			'orderby'		=> 'meta_value_num',
 			'order' => 'DESC',
 		);
 	} else {
@@ -78,7 +78,7 @@
 
 	$args['post_type'] = 'product';
 	$args['post_status'] = 'publish';
-	
+
 	if ($product_sort != 'best-sellers' && $product_sort != 'top-rated' && $product_sort != 'latest-products') {
 		$args['orderby'] = $orderby;
 		$args['order'] = $order;
@@ -91,12 +91,12 @@
 	} else {
 		$args['posts_per_page'] = -1;
 	}
-	
+
 	$args['meta_query'] = WC()->query->get_meta_query();
-	
+
 	ob_start();
-	
-	$products = new WP_Query( apply_filters('goya_core_product_masonry_args', $args) );
+
+	$products = new WP_Query( apply_filters('belctech_core_product_masonry_args', $args) );
 
 	// Products ID's
 	$products_id_array = array();
@@ -114,7 +114,7 @@
 	$item_hover_animation = get_theme_mod('shop_product_animation_hover','zoom-jump');
 
 	// Loading animation
-	$item_animation = get_theme_mod('shop_product_animation','animation bottom-to-top');	
+	$item_animation = get_theme_mod('shop_product_animation','animation bottom-to-top');
 
 	// Quick view
 	$item_quickview = get_theme_mod('product_quickview', true);
@@ -131,7 +131,7 @@
 	$classes[] = ($show_variations) ? 'et-shop-show-variations' : 'et-no-variations';
 
 	// Hover images
-	if ( goya_core_meta_config('shop','product_img_hover', true) == true ) $classes[] = 'et-shop-hover-images';
+	if ( belctech_core_meta_config('shop','product_img_hover', true) == true ) $classes[] = 'et-shop-hover-images';
 
 	// Category filter
 	if($categories && $category_navigation) {
@@ -140,47 +140,47 @@
 
 	/* Indicate it's a masonry element to content-product.php */
 	$item_masonry = 'masonry';
-	
-	if ( $products->have_posts() ) { 
 
-		$woocommerce_loop['columns'] = $columns; 
+	if ( $products->have_posts() ) {
+
+		$woocommerce_loop['columns'] = $columns;
 		$columns_large = get_theme_mod('shop_columns', 4);
 		$columns_mobile = get_theme_mod('shop_columns_mobile', 2);
 
 		?>
-			
-		<ul class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-loadmore="#loadmore-<?php echo esc_attr($rand); ?>" data-filter="et-filter-<?php echo esc_attr($rand); ?>">
-				
-			<?php while ( $products->have_posts() ) : $products->the_post(); ?>
-				<?php 
-				set_query_var( 'goya_is_shortcode', true );
-				set_query_var( 'goya_product_style', $item_style );
-				set_query_var( 'goya_masonry_list', $item_masonry );
-				set_query_var( 'goya_product_swatches', $show_variations );
 
-				set_query_var( 'goya_product_animation', $item_animation );
-				set_query_var( 'goya_product_hover_image', $item_hover_img );
-				set_query_var( 'goya_product_hover_animation', $item_hover_animation );
-				set_query_var( 'goya_product_quickview', $item_quickview );
-				set_query_var( 'goya_product_skip_lazy', 0 );
-				set_query_var( 'goya_product_columns_large', $columns_large );
-				set_query_var( 'goya_product_columns_mobile', $columns_mobile );
+		<ul class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-loadmore="#loadmore-<?php echo esc_attr($rand); ?>" data-filter="et-filter-<?php echo esc_attr($rand); ?>">
+
+			<?php while ( $products->have_posts() ) : $products->the_post(); ?>
+				<?php
+				set_query_var( 'belctech_is_shortcode', true );
+				set_query_var( 'belctech_product_style', $item_style );
+				set_query_var( 'belctech_masonry_list', $item_masonry );
+				set_query_var( 'belctech_product_swatches', $show_variations );
+
+				set_query_var( 'belctech_product_animation', $item_animation );
+				set_query_var( 'belctech_product_hover_image', $item_hover_img );
+				set_query_var( 'belctech_product_hover_animation', $item_hover_animation );
+				set_query_var( 'belctech_product_quickview', $item_quickview );
+				set_query_var( 'belctech_product_skip_lazy', 0 );
+				set_query_var( 'belctech_product_columns_large', $columns_large );
+				set_query_var( 'belctech_product_columns_mobile', $columns_mobile );
 
 				$product = wc_get_product( $products->post->ID ); ?>
 				<?php wc_get_template_part( 'content', 'product' ); ?>
 			<?php endwhile; // end of the loop. ?>
-									
+
 		</ul>
-		 
+
 	<?php }
-			 
+
 	 $out = ob_get_contents();
 	 if (ob_get_contents()) ob_end_clean();
-	 
+
 	 wp_reset_query();
 	 wp_reset_postdata();
 	 unset($args);
-		 
+
 	return $out;
 }
-add_shortcode('et_product_masonry', 'goya_shortcode_product_masonry');
+add_shortcode('et_product_masonry', 'belctech_shortcode_product_masonry');

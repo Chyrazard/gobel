@@ -5,16 +5,16 @@
  * The template for wide layout pages
  * Used with Gutemberg builder
  *
- * @package Goya
+ * @package Belctech
  */
 
 $post = get_post();
 $vc = class_exists('WPBakeryVisualComposerAbstract');
 $vc_enabled =  $post && preg_match( '/vc_row/', $post->post_content );
 
-$header_layout = get_post_meta(get_queried_object_id(), 'goya_page_header_layout', true);
-$title_style = get_post_meta(get_the_ID(), 'goya_page_title_style', true);
-$featured_image = get_post_meta(get_the_ID(), 'goya_page_hero_featured_image', true);
+$header_layout = get_post_meta(get_queried_object_id(), 'belctech_page_header_layout', true);
+$title_style = get_post_meta(get_the_ID(), 'belctech_page_title_style', true);
+$featured_image = get_post_meta(get_the_ID(), 'belctech_page_hero_featured_image', true);
 
 $enable_pagepadding = ($header_layout == 'transparent') ? true : false;
 
@@ -23,7 +23,7 @@ $image_id = $image_url = '';
 
 if ($title_style ==  'hero') {
 	$classes[] = 'hero-header';
-	
+
 	$title_class[] = 'hero-title';
 
 	if ($featured_image) {
@@ -33,10 +33,10 @@ if ($title_style ==  'hero') {
 		$title_class[] = 'post-featured';
 		$title_class[] = 'parallax_image';
 		$title_class[] = 'vh-height';
-	
+
 		if ( has_post_thumbnail() ) {
 			$image_id = get_post_thumbnail_id();
-			$image_url = wp_get_attachment_image_src($image_id, 'full'); 
+			$image_url = wp_get_attachment_image_src($image_id, 'full');
 		}
 
 	}
@@ -76,12 +76,12 @@ $classes[] = ($enable_pagepadding || $title_style == 'hero' ) ? 'page-transparen
 				</div>
 			</div>
 		<?php } ?>
-	
+
 	</div>
-	
+
 	<?php if ( comments_open() || get_comments_number() ) : ?>
 	<?php comments_template('', true); ?>
 	<?php endif; ?>
-	
+
 <?php endwhile; else : endif; ?>
 <?php get_footer(); ?>

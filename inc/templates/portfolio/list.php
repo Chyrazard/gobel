@@ -1,30 +1,30 @@
 <?php
 	$vars = $wp_query->query_vars;
-	$port_layout = array_key_exists('goya_port_layout', $vars) ? $vars['goya_port_layout'] : false;
-	$port_columns = array_key_exists('goya_port_columns', $vars) ? $vars['goya_port_columns'] : false;
-	$port_aspect = array_key_exists('goya_port_aspect', $vars) ? $vars['goya_port_aspect'] : false;
-	$port_animation = array_key_exists('goya_port_animation', $vars) ? $vars['goya_port_animation'] : false;
-	
+	$port_layout = array_key_exists('belctech_port_layout', $vars) ? $vars['belctech_port_layout'] : false;
+	$port_columns = array_key_exists('belctech_port_columns', $vars) ? $vars['belctech_port_columns'] : false;
+	$port_aspect = array_key_exists('belctech_port_aspect', $vars) ? $vars['belctech_port_aspect'] : false;
+	$port_animation = array_key_exists('belctech_port_animation', $vars) ? $vars['belctech_port_animation'] : false;
+
 	$id = get_the_ID();
-	
-	$port_columns = goya_get_portfolio_columns($port_columns);
+
+	$port_columns = belctech_get_portfolio_columns($port_columns);
 
 	//Image
 	$image_id = get_post_thumbnail_id($id);
-	
+
 	// Categories
-	$categories = get_the_term_list( $id, 'portfolio-category', '', ', ', '' ); 
+	$categories = get_the_term_list( $id, 'portfolio-category', '', ', ', '' );
 	if ($categories !== '' && !empty($categories)) {
 		$categories = strip_tags($categories);
 	}
-	
+
 	$terms = get_the_terms( $id, 'portfolio-category' );
-	
-	$cats = '';	
+
+	$cats = '';
 	if (!empty($terms)) {
 		foreach ($terms as $term) { $cats .= ' cat-'.strtolower($term->slug); }
 	}
-	
+
 	// Classes
 	$class[] = 'item';
 	$class[] = 'type-portfolio';

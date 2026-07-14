@@ -1,5 +1,5 @@
-<?php function goya_shortcode_testimonial_slider( $atts, $content = null ) {
-	
+<?php function belctech_shortcode_testimonial_slider( $atts, $content = null ) {
+
 	extract( shortcode_atts( array(
 		'arrows'         => '',
 		'pagination'     => '',
@@ -19,7 +19,7 @@
 	if ($columns < $columns_mobile ) {
 		$columns_mobile = $columns;
 	}
-	
+
 	$element_id = 'et-testimonials-' . mt_rand(10, 99);
 
 	if ( strlen( $pagination ) > 0 ) { $classes[] = 'slick-dots-centered'; }
@@ -37,4 +37,4 @@
 	if (ob_get_contents()) ob_end_clean();
 	return $out;
 }
-add_shortcode('et_testimonial_slider', 'goya_shortcode_testimonial_slider');
+add_shortcode('et_testimonial_slider', 'belctech_shortcode_testimonial_slider');

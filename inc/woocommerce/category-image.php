@@ -3,15 +3,15 @@
  * Edit category header field.
  */
 
-function goya_edit_category_header_img( $term, $taxonomy ) {
-	
+function belctech_edit_category_header_img( $term, $taxonomy ) {
+
 	// Enqueue scripts
 	wp_enqueue_media();
 
 	$display_type	= get_term_meta( $term->term_id, 'display_type', true );
-	$image 			= '';
-	$header_id 	= absint( get_term_meta( $term->term_id, 'header_id', true ) );
-	$shop_menu_color_cat 	= get_term_meta( $term->term_id, 'shop_menu_color_cat', true );
+	$image			= '';
+	$header_id	= absint( get_term_meta( $term->term_id, 'header_id', true ) );
+	$shop_menu_color_cat	= get_term_meta( $term->term_id, 'shop_menu_color_cat', true );
 	$placeholder = get_template_directory_uri() . '/assets/img/placeholder.png';
 	if ($header_id) {
 		$image = wp_get_attachment_image_url( $header_id, 'medium' );
@@ -21,25 +21,25 @@ function goya_edit_category_header_img( $term, $taxonomy ) {
 
 	?>
 	<tr class="form-field">
-		<th scope="row"><h2><?php esc_html_e( 'Goya Settings', 'goya' ); ?></h2></th>
+		<th scope="row"><h2><?php esc_html_e( 'Belctech Settings', 'belctech-ecommerce' ); ?></h2></th>
 	</tr>
 	<tr class="form-field">
-		<th scope="row" valign="top"><label><?php esc_html_e( 'Hero Banner', 'goya' ); ?></label></th>
+		<th scope="row" valign="top"><label><?php esc_html_e( 'Hero Banner', 'belctech-ecommerce' ); ?></label></th>
 		<td>
 			<div id="product_cat_header"><img src="<?php echo esc_url($image); ?>" /></div>
 			<div>
 				<input type="hidden" id="wc_placeholder_img_src" name="wc_placeholder_img_src" value="<?php echo esc_url($placeholder); ?>" />
 				<input type="hidden" id="product_cat_header_id" name="product_cat_header_id" value="<?php echo esc_attr($header_id); ?>" />
-				<button type="submit" class="et_upload_header button"><?php esc_html_e( 'Upload/Add image', 'goya' ); ?></button>
-				<button type="submit" class="et_remove_header button"><?php esc_html_e( 'Remove image', 'goya' ); ?></button>
+				<button type="submit" class="et_upload_header button"><?php esc_html_e( 'Upload/Add image', 'belctech-ecommerce' ); ?></button>
+				<button type="submit" class="et_remove_header button"><?php esc_html_e( 'Remove image', 'belctech-ecommerce' ); ?></button>
 			</div>
 
 			<div class="clear"></div>
 			<p class="description">
 				<?php if ($_REQUEST['taxonomy']=='product_cat' || $_REQUEST['taxonomy']=='product_tag' || $_REQUEST['taxonomy']=='product_brand') { ?>
-					<?php esc_html_e( 'To display the image enable the option Appearance > Customize > Shop > Products Catalog > Shop Hero Title', 'goya' ); ?>
+					<?php esc_html_e( 'To display the image enable the option Appearance > Customize > Shop > Products Catalog > Shop Hero Title', 'belctech-ecommerce' ); ?>
 				<?php } else { ?>
-					<?php esc_html_e( 'To display the image enable the option Appearance > Customize > Blog > Blog Main > Post Hero Title', 'goya' ); ?>
+					<?php esc_html_e( 'To display the image enable the option Appearance > Customize > Blog > Blog Main > Post Hero Title', 'belctech-ecommerce' ); ?>
 				<?php } ?>
 					</p>
 
@@ -47,24 +47,24 @@ function goya_edit_category_header_img( $term, $taxonomy ) {
 
 	</tr>
 	<tr class="form-field">
-		<th scope="row" valign="top"><label><?php esc_html_e( 'Hero Text Color', 'goya' ); ?></label></th>
+		<th scope="row" valign="top"><label><?php esc_html_e( 'Hero Text Color', 'belctech-ecommerce' ); ?></label></th>
 		<td>
 			<select id="shop_menu_color_cat" name="shop_menu_color_cat" class="postform">
 				<option value="" <?php selected( '', $shop_menu_color_cat ); ?>><?php esc_html_e( 'Default', 'woocommerce' ); ?></option>
 				<option value="dark-title" <?php selected( 'dark-title', $shop_menu_color_cat ); ?>><?php esc_html_e( 'Dark Text', 'woocommerce' ); ?></option>
 				<option value="light-title" <?php selected( 'light-title', $shop_menu_color_cat ); ?>><?php esc_html_e( 'Light Text', 'woocommerce' ); ?></option>
 			</select>
-			<p class="description"><?php esc_html_e( '"Default" is the global value set in the customizer.', 'goya' ); ?></p>
+			<p class="description"><?php esc_html_e( '"Default" is the global value set in the customizer.', 'belctech-ecommerce' ); ?></p>
 		</td>
 	</tr>
 	<?php
 
 }
 
-add_action( 'product_cat_edit_form_fields', 'goya_edit_category_header_img', 20, 2 );
-add_action( 'product_tag_edit_form_fields', 'goya_edit_category_header_img', 20, 2 );
-add_action( 'product_brand_edit_form_fields', 'goya_edit_category_header_img', 20, 2 );
-add_action( 'category_edit_form_fields', 'goya_edit_category_header_img', 20, 2 );
+add_action( 'product_cat_edit_form_fields', 'belctech_edit_category_header_img', 20, 2 );
+add_action( 'product_tag_edit_form_fields', 'belctech_edit_category_header_img', 20, 2 );
+add_action( 'product_brand_edit_form_fields', 'belctech_edit_category_header_img', 20, 2 );
+add_action( 'category_edit_form_fields', 'belctech_edit_category_header_img', 20, 2 );
 
 if ( class_exists( 'woocommerce' ) ) {
 
@@ -72,7 +72,7 @@ if ( class_exists( 'woocommerce' ) ) {
 
 	if ( ! empty( $attribute_taxonomies ) ) {
 		foreach ( $attribute_taxonomies as $attribute ) {
-			add_action( 'pa_' . $attribute->attribute_name . '_edit_form_fields', 'goya_edit_category_header_img', 20, 2 );
+			add_action( 'pa_' . $attribute->attribute_name . '_edit_form_fields', 'belctech_edit_category_header_img', 20, 2 );
 		}
 	}
 }
@@ -81,7 +81,7 @@ if ( class_exists( 'woocommerce' ) ) {
  * woocommerce_category_header_img_save function.
  */
 
-function goya_category_header_img_save( $term_id, $tt_id, $taxonomy ) {
+function belctech_category_header_img_save( $term_id, $tt_id, $taxonomy ) {
 
 	if ( isset( $_POST['product_cat_header_id'] ) )
 		update_term_meta( $term_id, 'header_id', wp_unslash( absint( $_POST['product_cat_header_id'] ) ) );
@@ -92,14 +92,14 @@ function goya_category_header_img_save( $term_id, $tt_id, $taxonomy ) {
 
 }
 
-add_action( 'created_term', 'goya_category_header_img_save', 10,3 );
-add_action( 'edit_term', 'goya_category_header_img_save', 10,3 );
+add_action( 'created_term', 'belctech_category_header_img_save', 10,3 );
+add_action( 'edit_term', 'belctech_category_header_img_save', 10,3 );
 
 /**
  * Header column added to category admin.
  */
 
-function goya_woocommerce_product_cat_header_columns( $columns ) {
+function belctech_woocommerce_product_cat_header_columns( $columns ) {
 
 	$new_columns = array();
 
@@ -109,7 +109,7 @@ function goya_woocommerce_product_cat_header_columns( $columns ) {
 	}
 
 	$new_columns['thumb'] = __( 'Image', 'woocommerce' );
-	$new_columns['header'] = __( 'Header', 'goya' );
+	$new_columns['header'] = __( 'Header', 'belctech-ecommerce' );
 
 	$columns           = array_merge( $new_columns, $columns );
 	$columns['handle'] = '';
@@ -118,19 +118,19 @@ function goya_woocommerce_product_cat_header_columns( $columns ) {
 
 }
 
-add_filter( 'manage_edit-product_cat_columns', 'goya_woocommerce_product_cat_header_columns' );
+add_filter( 'manage_edit-product_cat_columns', 'belctech_woocommerce_product_cat_header_columns' );
 
 
 /**
  * Thumbnail column value added to category admin.
  */
 
-function goya_woocommerce_product_cat_header_column( $columns, $column, $id ) {
+function belctech_woocommerce_product_cat_header_column( $columns, $column, $id ) {
 
 	if ( $column == 'header' ) {
 
-		$image 			= '';
-		$thumbnail_id 	= get_term_meta( $id, 'header_id', true );
+		$image			= '';
+		$thumbnail_id	= get_term_meta( $id, 'header_id', true );
 		$thumb_size = 48;
 
 		if ($thumbnail_id)
@@ -146,4 +146,4 @@ function goya_woocommerce_product_cat_header_column( $columns, $column, $id ) {
 
 }
 
-add_filter( 'manage_product_cat_custom_column', 'goya_woocommerce_product_cat_header_column', 10, 3 );
+add_filter( 'manage_product_cat_custom_column', 'belctech_woocommerce_product_cat_header_column', 10, 3 );

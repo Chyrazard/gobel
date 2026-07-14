@@ -4,14 +4,14 @@
  *
  * @link    https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Goya
+ * @package Belctech
  */
 
 $format = get_post_format();
-$feat_gallery = goya_meta_config('post','featured_image','below');
+$feat_gallery = belctech_meta_config('post','featured_image','below');
 $title_class = 'title_outer';
 
-$post_sidebar = goya_meta_config('post','sidebar',true);
+$post_sidebar = belctech_meta_config('post','sidebar',true);
 
 if ( $post_sidebar == true && is_active_sidebar( 'single' ) ) {
 	$title_width = 'col-lg-12';

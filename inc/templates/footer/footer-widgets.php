@@ -1,10 +1,10 @@
-<?php 
+<?php
 /**
  * The template for displaying the footer widgets
  *
  * @link    https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Goya
+ * @package Belctech
  */
 
 $footer_widgets = get_theme_mod('footer_widgets',true);
@@ -30,7 +30,7 @@ if ( $is_active == 1 ) : ?>
 <div class="<?php echo esc_attr(implode(' ', $classes)); ?>">
 	<div class="container">
 		<div class="row">
-			<?php do_action('goya_footer_columns'); ?>
+			<?php do_action('belctech_footer_columns'); ?>
 		</div>
 	</div>
 </div>

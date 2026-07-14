@@ -1,5 +1,5 @@
-<?php 
-	add_filter( 'excerpt_length', 'goya_short_excerpt_length' );
+<?php
+	add_filter( 'excerpt_length', 'belctech_short_excerpt_length' );
 	// Column classes
 	$columns_large = get_theme_mod('blog_grid_columns', 3);
 	$columns_medium = ( intval( $columns_large ) > 3 ) ? '3' : '2';
@@ -23,7 +23,7 @@
 		<?php if ( has_post_thumbnail() ) : ?>
 		<figure class="post-gallery">
 			<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">
-				<?php goya_post_format_icon( get_the_ID() ); ?>
+				<?php belctech_post_format_icon( get_the_ID() ); ?>
 				<?php the_post_thumbnail($img_size); ?>
 			</a>
 		</figure>

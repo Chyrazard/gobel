@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 //Show login/register in two columns
-$two_col = goya_meta_config('','login_two_columns', false);
+$two_col = belctech_meta_config('','login_two_columns', false);
 
 if ( isset( $is_popup ) ) {
 	// Don't show 2 columns in popup
@@ -35,7 +35,7 @@ if ( isset( $is_popup ) ) {
 }
 
 // Disable register form on checkout
-$show_reg_form = ( ! goya_is_real_checkout() && get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) ? true : false;
+$show_reg_form = ( ! belctech_is_real_checkout() && get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) ? true : false;
 
 ?>
 
@@ -52,7 +52,7 @@ $show_reg_form = ( ! goya_is_real_checkout() && get_option( 'woocommerce_enable_
 	<div class="et-overflow-container et-login-wrapper <?php echo esc_attr($class); ?>">
 
 		<div class="et-form-container">
-			
+
 			<div id="et-login-form" class="<?php if($two_col == true) { ?> col-lg-6<?php } ?>">
 
 				<div class="form-wrapper">
@@ -98,11 +98,11 @@ $show_reg_form = ( ! goya_is_real_checkout() && get_option( 'woocommerce_enable_
 						<button type="submit" class="woocommerce-button button woocommerce-form-login__submit<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="login" value="<?php esc_attr_e( 'Log in', 'woocommerce' ); ?>"><?php esc_html_e( 'Log in', 'woocommerce' ); ?></button>
 					</p>
 
-					<?php do_action( 'woocommerce_login_actions' ); // Custom Goya ?>
+					<?php do_action( 'woocommerce_login_actions' ); // Custom Belctech ?>
 
 					<?php if ( $show_reg_form ) : ?>
-						<?php do_action( 'goya_toggle_registration_login', $context = 'register' ); ?>
-						
+						<?php do_action( 'belctech_toggle_registration_login', $context = 'register' ); ?>
+
 					<?php endif; ?>
 
 					<?php do_action( 'woocommerce_login_form_end' ); ?>
@@ -112,7 +112,7 @@ $show_reg_form = ( ! goya_is_real_checkout() && get_option( 'woocommerce_enable_
 			</div>
 
 			</div>
-						
+
 			<?php if ( $show_reg_form ) : ?>
 
 				<div id="et-register-form" class="<?php if($two_col == true) echo 'col-lg-6'; ?>">
@@ -130,7 +130,7 @@ $show_reg_form = ( ! goya_is_real_checkout() && get_option( 'woocommerce_enable_
 					<?php } else { ?>
 
 							<form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
-							
+
 					<?php } ?>
 
 					<?php do_action( 'woocommerce_register_form_start' ); ?>
@@ -169,7 +169,7 @@ $show_reg_form = ( ! goya_is_real_checkout() && get_option( 'woocommerce_enable_
 							<button type="submit" class="woocommerce-Button woocommerce-button button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> woocommerce-form-register__submit" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'Register', 'woocommerce' ); ?></button>
 						</p>
 
-						<?php do_action( 'goya_toggle_registration_login', $context = 'login' ); ?>
+						<?php do_action( 'belctech_toggle_registration_login', $context = 'login' ); ?>
 
 						<?php do_action( 'woocommerce_register_form_end' ); ?>
 
@@ -178,13 +178,13 @@ $show_reg_form = ( ! goya_is_real_checkout() && get_option( 'woocommerce_enable_
 				</div>
 
 				</div>
-		
+
 			<?php endif; ?>
 
 		</div>
 
 	</div>
-	
+
 	<?php do_action( 'woocommerce_after_customer_login_form' ); ?>
 
 </div>

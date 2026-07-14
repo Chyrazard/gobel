@@ -11,7 +11,7 @@ wc_print_notices();
 
 $columns = 'col-lg-7';
 
-$checkout_style = goya_meta_config('','checkout_style','free');
+$checkout_style = belctech_meta_config('','checkout_style','free');
 
 if ( $checkout_style == 'free' ) { ?>
 
@@ -24,9 +24,9 @@ if ( $checkout_style == 'free' ) { ?>
 		</div>
 	</div>
 
-<?php 
+<?php
 } else {
-	$columns .= ' col-xl-8'; 
+	$columns .= ' col-xl-8';
 } ?>
 
 <div class="checkout-options klarna">
@@ -36,11 +36,11 @@ if ( $checkout_style == 'free' ) { ?>
 			<?php do_action( 'woocommerce_before_checkout_form', WC()->checkout() ); ?>
 			</div>
 		</div>
-		<?php do_action( 'goya_back_button', $context = 'checkout' ); ?>
+		<?php do_action( 'belctech_back_button', $context = 'checkout' ); ?>
 	</div>
 </div>
 
-<?php 
+<?php
 
 
 // If checkout registration is disabled and not logged in, the user cannot checkout.

@@ -2,7 +2,7 @@
 /**
  * Template part for display footer menu
  *
- * @package Goya
+ * @package Belctech
  */
 ?>
 

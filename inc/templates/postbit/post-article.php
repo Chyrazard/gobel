@@ -4,15 +4,15 @@
  *
  * @link    https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Goya
+ * @package Belctech
  */
 
 $post_id = get_the_ID();
-$feat_gallery = goya_meta_config('post','featured_image','below');
-$transparent_header = goya_meta_config('post','transparent_header',false);
-$hero_title = goya_meta_config('blog','hero_title',false);
-$nav_style = goya_meta_config('post','navigation','simple');
-$post_sidebar = goya_meta_config('post','sidebar',true);
+$feat_gallery = belctech_meta_config('post','featured_image','below');
+$transparent_header = belctech_meta_config('post','transparent_header',false);
+$hero_title = belctech_meta_config('blog','hero_title',false);
+$nav_style = belctech_meta_config('post','navigation','simple');
+$post_sidebar = belctech_meta_config('post','sidebar',true);
 
 if ( $post_sidebar == true && is_active_sidebar( 'single' ) ) {
 	$class[] = 'sidebar-enabled';
@@ -44,8 +44,8 @@ if ( $transparent_header == true && ( ($hero_title == true && $feat_gallery == '
 
 // Post Format
 $format = get_post_format();
-$video = get_post_meta($post_id , 'goya_post_featured_video', true);
-$gallery = rwmb_meta( 'goya_post_featured_gallery', array( 'size' => 'full' ) );
+$video = get_post_meta($post_id , 'belctech_post_featured_video', true);
+$gallery = rwmb_meta( 'belctech_post_featured_gallery', array( 'size' => 'full' ) );
 
 if ( $format == 'gallery' && !empty($gallery) && count($gallery) > 0 ) {
 	$format = 'gallery';
@@ -62,7 +62,7 @@ if ( $format == 'gallery' && !empty($gallery) && count($gallery) > 0 ) {
 <div <?php post_class($class); ?>>
 
 	<?php
-	
+
 	if ( $feat_gallery == 'parallax' ) {
 		if (in_array($format, array('gallery', 'video'))) {
 			get_template_part( 'inc/templates/postformats/'.$format );
@@ -72,7 +72,7 @@ if ( $format == 'gallery' && !empty($gallery) && count($gallery) > 0 ) {
 	}
 
 	if ( $feat_gallery != 'parallax' || ( $feat_gallery == 'parallax' && in_array($format, array('gallery', 'video')) ) ) {
-		
+
 		if ( $feat_gallery != 'parallax' ) {
 			$title_class[] = 'title-wrap';
 		}
@@ -87,9 +87,9 @@ if ( $format == 'gallery' && !empty($gallery) && count($gallery) > 0 ) {
 	<div class="container article-body">
 		<div class="row justify-content-md-center">
 			<div class="col-lg-8 main-content">
-				
+
 				<div class="post-content entry-content">
-					
+
 					<?php if ( $feat_gallery == 'below' && ( in_array($format, array('gallery', 'video')) || has_post_thumbnail() ) ) { ?>
 						<div class="featured-media alignwide">
 							<?php if (in_array($format, array('gallery', 'video'))) {
@@ -99,7 +99,7 @@ if ( $format == 'gallery' && !empty($gallery) && count($gallery) > 0 ) {
 							} ?>
 						</div>
 					<?php } ?>
-					
+
 					<?php the_content(); ?>
 
 				</div>
@@ -107,14 +107,14 @@ if ( $format == 'gallery' && !empty($gallery) && count($gallery) > 0 ) {
 				<?php
 				wp_link_pages(
 					array(
-						'before'      => '<nav class="post-nav-links bg-light-background" aria-label="' . esc_attr__( 'Page', 'goya' ) . '"><span class="label">' . esc_html__( 'Pages:', 'goya' ) . '</span>',
+						'before'      => '<nav class="post-nav-links bg-light-background" aria-label="' . esc_attr__( 'Page', 'belctech-ecommerce' ) . '"><span class="label">' . esc_html__( 'Pages:', 'belctech-ecommerce' ) . '</span>',
 						'after'       => '</nav>',
 						'link_before' => '<span class="page-number">',
 						'link_after'  => '</span>',
 					)
 				); ?>
 
-				<?php if (get_theme_mod('post_meta_bar', true) == true) { ?> 				
+				<?php if (get_theme_mod('post_meta_bar', true) == true) { ?>
 
 				<?php
 					$has_meta = false;
@@ -126,28 +126,28 @@ if ( $format == 'gallery' && !empty($gallery) && count($gallery) > 0 ) {
 
 						<div class="single-post-meta">
 							<?php if ( $categories_list ) {
-								echo '<span class="posted_in"><span>' . esc_html__( 'Posted in:', 'goya' ) . '</span>' .  $categories_list . '</span>';
+								echo '<span class="posted_in"><span>' . esc_html__( 'Posted in:', 'belctech-ecommerce' ) . '</span>' .  $categories_list . '</span>';
 							}
 
 							if ( $tag_list ) {
-								echo '<span class="tagged_as"><span>' . esc_html__( 'Tagged:', 'goya' ) .  '</span>' . $tag_list . '</span>';
+								echo '<span class="tagged_as"><span>' . esc_html__( 'Tagged:', 'belctech-ecommerce' ) .  '</span>' . $tag_list . '</span>';
 							} ?>
 						</div>
 
 					<?php } ?>
 
 				<?php } ?>
-				
-				<?php if (get_theme_mod('post_author', false) == true) { ?> 
-					<?php do_action('goya_author_info'); ?>
+
+				<?php if (get_theme_mod('post_author', false) == true) { ?>
+					<?php do_action('belctech_author_info'); ?>
 				<?php } ?>
-				
-				<?php do_action( 'goya_social_share' ); ?>
+
+				<?php do_action( 'belctech_social_share' ); ?>
 
 				<?php if ( $post_sidebar == true && is_active_sidebar( 'single' ) ) { ?>
-					
+
 					<?php if ( $nav_style != '' ) {
-						do_action('goya_post_navigation');
+						do_action('belctech_post_navigation');
 					} ?>
 
 					<?php if ( comments_open() || get_comments_number() ) {
@@ -157,7 +157,7 @@ if ( $format == 'gallery' && !empty($gallery) && count($gallery) > 0 ) {
 					<?php if ( get_theme_mod('single_post_related', true) == true ) {
 						get_template_part( 'inc/templates/postbit/post-related');
 					} ?>
-					
+
 				<?php } ?>
 
 			</div>
@@ -173,7 +173,7 @@ if ( $format == 'gallery' && !empty($gallery) && count($gallery) > 0 ) {
 	<?php if ( $post_sidebar != true || !is_active_sidebar( 'single' ) ) { ?>
 
 		<?php if ( $nav_style != '' ) {
-			do_action('goya_post_navigation');
+			do_action('belctech_post_navigation');
 		} ?>
 
 		<?php if ( comments_open() || get_comments_number() ) {

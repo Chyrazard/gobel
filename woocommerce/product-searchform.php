@@ -27,9 +27,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<a href="#" class="search-clear remove" title="Clear"></a>
 			<span class="search-icon"><?php get_template_part( 'assets/img/svg/search.svg' ); ?></span>
 			<input type="search" id="woocommerce-product-search-field-<?php echo isset( $index ) ? absint( $index ) : 0; ?>" class="search-field" placeholder="<?php echo esc_attr__( 'Search products&hellip;', 'woocommerce' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />
-			
-			<?php goya_search_by_category($index); ?>
-			
+
+			<?php belctech_search_by_category($index); ?>
+
 			<button type="submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'woocommerce' ); ?>" class="<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ); ?>"><span class="screen-reader-text"><?php echo esc_html_x( 'Search', 'submit button', 'woocommerce' ); ?></span><?php get_template_part( 'assets/img/svg/search.svg' ); ?></button>
 		</div>
 		<input type="hidden" name="post_type" value="product" />

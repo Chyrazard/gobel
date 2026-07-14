@@ -1,8 +1,8 @@
 <figure class="post-featured-section post-featured-video">
-	<?php 
+	<?php
 	$id = get_the_ID();
-	$embed = get_post_meta($id , 'goya_post_featured_video', true); 
+	$embed = get_post_meta($id , 'belctech_post_featured_video', true);
 
-	echo apply_filters( 'goya_post_video_embed', $embed );
+	echo apply_filters( 'belctech_post_video_embed', $embed );
 	?>
 </figure>

@@ -176,6 +176,69 @@ function belctech_sanitize_checkbox( $value ) {
 	return (bool) $value;
 }
 
+function belctech_topbar_elements_list() {
+	return apply_filters( 'belctech_topbar_elements_list', array(
+		'menu'       => __( 'Menu Top Bar', 'belctech-ecommerce' ),
+		'currency'   => __( 'Currency Selector', 'belctech-ecommerce' ),
+		'language'   => __( 'Language Selector', 'belctech-ecommerce' ),
+		'social'     => __( 'Social Icons', 'belctech-ecommerce' ),
+		'text'       => __( 'Text 1', 'belctech-ecommerce' ),
+		'text2'      => __( 'Text 2', 'belctech-ecommerce' ),
+		'text3'      => __( 'Text 3', 'belctech-ecommerce' ),
+		'search'     => __( 'Search Icon', 'belctech-ecommerce' ),
+		'search-box' => __( 'Search Box', 'belctech-ecommerce' ),
+		'cart'       => __( 'Cart Icon', 'belctech-ecommerce' ),
+		'hamburger'  => __( 'Hamburger Icon', 'belctech-ecommerce' ),
+		'wishlist'   => __( 'Wishlist Icon', 'belctech-ecommerce' ),
+		'account'    => __( 'Account Link', 'belctech-ecommerce' ),
+	) );
+}
+
+function belctech_header_elements_list() {
+	return apply_filters( 'belctech_header_elements_list', array(
+		'logo'           => __( 'Logo', 'belctech-ecommerce' ),
+		'account'        => __( 'Account Link', 'belctech-ecommerce' ),
+		'cart'           => __( 'Cart Icon', 'belctech-ecommerce' ),
+		'currency'       => __( 'Currency Selector', 'belctech-ecommerce' ),
+		'hamburger'      => __( 'Hamburger Icon', 'belctech-ecommerce' ),
+		'language'       => __( 'Language Selector', 'belctech-ecommerce' ),
+		'menu-primary'   => __( 'Menu Primary', 'belctech-ecommerce' ),
+		'menu-secondary' => __( 'Menu Secondary', 'belctech-ecommerce' ),
+		'search'         => __( 'Search Icon', 'belctech-ecommerce' ),
+		'search-box'     => __( 'Search Box', 'belctech-ecommerce' ),
+		'social'         => __( 'Social Icons', 'belctech-ecommerce' ),
+		'text'           => __( 'Text 1', 'belctech-ecommerce' ),
+		'text2'          => __( 'Text 2', 'belctech-ecommerce' ),
+		'text3'          => __( 'Text 3', 'belctech-ecommerce' ),
+		'wishlist'       => __( 'Wishlist Icon', 'belctech-ecommerce' ),
+	) );
+}
+
+function belctech_footer_elements_list() {
+	return apply_filters( 'belctech_footer_elements_list', array(
+		'copyright'         => __( 'Copyright', 'belctech-ecommerce' ),
+		'currency'          => __( 'Currency Selector', 'belctech-ecommerce' ),
+		'currency_language' => __( 'Currency & Language Selector', 'belctech-ecommerce' ),
+		'language'          => __( 'Language Selector', 'belctech-ecommerce' ),
+		'menu'              => __( 'Menu Footer', 'belctech-ecommerce' ),
+		'social'            => __( 'Social Icons', 'belctech-ecommerce' ),
+		'text'              => __( 'Text 1', 'belctech-ecommerce' ),
+		'text2'             => __( 'Text 2', 'belctech-ecommerce' ),
+	) );
+}
+
+function belctech_mobile_header_elements_list() {
+	return apply_filters( 'belctech_mobile_header_elements_list', array(
+		'cart'     => __( 'Cart', 'belctech-ecommerce' ),
+		'account'  => __( 'Account', 'belctech-ecommerce' ),
+		'search'   => __( 'Search', 'belctech-ecommerce' ),
+		'wishlist' => __( 'Wishlist', 'belctech-ecommerce' ),
+		'currency' => __( 'Currency Selector', 'belctech-ecommerce' ),
+		'language' => __( 'Language Selector', 'belctech-ecommerce' ),
+		'text'     => __( 'Text 1', 'belctech-ecommerce' ),
+	) );
+}
+
 function belctech_design_css() {
 	$header        = max( 56, min( 160, absint( get_theme_mod( 'header_height', 90 ) ) ) );
 	$sticky        = max( 48, min( 110, absint( get_theme_mod( 'header_height_sticky', 70 ) ) ) );
@@ -207,9 +270,9 @@ function belctech_campaign_bar_items( $legacy_items ) {
 	}
 	return $items;
 }
-add_filter( 'goya_campaign_bar_items', 'belctech_campaign_bar_items', 20 );
+add_filter( 'belctech_campaign_bar_items', 'belctech_campaign_bar_items', 20 );
 
-// Existing Goya installations often carry an oversized logo value. Cap it once
+// Existing Belctech installations often carry an oversized logo value. Cap it once
 // when Belctech is first loaded, while keeping every size editable afterwards.
 function belctech_apply_logo_defaults() {
 	if ( get_option( 'belctech_logo_defaults_102' ) ) return;

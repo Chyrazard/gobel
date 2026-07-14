@@ -1,8 +1,8 @@
 <?php
 
-$goya_animation_array = array(
+$belctech_animation_array = array(
 	'type' => 'dropdown',
-	'heading' => esc_html__('Animation', 'goya-core'),
+	'heading' => esc_html__('Animation', 'belctech-ecommerce'),
 	'param_name' => 'animation',
 	'value' => array(
 		'None' => '',
@@ -46,27 +46,27 @@ vc_remove_param( 'vc_row', 'css_animation' );
 
 vc_add_param('vc_row', array(
 	'type' => 'checkbox',
-	'heading' => esc_html__('Enable Full Width', 'goya-core'),
+	'heading' => esc_html__('Enable Full Width', 'belctech-ecommerce'),
 	'param_name' => 'et_full_width',
 	'value' => array(
 		'Yes' => 'true'
 	),
 	'weight' => 1,
-	'description' => esc_html__('If you enable this, this row will fill the screen', 'goya-core')
+	'description' => esc_html__('If you enable this, this row will fill the screen', 'belctech-ecommerce')
 ));
 vc_add_param('vc_row', array(
 	'type' => 'checkbox',
-	'heading' => esc_html__('Disable Padding', 'goya-core'),
+	'heading' => esc_html__('Disable Padding', 'belctech-ecommerce'),
 	'param_name' => 'et_row_padding',
 	'value' => array(
 		'Yes' => 'true'
 	),
 	'weight' => 1,
-	'description' => esc_html__('If you enable this, this row won\'t leave padding on the sides', 'goya-core')
+	'description' => esc_html__('If you enable this, this row won\'t leave padding on the sides', 'belctech-ecommerce')
 ));
 vc_add_param('vc_row', array(
 	'type' => 'dropdown',
-	'heading' => esc_html__('Column Alignment', 'goya-core'),
+	'heading' => esc_html__('Column Alignment', 'belctech-ecommerce'),
 	'param_name' => 'et_column_align',
 	'value' => array(
 		'Default' => '',
@@ -74,7 +74,7 @@ vc_add_param('vc_row', array(
 		'Right' => 'align-right'
 	),
 	'weight' => 1,
-	'description' => esc_html__('Aligment for the columns inside this row.', 'goya-core')
+	'description' => esc_html__('Aligment for the columns inside this row.', 'belctech-ecommerce')
 ));
 
 
@@ -83,19 +83,19 @@ vc_remove_param( 'vc_row_inner', 'gap' );
 
 vc_add_param('vc_row_inner', array(
 	'type' => 'checkbox',
-	'heading' => esc_html__('Enable Max Width', 'goya-core'),
+	'heading' => esc_html__('Enable Max Width', 'belctech-ecommerce'),
 	'param_name' => 'et_max_width',
 	'value' => array(
 		'Yes' => 'max_width'
 	),
 	'std' => 'max_width',
 	'weight' => 1,
-	'description' => esc_html__('If you enable this, the row won\'t exceed the max width, especially inside a full-width parent row.', 'goya-core')
+	'description' => esc_html__('If you enable this, the row won\'t exceed the max width, especially inside a full-width parent row.', 'belctech-ecommerce')
 ));
 
 vc_add_param('vc_row_inner', array(
 	'type' => 'dropdown',
-	'heading' => esc_html__('Column Alignment', 'goya-core'),
+	'heading' => esc_html__('Column Alignment', 'belctech-ecommerce'),
 	'param_name' => 'et_column_align',
 	'value' => array(
 		'Default' => '',
@@ -103,18 +103,18 @@ vc_add_param('vc_row_inner', array(
 		'Right' => 'align-right'
 	),
 	'weight' => 1,
-	'description' => esc_html__('Aligment for the columns inside this row.', 'goya-core')
+	'description' => esc_html__('Aligment for the columns inside this row.', 'belctech-ecommerce')
 ));
 
 vc_add_param('vc_row_inner', array(
 	'type' => 'checkbox',
-	'heading' => esc_html__('Disable Padding', 'goya-core'),
+	'heading' => esc_html__('Disable Padding', 'belctech-ecommerce'),
 	'param_name' => 'et_row_padding',
 	'value' => array(
 		'Yes' => 'true'
 	),
 	'weight' => 1,
-	'description' => esc_html__('If you enable this, the columns inside won\'t leave padding on the sides', 'goya-core')
+	'description' => esc_html__('If you enable this, the columns inside won\'t leave padding on the sides', 'belctech-ecommerce')
 ));
 
 
@@ -122,7 +122,7 @@ vc_add_param('vc_row_inner', array(
 vc_remove_param( 'vc_column', 'css_animation' );
 vc_add_param('vc_column', array(
 	'type' => 'dropdown',
-	'heading' => esc_html__('Column Content Color', 'goya-core'),
+	'heading' => esc_html__('Column Content Color', 'belctech-ecommerce'),
 	'param_name' => 'et_column_color',
 	'value' => array(
 		'Dark' => 'et-dark-column',
@@ -130,11 +130,11 @@ vc_add_param('vc_column', array(
 	),
 	'std' => 'et-dark-column',
 	'weight' => 1,
-	'description' => esc_html__('If you white-colored contents for this column, select Light.', 'goya-core')
+	'description' => esc_html__('If you white-colored contents for this column, select Light.', 'belctech-ecommerce')
 ));
 vc_add_param('vc_column', array(
 	'type' => 'dropdown',
-	'heading' => esc_html__('Overlap column', 'goya-core'),
+	'heading' => esc_html__('Overlap column', 'belctech-ecommerce'),
 	'param_name' => 'et_column_overlap',
 	'value' => array(
 		'None' => '',
@@ -142,23 +142,23 @@ vc_add_param('vc_column', array(
 		'Overlap Left' => 'overlap-left'
 	),
 	'weight' => 1,
-	'description' => esc_html__('Overlap adjacent columns.', 'goya-core')
+	'description' => esc_html__('Overlap adjacent columns.', 'belctech-ecommerce')
 ));
 vc_add_param('vc_column', array(
 	'type' => 'checkbox',
-	'heading' => esc_html__('Make column sticky', 'goya-core'),
+	'heading' => esc_html__('Make column sticky', 'belctech-ecommerce'),
 	'param_name' => 'fixed',
 	'value' => array(
 		'Yes' => 'et-fixed'
 	),
 	'weight' => 1,
-	'description' => esc_html__('Keep the column fixed while scrolling.', 'goya-core')
+	'description' => esc_html__('Keep the column fixed while scrolling.', 'belctech-ecommerce')
 ));
 
 // Element: vc_column_inner
 vc_add_param('vc_column_inner', array(
 	'type' => 'dropdown',
-	'heading' => esc_html__('Column Content Color', 'goya-core'),
+	'heading' => esc_html__('Column Content Color', 'belctech-ecommerce'),
 	'param_name' => 'et_column_color',
 	'value' => array(
 		'Dark' => 'et-dark-column',
@@ -166,11 +166,11 @@ vc_add_param('vc_column_inner', array(
 	),
 	'std' => 'et-dark-column',
 	'weight' => 1,
-	'description' => esc_html__('If you white-colored contents for this column, select Light.', 'goya-core')
+	'description' => esc_html__('If you white-colored contents for this column, select Light.', 'belctech-ecommerce')
 ));
 vc_add_param('vc_column_inner', array(
 	'type' => 'dropdown',
-	'heading' => esc_html__('Overlap column', 'goya-core'),
+	'heading' => esc_html__('Overlap column', 'belctech-ecommerce'),
 	'param_name' => 'et_column_overlap',
 	'value' => array(
 		'None' => '',
@@ -178,29 +178,29 @@ vc_add_param('vc_column_inner', array(
 		'Overlap Left' => 'overlap-left'
 	),
 	'weight' => 1,
-	'description' => esc_html__('Overlap adjacent columns.', 'goya-core')
+	'description' => esc_html__('Overlap adjacent columns.', 'belctech-ecommerce')
 ));
 vc_add_param('vc_column_inner', array(
 	'type' => 'checkbox',
-	'heading' => esc_html__('Make column sticky', 'goya-core'),
+	'heading' => esc_html__('Make column sticky', 'belctech-ecommerce'),
 	'param_name' => 'fixed',
 	'value' => array(
 		'Yes' => 'et-fixed'
 	),
 	'weight' => 1,
-	'description' => esc_html__('Keep the column fixed while scrolling.', 'goya-core')
+	'description' => esc_html__('Keep the column fixed while scrolling.', 'belctech-ecommerce')
 ));
-vc_add_param('vc_column', $goya_animation_array);
-vc_add_param('vc_column_inner', $goya_animation_array);
+vc_add_param('vc_column', $belctech_animation_array);
+vc_add_param('vc_column_inner', $belctech_animation_array);
 
 
 vc_remove_param('vc_single_image', 'css_animation');
-vc_add_param('vc_single_image', $goya_animation_array);
+vc_add_param('vc_single_image', $belctech_animation_array);
 
 
 // Text Area
 vc_remove_param('vc_column_text', 'css_animation');
-vc_add_param('vc_column_text', $goya_animation_array);
+vc_add_param('vc_column_text', $belctech_animation_array);
 
 // Element: vc_tta_accordion
 vc_remove_param('vc_tta_accordion', 'title' );
@@ -212,7 +212,7 @@ vc_remove_param('vc_tta_accordion', 'style');
 vc_remove_param('vc_tta_accordion', 'spacing');
 vc_remove_param('vc_tta_accordion', 'gap');
 vc_remove_param('vc_tta_accordion', 'css_animation');
-vc_add_param('vc_tta_accordion', $goya_animation_array);
+vc_add_param('vc_tta_accordion', $belctech_animation_array);
 
 // Element: vc_tta_tabs
 vc_remove_param('vc_tta_tabs', 'title' );
@@ -224,7 +224,7 @@ vc_remove_param('vc_tta_tabs', 'style');
 vc_remove_param('vc_tta_tabs', 'spacing');
 vc_remove_param('vc_tta_tabs', 'gap');
 vc_remove_param('vc_tta_tabs', 'css_animation');
-vc_add_param('vc_tta_tabs', $goya_animation_array);
+vc_add_param('vc_tta_tabs', $belctech_animation_array);
 
 
 // Element: vc_tour
@@ -237,12 +237,12 @@ vc_remove_param('vc_tta_tour', 'style');
 vc_remove_param('vc_tta_tour', 'spacing');
 vc_remove_param('vc_tta_tour', 'gap');
 vc_remove_param('vc_tta_tour', 'css_animation');
-vc_add_param('vc_tta_tour', $goya_animation_array);
+vc_add_param('vc_tta_tour', $belctech_animation_array);
 
 // Element: vc_toggle
 vc_add_param('vc_toggle', array(
 	'type' => 'dropdown',
-	'heading' => esc_html__('Toggle style', 'goya-core'),
+	'heading' => esc_html__('Toggle style', 'belctech-ecommerce'),
 	'param_name' => 'style',
 	'value' => array(
 		'Default' => 'default',

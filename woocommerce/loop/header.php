@@ -27,7 +27,7 @@ $is_main_shop = is_shop();
 
 // OnSale page plugin
 if ( $is_sale_page || $is_latest_page ) {
-	$is_main_shop = false;	
+	$is_main_shop = false;
 }
 
 // Get category ID
@@ -35,21 +35,21 @@ $cate = get_queried_object();
 $cateID = ( ! is_shop() ) ? $cate->term_id : false;
 
 // Shop Header Style
-$shop_hero_title = goya_meta_config('shop','hero_title','none');
+$shop_hero_title = belctech_meta_config('shop','hero_title','none');
 $shop_header_bg = get_theme_mod( 'shop_header_bg', array() );
 
 $header_class[] = 'hero-header';
 $header_bg_class = array();
 
 if ( $shop_hero_title != 'none') {
-	
+
 	if ( $is_main_shop && ! is_search() ) {
 		if (! empty (get_theme_mod('shop_header_bg_image', '') ) ) {
 			$header_bg_class[] = 'parallax_image';
 			$header_bg_class[] = 'vh-height';
 		}
 		$header_bg_class[] = 'hero-title';
-	} else if ( is_tax() ) { 
+	} else if ( is_tax() ) {
 		$term = get_queried_object();
 		$term_id = $term->term_id;
 		$header_id = get_term_meta( $term_id, 'header_id', true );
@@ -121,7 +121,7 @@ if ( $shop_hero_title != 'none') {
 					?>
 
 					<?php if ( ( $is_main_shop || is_product_category() ) && !is_search() && get_theme_mod('shop_categories_list', true) == true ) {
-						goya_subcategories_by_id( apply_filters( 'goya_shop_header_subcategories', $cateID ) );
+						belctech_subcategories_by_id( apply_filters( 'belctech_shop_header_subcategories', $cateID ) );
 					} ?>
 				</div>
 			</header>

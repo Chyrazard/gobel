@@ -1,4 +1,4 @@
-<?php function goya_shortcode_pricing_table( $atts, $content = null ) {
+<?php function belctech_shortcode_pricing_table( $atts, $content = null ) {
 	extract( shortcode_atts( array(
 		'background_color' => '',
 		'icon_color' => '',
@@ -6,7 +6,7 @@
 		'price_color' => '',
 		'button_color' => '',
 	), $atts ) );
-	
+
 	$element_id = uniqid('et-pricing-table-');
 	$classes[] = 'et-pricing-table';
 
@@ -29,13 +29,13 @@
 	}
 
 	//Add inline styles
-  if (class_exists('Goya_Layout')) {
-  	Goya_Layout::append_to_shortcodes_css_buffer( $styles );
+  if (class_exists('Belctech_Layout')) {
+	Belctech_Layout::append_to_shortcodes_css_buffer( $styles );
   }
 
 	$out ='';
 	ob_start();
-	
+
 	?>
 
 	<div id="<?php echo esc_attr($element_id); ?>" class="<?php echo esc_attr(implode(' ', $classes)); ?>">
@@ -47,4 +47,4 @@
 	$out = ob_get_clean();
 	return $out;
 }
-add_shortcode('et_pricing_table', 'goya_shortcode_pricing_table');
+add_shortcode('et_pricing_table', 'belctech_shortcode_pricing_table');

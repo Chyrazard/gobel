@@ -1,6 +1,6 @@
 # Belctech Ecommerce
 
-Current version: 1.0.1.
+Current version: 1.0.36.
 
 Belctech Ecommerce is an installable WooCommerce theme derived from the existing
 site contract while replacing its setup framework and optional feature plugins
@@ -14,7 +14,8 @@ with a focused native layer.
 - WPBakery Page Builder only when editing pages that use `vc_*` content.
 
 WPBakery is the single intentional builder integration. Kirki, Meta Box,
-WooCommerce Variation Swatches, Merlin, TGM and Goya Core are not required.
+WooCommerce Variation Swatches, Merlin, TGM and any external core plugin are
+not required.
 
 ## Migration
 
@@ -27,9 +28,10 @@ WooCommerce Variation Swatches, Merlin, TGM and Goya Core are not required.
 6. Resave **Settings > Permalinks** once if portfolio URLs return 404.
 7. Purge page, object and CDN caches.
 
-Existing `goya_*` metadata and `et_*` shortcodes are read without changing the
-database. On first activation, options and menu locations are copied once from
-`theme_mods_goya` into the new theme-mod record. Product data is never rewritten.
+Existing `et_*` shortcodes remain unchanged. Version 1.0.36 performs a one-time,
+idempotent namespace migration for legacy metadata, widgets, options, theme
+mods and stored WPBakery content before templates render. Product, variation,
+order and customer records are otherwise untouched.
 
 ## Native commerce features
 

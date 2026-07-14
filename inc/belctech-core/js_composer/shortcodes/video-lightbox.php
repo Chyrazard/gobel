@@ -1,4 +1,4 @@
-<?php function goya_shortcode_video_lightbox( $atts, $content = null ) {
+<?php function belctech_shortcode_video_lightbox( $atts, $content = null ) {
 
 	extract( shortcode_atts( array(
 		'style'			=> 'lightbox-icon',
@@ -12,7 +12,7 @@
 		'animation'		=> 'animation bottom-to-top',
 		'hover_style'		=> '',
 	), $atts ) );
-	
+
 	$element_id = uniqid('et-video-lightbox-');
 	$classes[] = 'et-lightbox';
 	$classes[] = 'et-video-lightbox';
@@ -40,18 +40,18 @@
 	}
 
 	//Add inline styles
-  if (class_exists('Goya_Layout')) {
-  	Goya_Layout::append_to_shortcodes_css_buffer( $styles );
+  if (class_exists('Belctech_Layout')) {
+	Belctech_Layout::append_to_shortcodes_css_buffer( $styles );
   }
 
 	$out ='';
 	ob_start();
-		
+
 	?>
 
 	<div id="<?php echo esc_attr($element_id); ?>" class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-mfp-type="iframe" data-mfp-src="<?php echo esc_url( $video ) ?>" >
 		<?php
-		if ($style == 'lightbox-image') { 
+		if ($style == 'lightbox-image') {
 			$image_src = wp_get_attachment_image_src( $image, 'full' );
 			$image_title = get_the_title( $image );
 
@@ -62,10 +62,10 @@
 			}
 
 			?>
-			
+
 			<img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $image_title ); ?>" />
 		<?php } ?>
-		
+
 		<div class="et-video-icon">
 			<?php get_template_part('assets/img/svg/play.svg'); ?>
 		</div>
@@ -75,8 +75,8 @@
 		<?php } ?>
 	</div>
 	<?php
-	
+
 	$out = ob_get_clean();
 	return $out;
 }
-add_shortcode('et_video_lightbox', 'goya_shortcode_video_lightbox');
+add_shortcode('et_video_lightbox', 'belctech_shortcode_video_lightbox');

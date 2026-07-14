@@ -1,19 +1,19 @@
 <?php
 /**
- *	Goya Widget: Social Media Icons
+ *	Belctech Widget: Social Media Icons
  */
 
-class Goya_Widget_Social_Media extends WP_Widget {
+class Belctech_Widget_Social_Media extends WP_Widget {
 
 	public function __construct() {
 		$widget_ops = array(
 			'classname'   => 'et_widget et_widget_social_media',
-			'description' => __('Display social media icons', 'goya-core' )
+			'description' => __('Display social media icons', 'belctech-ecommerce' )
 		);
 
 		parent::__construct(
 			'et_social_media_widget',
-			__( 'Social Media Icons' , 'goya-core' ),
+			__( 'Social Media Icons' , 'belctech-ecommerce' ),
 			$widget_ops
 		);
 
@@ -67,7 +67,7 @@ class Goya_Widget_Social_Media extends WP_Widget {
 
 		echo $before_widget;
 
-		// Display the widget title 
+		// Display the widget title
 		if ( $title ) echo $before_title . $title . $after_title; ?>
 
 		<div class="social_widget">
@@ -80,7 +80,7 @@ class Goya_Widget_Social_Media extends WP_Widget {
 				if(isset($instance[$key]) && !empty($instance[$key])) {
 					$name = $key;
 
-					if ($key == 'twitter' && !apply_filters('goya_use_twitter_bird_logo', false)) {
+					if ($key == 'twitter' && !apply_filters('belctech_use_twitter_bird_logo', false)) {
 						$name = 'x';
 					}
 
@@ -89,18 +89,18 @@ class Goya_Widget_Social_Media extends WP_Widget {
 			}
 
 			$output = apply_filters( 'social_icons_items', $output );
-			
+
 			echo '<ul class="social-icons">' . $output . '</ul>';
 
 			?>
 		</div>
-		
-		<?php 
+
+		<?php
 		echo $after_widget;
 	}
 
-	//Update the widget 
-	 
+	//Update the widget
+
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 
@@ -138,41 +138,41 @@ class Goya_Widget_Social_Media extends WP_Widget {
 		return $instance;
 	}
 
-	
+
 	function form( $instance ) {
 
 		$social_base = array(
-			'facebook'   => esc_html__( 'Facebook', 'goya-core' ),
-			'twitter'    => esc_html__( 'X (Twitter)', 'goya-core' ),
-			'instagram'  => esc_html__( 'Instagram', 'goya-core' ),
-			'googleplus' => esc_html__( 'Google+', 'goya-core' ),
-			'pinterest'  => esc_html__( 'Pinterest', 'goya-core' ),
-			'linkedin'   => esc_html__( 'LinkedIn', 'goya-core' ),
-			'rss'        => esc_html__( 'RSS', 'goya-core' ),
-			'tumblr'     => esc_html__( 'Tumblr', 'goya-core' ),
-			'youtube'    => esc_html__( 'Youtube', 'goya-core' ),
-			'email'      => esc_html__( 'Email', 'goya-core' ),
-			'whatsapp'   => esc_html__( 'Whatsapp', 'goya-core' ),
-			'vimeo'      => esc_html__( 'Vimeo', 'goya-core' ),
-			'behance'    => esc_html__( 'Behance', 'goya-core' ),
-			'dribbble'   => esc_html__( 'Dribbble', 'goya-core' ),
-			'flickr'     => esc_html__( 'Flickr', 'goya-core' ),
-			'github'     => esc_html__( 'GitHub', 'goya-core' ),
-			'skype'      => esc_html__( 'Skype', 'goya-core' ),
-			'snapchat'   => esc_html__( 'Snapchat', 'goya-core' ),
-			'wechat'     => esc_html__( 'WeChat', 'goya-core' ),
-			'weibo'      => esc_html__( 'Weibo', 'goya-core' ),
-			'foursquare' => esc_html__( 'Foursquare', 'goya-core' ),
-			'soundcloud' => esc_html__( 'Soundcloud', 'goya-core' ),
-			'vk'         => esc_html__( 'VK', 'goya-core' ),
-			'tiktok'     => esc_html__( 'TikTok', 'goya-core' ),
-			'phone'      => esc_html__( 'Phone', 'goya-core' ),
-			'map-marker' => esc_html__( 'Map Pin', 'goya-core' ),
-			'spotify'    => esc_html__( 'Spotify', 'goya-core' ),
+			'facebook'   => esc_html__( 'Facebook', 'belctech-ecommerce' ),
+			'twitter'    => esc_html__( 'X (Twitter)', 'belctech-ecommerce' ),
+			'instagram'  => esc_html__( 'Instagram', 'belctech-ecommerce' ),
+			'googleplus' => esc_html__( 'Google+', 'belctech-ecommerce' ),
+			'pinterest'  => esc_html__( 'Pinterest', 'belctech-ecommerce' ),
+			'linkedin'   => esc_html__( 'LinkedIn', 'belctech-ecommerce' ),
+			'rss'        => esc_html__( 'RSS', 'belctech-ecommerce' ),
+			'tumblr'     => esc_html__( 'Tumblr', 'belctech-ecommerce' ),
+			'youtube'    => esc_html__( 'Youtube', 'belctech-ecommerce' ),
+			'email'      => esc_html__( 'Email', 'belctech-ecommerce' ),
+			'whatsapp'   => esc_html__( 'Whatsapp', 'belctech-ecommerce' ),
+			'vimeo'      => esc_html__( 'Vimeo', 'belctech-ecommerce' ),
+			'behance'    => esc_html__( 'Behance', 'belctech-ecommerce' ),
+			'dribbble'   => esc_html__( 'Dribbble', 'belctech-ecommerce' ),
+			'flickr'     => esc_html__( 'Flickr', 'belctech-ecommerce' ),
+			'github'     => esc_html__( 'GitHub', 'belctech-ecommerce' ),
+			'skype'      => esc_html__( 'Skype', 'belctech-ecommerce' ),
+			'snapchat'   => esc_html__( 'Snapchat', 'belctech-ecommerce' ),
+			'wechat'     => esc_html__( 'WeChat', 'belctech-ecommerce' ),
+			'weibo'      => esc_html__( 'Weibo', 'belctech-ecommerce' ),
+			'foursquare' => esc_html__( 'Foursquare', 'belctech-ecommerce' ),
+			'soundcloud' => esc_html__( 'Soundcloud', 'belctech-ecommerce' ),
+			'vk'         => esc_html__( 'VK', 'belctech-ecommerce' ),
+			'tiktok'     => esc_html__( 'TikTok', 'belctech-ecommerce' ),
+			'phone'      => esc_html__( 'Phone', 'belctech-ecommerce' ),
+			'map-marker' => esc_html__( 'Map Pin', 'belctech-ecommerce' ),
+			'spotify'    => esc_html__( 'Spotify', 'belctech-ecommerce' ),
 		);
 
 		//Set up some default widget settings.
-		$defaults = array( 
+		$defaults = array(
 			'title'      => '',
 			'intro_text' => '',
 			'facebook'   => '',
@@ -203,24 +203,24 @@ class Goya_Widget_Social_Media extends WP_Widget {
 			'map-marker' => '',
 			'spotify'    => '',
 		);
-		
+
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Widget title:', 'goya-core'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Widget title:', 'belctech-ecommerce'); ?></label>
 			<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" class="widefat" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'intro_text' ); ?>"><?php _e('Intro text', 'goya-core'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'intro_text' ); ?>"><?php _e('Intro text', 'belctech-ecommerce'); ?></label>
 			<textarea id="<?php echo $this->get_field_id( 'intro_text' ); ?>" name="<?php echo $this->get_field_name( 'intro_text' ); ?>" rows="6" cols="20" class="widefat" ><?php echo $instance['intro_text']; ?></textarea>
 		</p>
 
 		<?php foreach ($social_base as $key => $value) { ?>
 			<p>
-				<label for="<?php echo $this->get_field_id( $key ); ?>"><?php _e($value, 'goya-core'); ?></label>
+				<label for="<?php echo $this->get_field_id( $key ); ?>"><?php _e($value, 'belctech-ecommerce'); ?></label>
 				<input type="text" id="<?php echo $this->get_field_id( $key ); ?>" name="<?php echo $this->get_field_name( $key ); ?>" value="<?php echo $instance[$key]; ?>" class="widefat" />
 			</p>
-		<?php } 
+		<?php }
 	}
 }

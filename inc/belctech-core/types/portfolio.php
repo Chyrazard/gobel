@@ -8,11 +8,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Belctech_Portfolio {
-	
+
 	/* Init */
 	function init() {
 
-		define( 'GOYA_PORTFOLIO_VERSION', '1.0' );
+		define( 'BELCTECH_PORTFOLIO_VERSION', '1.0' );
 		// Post type and taxonomy hooks
 		add_action( 'init', array( $this, 'register_post_type' ) );
 		add_action( 'init', array( $this, 'register_taxonomy' ) );
@@ -20,52 +20,52 @@ class Belctech_Portfolio {
 	}
 
 	/* Register categories taxonomy */
-	
-	function register_taxonomy() {
-	 	global $et_theme_opt;
 
-	  $portfolio_taxonomy_permalink = _x( 'portfolio-category', 'portfolio category permalink slug', 'goya-core' );
-	  
+	function register_taxonomy() {
+		global $et_theme_opt;
+
+	  $portfolio_taxonomy_permalink = _x( 'portfolio-category', 'portfolio category permalink slug', 'belctech-ecommerce' );
+
 	  $args = array(
-	  	'label'              => _x( 'Portfolio Categories', 'category label', 'goya-core' ),
-	  	'public'             => true,
-	  	'show_ui'            => true,
-	  	'show_in_nav_menus'	 => false,
-	  	'hierarchical'       => true,
-	  	'query_var'          => true,
-	  	'show_in_rest'        => true,
-	  	'rewrite'            => array(
-	  	'slug'               => $portfolio_taxonomy_permalink,
-	  	'with_front' 	       => false,
-	  	'hierarchical'	      => true
-	  	)
+		'label'              => _x( 'Portfolio Categories', 'category label', 'belctech-ecommerce' ),
+		'public'             => true,
+		'show_ui'            => true,
+		'show_in_nav_menus'	 => false,
+		'hierarchical'       => true,
+		'query_var'          => true,
+		'show_in_rest'        => true,
+		'rewrite'            => array(
+		'slug'               => $portfolio_taxonomy_permalink,
+		'with_front'	       => false,
+		'hierarchical'	      => true
+		)
 	  );
 
 	  register_taxonomy( 'portfolio-category', 'portfolio', $args );
 	}
 
 	/* Register post type */
-	
+
 	function register_post_type() {
 		global $et_theme_opt;
 
-		$portfolio_slug = ( strlen( get_theme_mod( 'portfolio_permalink', 'portfolio' ) ) > 0 ) ? get_theme_mod( 'portfolio_permalink', 'portfolio' ) : _x( 'portfolio', 'portfolio permalink slug', 'goya-core' );
+		$portfolio_slug = ( strlen( get_theme_mod( 'portfolio_permalink', 'portfolio' ) ) > 0 ) ? get_theme_mod( 'portfolio_permalink', 'portfolio' ) : _x( 'portfolio', 'portfolio permalink slug', 'belctech-ecommerce' );
 		$labels = array(
-			'name'               => _x( 'Portfolio', 'post type general name', 'goya-core' ),
-			'singular_name'      => esc_html__( 'Portfolio Item','goya-core' ),
-			'rewrite'            => array('slug' => esc_html__( 'portfolios','goya-core' )),
-			'add_new'            => _x('Add New', 'portfolio item', 'goya-core'),
-			'add_new_item'       => esc_html__('Add New Portfolio Item','goya-core'),
-			'edit_item'          => esc_html__('Edit Portfolio Item','goya-core'),
-			'new_item'           => esc_html__('New Portfolio Item','goya-core'),
-			'view_item'          => esc_html__('View Portfolio Item','goya-core'),
-			'all_items'          => esc_html__('All Portfolio','goya-core'),
-			'search_items'       => esc_html__('Search Portfolio','goya-core'),
-			'not_found'          => esc_html__('No Portfolio items found','goya-core'),
-			'not_found_in_trash' => esc_html__('Nothing found in Trash','goya-core'),
+			'name'               => _x( 'Portfolio', 'post type general name', 'belctech-ecommerce' ),
+			'singular_name'      => esc_html__( 'Portfolio Item','belctech-ecommerce' ),
+			'rewrite'            => array('slug' => esc_html__( 'portfolios','belctech-ecommerce' )),
+			'add_new'            => _x('Add New', 'portfolio item', 'belctech-ecommerce'),
+			'add_new_item'       => esc_html__('Add New Portfolio Item','belctech-ecommerce'),
+			'edit_item'          => esc_html__('Edit Portfolio Item','belctech-ecommerce'),
+			'new_item'           => esc_html__('New Portfolio Item','belctech-ecommerce'),
+			'view_item'          => esc_html__('View Portfolio Item','belctech-ecommerce'),
+			'all_items'          => esc_html__('All Portfolio','belctech-ecommerce'),
+			'search_items'       => esc_html__('Search Portfolio','belctech-ecommerce'),
+			'not_found'          => esc_html__('No Portfolio items found','belctech-ecommerce'),
+			'not_found_in_trash' => esc_html__('Nothing found in Trash','belctech-ecommerce'),
 			'parent_item_colon'  => ''
 	  );
-	  
+
 	  $args = array(
 			'labels'              => $labels,
 			'public'              => true,
@@ -88,8 +88,8 @@ class Belctech_Portfolio {
 			'with_front'          => false
 			),
 			'capability_type'     => 'post',
-	  ); 
-	  
+	  );
+
 	  register_post_type('portfolio',$args);
 
 	}

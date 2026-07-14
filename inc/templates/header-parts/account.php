@@ -2,12 +2,12 @@
 /**
  * Template part for displaying the sign-in
  *
- * @package Goya
+ * @package Belctech
  */
 
-if( ! goya_wc_active() ) {
+if( ! belctech_wc_active() ) {
 	return;
 }
 ?>
 
-<?php do_action( 'goya_get_myaccount_link', true ); ?>
+<?php do_action( 'belctech_get_myaccount_link', true ); ?>

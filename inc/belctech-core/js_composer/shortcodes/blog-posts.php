@@ -1,8 +1,8 @@
 <?php
 
 // Shortcode: et_posts
-function goya_shortcode_posts( $atts, $content = NULL ) {
-	
+function belctech_shortcode_posts( $atts, $content = NULL ) {
+
 	extract( shortcode_atts( array(
 		'num_posts'    => '8',
 		'category'     => '',
@@ -14,8 +14,8 @@ function goya_shortcode_posts( $atts, $content = NULL ) {
 		'post_excerpt' => '0',
 	), $atts ) );
 
-	$tag = apply_filters( 'goya_core_blog_posts_by_tag', $tag);
-	$category = apply_filters( 'goya_core_blog_posts_by_category', $category);
+	$tag = apply_filters( 'belctech_core_blog_posts_by_tag', $tag);
+	$category = apply_filters( 'belctech_core_blog_posts_by_category', $category);
 
 	$categories = $category ? explode(',', $category) : false;
 	$tags = $tag ? explode(',', $tag) : false;
@@ -36,14 +36,14 @@ function goya_shortcode_posts( $atts, $content = NULL ) {
 	} else if($categories) {
 		$args['cat'] = $categories;
 	}
-	
+
 	$posts = new WP_Query( $args );
 
 	$columns = intval( $columns );
 	$img_size = 'medium_large';
-	
+
 	ob_start();
-	
+
 	if ($style == "carousel") {
 
 		$classes[] = 'post';
@@ -62,12 +62,12 @@ function goya_shortcode_posts( $atts, $content = NULL ) {
 						<figure class="post-gallery">
 							<?php if ( has_post_thumbnail() ) : ?>
 								<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title(); ?>">
-									<?php goya_post_format_icon( get_the_ID() ); ?>
+									<?php belctech_post_format_icon( get_the_ID() ); ?>
 									<?php the_post_thumbnail($img_size); ?>
 								</a>
 							<?php endif; ?>
 						</figure>
-										
+
 						<div class="et-post-slider-content">
 							<?php if ( get_theme_mod('blog_category', true) == true ) the_category(); ?>
 							<header class="post-title entry-header">
@@ -76,7 +76,7 @@ function goya_shortcode_posts( $atts, $content = NULL ) {
 							<?php get_template_part( 'inc/templates/postbit/post-meta' ); ?>
 							<?php if ( $post_excerpt ) : ?>
 							<div class="post-content">
-								<?php echo goya_excerpt(100, '&hellip;'); ?>
+								<?php echo belctech_excerpt(100, '&hellip;'); ?>
 							</div>
 							<?php endif; ?>
 						</div>
@@ -88,7 +88,7 @@ function goya_shortcode_posts( $atts, $content = NULL ) {
 		endif;
 	} else { ?>
 
-		<?php 
+		<?php
 		$allowed_styles = array(
 			'grid',
 			'masonry',
@@ -113,13 +113,13 @@ function goya_shortcode_posts( $atts, $content = NULL ) {
 		</div>
 		<?php
 	}
-	
+
 	wp_reset_query();
 	unset($args);
-	
+
 	$output = ob_get_clean();
-	
+
 	return $output;
 }
 
-add_shortcode( 'et_posts', 'goya_shortcode_posts' );
+add_shortcode( 'et_posts', 'belctech_shortcode_posts' );

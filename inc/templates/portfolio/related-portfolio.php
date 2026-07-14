@@ -3,7 +3,7 @@
 
 	$p_page = get_theme_mod('portfolio_page', '');
 	$category_navigation = get_theme_mod('portfolio_navigation', true);
-	
+
 	$portfolio_layout = 'grid'; // related items only in grid mode
 
 	$columns = get_theme_mod('portfolio_columns', '4');
@@ -29,19 +29,19 @@
 	$rand = rand(0,1000);
 
 	$postId = $post->ID;
-	$query = goya_get_posts_related_by_category($postId);
+	$query = belctech_get_posts_related_by_category($postId);
 ?>
 <?php if ($query->have_posts()) : ?>
 <aside class="related-posts hide-on-print et-portfolio et-portfolio-style-regular regular-padding">
 	<div class="container">
-		<h3 class="related-title"><?php esc_html_e( 'Related Items', 'goya' ); ?></h3>
+		<h3 class="related-title"><?php esc_html_e( 'Related Items', 'belctech-ecommerce' ); ?></h3>
 		<div class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-loadmore="#loadmore-<?php echo esc_attr($rand); ?>">
 			<?php while ($query->have_posts()) : $query->the_post(); ?>
-				<?php 
-				set_query_var( 'goya_port_layout', $portfolio_layout );
-				set_query_var( 'goya_port_columns', $columns );
-				set_query_var( 'goya_port_aspect', $aspect );
-				set_query_var( 'goya_port_animation', $animation );
+				<?php
+				set_query_var( 'belctech_port_layout', $portfolio_layout );
+				set_query_var( 'belctech_port_columns', $columns );
+				set_query_var( 'belctech_port_aspect', $aspect );
+				set_query_var( 'belctech_port_animation', $animation );
 
 				get_template_part( 'inc/templates/portfolio/' . $item_style); ?>
 			<?php endwhile; ?>

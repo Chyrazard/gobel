@@ -1,8 +1,8 @@
 <?php
-	
+
 // Shortcode: et_banner
-function goya_shortcode_banner( $atts, $content = NULL ) {
-	
+function belctech_shortcode_banner( $atts, $content = NULL ) {
+
 	extract( shortcode_atts( array(
 		'layout'                     => 'full',
 		'title'                      => '',
@@ -48,10 +48,10 @@ function goya_shortcode_banner( $atts, $content = NULL ) {
 
 	$banner_class[] = $element_id;
 	$banner_class[] = 'et-banner';
-	
+
 	// Centered content class
 	$banner_class[] = 'content-' . esc_attr( $layout ) . ' ';
-	
+
 	// Image
 	$image_output = '';
 	$image_url = '';
@@ -66,11 +66,11 @@ function goya_shortcode_banner( $atts, $content = NULL ) {
 		if($image == '') {
 			$image = '<img src="'. get_template_directory_uri() . '/assets/img/placeholder.png' . '" />';
 		}
-		
+
 		if ( $image_type == 'fluid' ) {
 			$banner_class[] = 'image-type-fluid';
 			$image_output .= $image;
-			
+
 			if ( strlen( $alt_image_id ) > 0 ) {
 				$banner_class[] = 'has-alt-image';
 				$alt_image = wp_get_attachment_image($alt_image_id, $img_size,'', apply_filters('et_banner_alt_img_attributes', array('class' => 'et-banner-alt-image')));
@@ -89,10 +89,10 @@ function goya_shortcode_banner( $atts, $content = NULL ) {
 			}
 
 			$image_title = get_the_title( $image_id );
-			
+
 			$banner_class[] = 'image-type-css vh-height';
 			$image_output .= '<div class="et-banner-image" role="img" aria-label="' . esc_attr( $image_title ) . '" data-image="' . esc_url( $image_url ) . '" style="background-image: url(' . esc_url( $image_url ) . ');"></div>';
-			
+
 			if ( strlen( $alt_image_id ) > 0 ) {
 				$alt_image_title = get_the_title( $alt_image_id );
 
@@ -109,7 +109,7 @@ function goya_shortcode_banner( $atts, $content = NULL ) {
 		$banner_class[] = 'image-type-none';
 		$banner_class[] = 'image-type-css';
 	}
-	
+
 	if ( !$is_fluid == true ) {
 		$banner_height = ( $height != 'custom') ? $height . 'vh' : $custom_height;
 		$banner_height = 'height: ' . $banner_height . ';';
@@ -128,7 +128,7 @@ function goya_shortcode_banner( $atts, $content = NULL ) {
 		$animation_class = '';
 		$animation_data = '';
 	}
-	
+
 	// Text-color class
 	$banner_class[] = 'text-color-' . $text_color_scheme;
 
@@ -147,7 +147,7 @@ function goya_shortcode_banner( $atts, $content = NULL ) {
 			$content_output .= ( strlen( $subtitle ) > 0 ) ? '<' . $subtitle_tag . ' class="et-banner-subtitle  color-' . $subtitle_color . ' ' . $subtitle_type.'">' . $subtitle . '</' . $subtitle_tag . '>' : '';
 		}
 		$content_output .= ( strlen( $content ) > 0 ) ? '<div class="et-banner-paragraph">' . wpb_js_remove_wpautop( $content, true ) . '</div>' : ( ( strlen( $paragraph ) > 0 ) ? '<div class="et-banner-paragraph">' . $paragraph . '</div>' : '' );
-	
+
 	// Link
 	$banner_link_open_output = $banner_link_close_output = '';
 	$link_class = '';
@@ -156,7 +156,7 @@ function goya_shortcode_banner( $atts, $content = NULL ) {
 	if ( strlen( $link ) > 0 ) {
 		$banner_link = vc_build_link( $link );
 		$banner_link_target_attr = ( strlen( $banner_link['target'] ) > 0) ? ' target="' . $banner_link['target'] . '"' : '';
-		
+
 		if ( $link_type === 'banner_link' ) {
 			$banner_link_open_output = '<a href="' . esc_url( $banner_link['url'] ) . '" class="et-banner-link et-banner-link-full' . $link_class . '"' . $banner_link_target_attr . '>';
 			$banner_link_close_output = '</a>';
@@ -167,7 +167,7 @@ function goya_shortcode_banner( $atts, $content = NULL ) {
 
 	// Caption position
 	$text_position = explode( '-', $text_position );
-	
+
 	if ( strlen( $content_output ) > 0 ) {
 		// Content markup
 		$content_output = '
@@ -195,7 +195,7 @@ function goya_shortcode_banner( $atts, $content = NULL ) {
 		$styles .= '.'. $element_id .' .et-banner-text .et-banner-subtitle, .'. $element_id .' .et-banner-text .et-banner-subtitle.tag_style  { color: '. $subtitle_color_custom .';}';
 	}
 	if ( strlen( $subtitle_background_custom ) > 0 && $subtitle_type == 'tag_style' ) {
-		$styles .= '.'. $element_id .' .et-banner-text .et-banner-subtitle.tag_style { background-color: '. $subtitle_background_custom .'; }';	
+		$styles .= '.'. $element_id .' .et-banner-text .et-banner-subtitle.tag_style { background-color: '. $subtitle_background_custom .'; }';
 	}
 	if ( strlen( $link_color_custom ) > 0 ) {
 		$styles .= '.'. $element_id .' .et-banner-text .et-banner-link, .'. $element_id .' .et-banner-text .et-banner-link:hover { color: '. $link_color_custom .';}';
@@ -212,15 +212,15 @@ function goya_shortcode_banner( $atts, $content = NULL ) {
 			$inline_style_tag = '<style scoped>@media all and (max-width: 767px) { .'. $element_id .'.et-banner { '. $m_banner_height .'} }</style>';
 		}
 	}
-	
 
-	
+
+
 	// Text padding
 	if ( strlen( $text_padding ) > 0 ) {
 		$padding = $text_padding . ' ';
 		$padding_top = '0 ';
 		$padding_bottom = '0 ';
-		
+
 		if ( $text_position[1] === 'v_top' ) {
 			$padding_top = $padding;
 		} else if ( $text_position[1] === 'v_bottom' ) {
@@ -241,10 +241,10 @@ function goya_shortcode_banner( $atts, $content = NULL ) {
 	}
 
 	//Add inline styles
-	if (class_exists('Goya_Layout')) {
-		Goya_Layout::append_to_shortcodes_css_buffer( $styles );
+	if (class_exists('Belctech_Layout')) {
+		Belctech_Layout::append_to_shortcodes_css_buffer( $styles );
 	}
-	
+
 	// Banner markup
 	$banner_output = '
 		<div class="' . esc_attr(implode(' ', $banner_class)) . '" ' . $inline_style . '>' .
@@ -254,8 +254,8 @@ function goya_shortcode_banner( $atts, $content = NULL ) {
 				$content_output .
 			$banner_link_close_output . '
 		</div>';
-	
+
 	return $banner_output;
 }
 
-add_shortcode( 'et_banner', 'goya_shortcode_banner' );
+add_shortcode( 'et_banner', 'belctech_shortcode_banner' );

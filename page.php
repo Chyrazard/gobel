@@ -9,17 +9,17 @@
  *
  * @link    https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package Goya
+ * @package Belctech
  */
 
 	$post = get_post();
 	$vc = class_exists('WPBakeryVisualComposerAbstract');
 	$vc_enabled =  $post && preg_match( '/vc_row/', $post->post_content );
-	
-	$header_layout = get_post_meta(get_queried_object_id(), 'goya_page_header_layout', true);
-	$title_style = get_post_meta(get_the_ID(), 'goya_page_title_style', true);
-	$featured_image = get_post_meta(get_the_ID(), 'goya_page_hero_featured_image', true);
-	$sidebar_status = get_post_meta(get_queried_object_id(), 'goya_page_sidebar_position', true);
+
+	$header_layout = get_post_meta(get_queried_object_id(), 'belctech_page_header_layout', true);
+	$title_style = get_post_meta(get_the_ID(), 'belctech_page_title_style', true);
+	$featured_image = get_post_meta(get_the_ID(), 'belctech_page_hero_featured_image', true);
+	$sidebar_status = get_post_meta(get_queried_object_id(), 'belctech_page_sidebar_position', true);
 	if (empty($sidebar_status)) {
 		$sidebar_status = 'disable';
 	}
@@ -30,7 +30,7 @@
 
 	if ($title_style ==  'hero') {
 		$classes[] = 'hero-header';
-		
+
 		$title_class[] = 'hero-title';
 
 		if ($featured_image) {
@@ -43,7 +43,7 @@
 			$title_class[] = 'vh-height';
 
 				$image_id = get_post_thumbnail_id();
-				$image_url = wp_get_attachment_image_src($image_id, 'full'); 
+				$image_url = wp_get_attachment_image_src($image_id, 'full');
 
 				$inline_bg = 'background-image: url('. $image_url[0] .')';
 			}
@@ -53,29 +53,29 @@
 	} else {
 		$title_class[] = 'regular-title';
 	}
-	
+
 	$classes[] = ($enable_pagepadding || $title_style == 'hero' ) ? 'page-transparent' :  'page-padding';
 
 ?>
 <?php get_header(); ?>
 
 <?php if (have_posts()) :  while (have_posts()) : the_post(); ?>
-	
+
 	<?php
-	 
+
 	 // WooCommerce pages
-	 if (goya_is_woocommerce()){
-	 	
-	 	// Hero title
-	 	$header_bg = get_theme_mod('shop_hero_title', 'none');
-	 	$header_class[] = 'hero-header';
-	 	$title_class_woo = ( $header_bg == 'all-hero' ) ? 'hero-title' : 'regular-title';
+	 if (belctech_is_woocommerce()){
 
-	 	if ($header_bg != 'all-hero') {
-	 		$header_class[] = 'page-padding';
-	 	}
+		// Hero title
+		$header_bg = get_theme_mod('shop_hero_title', 'none');
+		$header_class[] = 'hero-header';
+		$title_class_woo = ( $header_bg == 'all-hero' ) ? 'hero-title' : 'regular-title';
 
-	 	?>
+		if ($header_bg != 'all-hero') {
+			$header_class[] = 'page-padding';
+		}
+
+		?>
 		<div <?php post_class($header_class); ?>>
 			<div class="<?php echo esc_attr($title_class_woo); ?>" style="<?php echo esc_attr($inline_bg); ?>">
 				<div class="container hero-header-container">
@@ -112,7 +112,7 @@
 					</header>
 				</div>
 			<?php } ?>
-			
+
 			<?php if ($vc && $vc_enabled && ( !is_active_sidebar( 'page' ) || $sidebar_status == 'disable' ) ) { ?>
 				<?php the_content();?>
 			<?php } else { ?>
@@ -130,7 +130,7 @@
 							<?php
 							wp_link_pages(
 								array(
-									'before'      => '<nav class="post-nav-links bg-light-background" aria-label="' . esc_attr__( 'Page', 'goya' ) . '"><span class="label">' . esc_html__( 'Pages:', 'goya' ) . '</span>',
+									'before'      => '<nav class="post-nav-links bg-light-background" aria-label="' . esc_attr__( 'Page', 'belctech-ecommerce' ) . '"><span class="label">' . esc_html__( 'Pages:', 'belctech-ecommerce' ) . '</span>',
 									'after'       => '</nav>',
 									'link_before' => '<span class="page-number">',
 									'link_after'  => '</span>',

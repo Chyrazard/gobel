@@ -1,33 +1,33 @@
-<?php 
+<?php
 
 // VC element: et_counter
 
 vc_map( array(
-	'name' => esc_html__('Counter', 'goya-core' ),
+	'name' => esc_html__('Counter', 'belctech-ecommerce' ),
 	'base' => 'et_counter',
 	'icon' => 'et_counter',
-	'category' => esc_html__('Goya', 'goya-core' ),
+	'category' => esc_html__('Belctech', 'belctech-ecommerce' ),
 	'params' => array(
 		array(
 			'type' => 'dropdown',
-			'heading' => esc_html__('Style', 'goya-core' ),
+			'heading' => esc_html__('Style', 'belctech-ecommerce' ),
 			'param_name' => 'style',
 			'std' => 'counter-top',
 			'value' => array(
-				__( 'Counter Top', 'goya-core' ) => 'counter-top',
-				__( 'Counter Bottom', 'goya-core' ) => 'counter-bottom',
-				__( 'Counter Left', 'goya-core' ) => 'counter-left',
-				__( 'Counter Right', 'goya-core' ) => 'counter-right',
+				__( 'Counter Top', 'belctech-ecommerce' ) => 'counter-top',
+				__( 'Counter Bottom', 'belctech-ecommerce' ) => 'counter-bottom',
+				__( 'Counter Left', 'belctech-ecommerce' ) => 'counter-left',
+				__( 'Counter Right', 'belctech-ecommerce' ) => 'counter-right',
 			)
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __('Icon Type', 'goya-core' ),
+			'heading' => __('Icon Type', 'belctech-ecommerce' ),
 			'param_name' => 'icon_type',
-			'description' => __( 'Select icon type.', 'goya-core' ),
+			'description' => __( 'Select icon type.', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Font Icon', 'goya-core' ) => 'icon',
-				__( 'Image', 'goya-core' ) => 'image_id'
+				__( 'Font Icon', 'belctech-ecommerce' ) => 'icon',
+				__( 'Image', 'belctech-ecommerce' ) => 'image_id'
 			),
 			'std' => 'icon',
 			'dependency' => array(
@@ -36,14 +36,14 @@ vc_map( array(
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Icon library', 'goya-core' ),
+			'heading' => __( 'Icon library', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Pixeden 7 Stroke', 'goya-core' ) => 'pixeden',
-				__( 'Font Awesome', 'goya-core' ) => 'fontawesome',
+				__( 'Pixeden 7 Stroke', 'belctech-ecommerce' ) => 'pixeden',
+				__( 'Font Awesome', 'belctech-ecommerce' ) => 'fontawesome',
 			),
 			'admin_label' => true,
 			'param_name' => 'icon_library',
-			'description' => __( 'Select icon library.', 'goya-core' ),
+			'description' => __( 'Select icon library.', 'belctech-ecommerce' ),
 			'std' => 'pixeden',
 			'dependency' => array(
 				'element' => 'icon_type',
@@ -52,9 +52,9 @@ vc_map( array(
 		),
 		array(
 			'type' => 'iconpicker',
-			'heading' => __( 'Icon', 'goya-core' ),
+			'heading' => __( 'Icon', 'belctech-ecommerce' ),
 			'param_name' => 'icon_pixeden',
-			'description' => __( 'Select icon from library.', 'goya-core' ),
+			'description' => __( 'Select icon from library.', 'belctech-ecommerce' ),
 			'value' => 'pe-7s-close',
 			'settings' => array(
 				'type' => 'pixeden',
@@ -68,7 +68,7 @@ vc_map( array(
 		),
 		array(
 			'type' => 'iconpicker',
-			'heading' => __( 'Icon', 'goya-core' ),
+			'heading' => __( 'Icon', 'belctech-ecommerce' ),
 			'param_name' => 'icon_fontawesome',
 			'value' => 'fa fa-adjust',
 			'settings' => array(
@@ -79,13 +79,13 @@ vc_map( array(
 				'element' => 'icon_library',
 				'value' => 'fontawesome',
 			),
-			'description' => __( 'Select icon from library.', 'goya-core' ),
+			'description' => __( 'Select icon from library.', 'belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'attach_image',
-			'heading' => __( 'Image', 'goya-core' ),
+			'heading' => __( 'Image', 'belctech-ecommerce' ),
 			'param_name' => 'image_id',
-			'description' => __( 'Select image from the media library.', 'goya-core' ),
+			'description' => __( 'Select image from the media library.', 'belctech-ecommerce' ),
 			'dependency' => array(
 				'element' => 'icon_type',
 				'value' => array( 'image_id' )
@@ -93,12 +93,12 @@ vc_map( array(
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Image Style', 'goya-core' ),
+			'heading' => __( 'Image Style', 'belctech-ecommerce' ),
 			'param_name' => 'image_style',
-			'description' => __( 'Select an image style.', 'goya-core' ),
+			'description' => __( 'Select an image style.', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Default', 'goya-core' ) => 'default',
-				__( 'Rounded', 'goya-core' ) => 'rounded'
+				__( 'Default', 'belctech-ecommerce' ) => 'default',
+				__( 'Rounded', 'belctech-ecommerce' ) => 'rounded'
 			),
 			'std' => 'default',
 			'dependency' => array(
@@ -108,113 +108,113 @@ vc_map( array(
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => esc_html__('Image Width', 'goya-core' ),
+			'heading' => esc_html__('Image Width', 'belctech-ecommerce' ),
 			'param_name' => 'icon_image_width',
-			'description' => esc_html__( 'If you are using an image, you can set custom width here. Default is 64 (pixels).', 'goya-core' ),
+			'description' => esc_html__( 'If you are using an image, you can set custom width here. Default is 64 (pixels).', 'belctech-ecommerce' ),
 			'dependency' => array(
 				'element' => 'icon_type',
 				'value' => array( 'image_id' )),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Counter Color', 'goya-core' ),
+			'heading' => __( 'Counter Color', 'belctech-ecommerce' ),
 			'param_name' => 'counter_color',
 			'value' => array(
-				__( 'Default', 'goya-core' ) => '',
-        __( 'Dark', 'goya-core' ) => 'dark',
-        __( 'Light', 'goya-core' ) => 'light',
-        __( 'Accent Color', 'goya-core' ) => 'accent',
-        __( 'Custom', 'goya-core' ) => 'custom'
+				__( 'Default', 'belctech-ecommerce' ) => '',
+        __( 'Dark', 'belctech-ecommerce' ) => 'dark',
+        __( 'Light', 'belctech-ecommerce' ) => 'light',
+        __( 'Accent Color', 'belctech-ecommerce' ) => 'accent',
+        __( 'Custom', 'belctech-ecommerce' ) => 'custom'
 			),
 			'std' => '',
-			'group' => __( 'Styling','goya-core' ),
+			'group' => __( 'Styling','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'colorpicker',
-			'heading' => esc_html__('Counter Custom Color', 'goya-core' ),
+			'heading' => esc_html__('Counter Custom Color', 'belctech-ecommerce' ),
 			'param_name' => 'counter_color_custom',
 			'dependency' => array(
 				'element' => 'counter_color',
 				'value' => array( 'custom' )
 			),
-			'group' => __( 'Styling','goya-core' ),
+			'group' => __( 'Styling','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Icon Color', 'goya-core' ),
+			'heading' => __( 'Icon Color', 'belctech-ecommerce' ),
 			'param_name' => 'icon_color',
 			'value' => array(
-				__( 'Default', 'goya-core' ) => '',
-        __( 'Dark', 'goya-core' ) => 'dark',
-        __( 'Light', 'goya-core' ) => 'light',
-        __( 'Accent Color', 'goya-core' ) => 'accent',
-        __( 'Custom', 'goya-core' ) => 'custom'
+				__( 'Default', 'belctech-ecommerce' ) => '',
+        __( 'Dark', 'belctech-ecommerce' ) => 'dark',
+        __( 'Light', 'belctech-ecommerce' ) => 'light',
+        __( 'Accent Color', 'belctech-ecommerce' ) => 'accent',
+        __( 'Custom', 'belctech-ecommerce' ) => 'custom'
 			),
 			'dependency' => array(
 				'element' => 'icon_type',
 				'value' => array('icon')
 			),
 			'std' => '',
-			'group' => __( 'Styling','goya-core' ),
+			'group' => __( 'Styling','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'colorpicker',
-			'heading' => esc_html__('Icon Custom Color', 'goya-core' ),
+			'heading' => esc_html__('Icon Custom Color', 'belctech-ecommerce' ),
 			'param_name' => 'icon_color_custom',
 			'dependency' => array(
 				'element' => 'icon_color',
 				'value' => array( 'custom' )
 			),
-			'group' => __( 'Styling','goya-core' ),
+			'group' => __( 'Styling','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Text Color', 'goya-core' ),
+			'heading' => __( 'Text Color', 'belctech-ecommerce' ),
 			'param_name' => 'text_color',
 			'value' => array(
-				__( 'Default', 'goya-core' ) => '',
-        __( 'Dark', 'goya-core' ) => 'dark',
-        __( 'Light', 'goya-core' ) => 'light',
-        __( 'Custom', 'goya-core' ) => 'custom'
+				__( 'Default', 'belctech-ecommerce' ) => '',
+        __( 'Dark', 'belctech-ecommerce' ) => 'dark',
+        __( 'Light', 'belctech-ecommerce' ) => 'light',
+        __( 'Custom', 'belctech-ecommerce' ) => 'custom'
 			),
 			'std' => '',
-			'group' => __( 'Styling','goya-core' ),
+			'group' => __( 'Styling','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'colorpicker',
-			'heading' => esc_html__('Text Custom Color', 'goya-core' ),
+			'heading' => esc_html__('Text Custom Color', 'belctech-ecommerce' ),
 			'param_name' => 'text_color_custom',
 			'dependency' => array(
 				'element' => 'text_color',
 				'value' => array( 'custom' )
 			),
-			'group' => __( 'Styling','goya-core' ),
+			'group' => __( 'Styling','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => esc_html__('Number to Count', 'goya-core' ),
+			'heading' => esc_html__('Number to Count', 'belctech-ecommerce' ),
 			'param_name' => 'counter',
 			'admin_label' => true
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => esc_html__('Speed of the counter animation', 'goya-core' ),
+			'heading' => esc_html__('Speed of the counter animation', 'belctech-ecommerce' ),
 			'param_name' => 'speed',
 			'value' => '2000',
-			'description' => esc_html__('Speed of the counter animation, default 1500', 'goya-core' ),
+			'description' => esc_html__('Speed of the counter animation, default 1500', 'belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => esc_html__('Title', 'goya-core' ),
+			'heading' => esc_html__('Title', 'belctech-ecommerce' ),
 			'param_name' => 'title',
 			'admin_label' => true
 		),
 		array(
 			'type' => 'textarea',
-			'heading' => esc_html__( 'Description', 'goya-core' ),
+			'heading' => esc_html__( 'Description', 'belctech-ecommerce' ),
 			'param_name' => 'description',
-			'description' => esc_html__( 'Include a small description for this counter', 'goya-core' ),
+			'description' => esc_html__( 'Include a small description for this counter', 'belctech-ecommerce' ),
 		),
 	),
-	'description' => esc_html__('Counters with icons', 'goya-core' )
+	'description' => esc_html__('Counters with icons', 'belctech-ecommerce' )
 ) );

@@ -2,8 +2,8 @@
 /**
  * Template part for displaying the search icon
  *
- * @package Goya
+ * @package Belctech
  */
 ?>
 
-<?php do_action( 'goya_quick_search_button' ); ?>
+<?php do_action( 'belctech_quick_search_button' ); ?>

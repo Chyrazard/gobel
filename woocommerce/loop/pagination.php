@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$shop_infinite_load = goya_meta_config('shop','infinite_load','button');
+$shop_infinite_load = belctech_meta_config('shop','infinite_load','button');
 $infload = false;
 $infload_class = '';
 
@@ -59,4 +59,4 @@ if ( $total <= 1 ) {
 	?>
 </nav>
 
-<?php goya_shop_infinite_load_button(); ?>
+<?php belctech_shop_infinite_load_button(); ?>

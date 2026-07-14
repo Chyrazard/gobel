@@ -1,4 +1,4 @@
-<?php function goya_shortcode_image_slider( $atts, $content = null ) {
+<?php function belctech_shortcode_image_slider( $atts, $content = null ) {
 
 	extract( shortcode_atts( array(
 		'images'			=> '',
@@ -23,7 +23,7 @@
 	$element_id = 'et-image-slider-' . mt_rand(10, 999);
 
 	$img_size = ($img_size === '' ? 'full' : $img_size);
-	
+
 	$classes[] = 'et-image-slider';
 	$classes[] = 'slick';
 	$classes[] = 'slick-slider';
@@ -47,12 +47,12 @@
 	if ($columns < $columns_mobile ) {
 		$columns_mobile = $columns;
 	}
-	
+
 	?>
 	<div id="<?php echo esc_attr($element_id); ?>" class="<?php echo esc_attr(implode(' ', $classes)); ?>" data-adaptive-height="false" variable-width="true" data-pagination="<?php echo esc_attr($pagination); ?>" data-navigation="<?php echo esc_attr($arrows); ?>" data-center="<?php echo esc_attr($center); ?>" data-fade="<?php echo esc_attr($fade); ?>" data-columns="<?php echo esc_attr($columns); ?>" data-mobile-columns="<?php echo $columns_mobile; ?>" data-infinite="<?php echo esc_attr($infinite); ?>" data-autoplay="<?php echo esc_attr($autoplay); ?>" data-autoplay-speed="<?php echo esc_attr($autoplay_speed); ?>" data-pause="<?php echo esc_attr($pause); ?>">
 		<?php
 			foreach ($images as $image) {
-				
+
 				$img_id = preg_replace('/[^\d]/', '', $image);
 				$image_post = get_post($img_id);
 
@@ -68,7 +68,7 @@
 					'thumb_size' => strtolower( $img_size ),
 					'class' => 'et_image_slider-img',
 				) );
-				
+
 				if ( !empty($img) ) { ?>
 
 					<div class="gallery-item">
@@ -84,9 +84,9 @@
 							</div>
 						<?php if($lightbox != 'no') { ?></a><?php } ?>
 					</div>
-				
+
 				<?php }
-			
+
 			} // foreach
 		?>
 	</div>
@@ -94,4 +94,4 @@
 	$out = ob_get_clean();
 	return $out;
 }
-add_shortcode('et_image_slider', 'goya_shortcode_image_slider');
+add_shortcode('et_image_slider', 'belctech_shortcode_image_slider');

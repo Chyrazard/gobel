@@ -1,4 +1,4 @@
-<?php function goya_shortcode_testimonial( $atts, $content = null ) {
+<?php function belctech_shortcode_testimonial( $atts, $content = null ) {
 
 	extract( shortcode_atts( array(
 		'quote'		=> '',
@@ -11,12 +11,12 @@
 
 	// Image
 	$image_class = '';
-	
+
 	if ( strlen( $author_image ) > 0 ) { $image_class = ' has-image'; }
 
 	$out ='';
 	ob_start();
-	
+
 	?>
 	<div class="et-testimonial <?php echo esc_attr( $image_class ); ?>">
 		<?php if ( strlen( $show_stars ) > 0 && class_exists( 'woocommerce' ) ) {
@@ -37,4 +37,4 @@
 	return $out;
 }
 
-add_shortcode('et_testimonial', 'goya_shortcode_testimonial');
+add_shortcode('et_testimonial', 'belctech_shortcode_testimonial');

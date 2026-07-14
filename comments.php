@@ -20,9 +20,9 @@ if ( $comments ) {
 					<h4 class="comments-title">
 						<?php
 							if ( ! have_comments() ) {
-								_e( 'Leave a comment', 'goya' );
+								_e( 'Leave a comment', 'belctech-ecommerce' );
 							} else {
-								printf(_nx('%1$s reply on &ldquo;%2$s&rdquo;', '%1$s replies on &ldquo;%2$s&rdquo;', $comments_number, 'comments title', 'goya'),
+								printf(_nx('%1$s reply on &ldquo;%2$s&rdquo;', '%1$s replies on &ldquo;%2$s&rdquo;', $comments_number, 'comments title', 'belctech-ecommerce'),
 									number_format_i18n( $comments_number ),
 									get_the_title()
 								);
@@ -30,18 +30,18 @@ if ( $comments ) {
 
 							?>
 					</h4>
-						
+
 					<ul class="commentlist cf">
 						<?php wp_list_comments(
 							array(
-								'type'		  	=> 'all',
+								'type'			=> 'all',
 								'style'       => 'ul',
 								'short_ping'  => true,
 								'avatar_size' => 60,
 							)
 						); ?>
 					</ul>
-					
+
 					<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
 						<div class="navigation">
 							<div class="nav-previous"><?php previous_comments_link(); ?></div>
@@ -59,8 +59,8 @@ if ( comments_open() || pings_open() ) { ?>
 
 	<div class="respond-container">
 		<div class="container">
-			<?php 
-			comment_form( array( 
+			<?php
+			comment_form( array(
 				'comment_notes_after' => ''
 			) );
 			?>
@@ -71,7 +71,7 @@ if ( comments_open() || pings_open() ) { ?>
 
 	<div class="respond-container">
 		<div class="container">
-			<p class="comments-closed"><?php _e( 'Comments are closed', 'goya' ); ?></p>
+			<p class="comments-closed"><?php _e( 'Comments are closed', 'belctech-ecommerce' ); ?></p>
 		</div>
 	</div>
 

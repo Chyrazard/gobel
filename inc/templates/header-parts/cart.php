@@ -2,11 +2,11 @@
 /**
  * Template part for displaying the cart icon
  *
- * @package Goya
+ * @package Belctech
  */
-if( ! goya_wc_active() ) {
+if( ! belctech_wc_active() ) {
 	return;
 }
 ?>
 
-<?php do_action( 'goya_quick_cart' ); ?>
+<?php do_action( 'belctech_quick_cart' ); ?>

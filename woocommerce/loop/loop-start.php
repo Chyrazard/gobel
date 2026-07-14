@@ -10,7 +10,7 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see 	    https://docs.woocommerce.com/document/template-structure/
+ * @see	    https://docs.woocommerce.com/document/template-structure/
  * @package     WooCommerce\Templates
  * @version     3.3.0
  */
@@ -31,19 +31,19 @@ if ( (is_shop() || is_tax()) && isset( $_GET['product_style'] ) ) {
 }
 
 // Hover image
-$item_hover_img = goya_meta_config('shop','product_img_hover',true);
+$item_hover_img = belctech_meta_config('shop','product_img_hover',true);
 
 // Hover animation
-$item_hover_animation = goya_meta_config('shop','product_animation_hover','zoom-jump');
+$item_hover_animation = belctech_meta_config('shop','product_animation_hover','zoom-jump');
 
 // Loading animation
-$item_animation = goya_meta_config('shop','product_animation','animation bottom-to-top');
+$item_animation = belctech_meta_config('shop','product_animation','animation bottom-to-top');
 
 // Quick view
 $item_quickview = get_theme_mod('product_quickview', true);
 
 // Skip lazyload
-if ( apply_filters('goya_do_lazyload', get_theme_mod('lazy_load',false)) == true ) {
+if ( apply_filters('belctech_do_lazyload', get_theme_mod('lazy_load',false)) == true ) {
 	$item_skip_lazy = get_theme_mod('lazy_load_skip', 6);
 } else {
 	$item_skip_lazy = 0;
@@ -78,11 +78,11 @@ if ( ( get_theme_mod('archive_swatches_position', 'bottom') == 'side') && ( $ite
 
 // Masonry
 $item_masonry = apply_filters('shop_masonry_layout', ''); // deprecated
-$item_masonry = apply_filters('goya_shop_masonry_layout', $item_masonry);
+$item_masonry = apply_filters('belctech_shop_masonry_layout', $item_masonry);
 
 if (!empty($item_masonry && !is_product()) ) {
 	$classes[] = $item_masonry;
-	//set_query_var( 'goya_masonry_list', $item_masonry );
+	//set_query_var( 'belctech_masonry_list', $item_masonry );
 }
 
 if ( isset($woocommerce_loop['shop_archive']) && $woocommerce_loop['shop_archive'] == true ) {
@@ -101,14 +101,14 @@ $columns_mobile = get_theme_mod('shop_columns_mobile', 2);
 
 
 // Set query vars
-set_query_var( 'goya_product_style', $item_style );
-set_query_var( 'goya_product_animation', $item_animation );
-set_query_var( 'goya_product_hover_image', $item_hover_img );
-set_query_var( 'goya_product_quickview', $item_quickview );
-set_query_var( 'goya_product_skip_lazy', $item_skip_lazy );
-set_query_var( 'goya_product_columns_large', $columns_large );
-set_query_var( 'goya_product_columns_mobile', $columns_mobile );
-set_query_var( 'goya_is_shortcode', false );
+set_query_var( 'belctech_product_style', $item_style );
+set_query_var( 'belctech_product_animation', $item_animation );
+set_query_var( 'belctech_product_hover_image', $item_hover_img );
+set_query_var( 'belctech_product_quickview', $item_quickview );
+set_query_var( 'belctech_product_skip_lazy', $item_skip_lazy );
+set_query_var( 'belctech_product_columns_large', $columns_large );
+set_query_var( 'belctech_product_columns_mobile', $columns_mobile );
+set_query_var( 'belctech_is_shortcode', false );
 
 ?>
 

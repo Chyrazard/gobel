@@ -1,52 +1,52 @@
 <?php
-	
+
 // VC element: et_banner
 vc_map( array(
-	'name' => __( 'Banner', 'goya-core' ),
-	'description' => __( 'Responsive banner', 'goya-core' ),
+	'name' => __( 'Banner', 'belctech-ecommerce' ),
+	'description' => __( 'Responsive banner', 'belctech-ecommerce' ),
 	'base' => 'et_banner',
 	'icon' => 'et_banner',
-	'category' => esc_html__('Goya', 'goya-core'),
+	'category' => esc_html__('Belctech', 'belctech-ecommerce'),
 	'params' => array(
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Content Layout', 'goya-core' ),
+			'heading' => __( 'Content Layout', 'belctech-ecommerce' ),
 			'param_name' => 'layout',
-			'description' => __( 'Select content layout. "Inherit" matches the site global container width', 'goya-core' ),
+			'description' => __( 'Select content layout. "Inherit" matches the site global container width', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Full Width', 'goya-core' ) => 'full',
-				__( 'Inherit', 'goya-core' ) => 'boxed',
+				__( 'Full Width', 'belctech-ecommerce' ) => 'full',
+				__( 'Inherit', 'belctech-ecommerce' ) => 'boxed',
 			),
 			'std' => 'full',
 		),
 		array(
 			'type' => 'attach_image',
-			'heading' => __( 'Image', 'goya-core' ),
+			'heading' => __( 'Image', 'belctech-ecommerce' ),
 			'param_name' => 'image_id',
-			'description' => __( 'Add a banner image.', 'goya-core' )
+			'description' => __( 'Add a banner image.', 'belctech-ecommerce' )
 		),
 		array(
 			'type'      => 'attach_image',
-			'heading'     => __( 'Image - Tablet/Mobile', 'goya-core' ),
+			'heading'     => __( 'Image - Tablet/Mobile', 'belctech-ecommerce' ),
 			'param_name'  => 'alt_image_id',
-			'description'   => __( 'Set an optional banner image to display on smaller screens (max-width: 767px).', 'goya-core' )
+			'description'   => __( 'Set an optional banner image to display on smaller screens (max-width: 767px).', 'belctech-ecommerce' )
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Image Type', 'goya-core' ),
+			'heading' => __( 'Image Type', 'belctech-ecommerce' ),
 			'param_name' => 'image_type',
-			'description' => __( '1. Responsive: the image size determines the banner height. 2) Background image: you can set your preferred height.', 'goya-core' ),
+			'description' => __( '1. Responsive: the image size determines the banner height. 2) Background image: you can set your preferred height.', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Responsive Image', 'goya-core' ) => 'fluid',
-				__( 'CSS Background Image', 'goya-core' ) => 'css'
+				__( 'Responsive Image', 'belctech-ecommerce' ) => 'fluid',
+				__( 'CSS Background Image', 'belctech-ecommerce' ) => 'css'
 			),
 			'std' => 'fluid'
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Banner Height', 'goya-core' ),
+			'heading' => __( 'Banner Height', 'belctech-ecommerce' ),
 			'param_name' => 'height',
-			'description' => __( 'Proportional to screen height', 'goya-core' ),
+			'description' => __( 'Proportional to screen height', 'belctech-ecommerce' ),
 			'value' => array(
 				'10%' => '10',
 				'20%' => '20',
@@ -58,34 +58,34 @@ vc_map( array(
 				'80%' => '80',
 				'90%' => '90',
 				'100%' => '100',
-				__( 'Custom Height', 'goya-core' ) => 'custom',
+				__( 'Custom Height', 'belctech-ecommerce' ) => 'custom',
 			),
 			'std' => '50',
 			'dependency' => array(
 				'element' => 'image_type',
 				'value' => array( 'css' )
 			),
-			'group' => __( 'Size','goya-core' ),
+			'group' => __( 'Size','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => __( 'Custom Banner Height', 'goya-core' ),
+			'heading' => __( 'Custom Banner Height', 'belctech-ecommerce' ),
 			'param_name' => 'custom_height',
-			'description' => __( 'Enter banner height with unit (eg. 300px).', 'goya-core' ),
+			'description' => __( 'Enter banner height with unit (eg. 300px).', 'belctech-ecommerce' ),
 			'dependency' => array(
 				'element' => 'height',
 				'value' => array( 'custom' )
 			),
-			'group' => __( 'Size','goya-core' ),
+			'group' => __( 'Size','belctech-ecommerce' ),
 		),
 
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Banner Height  - Mobiles', 'goya-core' ),
+			'heading' => __( 'Banner Height  - Mobiles', 'belctech-ecommerce' ),
 			'param_name' => 'height_mobile',
-			'description' => __( 'Proportional to screen height', 'goya-core' ),
+			'description' => __( 'Proportional to screen height', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Same as desktop', 'goya-core' ) => '',
+				__( 'Same as desktop', 'belctech-ecommerce' ) => '',
 				'10%' => '10',
 				'20%' => '20',
 				'30%' => '30',
@@ -96,73 +96,73 @@ vc_map( array(
 				'80%' => '80',
 				'90%' => '90',
 				'100%' => '100',
-				__( 'Custom Height', 'goya-core' ) => 'custom',
+				__( 'Custom Height', 'belctech-ecommerce' ) => 'custom',
 			),
 			'std' => '',
 			'dependency' => array(
 				'element' => 'image_type',
 				'value' => array( 'css' )
 			),
-			'group' => __( 'Size','goya-core' ),
+			'group' => __( 'Size','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => __( 'Custom Banner Height - Mobiles', 'goya-core' ),
+			'heading' => __( 'Custom Banner Height - Mobiles', 'belctech-ecommerce' ),
 			'param_name' => 'custom_height_mobile',
-			'description' => __( 'Enter banner height with unit (eg. 300px).', 'goya-core' ),
+			'description' => __( 'Enter banner height with unit (eg. 300px).', 'belctech-ecommerce' ),
 			'dependency' => array(
 				'element' => 'height_mobile',
 				'value' => array( 'custom' )
 			),
-			'group' => __( 'Size','goya-core' ),
+			'group' => __( 'Size','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => esc_html__('Image size', 'goya-core'),
+			'heading' => esc_html__('Image size', 'belctech-ecommerce'),
 			'param_name' => 'img_size',
-			'description' => esc_html__('Enter image size. Example: thumbnail, medium, large, full or other sizes defined by current theme. Leave empty to use "full" image size.', 'goya-core'),
-			'group' => __( 'Size','goya-core' ),
+			'description' => esc_html__('Enter image size. Example: thumbnail, medium, large, full or other sizes defined by current theme. Leave empty to use "full" image size.', 'belctech-ecommerce'),
+			'group' => __( 'Size','belctech-ecommerce' ),
 		),
 		array(
 		  'type' => 'textfield',
-		  'heading' => esc_html__('"Sizes" attribute', 'goya-core'),
+		  'heading' => esc_html__('"Sizes" attribute', 'belctech-ecommerce'),
 		  'param_name' => 'img_sizes',
-		  'description' => esc_html__('Enter image \'sizes\' attribute for responsive image loading. Leave empty if unsure.', 'goya-core'),
-		  'group' => __( 'Size','goya-core' ),
+		  'description' => esc_html__('Enter image \'sizes\' attribute for responsive image loading. Leave empty if unsure.', 'belctech-ecommerce'),
+		  'group' => __( 'Size','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Default Color Scheme', 'goya-core' ),
+			'heading' => __( 'Default Color Scheme', 'belctech-ecommerce' ),
 			'param_name' => 'text_color_scheme',
-			'description' => __( 'This is the Default banner text color. You can override the color of each element.', 'goya-core' ),
+			'description' => __( 'This is the Default banner text color. You can override the color of each element.', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Dark', 'goya-core' ) => 'dark',
-				__( 'Light', 'goya-core' ) => 'light'
+				__( 'Dark', 'belctech-ecommerce' ) => 'dark',
+				__( 'Light', 'belctech-ecommerce' ) => 'light'
 			),
 			'std' => 'dark',
 		),
 		array(
 			'type' => 'colorpicker',
-			'heading' => __( 'Banner Background', 'goya-core' ),
+			'heading' => __( 'Banner Background', 'belctech-ecommerce' ),
 			'param_name' => 'background_color',
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Hover Effect', 'goya-core' ),
+			'heading' => __( 'Hover Effect', 'belctech-ecommerce' ),
 			'param_name' => 'hover_effect',
-			'description' => __( 'Animation on hover.', 'goya-core' ),
+			'description' => __( 'Animation on hover.', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'None', 'goya-core' ) => '',
-				__( 'Border', 'goya-core' ) => 'hover-border',
-				__( 'Zoom', 'goya-core' ) => 'hover-zoom',
-				__( 'Border & Zoom', 'goya-core' ) => 'hover-border hover-zoom'
+				__( 'None', 'belctech-ecommerce' ) => '',
+				__( 'Border', 'belctech-ecommerce' ) => 'hover-border',
+				__( 'Zoom', 'belctech-ecommerce' ) => 'hover-zoom',
+				__( 'Border & Zoom', 'belctech-ecommerce' ) => 'hover-border hover-zoom'
 			),
 		),
 		array(
 			'type' => 'colorpicker',
-			'heading' => __( 'Hover Border Color', 'goya-core' ),
+			'heading' => __( 'Hover Border Color', 'belctech-ecommerce' ),
 			'param_name' => 'border_color',
-			'description' => __( 'Border color used on hover effect.', 'goya-core' ),
+			'description' => __( 'Border color used on hover effect.', 'belctech-ecommerce' ),
 			'dependency' => array(
 				'element' => 'hover_effect',
 				'value' => array( 'hover-border', 'hover-border hover-zoom' )
@@ -170,105 +170,105 @@ vc_map( array(
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => esc_html__('Extra Class', 'goya-core' ),
-			'description' => esc_html__('Add a class for more customization', 'goya-core' ),
+			'heading' => esc_html__('Extra Class', 'belctech-ecommerce' ),
+			'description' => esc_html__('Add a class for more customization', 'belctech-ecommerce' ),
 			'param_name' => 'extra_class',
 		),
 		array(
 			'type' => 'vc_link',
-			'heading' => __( 'Link (URL)', 'goya-core' ),
+			'heading' => __( 'Link (URL)', 'belctech-ecommerce' ),
 			'param_name' => 'link',
-			'description' => __( 'Set a banner link.', 'goya-core' ),
-			'group' => __( 'Link','goya-core' ),
+			'description' => __( 'Set a banner link.', 'belctech-ecommerce' ),
+			'group' => __( 'Link','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Link Type', 'goya-core' ),
+			'heading' => __( 'Link Type', 'belctech-ecommerce' ),
 			'param_name' => 'link_type',
-			'description' => __( 'Full banner link (text/button not visible) or text/button link only', 'goya-core' ),
+			'description' => __( 'Full banner link (text/button not visible) or text/button link only', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'Banner Link', 'goya-core' ) => 'banner_link',
-				__( 'Text/Button Link', 'goya-core' ) => 'text_link'
+				__( 'Banner Link', 'belctech-ecommerce' ) => 'banner_link',
+				__( 'Text/Button Link', 'belctech-ecommerce' ) => 'text_link'
 			),
 			'std' => 'banner_link',
-			'group' => __( 'Link','goya-core' ),
+			'group' => __( 'Link','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Link Style', 'goya-core' ),
+			'heading' => __( 'Link Style', 'belctech-ecommerce' ),
 			'param_name' => 'link_style',
 			'value' => array(
-				__( 'Solid Button', 'goya-core' ) => 'solid',
-				__( 'Outlined Button', 'goya-core' ) => 'outlined',
-				__( 'Text Link', 'goya-core' ) => 'link'
+				__( 'Solid Button', 'belctech-ecommerce' ) => 'solid',
+				__( 'Outlined Button', 'belctech-ecommerce' ) => 'outlined',
+				__( 'Text Link', 'belctech-ecommerce' ) => 'link'
 			),
 			'std' => 'link_style',
 			'dependency' => array(
 				'element' => 'link_type',
 				'value' => array( 'text_link' )
 			),
-			'group' => __( 'Link','goya-core' ),
+			'group' => __( 'Link','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Text/Button Link Color', 'goya-core' ),
-			'description' => __( 'Also border color if "Outlined Button" is selected', 'goya-core' ),
+			'heading' => __( 'Text/Button Link Color', 'belctech-ecommerce' ),
+			'description' => __( 'Also border color if "Outlined Button" is selected', 'belctech-ecommerce' ),
 			'param_name' => 'link_color',
 			'value' => array(
-				__( 'Default', 'goya-core' ) => '',
-				__( 'Dark', 'goya-core' ) => 'dark',
-				__( 'Light', 'goya-core' ) => 'light',
-				__( 'Accent Color', 'goya-core' ) => 'accent',
-				__( 'Custom', 'goya-core' ) => 'custom'
+				__( 'Default', 'belctech-ecommerce' ) => '',
+				__( 'Dark', 'belctech-ecommerce' ) => 'dark',
+				__( 'Light', 'belctech-ecommerce' ) => 'light',
+				__( 'Accent Color', 'belctech-ecommerce' ) => 'accent',
+				__( 'Custom', 'belctech-ecommerce' ) => 'custom'
 			),
 			'std' => '',
-			'group' => __( 'Link','goya-core' ),
+			'group' => __( 'Link','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'colorpicker',
-			'heading' => __( 'Text/Button Link Color', 'goya-core' ),
+			'heading' => __( 'Text/Button Link Color', 'belctech-ecommerce' ),
 			'param_name' => 'link_color_custom',
 			'dependency' => array(
 				'element' => 'link_color',
 				'value' => array( 'custom' )
 			),
-			'group' => __( 'Link','goya-core' ),
+			'group' => __( 'Link','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'colorpicker',
-			'heading' => __( 'Button Background', 'goya-core' ),
+			'heading' => __( 'Button Background', 'belctech-ecommerce' ),
 			'param_name' => 'link_background_custom',
 			'dependency' => array(
 				'element' => 'link_color',
 				'value' => array( 'custom' )
 			),
-			'group' => __( 'Link','goya-core' ),
+			'group' => __( 'Link','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => __( 'Title', 'goya-core' ),
+			'heading' => __( 'Title', 'belctech-ecommerce' ),
 			'param_name' => 'title',
-			'group' => __( 'Content','goya-core' ),
+			'group' => __( 'Content','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Title Size', 'goya-core' ),
+			'heading' => __( 'Title Size', 'belctech-ecommerce' ),
 			'param_name' => 'title_size',
 			'value' => array(
-				__( 'Small', 'goya-core' ) => 'small',
-				__( 'Medium', 'goya-core' ) => 'medium',
-				__( 'Large', 'goya-core' ) => 'large',
-				__( 'X-Large', 'goya-core' ) => 'xlarge',
-				__( 'XX-Large', 'goya-core' ) => 'xxlarge',
+				__( 'Small', 'belctech-ecommerce' ) => 'small',
+				__( 'Medium', 'belctech-ecommerce' ) => 'medium',
+				__( 'Large', 'belctech-ecommerce' ) => 'large',
+				__( 'X-Large', 'belctech-ecommerce' ) => 'xlarge',
+				__( 'XX-Large', 'belctech-ecommerce' ) => 'xxlarge',
 			),
 			'std' => 'medium',
-			'group' => __( 'Content','goya-core' ),
+			'group' => __( 'Content','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Title Tag', 'goya-core' ),
+			'heading' => __( 'Title Tag', 'belctech-ecommerce' ),
 			'param_name' => 'title_tag',
-			'description' => __( 'Select a title HTML tag.', 'goya-core' ),
+			'description' => __( 'Select a title HTML tag.', 'belctech-ecommerce' ),
 			'value' => array(
 				'h1' => 'h1',
 				'h2' => 'h2',
@@ -278,55 +278,55 @@ vc_map( array(
 				'h6' => 'h6'
 			),
 			'std' => 'h2',
-			'group' => __( 'Content','goya-core' ),
+			'group' => __( 'Content','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Title Color', 'goya-core' ),
+			'heading' => __( 'Title Color', 'belctech-ecommerce' ),
 			'param_name' => 'title_color',
 			'value' => array(
-				__( 'Default', 'goya-core' ) => '',
-				__( 'Dark', 'goya-core' ) => 'dark',
-				__( 'Light', 'goya-core' ) => 'light',
-				__( 'Accent Color', 'goya-core' ) => 'accent',
-				__( 'Custom', 'goya-core' ) => 'custom'
+				__( 'Default', 'belctech-ecommerce' ) => '',
+				__( 'Dark', 'belctech-ecommerce' ) => 'dark',
+				__( 'Light', 'belctech-ecommerce' ) => 'light',
+				__( 'Accent Color', 'belctech-ecommerce' ) => 'accent',
+				__( 'Custom', 'belctech-ecommerce' ) => 'custom'
 			),
 			'std' => '',
-			'group' => __( 'Content','goya-core' ),
+			'group' => __( 'Content','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'colorpicker',
-			'heading' => __( 'Custom Title Color', 'goya-core' ),
+			'heading' => __( 'Custom Title Color', 'belctech-ecommerce' ),
 			'param_name' => 'title_color_custom',
 			'dependency' => array(
 				'element' => 'title_color',
 				'value' => array( 'custom' )
 			),
-			'group' => __( 'Content','goya-core' ),
+			'group' => __( 'Content','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => __( 'Subtitle/Label', 'goya-core' ),
+			'heading' => __( 'Subtitle/Label', 'belctech-ecommerce' ),
 			'param_name' => 'subtitle',
-			'group' => __( 'Content','goya-core' ),
+			'group' => __( 'Content','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Subtitle Type', 'goya-core' ),
+			'heading' => __( 'Subtitle Type', 'belctech-ecommerce' ),
 			'param_name' => 'subtitle_type',
-			'description' => __( 'Text only or Label style', 'goya-core' ),
-			'group' => __( 'Content','goya-core' ),
+			'description' => __( 'Text only or Label style', 'belctech-ecommerce' ),
+			'group' => __( 'Content','belctech-ecommerce' ),
 			'value' => array(
-				__( 'Text', 'goya-core' ) => 'text_style',
-				__( 'Label', 'goya-core' ) => 'tag_style'
+				__( 'Text', 'belctech-ecommerce' ) => 'text_style',
+				__( 'Label', 'belctech-ecommerce' ) => 'tag_style'
 			),
 			'std' => 'text_style'
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Subtitle Tag', 'goya-core' ),
+			'heading' => __( 'Subtitle Tag', 'belctech-ecommerce' ),
 			'param_name' => 'subtitle_tag',
-			'description' => __( 'Select a subtitle HTML tag.', 'goya-core' ),
+			'description' => __( 'Select a subtitle HTML tag.', 'belctech-ecommerce' ),
 			'value' => array(
 				'h1' => 'h1',
 				'h2' => 'h2',
@@ -338,108 +338,108 @@ vc_map( array(
 				'div'  => 'div'
 			),
 			'std' => 'h4',
-			'group' => __( 'Content','goya-core' ),
+			'group' => __( 'Content','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Subtitle/Label Color', 'goya-core' ),
+			'heading' => __( 'Subtitle/Label Color', 'belctech-ecommerce' ),
 			'param_name' => 'subtitle_color',
 			'value' => array(
-				__( 'Default', 'goya-core' ) => '',
-				__( 'Dark', 'goya-core' ) => 'dark',
-				__( 'Light', 'goya-core' ) => 'light',
-				__( 'Accent Color', 'goya-core' ) => 'accent',
-				__( 'Custom', 'goya-core' ) => 'custom'
+				__( 'Default', 'belctech-ecommerce' ) => '',
+				__( 'Dark', 'belctech-ecommerce' ) => 'dark',
+				__( 'Light', 'belctech-ecommerce' ) => 'light',
+				__( 'Accent Color', 'belctech-ecommerce' ) => 'accent',
+				__( 'Custom', 'belctech-ecommerce' ) => 'custom'
 			),
 			'std' => '',
-			'group' => __( 'Content','goya-core' ),
+			'group' => __( 'Content','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'colorpicker',
-			'heading' => __( 'Custom Subtitle/Label Color', 'goya-core' ),
+			'heading' => __( 'Custom Subtitle/Label Color', 'belctech-ecommerce' ),
 			'param_name' => 'subtitle_color_custom',
 			'dependency' => array(
 				'element' => 'subtitle_color',
 				'value' => array( 'custom' )
 			),
-			'group' => __( 'Content','goya-core' ),
+			'group' => __( 'Content','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'colorpicker',
-			'heading' => __( 'Subtitle/Label Background', 'goya-core' ),
-			'description' => __( 'Used for Label style', 'goya-core' ),
+			'heading' => __( 'Subtitle/Label Background', 'belctech-ecommerce' ),
+			'description' => __( 'Used for Label style', 'belctech-ecommerce' ),
 			'param_name' => 'subtitle_background_custom',
 			'dependency' => array(
 				'element' => 'subtitle_color',
 				'value' => array( 'custom' )
 			),
-			'group' => __( 'Content','goya-core' ),
+			'group' => __( 'Content','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'textarea_html',
-			'heading' => __( 'Extra Content', 'goya-core' ),
+			'heading' => __( 'Extra Content', 'belctech-ecommerce' ),
 			'param_name' => 'content',
-			'description' => __( 'For tablet/desktop screens only.', 'goya-core' ),
-			'group' => __( 'Content','goya-core' ),
+			'description' => __( 'For tablet/desktop screens only.', 'belctech-ecommerce' ),
+			'group' => __( 'Content','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Text Animation (Banner Slider)', 'goya-core' ),
+			'heading' => __( 'Text Animation (Banner Slider)', 'belctech-ecommerce' ),
 			'param_name' => 'text_animation',
-			'description' => __( 'Select a text animation (used by the Banner Slider).', 'goya-core' ),
+			'description' => __( 'Select a text animation (used by the Banner Slider).', 'belctech-ecommerce' ),
 			'value' => array(
-				__( 'None', 'goya-core' ) => '',
+				__( 'None', 'belctech-ecommerce' ) => '',
 				'fadeIn' => 'fadeIn',
 				'fadeInDown' => 'et-fadeInDown',
 				'fadeInLeft' => 'et-fadeInLeft',
 				'fadeInRight' => 'et-fadeInRight',
-				'fadeInUp' => 'et-fadeInUp' 
+				'fadeInUp' => 'et-fadeInUp'
 			),
-			'group' => __( 'Text Layout','goya-core' ),
+			'group' => __( 'Text Layout','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Text Position', 'goya-core' ),
+			'heading' => __( 'Text Position', 'belctech-ecommerce' ),
 			'param_name' => 'text_position',
 			'value' => array(
-				__( 'Center', 'goya-core' ) => 'h_center-v_center',
-				__( 'Top Left', 'goya-core' ) => 'h_left-v_top',
-				__( 'Top Center', 'goya-core' ) => 'h_center-v_top',
-				__( 'Top Right', 'goya-core' ) => 'h_right-v_top',
-				__( 'Center Left', 'goya-core' ) => 'h_left-v_center',
-				__( 'Center Right', 'goya-core' ) => 'h_right-v_center',
-				__( 'Bottom Left', 'goya-core' ) => 'h_left-v_bottom',
-				__( 'Bottom Center', 'goya-core' ) => 'h_center-v_bottom',
-				__( 'Bottom Right', 'goya-core' ) => 'h_right-v_bottom'
+				__( 'Center', 'belctech-ecommerce' ) => 'h_center-v_center',
+				__( 'Top Left', 'belctech-ecommerce' ) => 'h_left-v_top',
+				__( 'Top Center', 'belctech-ecommerce' ) => 'h_center-v_top',
+				__( 'Top Right', 'belctech-ecommerce' ) => 'h_right-v_top',
+				__( 'Center Left', 'belctech-ecommerce' ) => 'h_left-v_center',
+				__( 'Center Right', 'belctech-ecommerce' ) => 'h_right-v_center',
+				__( 'Bottom Left', 'belctech-ecommerce' ) => 'h_left-v_bottom',
+				__( 'Bottom Center', 'belctech-ecommerce' ) => 'h_center-v_bottom',
+				__( 'Bottom Right', 'belctech-ecommerce' ) => 'h_right-v_bottom'
 			),
 			'std' => 'h_center-v_center',
-			'group' => __( 'Text Layout','goya-core' ),
+			'group' => __( 'Text Layout','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Text Alignment', 'goya-core' ),
+			'heading' => __( 'Text Alignment', 'belctech-ecommerce' ),
 			'param_name' => 'text_alignment',
 			'value' => array(
-				__( 'Left', 'goya-core' ) => 'align_left',
-				__( 'Center', 'goya-core' ) => 'align_center',
-				__( 'Right', 'goya-core' ) => 'align_right'
+				__( 'Left', 'belctech-ecommerce' ) => 'align_left',
+				__( 'Center', 'belctech-ecommerce' ) => 'align_center',
+				__( 'Right', 'belctech-ecommerce' ) => 'align_right'
 			),
 			'std' => 'align_left',
-			'group' => __( 'Text Layout','goya-core' ),
+			'group' => __( 'Text Layout','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => __( 'Text Width', 'goya-core' ),
+			'heading' => __( 'Text Width', 'belctech-ecommerce' ),
 			'param_name' => 'text_width',
-			'description' => __( 'Default is 50%', 'goya-core' ),
-			'group' => __( 'Text Layout','goya-core' ),
+			'description' => __( 'Default is 50%', 'belctech-ecommerce' ),
+			'group' => __( 'Text Layout','belctech-ecommerce' ),
 		),
 		array(
 			'type' => 'textfield',
-			'heading' => __( 'Text Padding', 'goya-core' ),
+			'heading' => __( 'Text Padding', 'belctech-ecommerce' ),
 			'param_name' => 'text_padding',
-			'description' => __( 'Default is 15% (relative to "Text Width" value above)', 'goya-core' ),
-			'group' => __( 'Text Layout','goya-core' ),
+			'description' => __( 'Default is 15% (relative to "Text Width" value above)', 'belctech-ecommerce' ),
+			'group' => __( 'Text Layout','belctech-ecommerce' ),
 		),
 	 )
 ) );

@@ -1,4 +1,4 @@
-<?php function goya_shortcode_pricing_column( $atts, $content = null ) {
+<?php function belctech_shortcode_pricing_column( $atts, $content = null ) {
 	extract( shortcode_atts( array(
 		'highlight' => '',
 		'icon_type'				=> 'icon',
@@ -17,9 +17,9 @@
 		'price_color' => '',
 		'button_color' => '',
 	), $atts ) );
-		
+
 	$content = vc_value_from_safe( $content );
-	
+
 	$element_id = uniqid('et-pricing-column-');
 	$classes[] = $animation;
 	$classes[] = 'et-pricing-column';
@@ -46,8 +46,8 @@
 	}
 
 	//Add inline styles
-  if (class_exists('Goya_Layout')) {
-  	Goya_Layout::append_to_shortcodes_css_buffer( $styles );
+  if (class_exists('Belctech_Layout')) {
+	Belctech_Layout::append_to_shortcodes_css_buffer( $styles );
   }
 
 	$out ='';
@@ -67,7 +67,7 @@
 			}
 		}
 	} else {
-		
+
 		if ( strlen( $image_id ) > 0 ) {
 			$image_src = wp_get_attachment_image_src( $image_id, 'full' );
 
@@ -78,15 +78,15 @@
 			}
 		}
 	}
-	
+
 	/* Button */
 	$link = ( $link == '||' ) ? '' : $link;
 	$link = vc_build_link( $link  );
-	
+
 	$link_to = $link['url'];
 	$a_title = $link['title'];
-	$a_target = $link['target'] ? $link['target'] : '_self';	
-	
+	$a_target = $link['target'] ? $link['target'] : '_self';
+
 	?>
 
 	<div id="<?php echo esc_attr($element_id); ?>" class="<?php echo esc_attr(implode(' ', $classes)); ?>">
@@ -124,4 +124,4 @@
 	$out = ob_get_clean();
 	return $out;
 }
-add_shortcode('et_pricing_column', 'goya_shortcode_pricing_column');
+add_shortcode('et_pricing_column', 'belctech_shortcode_pricing_column');

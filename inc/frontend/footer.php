@@ -3,15 +3,15 @@
 /* Footer Build
 ---------------------------------------------------------- */
 
-function goya_footer_build() {
+function belctech_footer_build() {
 
 	$portfolio_footer = is_singular('portfolio') ? get_theme_mod('portfolio_footer', false) : true;
 	$post_footer = is_singular('post') ? get_theme_mod('post_footer', true) : true;
-	$page_footer = get_post_meta(get_queried_object_id(), 'goya_page_disable_footer', true);
+	$page_footer = get_post_meta(get_queried_object_id(), 'belctech_page_disable_footer', true);
 
 	$display_footer = ( $portfolio_footer && $post_footer && !$page_footer ) ? true : false;
 
-	$checkout_style = goya_meta_config('','checkout_style','free');
+	$checkout_style = belctech_meta_config('','checkout_style','free');
 
 	if ( $display_footer ) { ?>
 
@@ -33,7 +33,7 @@ function goya_footer_build() {
 		if ( $footer_middle != 'before') {
 			get_template_part( 'inc/templates/footer/footer', 'middle' );
 		}
-		
+
 		// Footer bar
 		get_template_part( 'inc/templates/footer/footer', 'bar' );
 		?>
@@ -43,19 +43,19 @@ function goya_footer_build() {
 
 }
 
-add_action( 'goya_footer', 'goya_footer_build' );
+add_action( 'belctech_footer', 'belctech_footer_build' );
 
 
 /* Footer Columns
 ---------------------------------------------------------- */
 
-function goya_footer_columns() {
+function belctech_footer_columns() {
 	$columns = get_theme_mod('footer_widgets_columns', 4);
 	$col_width = get_theme_mod('footer_widgets_column_width', 'equal');
 	?>
 
 	<?php if ($columns == 1) { ?>
-		
+
 		<div class="col-12">
 			<?php dynamic_sidebar('footer1'); ?>
 		</div>
@@ -71,11 +71,11 @@ function goya_footer_columns() {
 			<div class="<?php echo esc_attr($columns_class . ' footer' . $i); ?>">
 				<?php dynamic_sidebar('footer' . $i); ?>
 			</div>
-			
+
 		<?php } ?>
-	
+
 	<?php } else { ?>
-		
+
 		<?php if ($columns == 4) {
 			if ($col_width == 'first') {
 				$footX = 'footer1'; $footY = 'footer4';
@@ -135,10 +135,10 @@ function goya_footer_columns() {
 
 	<?php
 }
-add_action( 'goya_footer_columns', 'goya_footer_columns' );
+add_action( 'belctech_footer_columns', 'belctech_footer_columns' );
 
 
-function goya_footer_elements( $item ) {
+function belctech_footer_elements( $item ) {
 	switch ( $item ) {
 		case 'copyright':
 			echo '<div class="footer-bar-content copyright">' . do_shortcode( wp_kses( get_theme_mod( 'footer_bar_copyright', '' ), 'essentials' ) ). '</div>';
@@ -149,21 +149,21 @@ function goya_footer_elements( $item ) {
 			break;
 
 		case 'social':
-			echo goya_social_profiles( 'footer-social-icons' );
+			echo belctech_social_profiles( 'footer-social-icons' );
 			break;
 
 		case 'currency':
-			do_action( 'goya_currency_switcher' );
+			do_action( 'belctech_currency_switcher' );
 			break;
 
 		case 'language':
-			do_action( 'goya_language_switcher' );
+			do_action( 'belctech_language_switcher' );
 			break;
 
 		case 'currency_language':
 			echo '<div class="switchers">';
-			do_action( 'goya_currency_switcher' );
-			do_action( 'goya_language_switcher' );
+			do_action( 'belctech_currency_switcher' );
+			do_action( 'belctech_language_switcher' );
 			echo '</div>';
 			break;
 
@@ -176,7 +176,7 @@ function goya_footer_elements( $item ) {
 			break;
 
 		default:
-			do_action( 'goya_footer_main_item', $item );
+			do_action( 'belctech_footer_main_item', $item );
 			break;
 	}
 }
@@ -185,15 +185,15 @@ function goya_footer_elements( $item ) {
 /* Back to Top
 ---------------------------------------------------------- */
 
-function goya_back_to_top() { 
+function belctech_back_to_top() {
 
 	if ( get_theme_mod('back_to_top_button', true) == false ) {
 		return;
 	}
 
 	?>
-	<a href="#" title="<?php esc_attr_e('Scroll To Top', 'goya'); ?>" id="scroll_to_top"><span class="arrow-top"><?php get_template_part('assets/img/svg/arrow-right.svg'); ?></span></a>
+	<a href="#" title="<?php esc_attr_e('Scroll To Top', 'belctech-ecommerce'); ?>" id="scroll_to_top"><span class="arrow-top"><?php get_template_part('assets/img/svg/arrow-right.svg'); ?></span></a>
 	<?php
 }
 
-add_action( 'wp_footer', 'goya_back_to_top' );
+add_action( 'wp_footer', 'belctech_back_to_top' );

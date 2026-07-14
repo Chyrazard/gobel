@@ -1,10 +1,10 @@
 <?php
-	
+
 // VC element: et_pricing_table
 
 vc_map( array(
-	'name' => esc_html__('Pricing Table', 'goya-core' ),
-	'category' => esc_html__('Goya', 'goya-core' ),
+	'name' => esc_html__('Pricing Table', 'belctech-ecommerce' ),
+	'category' => esc_html__('Belctech', 'belctech-ecommerce' ),
 	'base' => 'et_pricing_table',
 	'icon' => 'et_pricing_table',
 	'content_element'	=> true,
@@ -12,18 +12,18 @@ vc_map( array(
 	'params'	=> array(
 		array(
       'type'           => 'colorpicker',
-      'heading'        => esc_html__('Background Color', 'goya-core' ),
+      'heading'        => esc_html__('Background Color', 'belctech-ecommerce' ),
       'param_name'     => 'background_color',
-      'description'    => esc_html__( 'You can choose the colors for the highlighted item in the individual Pricing Column settings.', 'goya-core' ),
+      'description'    => esc_html__( 'You can choose the colors for the highlighted item in the individual Pricing Column settings.', 'belctech-ecommerce' ),
     ),
 		array(
       'type'           => 'colorpicker',
-      'heading'        => esc_html__('Price Color', 'goya-core' ),
+      'heading'        => esc_html__('Price Color', 'belctech-ecommerce' ),
       'param_name'     => 'price_color',
     ),
     array(
       'type'           => 'colorpicker',
-      'heading'        => esc_html__('Icon Color', 'goya-core' ),
+      'heading'        => esc_html__('Icon Color', 'belctech-ecommerce' ),
       'param_name'     => 'icon_color',
       'dependency' => array(
         'element' => 'icon_type',
@@ -31,16 +31,16 @@ vc_map( array(
     ),
     array(
       'type'           => 'colorpicker',
-      'heading'        => esc_html__('Title Color', 'goya-core' ),
+      'heading'        => esc_html__('Title Color', 'belctech-ecommerce' ),
       'param_name'     => 'title_color',
     ),
     array(
       'type'           => 'colorpicker',
-      'heading'        => esc_html__('Button Color', 'goya-core' ),
+      'heading'        => esc_html__('Button Color', 'belctech-ecommerce' ),
       'param_name'     => 'button_color',
     ),
 	),
-	'description' => esc_html__('Pricing Table', 'goya-core' ),
+	'description' => esc_html__('Pricing Table', 'belctech-ecommerce' ),
 	'js_view' => 'VcColumnView'
 ) );
 

@@ -48,7 +48,7 @@ function belctech_cached_custom_styles() {
 	$key = 'belctech_css_' . md5( wp_json_encode( get_theme_mods() ) );
 	$css = get_transient( $key );
 	if ( false === $css ) {
-		$css = function_exists( 'goya_custom_styles' ) ? goya_custom_styles() : '';
+		$css = function_exists( 'belctech_custom_styles' ) ? belctech_custom_styles() : '';
 		set_transient( $key, $css, WEEK_IN_SECONDS );
 	}
 	return $css;
@@ -63,7 +63,7 @@ add_filter( 'emoji_svg_url', '__return_false' );
 add_action( 'wp_enqueue_scripts', static function () {
 	if ( ! is_user_logged_in() ) wp_dequeue_style( 'dashicons' );
 	wp_dequeue_script( 'wp-embed' );
-	foreach ( array( 'modernizr', 'mobile-detect', 'in-viewport', 'magnific-popup', 'sticky-kit', 'jquery-slick', 'isotope-pk', 'packery', 'arrive', 'goya-app', 'belctech-swatches' ) as $handle ) {
+	foreach ( array( 'modernizr', 'mobile-detect', 'in-viewport', 'magnific-popup', 'sticky-kit', 'jquery-slick', 'isotope-pk', 'packery', 'arrive', 'belctech-app', 'belctech-swatches' ) as $handle ) {
 		wp_script_add_data( $handle, 'strategy', 'defer' );
 	}
 }, 100 );
@@ -147,7 +147,7 @@ add_filter( 'wp_get_custom_css', static function ( $css ) {
 }, 999 );
 
 add_action( 'wp_head', static function () {
-	echo '<link rel="preload" href="' . esc_url( GOYA_THEME_URI . '/assets/fonts/jost-latin.woff2' ) . '" as="font" type="font/woff2" crossorigin>';
+	echo '<link rel="preload" href="' . esc_url( BELCTECH_THEME_URI . '/assets/fonts/jost-latin.woff2' ) . '" as="font" type="font/woff2" crossorigin>';
 }, 2 );
 
 add_action( 'wp_head', static function () {
@@ -242,7 +242,7 @@ function belctech_optimize_footer_brand( $html ) {
 	while ( $processor->next_tag( 'img' ) ) {
 		$src = (string) $processor->get_attribute( 'src' );
 		if ( false === strpos( $src, 'logo-png-BELC.png' ) ) continue;
-		$processor->set_attribute( 'src', GOYA_THEME_URI . '/assets/img/belctech-footer-logo.png' );
+		$processor->set_attribute( 'src', BELCTECH_THEME_URI . '/assets/img/belctech-footer-logo.png' );
 		$processor->set_attribute( 'alt', 'Belctech' );
 		$processor->set_attribute( 'width', '32' );
 		$processor->set_attribute( 'height', '32' );
@@ -256,7 +256,7 @@ add_filter( 'theme_mod_footer_bar_custom_text2', 'belctech_optimize_footer_brand
 // Non-commerce pages receive the large shop stylesheet without blocking first
 // paint. It is still ready for the header mini-cart when the user interacts.
 add_filter( 'style_loader_tag', static function ( $html, $handle ) {
-	if ( 'goya-shop' !== $handle || belctech_needs_woocommerce_assets() ) return $html;
+	if ( 'belctech-shop' !== $handle || belctech_needs_woocommerce_assets() ) return $html;
 	$html = str_replace( "media='all'", "media='print' onload=\"this.media='all'\"", $html );
 	return $html . '<noscript>' . str_replace( "media='print' onload=\"this.media='all'\"", "media='all'", $html ) . '</noscript>';
 }, 20, 2 );
@@ -268,4 +268,4 @@ add_filter( 'heartbeat_settings', static function ( $settings ) {
 } );
 
 // Use WordPress native image loading instead of the older JavaScript lazy loader.
-add_filter( 'goya_do_lazyload', '__return_false', 100 );
+add_filter( 'belctech_do_lazyload', '__return_false', 100 );

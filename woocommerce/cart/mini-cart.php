@@ -59,7 +59,7 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 
 						?>
 						<li id="et-cart-panel-item-<?php echo esc_attr( $cart_item_key ); ?>" class="woocommerce-mini-cart-item <?php echo esc_attr( apply_filters( 'woocommerce_mini_cart_item_class', 'mini_cart_item', $cart_item, $cart_item_key ) ); ?>">
-							
+
 							<div class="et-cart-panel-item-thumbnail">
 								<?php echo '<div class="et-cart-panel-thumbnail-wrap">'. $thumbnail .'<span class="et-loader"></span></div>'; ?>
 							</div>
@@ -83,7 +83,7 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 									?>
 
 								<?php echo '<span class="et-cart-panel-product-title">' . wp_kses_post( $product_title ) . '</span>'; ?>
-							
+
 								<?php echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 								<div class="et-cart-panel-quantity-pricing">
@@ -93,17 +93,17 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 									<?php else: ?>
 								    <div class="product-quantity" data-title="<?php esc_attr_e( 'Quantity', 'woocommerce' ); ?>">
 							        <?php
-							        	$min_quantity = 0;
-							        	$max_quantity = $_product->get_max_purchase_quantity();
+								$min_quantity = 0;
+								$max_quantity = $_product->get_max_purchase_quantity();
 
-					           		$product_quantity = woocommerce_quantity_input(
+							$product_quantity = woocommerce_quantity_input(
 													array(
 					                'input_name'  => "cart[{$cart_item_key}][qty]",
 					                'input_value' => $cart_item['quantity'],
 														'max_value'    => $max_quantity,
 														'min_value'    => $min_quantity,
 					                'product_name' => $product_name,
-														'goya_minicart_qty' => true
+														'belctech_minicart_qty' => true
 													),
 													$_product,
 													false
@@ -133,14 +133,14 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 	<?php else : ?>
 
 		<div class="et-cart-empty">
-			<div class="empty-circle"><?php echo apply_filters( 'goya_minicart_icon', goya_load_template_part('assets/img/svg/shopping-'. get_theme_mod('header_cart_icon', 'bag').'.svg') ); ?></div>
+			<div class="empty-circle"><?php echo apply_filters( 'belctech_minicart_icon', belctech_load_template_part('assets/img/svg/shopping-'. get_theme_mod('header_cart_icon', 'bag').'.svg') ); ?></div>
 			<p class="woocommerce-mini-cart__empty-message"><?php esc_html_e( 'No products in the cart.', 'woocommerce' ); ?></p>
 		</div>
 
 	<?php endif; ?>
 
 	<div class="cart-panel-summary<?php if( WC()->cart->is_empty() ) { ?> empty-cart<?php } ?>">
-	
+
 		<?php if ( ! WC()->cart->is_empty() ) : ?>
 
 			<p class="woocommerce-mini-cart__total total">
@@ -162,7 +162,7 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 
 <?php else : ?>
 
-			<?php do_action( 'goya_mini_cart_empty' ); ?>
+			<?php do_action( 'belctech_mini_cart_empty' ); ?>
 
 		<?php endif; ?>
 

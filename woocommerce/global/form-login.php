@@ -58,7 +58,7 @@ if ( is_user_logged_in() ) {
 			<button type="submit" class="woocommerce-button button woocommerce-form-login__submit<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>"><?php esc_html_e( 'Login', 'woocommerce' ); ?></button>
 		</p>
 
-		<?php do_action( 'woocommerce_login_actions' ); // Custom Goya hook ?>
+		<?php do_action( 'woocommerce_login_actions' ); // Custom Belctech hook ?>
 
 		<?php do_action( 'woocommerce_login_form_end' ); ?>
 

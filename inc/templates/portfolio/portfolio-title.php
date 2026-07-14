@@ -1,16 +1,16 @@
-<?php 
-$disable_title = get_post_meta(get_the_ID(), 'goya_portfolio_disable_title', true);
+<?php
+$disable_title = get_post_meta(get_the_ID(), 'belctech_portfolio_disable_title', true);
 
 if ($disable_title) return;
 
 $title_class = 'title_outer';
 
-$portfolio_layout = goya_meta_config('portfolio','layout_single','regular');
+$portfolio_layout = belctech_meta_config('portfolio','layout_single','regular');
 $gallery = array();
-if ( rwmb_meta( 'goya_portfolio_featured_gallery') !== '' ) {
-	$gallery = rwmb_meta( 'goya_portfolio_featured_gallery', array( 'size' => 'full' ) );
+if ( rwmb_meta( 'belctech_portfolio_featured_gallery') !== '' ) {
+	$gallery = rwmb_meta( 'belctech_portfolio_featured_gallery', array( 'size' => 'full' ) );
 }
-$multiple_gallery = ( !empty($gallery) && count($gallery) > 1 ) ? true :  false; 
+$multiple_gallery = ( !empty($gallery) && count($gallery) > 1 ) ? true :  false;
 ?>
 
 <header class="post-title entry-header header-parallax container">
@@ -22,9 +22,9 @@ $multiple_gallery = ( !empty($gallery) && count($gallery) > 1 ) ? true :  false;
 				</div>
 				<?php the_title('<h1 class="entry-title" itemprop="name headline">', '</h1>'); ?>
 				<div class="et-portfolio-excerpt">
-					<?php 
-						add_filter( 'excerpt_length', 'goya_mini_excerpt_length' );
-						the_excerpt(); 
+					<?php
+						add_filter( 'excerpt_length', 'belctech_mini_excerpt_length' );
+						the_excerpt();
 					?>
 				</div>
 			</div>

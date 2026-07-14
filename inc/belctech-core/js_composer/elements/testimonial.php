@@ -2,45 +2,45 @@
 
 // VC element: et_testimonial
 vc_map( array(
-	'name' => esc_html__('Testimonial', 'goya-core'),
-	'description' => esc_html__('Single Testimonial', 'goya-core'),
-	'category' => esc_html__('Goya', 'goya-core'),
+	'name' => esc_html__('Testimonial', 'belctech-ecommerce'),
+	'description' => esc_html__('Single Testimonial', 'belctech-ecommerce'),
+	'category' => esc_html__('Belctech', 'belctech-ecommerce'),
 	'base' => 'et_testimonial',
 	'icon' => 'et_testimonial',
-	
+
 	//'as_child' => array('only' => 'et_testimonial_slider'),
 	'params'	=> array(
 		array(
 			'type'           => 'textarea',
-			'heading'        => esc_html__( 'Quote', 'goya-core' ),
+			'heading'        => esc_html__( 'Quote', 'belctech-ecommerce' ),
 			'param_name'     => 'quote',
-			'description'    => esc_html__( 'Quote you want to show', 'goya-core' ),
+			'description'    => esc_html__( 'Quote you want to show', 'belctech-ecommerce' ),
 		),
 		array(
 		'type'           => 'textfield',
-			'heading'        => esc_html__( 'Author', 'goya-core' ),
+			'heading'        => esc_html__( 'Author', 'belctech-ecommerce' ),
 			'param_name'     => 'author_name',
 			'admin_label'	 => true,
-			'description'    => esc_html__( 'Name of the member.', 'goya-core' ),
+			'description'    => esc_html__( 'Name of the member.', 'belctech-ecommerce' ),
 		),
 		array(
 			'type'           => 'textfield',
-			'heading'        => esc_html__( 'Author Title', 'goya-core' ),
+			'heading'        => esc_html__( 'Author Title', 'belctech-ecommerce' ),
 			'param_name'     => 'author_title',
-			'description'    => esc_html__( 'Title that will appear below author name.', 'goya-core' ),
+			'description'    => esc_html__( 'Title that will appear below author name.', 'belctech-ecommerce' ),
 		),
 		array(
-			'type' 			=> 'checkbox',
-			'heading' 		=> __( 'Show stars', 'goya-core' ),
-			'param_name' 	=> 'show_stars',
-			'description'	=> __( 'Display rating stars. WooCommerce must be active', 'goya-core' ),
+			'type'			=> 'checkbox',
+			'heading'		=> __( 'Show stars', 'belctech-ecommerce' ),
+			'param_name'	=> 'show_stars',
+			'description'	=> __( 'Display rating stars. WooCommerce must be active', 'belctech-ecommerce' ),
 			'value'			=> array(
-				__( 'Enable', 'goya-core' )	=> '1'
+				__( 'Enable', 'belctech-ecommerce' )	=> '1'
 			)
 		),
 		array(
 			'type' => 'dropdown',
-			'heading' => __( 'Number of stars', 'goya-core' ),
+			'heading' => __( 'Number of stars', 'belctech-ecommerce' ),
 			'param_name' => 'stars',
 			'value' => array(
 				'1' => '1',
@@ -57,10 +57,10 @@ vc_map( array(
 		),
 		array(
 			'type'           => 'attach_image',
-			'heading'        => esc_html__( 'Author Image', 'goya-core' ),
+			'heading'        => esc_html__( 'Author Image', 'belctech-ecommerce' ),
 			'param_name'     => 'author_image',
-			'description'    => esc_html__( 'Add Author image here. Could be used depending on style.', 'goya-core' )
+			'description'    => esc_html__( 'Add Author image here. Could be used depending on style.', 'belctech-ecommerce' )
 		)
 	),
-	
+
 ) );

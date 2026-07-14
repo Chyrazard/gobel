@@ -26,17 +26,17 @@ if ( ! is_a( $product, WC_Product::class ) || ! $product->is_visible() ) {
 
 $vars = $wp_query->query_vars;
 
-$item_style = array_key_exists('goya_product_style', $vars) ? $vars['goya_product_style'] : false;
-$item_animation = array_key_exists('goya_product_animation', $vars) ? $vars['goya_product_animation'] : false;
-$item_hover_img = array_key_exists('goya_product_hover_image', $vars) ? $vars['goya_product_hover_image'] : false;
-$item_quickview = array_key_exists('goya_product_quickview', $vars) ? $vars['goya_product_quickview'] : false;
-$item_skip_lazy = array_key_exists('goya_product_skip_lazy', $vars) ? $vars['goya_product_skip_lazy'] : 0;
-$item_column_large = array_key_exists('goya_product_columns_large', $vars) ? $vars['goya_product_columns_large'] : get_theme_mod('shop_columns', 4);
-$item_column_mobile = array_key_exists('goya_product_columns_mobile', $vars) ? $vars['goya_product_columns_mobile'] : get_theme_mod('shop_columns_mobile', 2);
+$item_style = array_key_exists('belctech_product_style', $vars) ? $vars['belctech_product_style'] : false;
+$item_animation = array_key_exists('belctech_product_animation', $vars) ? $vars['belctech_product_animation'] : false;
+$item_hover_img = array_key_exists('belctech_product_hover_image', $vars) ? $vars['belctech_product_hover_image'] : false;
+$item_quickview = array_key_exists('belctech_product_quickview', $vars) ? $vars['belctech_product_quickview'] : false;
+$item_skip_lazy = array_key_exists('belctech_product_skip_lazy', $vars) ? $vars['belctech_product_skip_lazy'] : 0;
+$item_column_large = array_key_exists('belctech_product_columns_large', $vars) ? $vars['belctech_product_columns_large'] : get_theme_mod('shop_columns', 4);
+$item_column_mobile = array_key_exists('belctech_product_columns_mobile', $vars) ? $vars['belctech_product_columns_mobile'] : get_theme_mod('shop_columns_mobile', 2);
 
 
 // Color/image Swatches
-add_action( 'goya_woocommerce_after_shop_loop_item', 'goya_add_loop_variation_swatches', 9 );
+add_action( 'belctech_woocommerce_after_shop_loop_item', 'belctech_add_loop_variation_swatches', 9 );
 
 // Columns large
 if ( isset( $_GET['col'] ) ) {
@@ -53,7 +53,7 @@ if ( intval( $columns_large ) == 1 ) {
 	$columns_medium = $columns_small = $columns_xsmall = $columns_large;
 
 } else {
-	
+
 	// Columns medium
 	if ( intval( $columns_large ) < 3 ) {
 	$columns_medium = '2';
@@ -78,17 +78,17 @@ $inner_classes[] = 'product-inner';
 $inner_classes[] = $item_animation;
 
 // Masonry/Columns size
-if (array_key_exists('goya_masonry_list', $vars)) {
-	$masonry_size = get_post_meta($id, 'goya_product_masonry_size', true);
+if (array_key_exists('belctech_masonry_list', $vars)) {
+	$masonry_size = get_post_meta($id, 'belctech_product_masonry_size', true);
 	$masonry_size = ($masonry_size) ? $masonry_size : 'small';
-	$masonry_adjust = goya_get_masonry_size($masonry_size);
+	$masonry_adjust = belctech_get_masonry_size($masonry_size);
 	$classes[] = $masonry_adjust['class'];
 	$image_size = $masonry_adjust['image_size'];
 
 	// If masonry get the product categories
 	$terms = get_the_terms( $id, 'product_cat' );
 
-	$cats = '';	
+	$cats = '';
 	if (!empty($terms)) {
 		foreach ($terms as $term) { $cats .= ' cat-'.strtolower($term->slug); }
 	}
@@ -99,7 +99,7 @@ if (array_key_exists('goya_masonry_list', $vars)) {
 	$classes[] = 'col-' . 12 / $columns_xsmall;
 	$classes[] = 'col-sm-' . 12 / $columns_small;
 	$classes[] = 'col-md-' . 12 / $columns_medium;
-	
+
 	if($columns_large != 5) {
 		$classes[] = 'col-lg-' . 12 / $columns_large;
 	} else {
@@ -131,13 +131,13 @@ if ($wp_query->current_post < $item_skip_lazy) {
 		 */
 		do_action( 'woocommerce_before_shop_loop_item' );
 	?>
-	<figure class="product_thumbnail <?php echo esc_attr($thumbnail_class); ?>">  
+	<figure class="product_thumbnail <?php echo esc_attr($thumbnail_class); ?>">
 		<a href="<?php echo esc_url( get_permalink() ); ?>" title="<?php the_title_attribute(); ?>"><?php
 				echo woocommerce_get_product_thumbnail('woocommerce_thumbnail', array( 'class' => $image_class ));
-				
+
 				// Alternative/hover image
-				if ( apply_filters('goya_product_hover_image', $item_hover_img) == 1) {
-					echo goya_product_thumbnail_alt( $product );
+				if ( apply_filters('belctech_product_hover_image', $item_hover_img) == 1) {
+					echo belctech_product_thumbnail_alt( $product );
 			} ?></a>
 		<?php
 			/**
@@ -149,20 +149,20 @@ if ($wp_query->current_post < $item_skip_lazy) {
 			do_action( 'woocommerce_before_shop_loop_item_title' );
 		?>
 		<div class="actions-wrapper">
-				<?php if ($item_style != 'style1' ) { goya_wishlist_button('loop'); } ?>
+				<?php if ($item_style != 'style1' ) { belctech_wishlist_button('loop'); } ?>
 				<?php if ($item_style == 'style2' || $item_style == 'style3' ) { woocommerce_template_loop_add_to_cart(); } ?>
-				<?php 
+				<?php
 				if ( $item_quickview == true ) {
-					goya_loop_quick_view();
+					belctech_loop_quick_view();
 				} ?>
 			</div>
 	</figure>
 	<div class="caption">
 		<div class="product-title">
 			<h2><a class="product-link" href="<?php echo esc_url( get_permalink() ); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
-			<?php if ($item_style === 'style1') { goya_wishlist_button('loop'); } ?>
+			<?php if ($item_style === 'style1') { belctech_wishlist_button('loop'); } ?>
 		</div>
-		<?php 
+		<?php
 			/**
 			 * Hook: woocommerce_shop_loop_item_title.
 			 *
@@ -191,7 +191,7 @@ if ($wp_query->current_post < $item_skip_lazy) {
 
 			<div class="after_shop_loop_actions">
 
-				<?php 
+				<?php
 					/**
 					 * Hook: woocommerce_after_shop_loop_item.
 					 *
@@ -204,7 +204,7 @@ if ($wp_query->current_post < $item_skip_lazy) {
 
 		</div>
 
-		<?php do_action( 'goya_woocommerce_after_shop_loop_item' ); ?>
+		<?php do_action( 'belctech_woocommerce_after_shop_loop_item' ); ?>
 
 	</div>
 

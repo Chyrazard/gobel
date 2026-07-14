@@ -2,13 +2,13 @@
 /**
  * Template part for displaying the top bar
  *
- * @package Goya
+ * @package Belctech
  */
 
 $groups = array(
-	'left'   => goya_meta_config('','top_bar_left', array( array( 'item' => 'social' )) ),
-	'center'   => goya_meta_config('','top_bar_center', array() ),
-	'right'   => goya_meta_config('','top_bar_right', array() ),
+	'left'   => belctech_meta_config('','top_bar_left', array( array( 'item' => 'social' )) ),
+	'center'   => belctech_meta_config('','top_bar_center', array() ),
+	'right'   => belctech_meta_config('','top_bar_right', array() ),
 ); ?>
 
 <div id="top-bar" class="et-top-bar top-bar">
@@ -17,10 +17,10 @@ $groups = array(
 			<div class="topbar-items topbar-<?php echo esc_attr( $group ); ?>">
 				<?php
 				foreach ( $items as $item ) {
-					$item['item'] = $item['item'] ? $item['item'] : key( goya_topbar_elements_list() );
-					goya_topbar_elements( $item['item'] );
+					$item['item'] = $item['item'] ? $item['item'] : key( belctech_topbar_elements_list() );
+					belctech_topbar_elements( $item['item'] );
 				} ?>
 			</div>
-		<?php endforeach; ?>			
-	</div>                
+		<?php endforeach; ?>
+	</div>
 </div>

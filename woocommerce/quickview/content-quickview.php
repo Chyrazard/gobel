@@ -19,13 +19,13 @@ if (get_theme_mod('shop_catalog_mode', false) == true) {
 }
 
 // Remove breadcrumbs
-remove_action('woocommerce_single_product_summary', 'goya_show_breadcrumbs', 1);
+remove_action('woocommerce_single_product_summary', 'belctech_show_breadcrumbs', 1);
 
 // Remove Sizing Guide
-remove_action('woocommerce_single_product_summary', 'goya_sizing_guide_link', 29);
+remove_action('woocommerce_single_product_summary', 'belctech_sizing_guide_link', 29);
 
 // Remove featured video
-remove_action( 'woocommerce_single_product_summary', 'goya_woocommerce_featured_video',22 );
+remove_action( 'woocommerce_single_product_summary', 'belctech_woocommerce_featured_video',22 );
 ;
 
 if ( get_theme_mod('product_reviews', true) == false ) {
@@ -36,9 +36,9 @@ if ( get_theme_mod('product_quickview_atc', true) == false ) {
 	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
 }
 
-add_action( 'woocommerce_single_product_summary', 'goya_qv_product_summary_open', 1 );
-add_action( 'woocommerce_single_product_summary', 'goya_qv_product_summary_divider', 15 );
-add_action( 'woocommerce_single_product_summary', 'goya_extra_div_close', 100 );
+add_action( 'woocommerce_single_product_summary', 'belctech_qv_product_summary_open', 1 );
+add_action( 'woocommerce_single_product_summary', 'belctech_qv_product_summary_divider', 15 );
+add_action( 'woocommerce_single_product_summary', 'belctech_extra_div_close', 100 );
 
 
 $cart_layout = get_theme_mod( 'product_cart_buttons_layout','mixed');
@@ -48,20 +48,20 @@ $classes[] = 'et-cart-' . $cart_layout;
 $classes[] = 'et-product-detail';
 $classes[] = 'product' . ' product-' . $product->get_type();
 
-// Ajax Add to Cart 
-$ajax_atc = apply_filters('goya_ajax_atc_single_product', get_theme_mod( 'product_single_ajax_addtocart', true ));
+// Ajax Add to Cart
+$ajax_atc = apply_filters('belctech_ajax_atc_single_product', get_theme_mod( 'product_single_ajax_addtocart', true ));
 if ($ajax_atc) {
-	$classes[] = 'single-ajax-atc';	
+	$classes[] = 'single-ajax-atc';
 }
 
 // Options style
 $classes[] = 'et-variation-style-' . get_theme_mod('product_variations_style','table');
 
 /* Product color mode */
-$showcase_text = get_post_meta($product->get_id(), 'goya_product_showcase_style', true);
+$showcase_text = get_post_meta($product->get_id(), 'belctech_product_showcase_style', true);
 $classes[] = 'product-showcase-' . $showcase_text;
 
-do_action( 'goya_quickview_woocommerce_before_single_product' );
+do_action( 'belctech_quickview_woocommerce_before_single_product' );
 
 ?>
 
@@ -70,15 +70,15 @@ do_action( 'goya_quickview_woocommerce_before_single_product' );
 	<div id="product-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
 		<div class="row">
 			<div class="et-qv-product-image belctech-qv-image-stage product-gallery col-lg-7">
-				<?php 
+				<?php
 				if ( (class_exists('Woo_Variation_Gallery') || class_exists('WooProductVariationGallery') ) && $product->is_type( 'variable' ) ) {
 					woocommerce_show_product_images();
 				} else {
-					goya_quick_view_show_product_images();
+					belctech_quick_view_show_product_images();
 				}
 				 ?>
 			</div>
-				
+
 			<div class="et-qv-summary col-lg-5">
 				<div id="et-qv-product-summary" class="summary custom_scroll">
 					<a class="belctech-qv-full-product" href="<?php echo esc_url( $product->get_permalink() ); ?>">
@@ -88,16 +88,16 @@ do_action( 'goya_quickview_woocommerce_before_single_product' );
 					/**
 					 * woocommerce_single_product_summary hook
 					 *
-					 * @hooked goya_qv_product_summary_open - 1
+					 * @hooked belctech_qv_product_summary_open - 1
 					 * @hooked woocommerce_template_single_title - 5
 					 * @hooked woocommerce_template_single_price - 10
-					 * @hooked goya_qv_product_summary_divider - 15
+					 * @hooked belctech_qv_product_summary_divider - 15
 					 * @hooked woocommerce_template_single_excerpt - 20
 					 * @hooked woocommerce_template_single_rating - 21
 									 * @hooked woocommerce_template_single_add_to_cart - 30
-					 * @hooked goya_qv_product_summary_actions - 30
+					 * @hooked belctech_qv_product_summary_actions - 30
 					 * @hooked woocommerce_template_single_sharing - 50
-					 * @hooked goya_qv_product_summary_open - 100
+					 * @hooked belctech_qv_product_summary_open - 100
 					 */
 					do_action( 'woocommerce_single_product_summary' );
 				?>
@@ -112,6 +112,6 @@ do_action( 'goya_quickview_woocommerce_before_single_product' );
 		<div class="col-9 justify-content-center">
 			<?php echo get_the_password_form(); ?>
 		</div>
-	</div>	
+	</div>
 
 <?php endif; ?>

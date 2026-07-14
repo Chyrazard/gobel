@@ -4,13 +4,13 @@
 defined( 'ABSPATH' ) || exit;
 
 function belctech_asset_version( $relative_path ) {
-	$path = GOYA_THEME_DIR . '/' . ltrim( $relative_path, '/' );
+	$path = BELCTECH_THEME_DIR . '/' . ltrim( $relative_path, '/' );
 	return file_exists( $path ) ? (string) filemtime( $path ) : BELCTECH_THEME_VERSION;
 }
 
 // The theme's visual layer is global, independently of the swatch provider.
 add_action( 'wp_enqueue_scripts', static function () {
-	wp_enqueue_style( 'belctech-native', GOYA_THEME_URI . '/assets/css/belctech.css', array( 'goya-core' ), belctech_asset_version( 'assets/css/belctech.css' ) );
+	wp_enqueue_style( 'belctech-native', BELCTECH_THEME_URI . '/assets/css/belctech.css', array( 'belctech-core' ), belctech_asset_version( 'assets/css/belctech.css' ) );
 	wp_add_inline_style( 'belctech-native', belctech_design_css() );
 }, 30 );
 
@@ -292,5 +292,5 @@ add_action( 'wp_enqueue_scripts', static function () {
 	$content = $post instanceof WP_Post ? $post->post_content : '';
 	$has_product_block = has_shortcode( $content, 'et_product_slider' ) || has_shortcode( $content, 'et_product_masonry' );
 	if ( ! is_woocommerce() && ! is_cart() && ! is_checkout() && ! $has_product_block ) return;
-	wp_enqueue_script( 'belctech-swatches', GOYA_THEME_URI . '/assets/js/belctech-swatches.js', array( 'jquery' ), belctech_asset_version( 'assets/js/belctech-swatches.js' ), true );
+	wp_enqueue_script( 'belctech-swatches', BELCTECH_THEME_URI . '/assets/js/belctech-swatches.js', array( 'jquery' ), belctech_asset_version( 'assets/js/belctech-swatches.js' ), true );
 }, 30 );

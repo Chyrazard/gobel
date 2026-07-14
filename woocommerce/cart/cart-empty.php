@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <div class="my_woocommerce_page et-cart-empty">
-	<div class="empty-circle"><?php echo apply_filters( 'goya_minicart_icon', goya_load_template_part('assets/img/svg/shopping-'. get_theme_mod('header_cart_icon', 'bag').'.svg') ); ?></div>
+	<div class="empty-circle"><?php echo apply_filters( 'belctech_minicart_icon', belctech_load_template_part('assets/img/svg/shopping-'. get_theme_mod('header_cart_icon', 'bag').'.svg') ); ?></div>
 	<?php
 	/*
 	 * @hooked wc_empty_cart_message - 10

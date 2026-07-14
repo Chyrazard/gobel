@@ -1,6 +1,6 @@
 <?php
 
-function goya_currency_switcher( $args = array() ) {
+function belctech_currency_switcher( $args = array() ) {
 
 	if ( class_exists( 'WOOCS' ) ) {
 
@@ -27,7 +27,7 @@ function goya_currency_switcher( $args = array() ) {
 	}
 	?>
 	<div class="et-switcher-container et-currency">
-		<span class="label"><?php echo esc_html__('Currency', 'goya');	?></span>
+		<span class="label"><?php echo esc_html__('Currency', 'belctech-ecommerce');	?></span>
 		<?php if ( ! empty( $args['label'] ) ) : ?>
 			<span class="label"><?php echo esc_html( $args['label'] ); ?></span>
 		<?php endif; ?>
@@ -40,62 +40,62 @@ function goya_currency_switcher( $args = array() ) {
 			</li>
 		</ul>
 	</div>
-		
+
 	<?php } else if (class_exists('WCML_Currency_Switcher') ) { ?>
-		
+
 		<div class="et-switcher-container et-currency">
-			<span class="label"><?php echo esc_html__('Currency', 'goya');	?></span> <?php do_action('wcml_currency_switcher', array('format' => '%code%'));  ?>
+			<span class="label"><?php echo esc_html__('Currency', 'belctech-ecommerce');	?></span> <?php do_action('wcml_currency_switcher', array('format' => '%code%'));  ?>
 		</div>
 
 	<?php }
 }
-add_action( 'goya_currency_switcher', 'goya_currency_switcher' );
+add_action( 'belctech_currency_switcher', 'belctech_currency_switcher' );
 
 
 /* Custom Language Switcher */
-function goya_language_switcher() {
+function belctech_language_switcher() {
 	$langs = array();
-	$languages = apply_filters( 'goya_languages', $langs );
+	$languages = apply_filters( 'belctech_languages', $langs );
 	$ls_default = get_theme_mod('ls_default', array('name'));
 	$ls_mobile = get_theme_mod('ls_mobile_header', array('code'));
 
-	if (function_exists('icl_get_languages') || 
-		function_exists('pll_the_languages') || 
-		function_exists('weglot_get_languages_available') || 
-		class_exists('TRP_Translate_Press') || 
-		function_exists('weglot_get_languages_available') || 
+	if (function_exists('icl_get_languages') ||
+		function_exists('pll_the_languages') ||
+		function_exists('weglot_get_languages_available') ||
+		class_exists('TRP_Translate_Press') ||
+		function_exists('weglot_get_languages_available') ||
 		!empty($languages)) {
 	?>
 		<div class="et-switcher-container et-language">
-			<span class="label"><?php echo esc_html__('Language', 'goya');	?></span>
+			<span class="label"><?php echo esc_html__('Language', 'belctech-ecommerce');	?></span>
 
 			<?php
 
 			if (class_exists('TRP_Translate_Press')) {
 
 				echo do_shortcode('[language-switcher]');
-	
+
 			} else if (function_exists('weglot_get_languages_available')) {
 
 				echo do_shortcode('[weglot_switcher]');
-			
-			} else if ( function_exists('icl_get_languages') 
-				|| !empty($languages) 
+
+			} else if ( function_exists('icl_get_languages')
+				|| !empty($languages)
 				|| function_exists('pll_the_languages')) {
 
 	$classes [] = 'et-header-menu';
 
 	foreach($ls_default as $el) {
-		$classes [] = 'ls-default-' . $el;	
+		$classes [] = 'ls-default-' . $el;
 	}
 	foreach($ls_mobile as $el) {
 		$classes [] = 'ls-mobile-' . $el;
 	}
-	
-	$classes [] = 'style-' . apply_filters( 'goya_language_switcher_style', get_theme_mod('ls_default_layout', 'dropdown') );
+
+	$classes [] = 'style-' . apply_filters( 'belctech_language_switcher_style', get_theme_mod('ls_default_layout', 'dropdown') );
 
 					if (function_exists('pll_the_languages')) {
-						$languages = pll_the_languages(array('raw'=>1));	
+						$languages = pll_the_languages(array('raw'=>1));
 					} else if (function_exists('icl_get_languages')) {
 						$languages = icl_get_languages('skip_missing=0');
 		}
@@ -103,7 +103,7 @@ function goya_language_switcher() {
 
 		<ul class="<?php echo esc_attr(implode(' ', $classes)); ?>">
 			<li class="menu-item-has-children">
-					
+
 				<span class="selected"><?php
 					if(1 < count($languages)){
 						if (function_exists('pll_the_languages')) { // Polylang
@@ -144,7 +144,7 @@ function goya_language_switcher() {
 							}
 						}
 					} else {
-						echo '<li>'.esc_html__('Add Languages', 'goya').'</li>';	
+						echo '<li>'.esc_html__('Add Languages', 'belctech-ecommerce').'</li>';
 					}
 				?>
 				</ul>
@@ -158,4 +158,4 @@ function goya_language_switcher() {
 <?php
 	}
 }
-add_action( 'goya_language_switcher', 'goya_language_switcher' );
+add_action( 'belctech_language_switcher', 'belctech_language_switcher' );
