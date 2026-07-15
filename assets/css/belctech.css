@@ -575,23 +575,282 @@ select[data-belctech-native-select="1"] {
 }
 
 .single-product .et-product-detail .summary .single_add_to_cart_button,
-.single-product .et-product-detail .summary .single_buy_now_button,
+.et-product-detail .summary .single_buy_now_button,
 .single-product .sticky-product-bar .single_add_to_cart_button,
 .single-product .sticky-product-bar .sticky_add_to_cart {
 	border-radius: var(--belctech-product-button-radius, 6px) !important;
 }
 
-.single-product .et-product-detail .summary .single_buy_now_button {
-	background: #fff !important;
-	border: 1px solid #202224 !important;
-	color: #202224 !important;
+.et-product-detail .summary .single_buy_now_button {
+	background: var(--belctech-buy-now-bg, #fff) !important;
+	border: 1px solid var(--belctech-buy-now-border, #202224) !important;
+	color: var(--belctech-buy-now-text, #202224) !important;
 }
 
-.single-product .et-product-detail .summary .single_buy_now_button:hover,
-.single-product .et-product-detail .summary .single_buy_now_button:focus-visible {
-	background: #202224 !important;
-	border-color: #202224 !important;
-	color: #fff !important;
+.et-product-detail .summary .single_buy_now_button:hover,
+.et-product-detail .summary .single_buy_now_button:focus-visible {
+	background: var(--belctech-buy-now-hover-bg, #202224) !important;
+	border-color: var(--belctech-buy-now-hover-border, #202224) !important;
+	color: var(--belctech-buy-now-hover-text, #fff) !important;
+}
+
+/* The size guide uses one inline Font Awesome ruler instead of loading an icon font. */
+.single-product .et-product-detail .summary .sizing_guide {
+	align-items: center;
+	display: inline-flex;
+	gap: 10px;
+}
+
+.single-product .et-product-detail .summary .sizing_guide::before {
+	content: none !important;
+	display: none !important;
+}
+
+.belctech-size-guide-icon {
+	align-items: center;
+	color: #202224;
+	display: inline-flex;
+	flex: 0 0 22px;
+	height: 18px;
+	justify-content: center;
+	width: 22px;
+}
+
+.belctech-size-guide-icon svg {
+	display: block;
+	fill: currentColor;
+	height: 14px;
+	width: 22px;
+}
+
+/* Buy-now checkout modal. The iframe is created only after a successful cart add. */
+body.belctech-buy-now-open {
+	overflow: hidden !important;
+}
+
+.belctech-buy-now-modal[hidden] {
+	display: none !important;
+}
+
+.belctech-buy-now-modal {
+	align-items: center;
+	display: flex;
+	inset: 0;
+	justify-content: center;
+	padding: 16px;
+	position: fixed;
+	z-index: 100000;
+}
+
+.belctech-buy-now-modal__backdrop {
+	background: rgba(20, 21, 22, .62);
+	backdrop-filter: blur(3px);
+	inset: 0;
+	opacity: 0;
+	position: absolute;
+	transition: opacity 180ms ease;
+}
+
+.belctech-buy-now-modal__dialog {
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 28px 80px rgba(0, 0, 0, .28);
+	display: grid;
+	grid-template-rows: auto minmax(0, 1fr);
+	height: min(900px, calc(100dvh - 32px));
+	max-width: 1180px;
+	overflow: hidden;
+	position: relative;
+	transform: translateY(14px) scale(.99);
+	transition: opacity 180ms ease, transform 180ms ease;
+	width: min(1180px, calc(100vw - 32px));
+	z-index: 1;
+}
+
+.belctech-buy-now-modal:not(.is-open) .belctech-buy-now-modal__dialog {
+	opacity: 0;
+}
+
+.belctech-buy-now-modal.is-open .belctech-buy-now-modal__backdrop {
+	opacity: 1;
+}
+
+.belctech-buy-now-modal.is-open .belctech-buy-now-modal__dialog {
+	opacity: 1;
+	transform: translateY(0) scale(1);
+}
+
+.belctech-buy-now-modal__header {
+	align-items: center;
+	border-bottom: 1px solid #e8e8e8;
+	display: flex;
+	gap: 24px;
+	justify-content: space-between;
+	min-height: 76px;
+	padding: 12px 18px 12px 24px;
+}
+
+.belctech-buy-now-modal__eyebrow {
+	color: #747474;
+	display: block;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.2;
+	margin-bottom: 3px;
+	text-transform: uppercase;
+}
+
+.belctech-buy-now-modal__header h2 {
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 1.15;
+	margin: 0;
+}
+
+.belctech-buy-now-modal__actions {
+	align-items: center;
+	display: flex;
+	gap: 14px;
+}
+
+.belctech-buy-now-modal__external {
+	color: #202224;
+	font-size: 13px;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.belctech-buy-now-modal__close {
+	align-items: center;
+	background: transparent;
+	border: 0;
+	border-radius: 50%;
+	color: #202224;
+	cursor: pointer;
+	display: inline-flex;
+	font-size: 32px;
+	height: 42px;
+	justify-content: center;
+	line-height: 1;
+	padding: 0 0 4px;
+	width: 42px;
+}
+
+.belctech-buy-now-modal__close:hover,
+.belctech-buy-now-modal__close:focus-visible {
+	background: #f1f1f1;
+}
+
+.belctech-buy-now-modal__content {
+	background: #fff;
+	min-height: 0;
+	position: relative;
+}
+
+.belctech-buy-now-modal__content iframe {
+	background: #fff;
+	border: 0;
+	display: block;
+	height: 100%;
+	opacity: 0;
+	transition: opacity 160ms ease;
+	width: 100%;
+}
+
+.belctech-buy-now-modal__content iframe.is-ready {
+	opacity: 1;
+}
+
+.belctech-buy-now-modal__loader {
+	align-items: center;
+	background: #fff;
+	color: #4d4d4d;
+	display: flex;
+	font-size: 14px;
+	inset: 0;
+	justify-content: center;
+	position: absolute;
+	z-index: 2;
+}
+
+.belctech-buy-now-modal__loader::before {
+	animation: belctech-checkout-spin .7s linear infinite;
+	border: 2px solid #ddd;
+	border-radius: 50%;
+	border-top-color: #202224;
+	content: "";
+	height: 20px;
+	margin-right: 10px;
+	width: 20px;
+}
+
+.belctech-buy-now-modal__loader.is-hidden {
+	display: none;
+}
+
+@keyframes belctech-checkout-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* Remove only the site chrome inside the same-origin checkout frame. */
+body.belctech-checkout-modal-frame {
+	background: #fff !important;
+	padding: 0 !important;
+}
+
+.belctech-checkout-modal-frame #wpadminbar,
+.belctech-checkout-modal-frame .et-global-campaign,
+.belctech-checkout-modal-frame #header,
+.belctech-checkout-modal-frame .site-header,
+.belctech-checkout-modal-frame .header-spacer,
+.belctech-checkout-modal-frame .mobile-header-spacer,
+.belctech-checkout-modal-frame footer,
+.belctech-checkout-modal-frame #footer,
+.belctech-checkout-modal-frame .site-footer,
+.belctech-checkout-modal-frame .footer-bar,
+.belctech-checkout-modal-frame .to-top,
+.belctech-checkout-modal-frame [class*="whatsapp"] {
+	display: none !important;
+}
+
+.belctech-checkout-modal-frame #wrapper,
+.belctech-checkout-modal-frame .page-wrapper-inner,
+.belctech-checkout-modal-frame .site-content {
+	margin-top: 0 !important;
+	padding-top: 0 !important;
+}
+
+@media (max-width: 767px) {
+	.belctech-buy-now-modal {
+		padding: 0;
+	}
+
+	.belctech-buy-now-modal__dialog {
+		border-radius: 0;
+		height: 100dvh;
+		width: 100vw;
+	}
+
+	.belctech-buy-now-modal__header {
+		min-height: 66px;
+		padding: 10px 10px 10px 16px;
+	}
+
+	.belctech-buy-now-modal__header h2 {
+		font-size: 18px;
+	}
+
+	.belctech-buy-now-modal__external {
+		display: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.belctech-buy-now-modal__backdrop,
+	.belctech-buy-now-modal__dialog,
+	.belctech-buy-now-modal__content iframe {
+		transition: none;
+	}
 }
 
 /* Quick view is a self-contained product surface, not a full-page summary. */

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.42
+
+- Add an optional same-origin Buy Now checkout modal backed by the real
+  WooCommerce checkout, validation, session and payment fields.
+- Add native Customizer controls for the Buy Now label, popup behavior and
+  normal/hover button colors while retaining the classic checkout fallback.
+- Load the modal checkout only after a successful product add and serve its
+  dedicated script minified and deferred.
+- Replace the size-guide divider with a lightweight inline Font Awesome ruler.
+
 ## 1.0.40
 
 - Add an editable HEX color picker to every WooCommerce color attribute term.

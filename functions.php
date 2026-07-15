@@ -18,7 +18,7 @@ define( 'BELCTECH_INC_URI', get_template_directory_uri() . '/inc' );
 define( 'BELCTECH_NAMESPACE', 'belctech-ecommerce' );
 
 // Constant: Theme version
-define( 'BELCTECH_THEME_VERSION', '1.0.41' );
+define( 'BELCTECH_THEME_VERSION', '1.0.42' );
 define( 'BELCTECH_FEATURES_DIR', BELCTECH_INC_DIR . '/belctech' );
 
 
@@ -32,6 +32,7 @@ require BELCTECH_FEATURES_DIR . '/swatches.php';
 require BELCTECH_FEATURES_DIR . '/shop-filters.php';
 require BELCTECH_FEATURES_DIR . '/footer-blocks.php';
 require BELCTECH_FEATURES_DIR . '/performance.php';
+require BELCTECH_FEATURES_DIR . '/buy-now.php';
 
 // Store-specific modules migrated from the previous site functions file.
 require BELCTECH_INC_DIR . '/vaam-custom.php';

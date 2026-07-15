@@ -924,11 +924,12 @@ if( ! belctech_wc_active() ) {
 	function belctech_sizing_guide_link() {
 		$size_page = belctech_sizing_guide();
 		$mode = apply_filters('belctech_size_guide_open_mode', 'lightbox');
+		$icon = '<span class="belctech-size-guide-icon" aria-hidden="true"><svg viewBox="0 0 576 512" focusable="false"><path d="M0 96C0 60.7 28.7 32 64 32l448 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zm96 64l0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 32 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 32 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 32 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 32 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 32 0 0-64L96 160z"/></svg></span>';
 		if (!empty($size_page)) {
 			if ($mode == 'lightbox') { ?>
-			<a href="#sizing-popup" rel="inline" class="sizing-guide-open sizing_guide" data-class="et-sizing-guide" data-button-inside="true"><?php echo apply_filters('belctech_size_guide_link_title', get_the_title($size_page)); ?></a>
+			<a href="#sizing-popup" rel="inline" class="sizing-guide-open sizing_guide" data-class="et-sizing-guide" data-button-inside="true"><?php echo $icon; ?><span><?php echo esc_html( apply_filters('belctech_size_guide_link_title', get_the_title($size_page)) ); ?></span></a>
 		<?php } else { ?>
-			<a href="<?php echo get_permalink($size_page); ?>" class="sizing-guide-open sizing_guide" data-class="et-sizing-guide" target="_blank"><?php echo apply_filters('belctech_size_guide_link_title', get_the_title($size_page)); ?></a>
+			<a href="<?php echo esc_url( get_permalink($size_page) ); ?>" class="sizing-guide-open sizing_guide" data-class="et-sizing-guide" target="_blank"><?php echo $icon; ?><span><?php echo esc_html( apply_filters('belctech_size_guide_link_title', get_the_title($size_page)) ); ?></span></a>
 		<?php }
 	}
 	}
@@ -1710,15 +1711,20 @@ if( ! belctech_wc_active() ) {
 	add_action('woocommerce_after_add_to_cart_button', 'belctech_add_buy_now_button', 1);
 	function belctech_add_buy_now_button() {
 		global $product;
-		if ( ! get_theme_mod('product_single_buy_now', true) == true ) {
+		if ( ! $product instanceof WC_Product || ! get_theme_mod('product_single_buy_now', true) == true ) {
 			return;
 		}
 		$style = get_theme_mod('buy_now_style', 'outlined');
+		$popup = function_exists( 'belctech_buy_now_popup_enabled' )
+			&& belctech_buy_now_popup_enabled()
+			&& belctech_buy_now_popup_supported_product( $product );
+		$label = trim( (string) get_theme_mod( 'product_buy_now_label', 'Comprar ahora' ) );
+		if ( '' === $label ) $label = 'Comprar ahora';
 	 ?>
 	 <div class="buy-now-container-single-product">
 		 <div>
-		<button type="submit" name="add-to-cart" value="<?php echo esc_attr($product->get_id()); ?>" class="single_buy_now_button et-buy-now-button button alt <?php echo esc_attr( $style ); ?>" id="buy_now_button">
-		<?php echo esc_html( get_theme_mod( 'product_buy_now_label', 'Comprar ahora' ) ); ?>
+		<button type="<?php echo $popup ? 'button' : 'submit'; ?>" <?php if ( ! $popup ) : ?>name="add-to-cart"<?php endif; ?> value="<?php echo esc_attr($product->get_id()); ?>" data-product-id="<?php echo esc_attr( $product->get_id() ); ?>" class="single_buy_now_button et-buy-now-button button alt <?php echo esc_attr( $style ); ?><?php echo $popup ? ' belctech-buy-now-popup-button' : ''; ?>"<?php if ( ! $popup ) : ?> id="buy_now_button"<?php endif; ?>>
+		<?php echo esc_html( $label ); ?>
 		</button>
 		<input type="hidden" name="is_buy_now" id="is_buy_now" value="0" />
 		</div>

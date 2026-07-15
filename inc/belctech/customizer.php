@@ -59,6 +59,7 @@ function belctech_customize_register( WP_Customize_Manager $customizer ) {
 	belctech_customizer_section( $customizer, 'belctech_shop_cards', 'Product cards', 'belctech_shop' );
 	belctech_customizer_section( $customizer, 'belctech_shop_quickview', 'Quick view', 'belctech_shop' );
 	belctech_customizer_section( $customizer, 'belctech_product_layout', 'Product layout', 'belctech_product' );
+	belctech_customizer_section( $customizer, 'belctech_product_buy_now', 'Buy now button', 'belctech_product' );
 	belctech_customizer_section( $customizer, 'belctech_product_gallery', 'Product gallery', 'belctech_product' );
 	belctech_customizer_section( $customizer, 'belctech_product_size', 'Size guide', 'belctech_product' );
 	belctech_customizer_section( $customizer, 'belctech_footer_columns', 'Footer de 4 columnas', 'belctech_footer' );
@@ -110,9 +111,16 @@ function belctech_customize_register( WP_Customize_Manager $customizer ) {
 	belctech_customize_field( $customizer, 'product_layout_single', 'Product layout', 'belctech_product_layout', 'select', 'regular', array( 'regular' => 'Regular', 'showcase' => 'Showcase', 'no-padding' => 'No padding', 'full-width' => 'Full width' ) );
 	belctech_customize_field( $customizer, 'product_details_style', 'Details style', 'belctech_product_layout', 'select', 'tabs', array( 'tabs' => 'Tabs', 'accordion' => 'Accordion', 'vertical' => 'Vertical' ) );
 	belctech_customize_field( $customizer, 'product_sticky_bar', 'Sticky product bar', 'belctech_product_layout', 'checkbox', true );
-	belctech_customize_field( $customizer, 'product_single_buy_now', 'Show Buy now button', 'belctech_product_layout', 'checkbox', true );
-	belctech_customize_field( $customizer, 'product_buy_now_label', 'Buy now label', 'belctech_product_layout', 'text', 'Comprar ahora' );
 	belctech_customize_field( $customizer, 'product_button_radius', 'Product button radius', 'belctech_product_layout', 'number', 6, array( 'min' => 0, 'max' => 24, 'step' => 1 ) );
+	belctech_customize_field( $customizer, 'product_single_buy_now', 'Mostrar boton Comprar ahora', 'belctech_product_buy_now', 'checkbox', true );
+	belctech_customize_field( $customizer, 'product_buy_now_popup', 'Abrir checkout en popup', 'belctech_product_buy_now', 'checkbox', true );
+	belctech_customize_field( $customizer, 'product_buy_now_label', 'Texto del boton', 'belctech_product_buy_now', 'text', 'Comprar ahora' );
+	belctech_customize_field( $customizer, 'product_buy_now_background_color', 'Color de fondo', 'belctech_product_buy_now', 'color', '#ffffff' );
+	belctech_customize_field( $customizer, 'product_buy_now_text_color', 'Color del texto', 'belctech_product_buy_now', 'color', '#202224' );
+	belctech_customize_field( $customizer, 'product_buy_now_border_color', 'Color del borde', 'belctech_product_buy_now', 'color', '#202224' );
+	belctech_customize_field( $customizer, 'product_buy_now_hover_background_color', 'Fondo al pasar el cursor', 'belctech_product_buy_now', 'color', '#202224' );
+	belctech_customize_field( $customizer, 'product_buy_now_hover_text_color', 'Texto al pasar el cursor', 'belctech_product_buy_now', 'color', '#ffffff' );
+	belctech_customize_field( $customizer, 'product_buy_now_hover_border_color', 'Borde al pasar el cursor', 'belctech_product_buy_now', 'color', '#202224' );
 	belctech_customize_field( $customizer, 'product_gallery_style', 'Gallery style', 'belctech_product_gallery', 'select', 'carousel', array( 'carousel' => 'Slider', 'column' => 'Column', 'grid' => 'Grid' ) );
 	belctech_customize_field( $customizer, 'product_gallery_transition', 'Slider transition', 'belctech_product_gallery', 'select', 'slide', array( 'slide' => 'Slide', 'fade' => 'Fade' ) );
 	belctech_customize_field( $customizer, 'product_image_lightbox', 'Image lightbox', 'belctech_product_gallery', 'checkbox', true );
@@ -248,8 +256,14 @@ function belctech_design_css() {
 	$campaign_bg   = sanitize_hex_color( get_theme_mod( 'campaign_bar_background_color', get_theme_mod( 'campaign_bar_background', '#e97a7e' ) ) ) ?: '#e97a7e';
 	$campaign_text = sanitize_hex_color( get_theme_mod( 'campaign_bar_font_color', get_theme_mod( 'campaign_bar_text_color', '#ffffff' ) ) ) ?: '#ffffff';
 	$button_radius = max( 0, min( 24, absint( get_theme_mod( 'product_button_radius', 6 ) ) ) );
+	$buy_now_bg = sanitize_hex_color( get_theme_mod( 'product_buy_now_background_color', '#ffffff' ) ) ?: '#ffffff';
+	$buy_now_text = sanitize_hex_color( get_theme_mod( 'product_buy_now_text_color', '#202224' ) ) ?: '#202224';
+	$buy_now_border = sanitize_hex_color( get_theme_mod( 'product_buy_now_border_color', '#202224' ) ) ?: '#202224';
+	$buy_now_hover_bg = sanitize_hex_color( get_theme_mod( 'product_buy_now_hover_background_color', '#202224' ) ) ?: '#202224';
+	$buy_now_hover_text = sanitize_hex_color( get_theme_mod( 'product_buy_now_hover_text_color', '#ffffff' ) ) ?: '#ffffff';
+	$buy_now_hover_border = sanitize_hex_color( get_theme_mod( 'product_buy_now_hover_border_color', '#202224' ) ) ?: '#202224';
 
-	return ':root{--belctech-header-height:' . $header . 'px;--belctech-sticky-height:' . $sticky . 'px;--belctech-campaign-bg:' . $campaign_bg . ';--belctech-campaign-text:' . $campaign_text . ';--belctech-product-button-radius:' . $button_radius . 'px;}'
+	return ':root{--belctech-header-height:' . $header . 'px;--belctech-sticky-height:' . $sticky . 'px;--belctech-campaign-bg:' . $campaign_bg . ';--belctech-campaign-text:' . $campaign_text . ';--belctech-product-button-radius:' . $button_radius . 'px;--belctech-buy-now-bg:' . $buy_now_bg . ';--belctech-buy-now-text:' . $buy_now_text . ';--belctech-buy-now-border:' . $buy_now_border . ';--belctech-buy-now-hover-bg:' . $buy_now_hover_bg . ';--belctech-buy-now-hover-text:' . $buy_now_hover_text . ';--belctech-buy-now-hover-border:' . $buy_now_hover_border . ';}'
 		. '.et-global-campaign{background-color:var(--belctech-campaign-bg)!important;color:var(--belctech-campaign-text)!important}'
 		. '@media(min-width:992px){.site-header,.header-spacer{height:' . $header . 'px!important}.header_on_scroll:not(.megamenu-active) .site-header,.header_on_scroll:not(.megamenu-active) .header-spacer{height:' . $sticky . 'px!important}.site-header .logoimg{width:auto!important;max-height:' . $logo . 'px!important;object-fit:contain}.header_on_scroll:not(.megamenu-active) .site-header .logoimg{max-height:' . $logo_sticky . 'px!important}.site-header .main-navigation .et-header-menu>li{align-self:center;height:auto!important;min-height:0!important;pointer-events:none}.site-header .main-navigation .et-header-menu>li>a,.site-header .main-navigation .et-header-menu>li>.sub-menu{pointer-events:auto}.site-header .main-navigation .et-header-menu>li>a{align-self:center;display:inline-flex!important;flex:0 0 auto;height:auto!important;min-height:0!important;padding-bottom:0;padding-top:0;width:auto!important}}'
 		. '@media(max-width:991px){.site-header .logoimg{width:auto!important;max-height:' . $logo_mobile . 'px!important;object-fit:contain}}';

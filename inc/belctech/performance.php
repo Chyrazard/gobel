@@ -63,7 +63,7 @@ add_filter( 'emoji_svg_url', '__return_false' );
 add_action( 'wp_enqueue_scripts', static function () {
 	if ( ! is_user_logged_in() ) wp_dequeue_style( 'dashicons' );
 	wp_dequeue_script( 'wp-embed' );
-	foreach ( array( 'modernizr', 'mobile-detect', 'in-viewport', 'magnific-popup', 'sticky-kit', 'jquery-slick', 'isotope-pk', 'packery', 'arrive', 'belctech-app', 'belctech-swatches' ) as $handle ) {
+	foreach ( array( 'modernizr', 'mobile-detect', 'in-viewport', 'magnific-popup', 'sticky-kit', 'jquery-slick', 'isotope-pk', 'packery', 'arrive', 'belctech-app', 'belctech-swatches', 'belctech-buy-now' ) as $handle ) {
 		wp_script_add_data( $handle, 'strategy', 'defer' );
 	}
 }, 100 );
