@@ -27,13 +27,34 @@ add_filter( 'product_attributes_type_selector', static function ( $types ) {
 	return $types;
 } );
 
+function belctech_attribute_taxonomy_is_color( $attribute ) {
+	if ( ! is_object( $attribute ) || empty( $attribute->attribute_name ) ) return false;
+	if ( 'color' === $attribute->attribute_type ) return true;
+
+	$label = isset( $attribute->attribute_label ) ? $attribute->attribute_label : '';
+	$key   = sanitize_title( remove_accents( $attribute->attribute_name . ' ' . $label ) );
+	return false !== strpos( $key, 'color' ) || false !== strpos( $key, 'colour' );
+}
+
+function belctech_is_color_attribute_taxonomy( $taxonomy ) {
+	if ( ! function_exists( 'wc_get_attribute_taxonomies' ) ) return false;
+	foreach ( wc_get_attribute_taxonomies() as $attribute ) {
+		if ( wc_attribute_taxonomy_name( $attribute->attribute_name ) === $taxonomy ) {
+			return belctech_attribute_taxonomy_is_color( $attribute );
+		}
+	}
+	return false;
+}
+
 function belctech_attribute_taxonomies() {
 	if ( ! function_exists( 'wc_get_attribute_taxonomies' ) ) return;
 	foreach ( wc_get_attribute_taxonomies() as $attribute ) {
 		$taxonomy = wc_attribute_taxonomy_name( $attribute->attribute_name );
-		if ( 'color' === $attribute->attribute_type ) {
+		if ( belctech_attribute_taxonomy_is_color( $attribute ) ) {
 			add_action( $taxonomy . '_add_form_fields', 'belctech_color_add_field' );
 			add_action( $taxonomy . '_edit_form_fields', 'belctech_color_edit_field' );
+			add_filter( 'manage_edit-' . $taxonomy . '_columns', 'belctech_color_term_columns' );
+			add_filter( 'manage_' . $taxonomy . '_custom_column', 'belctech_color_term_column', 10, 3 );
 		} elseif ( 'image' === $attribute->attribute_type ) {
 			add_action( $taxonomy . '_add_form_fields', 'belctech_image_add_field' );
 			add_action( $taxonomy . '_edit_form_fields', 'belctech_image_edit_field' );
@@ -44,23 +65,76 @@ function belctech_attribute_taxonomies() {
 }
 add_action( 'admin_init', 'belctech_attribute_taxonomies' );
 
+function belctech_swatch_admin_assets( $hook ) {
+	if ( ! in_array( $hook, array( 'edit-tags.php', 'term.php' ), true ) ) return;
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+	if ( ! $screen || empty( $screen->taxonomy ) || ! belctech_is_color_attribute_taxonomy( $screen->taxonomy ) ) return;
+
+	wp_enqueue_style( 'wp-color-picker' );
+	wp_enqueue_script( 'wp-color-picker' );
+	wp_add_inline_script(
+		'wp-color-picker',
+		'jQuery(function($){function initBelctechColors(context){$(context).find("input.belctech-color-picker").each(function(){if(!$(this).hasClass("wp-color-picker")){$(this).wpColorPicker();}});}initBelctechColors(document);$(document).ajaxComplete(function(){initBelctechColors(document);});});'
+	);
+}
+add_action( 'admin_enqueue_scripts', 'belctech_swatch_admin_assets' );
+
+function belctech_swatch_nonce_field() {
+	wp_nonce_field( 'belctech_save_swatch_term', 'belctech_swatch_nonce', false );
+}
+
 function belctech_color_add_field() {
-	echo '<div class="form-field"><label for="product_attribute_color">' . esc_html__( 'Swatch color', 'belctech-ecommerce' ) . '</label><input type="color" name="product_attribute_color" id="product_attribute_color" value="#000000"></div>';
+	echo '<div class="form-field"><label for="belctech_swatch_color">' . esc_html__( 'Color del swatch', 'belctech-ecommerce' ) . '</label>';
+	belctech_swatch_nonce_field();
+	echo '<input class="belctech-color-picker" type="text" name="belctech_swatch_color" id="belctech_swatch_color" value="#CCCCCC" data-default-color="#CCCCCC">';
+	echo '<p class="description">' . esc_html__( 'Escoge el color visual o escribe directamente su código HEX.', 'belctech-ecommerce' ) . '</p></div>';
 }
 function belctech_color_edit_field( $term ) {
-	$value = get_term_meta( $term->term_id, 'product_attribute_color', true ) ?: '#000000';
-	echo '<tr class="form-field"><th><label for="product_attribute_color">' . esc_html__( 'Swatch color', 'belctech-ecommerce' ) . '</label></th><td><input type="color" name="product_attribute_color" id="product_attribute_color" value="' . esc_attr( $value ) . '"></td></tr>';
+	$value = belctech_swatch_color( $term, $term->slug );
+	echo '<tr class="form-field"><th><label for="belctech_swatch_color">' . esc_html__( 'Color del swatch', 'belctech-ecommerce' ) . '</label></th><td>';
+	belctech_swatch_nonce_field();
+	echo '<input class="belctech-color-picker" type="text" name="belctech_swatch_color" id="belctech_swatch_color" value="' . esc_attr( strtoupper( $value ) ) . '" data-default-color="' . esc_attr( strtoupper( $value ) ) . '">';
+	echo '<p class="description">' . esc_html__( 'Este HEX controla el color mostrado en productos, vista rápida y tarjetas.', 'belctech-ecommerce' ) . '</p></td></tr>';
 }
 function belctech_image_add_field() {
-	echo '<div class="form-field"><label for="product_attribute_image">' . esc_html__( 'Swatch image ID', 'belctech-ecommerce' ) . '</label><input type="number" name="product_attribute_image" id="product_attribute_image"></div>';
+	echo '<div class="form-field"><label for="product_attribute_image">' . esc_html__( 'Swatch image ID', 'belctech-ecommerce' ) . '</label>';
+	belctech_swatch_nonce_field();
+	echo '<input type="number" name="product_attribute_image" id="product_attribute_image"></div>';
 }
 function belctech_image_edit_field( $term ) {
 	$value = absint( get_term_meta( $term->term_id, 'product_attribute_image', true ) );
-	echo '<tr class="form-field"><th><label for="product_attribute_image">' . esc_html__( 'Swatch image ID', 'belctech-ecommerce' ) . '</label></th><td><input type="number" name="product_attribute_image" id="product_attribute_image" value="' . esc_attr( $value ) . '"><p class="description">' . esc_html__( 'Attachment ID from the Media Library.', 'belctech-ecommerce' ) . '</p></td></tr>';
+	echo '<tr class="form-field"><th><label for="product_attribute_image">' . esc_html__( 'Swatch image ID', 'belctech-ecommerce' ) . '</label></th><td>';
+	belctech_swatch_nonce_field();
+	echo '<input type="number" name="product_attribute_image" id="product_attribute_image" value="' . esc_attr( $value ) . '"><p class="description">' . esc_html__( 'Attachment ID from the Media Library.', 'belctech-ecommerce' ) . '</p></td></tr>';
 }
 function belctech_save_swatch_term( $term_id ) {
-	if ( isset( $_POST['product_attribute_color'] ) ) update_term_meta( $term_id, 'product_attribute_color', sanitize_hex_color( wp_unslash( $_POST['product_attribute_color'] ) ) );
-	if ( isset( $_POST['product_attribute_image'] ) ) update_term_meta( $term_id, 'product_attribute_image', absint( $_POST['product_attribute_image'] ) );
+	if ( empty( $_POST['belctech_swatch_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['belctech_swatch_nonce'] ) ), 'belctech_save_swatch_term' ) ) return;
+	$taxonomy = isset( $_POST['taxonomy'] ) ? sanitize_key( wp_unslash( $_POST['taxonomy'] ) ) : '';
+	$object   = $taxonomy ? get_taxonomy( $taxonomy ) : null;
+	if ( ! $object || ! current_user_can( $object->cap->edit_terms ) ) return;
+
+	if ( isset( $_POST['belctech_swatch_color'] ) ) {
+		$color = sanitize_hex_color( wp_unslash( $_POST['belctech_swatch_color'] ) );
+		if ( $color ) {
+			update_term_meta( $term_id, 'belctech_swatch_color', strtoupper( $color ) );
+		} else {
+			delete_term_meta( $term_id, 'belctech_swatch_color' );
+		}
+	}
+	if ( isset( $_POST['product_attribute_image'] ) ) update_term_meta( $term_id, 'product_attribute_image', absint( wp_unslash( $_POST['product_attribute_image'] ) ) );
+}
+
+function belctech_color_term_columns( $columns ) {
+	$columns['belctech_swatch_color'] = __( 'Color', 'belctech-ecommerce' );
+	return $columns;
+}
+
+function belctech_color_term_column( $content, $column, $term_id ) {
+	if ( 'belctech_swatch_color' !== $column ) return $content;
+	$term = get_term( $term_id );
+	if ( ! $term instanceof WP_Term ) return $content;
+	$color = belctech_swatch_color( $term, $term->slug );
+	return '<span style="display:inline-block;width:24px;height:24px;margin-right:8px;border:1px solid #aaa;border-radius:50%;background:' . esc_attr( $color ) . ';vertical-align:middle"></span><code>' . esc_html( strtoupper( $color ) ) . '</code>';
 }
 
 function belctech_swatch_type( $attribute ) {
@@ -85,6 +159,14 @@ function belctech_swatch_type( $attribute ) {
 function belctech_swatch_color( $term, $option ) {
 	$name = sanitize_title( remove_accents( $term instanceof WP_Term ? $term->name . ' ' . $term->slug : $option ) );
 	$option_slug = sanitize_title( remove_accents( $option ) );
+
+	// A color selected directly on the WooCommerce attribute term is always the
+	// source of truth. Customizer mappings remain backward-compatible fallbacks.
+	if ( $term instanceof WP_Term ) {
+		$term_color = sanitize_hex_color( get_term_meta( $term->term_id, 'belctech_swatch_color', true ) );
+		if ( $term_color ) return $term_color;
+	}
+
 	$custom_lines = preg_split( '/\r\n|\r|\n/', (string) get_theme_mod( 'belctech_swatch_custom_assignments', '' ) );
 	$custom_colors = array();
 	foreach ( $custom_lines as $line ) {
@@ -124,15 +206,14 @@ function belctech_swatch_color( $term, $option ) {
 		if ( $assigned ) return $assigned;
 	}
 
-	$color = '';
+	// Retain colors created by legacy swatch plugins for terms without a known
+	// Belctech mapping. They intentionally remain below the established palette.
 	if ( $term instanceof WP_Term ) {
 		foreach ( array( 'product_attribute_color', 'wvs_color', 'color' ) as $meta_key ) {
-			$color = sanitize_hex_color( get_term_meta( $term->term_id, $meta_key, true ) );
-			if ( $color ) break;
+			$legacy_color = sanitize_hex_color( get_term_meta( $term->term_id, $meta_key, true ) );
+			if ( $legacy_color ) return $legacy_color;
 		}
 	}
-
-	if ( $color ) return $color;
 
 	$fallback = sanitize_hex_color( get_theme_mod( 'belctech_swatch_default_color', '#CCCCCC' ) ) ?: '#CCCCCC';
 	return apply_filters( 'belctech_swatch_fallback_color', $fallback, $name, $term );

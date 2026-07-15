@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.40
+
+- Add an editable HEX color picker to every WooCommerce color attribute term.
+- Treat attributes named Color as color swatches even when their stored WooCommerce type is Select.
+- Give term-level HEX colors priority while retaining all existing Customizer assignments as fallbacks.
+- Show the resolved swatch and HEX value in the attribute terms table.
+
 ## 1.0.39
 
 - Keep every catalog filter section expanded when the panel opens on desktop and mobile.
