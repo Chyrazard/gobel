@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.39
+
+- Keep every catalog filter section expanded when the panel opens on desktop and mobile.
+- Restore the mobile catalog header spacer so breadcrumbs never overlap the transparent header.
+
 ## 1.0.38
 
 - Added removable active-filter tags beside the catalog filter control and

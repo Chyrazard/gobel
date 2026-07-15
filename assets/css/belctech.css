@@ -1192,6 +1192,15 @@ select[data-belctech-native-select="1"] {
 }
 
 @media (max-width: 767px) {
+	/* Transparent mobile headers hide the global spacer. Catalog archives still
+	   need it so breadcrumbs and controls always begin below the real header. */
+	body.post-type-archive-product .site-content > .header-spacer,
+	body.tax-product_cat .site-content > .header-spacer,
+	body.tax-product_tag .site-content > .header-spacer,
+	body.woocommerce.search-results .site-content > .header-spacer {
+		display: block !important;
+	}
+
 	.shop_bar .belctech-toolbar-active-filters {
 		flex: 1 0 100%;
 		justify-content: flex-start;
@@ -1212,7 +1221,7 @@ select[data-belctech-native-select="1"] {
 	body.tax-product_cat .site-content > .hero-header,
 	body.tax-product_tag .site-content > .hero-header,
 	body.woocommerce.search-results .site-content > .hero-header {
-		padding-top: 20px;
+		padding-top: 24px;
 	}
 }
 

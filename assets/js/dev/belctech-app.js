@@ -914,14 +914,7 @@
 
 			// Open Side Filters (mobile included)
 			self.$body.on('click', '#et-shop-filters', function() {
-
-				// Collapse widgets on mobile filter
-				if($(window).width()<768){
-					var $filterTitle = self.$sideFilters.find('.widgettitle');
-					if(!$filterTitle.hasClass('active') && !$filterTitle.parent().hasClass('widget-woof') && !$filterTitle.parent().hasClass('woof_sid_widget')){
-						$filterTitle.trigger('click');
-					}
-				}
+				self.expandShopFilterWidgets(self.$sideFilters);
 
 				filterPanelAction('play');
 				return false;
@@ -1805,6 +1798,21 @@
 
 		},
 
+		expandShopFilterWidgets: function(sidebar) {
+			var $sidebar = sidebar && sidebar.length ? sidebar : this.$sideFilters;
+
+			// Keep every filter visible when the panel opens. This also clears
+			// collapsed state left by a previous visit or an AJAX refresh.
+			$sidebar.find('.widgettitle').each(function() {
+				var $filterTitle = $(this);
+				$filterTitle.removeClass('active');
+				$filterTitle.next().stop(true, true).show().css({
+					height: 'auto',
+					opacity: 1
+				});
+			});
+		},
+
 		/* Filter widgets actions */
 		shopFilterWidgets: function(isAjax) {
 			var self = this,
@@ -1819,6 +1827,10 @@
 
 			// Toggle widgets
 			self.toggleWidgets($sidebarFilters);
+
+			// Filters start expanded on desktop and mobile. AJAX filter plugins
+			// can replace this markup, so normalize it on every initialization.
+			self.expandShopFilterWidgets($sidebarFilters);
 
 			// Update filters count
 			self.shopActiveFiltersCount(200);
@@ -1894,6 +1906,7 @@
 
 			$filterButton.on('click', function(e) {
 				e.preventDefault();
+				self.expandShopFilterWidgets($shopSidebar);
 
 				var isOpen = $shopSidebar.is(':visible'),
 						offset = self.$headerHeight;
