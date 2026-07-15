@@ -150,6 +150,67 @@
 		$image.removeAttr('data-belctech-hover-src data-belctech-hover-srcset data-belctech-hover-sizes');
 	}
 
+	var swatchTooltipFrame = 0;
+	var $swatchTooltip = $();
+
+	function swatchLabel($item) {
+		return String(
+			$item.attr('data-belctech-swatch-label') ||
+			$item.attr('data-title') ||
+			$item.attr('data-wvstooltip') ||
+			$item.attr('aria-label') ||
+			''
+		).trim();
+	}
+
+	function ensureSwatchTooltip() {
+		if ($swatchTooltip.length) return $swatchTooltip;
+		$swatchTooltip = $('<span class="belctech-swatch-tooltip" role="tooltip" aria-hidden="true"></span>').appendTo(document.body);
+		return $swatchTooltip;
+	}
+
+	function positionSwatchTooltip($item) {
+		var label = swatchLabel($item);
+		if (!label) return;
+
+		var tooltip = ensureSwatchTooltip();
+		var target = $item.get(0);
+		if (!target) return;
+
+		window.cancelAnimationFrame(swatchTooltipFrame);
+		tooltip.removeClass('is-visible is-below').attr('aria-hidden', 'false').text(label);
+
+		var targetRect = target.getBoundingClientRect();
+		var tooltipRect = tooltip.get(0).getBoundingClientRect();
+		var viewportPadding = 8;
+		var gap = 9;
+		var targetCenter = targetRect.left + (targetRect.width / 2);
+		var halfWidth = tooltipRect.width / 2;
+		var center = Math.max(viewportPadding + halfWidth, Math.min(window.innerWidth - viewportPadding - halfWidth, targetCenter));
+		var top = targetRect.top - tooltipRect.height - gap;
+		var below = top < viewportPadding;
+
+		if (below) top = targetRect.bottom + gap;
+
+		var arrowLeft = Math.max(9, Math.min(tooltipRect.width - 9, halfWidth + targetCenter - center));
+		tooltip
+			.toggleClass('is-below', below)
+			.css({
+				'--belctech-swatch-arrow-left': arrowLeft + 'px',
+				left: center + 'px',
+				top: top + 'px'
+			});
+
+		swatchTooltipFrame = window.requestAnimationFrame(function () {
+			tooltip.addClass('is-visible');
+		});
+	}
+
+	function hideSwatchTooltip() {
+		window.cancelAnimationFrame(swatchTooltipFrame);
+		if ($swatchTooltip.length) $swatchTooltip.removeClass('is-visible').attr('aria-hidden', 'true');
+	}
+
 	$(document.body).on('click', '.variable-items-wrapper:not(.belctech-card-swatches) .variable-item', function (event) {
 		var $item = $(this);
 		if ($item.hasClass('disabled')) return;
@@ -221,6 +282,12 @@
 		}
 	});
 
+	$(document.body)
+		.on('mouseenter focusin', '[data-belctech-swatch-label], .color-variable-item[data-title], .image-variable-item[data-title], .color-variable-item[data-wvstooltip], .image-variable-item[data-wvstooltip]', function () {
+			positionSwatchTooltip($(this));
+		})
+		.on('mouseleave focusout click', '[data-belctech-swatch-label], .color-variable-item[data-title], .image-variable-item[data-title], .color-variable-item[data-wvstooltip], .image-variable-item[data-wvstooltip]', hideSwatchTooltip);
+
 	$(document.body).on('mouseenter focusin', '.products .product', function () {
 		loadCardHoverImage($(this));
 	});
@@ -263,6 +330,10 @@
 		}
 	});
 
-	$(window).on('load resize', updateTallProductLayout);
+	$(window).on('load resize', function () {
+		hideSwatchTooltip();
+		updateTallProductLayout();
+	});
+	$(window).on('scroll', hideSwatchTooltip);
 	$(window).on('popstate', updateFilterCount);
 })(jQuery);

@@ -71,6 +71,66 @@
 	position: relative;
 }
 
+/* One viewport-level tooltip serves every color swatch, including cards,
+   quick view and the sticky product bar, without being clipped by sliders. */
+.belctech-swatch-tooltip {
+	--belctech-swatch-arrow-left: 50%;
+	background: #202224;
+	border-radius: 5px;
+	box-shadow: 0 6px 18px rgba(20, 22, 24, .18);
+	box-sizing: border-box;
+	color: #fff;
+	display: block;
+	font-family: inherit;
+	font-size: 11px;
+	font-weight: 500;
+	letter-spacing: 0;
+	line-height: 1.2;
+	max-width: min(180px, calc(100vw - 16px));
+	opacity: 0;
+	padding: 5px 8px;
+	pointer-events: none;
+	position: fixed;
+	text-align: center;
+	transform: translate(-50%, 3px);
+	transition: opacity 130ms ease, transform 130ms ease;
+	visibility: hidden;
+	white-space: nowrap;
+	z-index: 1000002;
+}
+
+.belctech-swatch-tooltip::after {
+	border: 5px solid transparent;
+	border-top-color: #202224;
+	content: "";
+	left: var(--belctech-swatch-arrow-left);
+	pointer-events: none;
+	position: absolute;
+	top: 100%;
+	transform: translateX(-50%);
+}
+
+.belctech-swatch-tooltip.is-visible {
+	opacity: 1;
+	transform: translate(-50%, 0);
+	visibility: visible;
+}
+
+.belctech-swatch-tooltip.is-below {
+	transform: translate(-50%, -3px);
+}
+
+.belctech-swatch-tooltip.is-below.is-visible {
+	transform: translate(-50%, 0);
+}
+
+.belctech-swatch-tooltip.is-below::after {
+	border-bottom-color: #202224;
+	border-top-color: transparent;
+	bottom: 100%;
+	top: auto;
+}
+
 .variable-items-wrapper .variable-item.disabled {
 	cursor: not-allowed;
 	opacity: .38;

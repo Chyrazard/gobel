@@ -18,7 +18,7 @@ define( 'BELCTECH_INC_URI', get_template_directory_uri() . '/inc' );
 define( 'BELCTECH_NAMESPACE', 'belctech-ecommerce' );
 
 // Constant: Theme version
-define( 'BELCTECH_THEME_VERSION', '1.0.40' );
+define( 'BELCTECH_THEME_VERSION', '1.0.41' );
 define( 'BELCTECH_FEATURES_DIR', BELCTECH_INC_DIR . '/belctech' );
 
 

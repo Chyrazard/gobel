@@ -282,7 +282,8 @@ function belctech_variation_swatches_html( $html, $args ) {
 			$image_id = $term instanceof WP_Term ? absint( get_term_meta( $term->term_id, 'product_attribute_image', true ) ) : 0;
 			$content = $image_id ? wp_get_attachment_image( $image_id, 'thumbnail' ) : esc_html( $name );
 		}
-		$items .= '<li class="' . esc_attr( implode( ' ', $class ) ) . '" role="radio" tabindex="0" aria-checked="' . ( (string) $selected === (string) $option ? 'true' : 'false' ) . '" aria-label="' . esc_attr( $name ) . '" data-value="' . esc_attr( $option ) . '" data-title="' . esc_attr( $name ) . '"><span class="variable-item-contents">' . $content . '</span></li>';
+		$tooltip = in_array( $type, array( 'color', 'image' ), true ) ? ' data-belctech-swatch-label="' . esc_attr( $name ) . '"' : '';
+		$items .= '<li class="' . esc_attr( implode( ' ', $class ) ) . '" role="radio" tabindex="0" aria-checked="' . ( (string) $selected === (string) $option ? 'true' : 'false' ) . '" aria-label="' . esc_attr( $name ) . '" data-value="' . esc_attr( $option ) . '" data-title="' . esc_attr( $name ) . '"' . $tooltip . '><span class="variable-item-contents">' . $content . '</span></li>';
 	}
 
 	if ( '' === $items ) return $html;
@@ -353,7 +354,7 @@ function belctech_render_loop_color_swatches( $product ) {
 		$data = isset( $map[ $option ] ) ? $map[ $option ] : array( 'available' => false, 'image' => '' );
 		$classes = array( 'variable-item', 'color-variable-item' );
 		if ( ! $data['available'] ) $classes[] = 'disabled';
-		$items .= '<li class="' . esc_attr( implode( ' ', $classes ) ) . '" role="radio" tabindex="' . ( $data['available'] ? '0' : '-1' ) . '" aria-checked="false" aria-disabled="' . ( $data['available'] ? 'false' : 'true' ) . '" aria-label="' . esc_attr( $name ) . '" data-value="' . esc_attr( $option ) . '" data-card-image="' . esc_url( $data['image'] ) . '"><span class="variable-item-contents"><span class="variable-item-span variable-item-span-color" style="background-color:' . esc_attr( belctech_swatch_color( $term, $option ) ) . '"></span></span></li>';
+		$items .= '<li class="' . esc_attr( implode( ' ', $classes ) ) . '" role="radio" tabindex="' . ( $data['available'] ? '0' : '-1' ) . '" aria-checked="false" aria-disabled="' . ( $data['available'] ? 'false' : 'true' ) . '" aria-label="' . esc_attr( $name ) . '" data-belctech-swatch-label="' . esc_attr( $name ) . '" data-value="' . esc_attr( $option ) . '" data-card-image="' . esc_url( $data['image'] ) . '"><span class="variable-item-contents"><span class="variable-item-span variable-item-span-color" style="background-color:' . esc_attr( belctech_swatch_color( $term, $option ) ) . '"></span></span></li>';
 	}
 
 	echo '<ul class="variable-items-wrapper belctech-card-swatches color-variable-items-wrapper" role="radiogroup" aria-label="' . esc_attr( wc_attribute_label( $attribute ) ) . '">' . $items . '</ul>';
