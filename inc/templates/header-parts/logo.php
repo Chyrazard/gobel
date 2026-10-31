@@ -14,20 +14,22 @@ $logo_alt = get_theme_mod( 'site_logo_alt' );
 // Logo
 if ( !empty( $wp_logo_id ) ) {
 	$image = wp_get_attachment_image_src( $wp_logo_id , 'full' );
-	$logo = $image[0];
+	if ( ! empty( $image[0] ) ) {
+		$logo = $image[0];
+	}
 }
 
-if(!$logo) { // Theme logo if empty
-	$logo = get_template_directory_uri() . '/assets/img/logo-light.png';
-}
+$logo = belctech_resolve_header_logo( $logo );
 
 // Dark Scheme Logo
-if ( empty($logo_dark) ) {
+$logo_dark = belctech_resolve_header_logo( $logo_dark, false );
+if ( empty( $logo_dark ) ) {
 	$logo_dark = $logo;
 }
 
 // Alternative Logo
 $logo_alt_class =  get_theme_mod( 'site_logo_alt_use', '' );
+$logo_alt = belctech_resolve_header_logo( $logo_alt, false );
 ?>
 
 <div class="logo-holder">

@@ -62,6 +62,7 @@ function belctech_customize_register( WP_Customize_Manager $customizer ) {
 	belctech_customizer_section( $customizer, 'belctech_product_buy_now', 'Buy now button', 'belctech_product' );
 	belctech_customizer_section( $customizer, 'belctech_product_gallery', 'Product gallery', 'belctech_product' );
 	belctech_customizer_section( $customizer, 'belctech_product_size', 'Size guide', 'belctech_product' );
+	belctech_customizer_section( $customizer, 'belctech_footer_middle', 'Bloque superior / Instagram', 'belctech_footer' );
 	belctech_customizer_section( $customizer, 'belctech_footer_columns', 'Footer de 4 columnas', 'belctech_footer' );
 
 	belctech_customize_field( $customizer, 'header_sticky', 'Sticky header', 'belctech_header_layout', 'checkbox', true );
@@ -74,8 +75,9 @@ function belctech_customize_register( WP_Customize_Manager $customizer ) {
 	belctech_customize_field( $customizer, 'header_full_width', 'Full-width header', 'belctech_header_layout', 'checkbox', false );
 	belctech_customize_field( $customizer, 'main_header_login_icon', 'Account display', 'belctech_header_layout', 'select', 'icon', array( 'icon' => 'User icon', 'text' => 'My account text' ) );
 	belctech_customize_field( $customizer, 'main_header_login_popup', 'Account login popup (heavier)', 'belctech_header_layout', 'checkbox', false );
-	belctech_customize_field( $customizer, 'site_logo', 'General logo', 'belctech_header_brand', 'image', '' );
-	belctech_customize_field( $customizer, 'site_logo_dark', 'Logo on transparent header', 'belctech_header_brand', 'image', '' );
+	$default_header_logo = BELCTECH_THEME_URI . '/assets/img/vaam-logo.svg';
+	belctech_customize_field( $customizer, 'site_logo', 'General logo', 'belctech_header_brand', 'image', $default_header_logo );
+	belctech_customize_field( $customizer, 'site_logo_dark', 'Logo on transparent header', 'belctech_header_brand', 'image', $default_header_logo );
 	belctech_customize_field( $customizer, 'header_height', 'Desktop header height', 'belctech_header_brand', 'number', 90, array( 'min' => 56, 'max' => 160, 'step' => 1 ) );
 	belctech_customize_field( $customizer, 'header_height_sticky', 'Sticky header height', 'belctech_header_brand', 'number', 70, array( 'min' => 48, 'max' => 110, 'step' => 1 ) );
 	belctech_customize_field( $customizer, 'header_height_mobile', 'Mobile header height', 'belctech_header_brand', 'number', 60, array( 'min' => 48, 'max' => 90, 'step' => 1 ) );
@@ -110,6 +112,8 @@ function belctech_customize_register( WP_Customize_Manager $customizer ) {
 
 	belctech_customize_field( $customizer, 'product_layout_single', 'Product layout', 'belctech_product_layout', 'select', 'regular', array( 'regular' => 'Regular', 'showcase' => 'Showcase', 'no-padding' => 'No padding', 'full-width' => 'Full width' ) );
 	belctech_customize_field( $customizer, 'product_details_style', 'Details style', 'belctech_product_layout', 'select', 'tabs', array( 'tabs' => 'Tabs', 'accordion' => 'Accordion', 'vertical' => 'Vertical' ) );
+	belctech_customize_field( $customizer, 'product_force_showcase_background', 'Forzar este color en todos los productos', 'belctech_product_layout', 'checkbox', true, array(), 'Activado por defecto. Ignora fondos antiguos o individuales solamente en el bloque superior del producto.' );
+	belctech_customize_field( $customizer, 'product_showcase_background_color', 'Color de fondo de la parte superior', 'belctech_product_layout', 'color', '#ffffff', array(), 'Selecciona el color que se aplicara al bloque de imagen e informacion de todos los productos.' );
 	belctech_customize_field( $customizer, 'product_sticky_bar', 'Sticky product bar', 'belctech_product_layout', 'checkbox', true );
 	belctech_customize_field( $customizer, 'product_button_radius', 'Product button radius', 'belctech_product_layout', 'number', 6, array( 'min' => 0, 'max' => 24, 'step' => 1 ) );
 	belctech_customize_field( $customizer, 'product_single_buy_now', 'Mostrar boton Comprar ahora', 'belctech_product_buy_now', 'checkbox', true );
@@ -127,6 +131,10 @@ function belctech_customize_register( WP_Customize_Manager $customizer ) {
 	belctech_customize_field( $customizer, 'product_image_hover_zoom', 'Image zoom', 'belctech_product_gallery', 'checkbox', false );
 	belctech_customize_field( $customizer, 'product_size_guide', 'Enable size guide', 'belctech_product_size', 'checkbox', true );
 	belctech_customize_field( $customizer, 'product_size_page', 'Default size guide page', 'belctech_product_size', 'dropdown-pages', '' );
+
+	belctech_customize_field( $customizer, 'footer_middle', 'Mostrar bloque adicional', 'belctech_footer_middle', 'checkbox', false );
+	belctech_customize_field( $customizer, 'footer_middle_content', 'Contenido o shortcode', 'belctech_footer_middle', 'textarea', '' );
+	belctech_customize_field( $customizer, 'footer_middle_position', 'Posicion del bloque', 'belctech_footer_middle', 'select', 'after', array( 'before' => 'Antes de las columnas', 'after' => 'Despues de las columnas' ) );
 
 	belctech_customize_field( $customizer, 'footer_widgets', 'Enable footer', 'belctech_footer_columns', 'checkbox', true );
 	belctech_customize_field( $customizer, 'footer_widgets_columns', 'Columns', 'belctech_footer_columns', 'select', 4, array( 1 => '1', 2 => '2', 3 => '3', 4 => '4' ) );
@@ -156,7 +164,7 @@ function belctech_customizer_section( $customizer, $id, $title, $panel ) {
 	$customizer->add_section( $id, array( 'title' => __( $title, 'belctech-ecommerce' ), 'panel' => $panel ) );
 }
 
-function belctech_customize_field( $customizer, $id, $label, $section, $type, $default, $choices = array() ) {
+function belctech_customize_field( $customizer, $id, $label, $section, $type, $default, $choices = array(), $description = '' ) {
 	$sanitize = 'sanitize_text_field';
 	if ( 'checkbox' === $type ) $sanitize = 'belctech_sanitize_checkbox';
 	if ( 'number' === $type ) $sanitize = 'absint';
@@ -166,6 +174,7 @@ function belctech_customize_field( $customizer, $id, $label, $section, $type, $d
 	if ( 'color' === $type ) $sanitize = 'sanitize_hex_color';
 	$customizer->add_setting( $id, array( 'default' => $default, 'sanitize_callback' => $sanitize, 'transport' => 'refresh' ) );
 	$args = array( 'label' => __( $label, 'belctech-ecommerce' ), 'section' => $section, 'settings' => $id, 'type' => $type );
+	if ( $description ) $args['description'] = __( $description, 'belctech-ecommerce' );
 	if ( 'number' === $type ) {
 		$args['input_attrs'] = $choices;
 	} else {
@@ -319,3 +328,17 @@ function belctech_apply_performance_defaults() {
 	update_option( 'belctech_performance_defaults_115', 1, false );
 }
 add_action( 'after_setup_theme', 'belctech_apply_performance_defaults', 33 );
+
+// Restore the legacy footer-middle control and update the store's retired
+// Instagram feed reference once. Other footer content remains untouched.
+function belctech_migrate_footer_instagram_feed() {
+	if ( get_option( 'belctech_footer_instagram_feed_1044' ) ) return;
+
+	$content = (string) get_theme_mod( 'footer_middle_content', '' );
+	if ( preg_match( '/^\s*\[instagram-feed\s+feed=(?:["\x27])?1(?:["\x27])?\s*\]\s*$/i', $content ) ) {
+		set_theme_mod( 'footer_middle_content', '[instagram-feed feed=3]' );
+	}
+
+	update_option( 'belctech_footer_instagram_feed_1044', 1, false );
+}
+add_action( 'after_setup_theme', 'belctech_migrate_footer_instagram_feed', 34 );

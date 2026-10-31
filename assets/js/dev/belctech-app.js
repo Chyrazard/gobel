@@ -422,33 +422,104 @@
 		megaMenu: function() {
 			var self = this;
 
-			// Megamenu full width activates sticky mode with transparent headers
-			if (!self.$body.hasClass('megamenu-fullwidth') && !self.$body.hasClass('page-header-transparent'))
-				return;
-
-			var hasTopBar = (self.$topBar.length && !self.$topBar.parent().hasClass('site-header') && self.$topBar.is(':visible')) ? true : false,
+			var manageHeaderState = self.$body.hasClass('megamenu-fullwidth') || self.$body.hasClass('page-header-transparent'),
+					hasTopBar = (self.$topBar.length && !self.$topBar.parent().hasClass('site-header') && self.$topBar.is(':visible')) ? true : false,
 					hasCampaignBar = (self.$campaignBar.length && self.$campaignBar.is(':visible')) ? true : false,
 					topBarHeight = hasTopBar ? self.$topBar.outerHeight(true) : 0,
 					headerTopSpace = hasCampaignBar ? topBarHeight + self.$campaignBar.outerHeight(true) : topBarHeight,
 					stick = 'header_on_scroll',
+					openClass = 'mega-menu-click-open',
 					$megamenu = $('.et-header-menu > li.menu-item-mega-parent');
 
-			self.$body.removeClass(stick);
+			if (!$megamenu.length)
+				return;
 
-			$megamenu.on({
-				mouseenter: function () {
-					if (!self.$body.hasClass('megamenu-active') && !self.$body.hasClass(stick) ) {
+			if (manageHeaderState && self.$document.scrollTop() <= headerTopSpace) {
+				self.$body.removeClass(stick);
+			}
+
+			function closeMegaMenu() {
+				var $openMenu = $megamenu.filter('.' + openClass);
+
+				$openMenu.removeClass(openClass)
+					.children('a').first().attr('aria-expanded', 'false');
+				self.$body.removeClass('megamenu-active');
+
+				if (manageHeaderState && self.$document.scrollTop() <= headerTopSpace) {
+					self.$body.removeClass(stick);
+				}
+			}
+
+			$megamenu.each(function() {
+				$(this).children('a').first().attr({
+					'aria-haspopup': 'true',
+					'aria-expanded': 'false'
+				});
+			});
+
+			$megamenu.children('a').on('click.belctech_megamenu', function(event) {
+				var $trigger = $(this),
+						$item = $trigger.parent(),
+						href = $.trim($trigger.attr('href') || ''),
+						hasLink = href !== '' && href !== '#' && href.toLowerCase().indexOf('javascript:') !== 0,
+						openAtTop = manageHeaderState && self.$document.scrollTop() <= headerTopSpace;
+
+				if (!$item.hasClass(openClass)) {
+					event.preventDefault();
+					event.stopPropagation();
+					closeMegaMenu();
+					$item.addClass(openClass);
+					$trigger.attr('aria-expanded', 'true');
+					if (openAtTop) {
 						self.$body.addClass('megamenu-active').addClass(stick);
+					} else {
+						self.$body.removeClass('megamenu-active');
+					}
+					return false;
+				}
+
+				closeMegaMenu();
+				if (!hasLink) {
+					event.preventDefault();
+					return false;
+				}
+
+				return true;
+			}).on('keydown.belctech_megamenu', function(event) {
+				if (event.key === ' ' || event.key === 'Spacebar') {
+					event.preventDefault();
+					$(this).trigger('click');
+				}
+			});
+
+			// The dropdown is absolutely positioned outside the trigger's visual box.
+			// Listen on the complete header so moving down into the mega menu never
+			// looks like an exit; close only after leaving both header and dropdown.
+			self.$header.on('mouseleave.belctech_megamenu', closeMegaMenu);
+
+			$megamenu.parent('.et-header-menu').children('li').not($megamenu)
+				.on('mouseenter.belctech_megamenu', closeMegaMenu);
+
+			self.$document.on('click.belctech_megamenu', function(event) {
+				if (!$(event.target).closest('.et-header-menu > li.menu-item-mega-parent').length) {
+					closeMegaMenu();
+				}
+			}).on('keydown.belctech_megamenu', function(event) {
+				if (event.key === 'Escape' || event.keyCode === 27) {
+					var $trigger = $megamenu.filter('.' + openClass).children('a').first();
+
+					if ($trigger.length) {
+						closeMegaMenu();
+						$trigger.trigger('focus');
 					}
 				}
 			});
-			$megamenu.parent('.et-header-menu').on({
-				mouseleave: function () {
-					if (self.$body.hasClass('megamenu-active') && (self.$document.scrollTop() <= headerTopSpace)) {
-						self.$body.removeClass(stick).removeClass('megamenu-active');
-					}
+
+			self.$window.on('scroll.belctech_megamenu', _.debounce(function() {
+				if (self.$document.scrollTop() > headerTopSpace) {
+					closeMegaMenu();
 				}
-			});
+			}, 20));
 
 		},
 

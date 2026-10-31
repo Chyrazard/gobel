@@ -752,23 +752,35 @@ if( ! belctech_wc_active() ) {
 		if ( $att_in_stock == true ) {
 
 			// "New" badge
-			if ( get_theme_mod('product_new_badge', true) == true ) {
+			$automatic_new_badge = get_theme_mod( 'product_new_badge', true ) == true;
+			$manual_new_badge = '1' === get_post_meta( $product->get_id(), 'belctech_product_force_new', true );
+			$new_colors_badge = '1' === get_post_meta( $product->get_id(), 'belctech_product_new_colors', true );
+			$is_new = false;
+			if ( $automatic_new_badge || $manual_new_badge ) {
 
 				// "New Product" badge
 				$postdate		= get_the_time( 'Y-m-d' );			// Post date
 				$postdate_stamp	= strtotime( $postdate );			// Timestamped post date
 				$new_range = get_theme_mod('new_badge_duration', 5);
-				$is_new = apply_filters( 'belctech_product_is_new', $product_new = false );
+				$is_new = $manual_new_badge;
 
 				// If the product was published within the time frame display the new badge
-				if ( ( time() - ( 60 * 60 * 24 * $new_range ) ) < $postdate_stamp) {
+				if ( $automatic_new_badge && ( time() - ( 60 * 60 * 24 * $new_range ) ) < $postdate_stamp) {
 					$is_new = true;
 				}
+				$is_new = apply_filters( 'belctech_product_is_new', $is_new, $product );
+			}
 
-				if ($is_new == true) { ?>
+			if ( $is_new || $new_colors_badge ) { ?>
+				<span class="belctech-new-badges">
+				<?php if ( $is_new ) { ?>
 					<span class="badge new"><?php echo apply_filters('belctech_new_badge_text', esc_html__( 'New', 'belctech-ecommerce' ) ); ?></span>
 				<?php }
-			}
+				if ( $new_colors_badge ) { ?>
+					<span class="badge new-colors"><?php echo apply_filters( 'belctech_new_colors_badge_text', esc_html__( 'Nuevos colores', 'belctech-ecommerce' ) ); ?></span>
+				<?php } ?>
+				</span>
+			<?php }
 
 			// "Sale" badge
 			if($product->is_on_sale() && get_theme_mod('product_sale_flash', 'pct') != 'disabled' && get_theme_mod('shop_catalog_mode', false) == false ) {

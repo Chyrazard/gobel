@@ -45,7 +45,19 @@ function belctech_needs_popup() {
 }
 
 function belctech_cached_custom_styles() {
-	$key = 'belctech_css_' . md5( wp_json_encode( get_theme_mods() ) );
+	if ( is_customize_preview() ) {
+		return function_exists( 'belctech_custom_styles' ) ? belctech_custom_styles() : '';
+	}
+
+	// Custom styles include queried-object metadata (for example product and
+	// page backgrounds), so they must never be shared between different posts.
+	$queried_object = get_queried_object();
+	$cache_context = array(
+		'theme_mods'  => get_theme_mods(),
+		'object_id'   => get_queried_object_id(),
+		'object_type' => is_object( $queried_object ) ? get_class( $queried_object ) : '',
+	);
+	$key = 'belctech_css_' . md5( wp_json_encode( $cache_context ) );
 	$css = get_transient( $key );
 	if ( false === $css ) {
 		$css = function_exists( 'belctech_custom_styles' ) ? belctech_custom_styles() : '';

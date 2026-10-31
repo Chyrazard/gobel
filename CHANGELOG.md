@@ -1,5 +1,91 @@
 # Changelog
 
+## 1.0.53
+
+- Keep a click-opened mega menu visible while the pointer moves downward from
+  its trigger into the dropdown content.
+- Close it only when the pointer enters another top-level menu item or leaves
+  the complete header and mega-menu region.
+
+## 1.0.52
+
+- Keep the header fixed in its sticky position when a mega menu is opened after
+  scrolling instead of applying the legacy top-of-page mega-menu state.
+- Reserve `megamenu-active` for menus opened at the transparent page top so
+  closing the menu or scrolling back cannot leave conflicting header states.
+
+## 1.0.51
+
+- Close a click-opened desktop mega menu when the pointer leaves its complete
+  area or moves onto another top-level menu item.
+- Fade transparent desktop headers to their configured white header background
+  on hover, including readable navigation colors and the regular logo, then
+  restore transparency when the pointer leaves.
+- Preserve the existing white sticky-header behavior after scrolling.
+
+## 1.0.50
+
+- Open desktop mega menus only after an intentional first click instead of on
+  hover, and follow the parent menu link on its second click when one exists.
+- Close an open mega menu on an outside click, Escape or page scrolling while
+  leaving regular dropdowns and the mobile menu unchanged.
+- Add `aria-expanded` and keyboard activation state to mega-menu triggers.
+
+## 1.0.49
+
+- Replace the retired bundled header artwork with the current VAAM wordmark.
+- Use the local VAAM asset by default for normal and transparent headers on
+  fresh installations and every header preset.
+- Redirect legacy saved logo URLs and any explicitly named GOYA asset to the
+  VAAM fallback so the retired brand cannot resurface after an update.
+
+## 1.0.48
+
+- Add an independently editable "Nuevos colores" product badge in the product
+  editor sidebar.
+- Display Nuevo first and Nuevos colores second in the same badge row whenever
+  both manual product labels are active.
+- Keep the new badge visually identical to Nuevo and preserve the existing
+  automatic-new and out-of-stock behavior.
+
+## 1.0.47
+
+- Add a right-sidebar "Etiqueta Nuevo" control to the product editor.
+- Let manually marked products retain the New badge indefinitely until the
+  checkbox is cleared, while unmarked products keep the automatic date rule.
+
+## 1.0.46
+
+- Add a global Customizer color picker for the upper single-product section.
+- Force that color across every product by default, using white as the safe
+  initial value and overriding stale hidden or per-product backgrounds.
+- Link the product editor's individual background field to its global
+  Customizer controls and retire the hidden legacy global background options.
+- Scope generated CSS caches to the current page or product so one product's
+  metadata can never leak its background into every other product page.
+- Bypass the generated CSS cache during Customizer previews so color changes
+  are visible before publishing.
+
+## 1.0.45
+
+- Keep unavailable color swatches at full color intensity on product cards
+  while retaining their crossed-out state.
+- Mark every card color as unavailable when the variable product itself is out
+  of stock, and refresh previously cached card availability maps.
+
+## 1.0.44
+
+- Restore the editable footer-middle section in the native Customizer, including
+  its visibility, content/shortcode and position controls.
+- Migrate the store's retired Instagram feed 1 shortcode to feed 3 without
+  changing any other footer content or widget configuration.
+
+## 1.0.43
+
+- Let sticky product-bar color and image swatches use all remaining horizontal
+  space so long attribute lists no longer appear clipped.
+- Add clear spacing between the sticky quantity control and add-to-cart button.
+
 ## 1.0.42
 
 - Add an optional same-origin Buy Now checkout modal backed by the real

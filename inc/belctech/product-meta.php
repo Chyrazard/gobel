@@ -6,8 +6,18 @@ defined( 'ABSPATH' ) || exit;
 function belctech_product_meta_boxes() {
 	add_meta_box( 'belctech-product-media', __( 'Belctech: video and size guide', 'belctech-ecommerce' ), 'belctech_product_media_box', 'product', 'normal', 'high' );
 	add_meta_box( 'belctech-product-layout', __( 'Belctech: product layout', 'belctech-ecommerce' ), 'belctech_product_layout_box', 'product', 'normal', 'high' );
+	add_meta_box( 'belctech-product-new-badge', __( 'Etiquetas de producto', 'belctech-ecommerce' ), 'belctech_product_new_badge_box', 'product', 'side', 'high' );
 }
 add_action( 'add_meta_boxes_product', 'belctech_product_meta_boxes' );
+
+function belctech_product_new_badge_box( WP_Post $post ) {
+	$forced = '1' === get_post_meta( $post->ID, 'belctech_product_force_new', true );
+	$new_colors = '1' === get_post_meta( $post->ID, 'belctech_product_new_colors', true );
+	wp_nonce_field( 'belctech_product_new_badge', 'belctech_product_new_badge_nonce' );
+	echo '<p><label for="belctech_product_force_new"><input type="checkbox" id="belctech_product_force_new" name="belctech_product_force_new" value="1" ' . checked( $forced, true, false ) . '> <strong>' . esc_html__( 'Marcar como nuevo', 'belctech-ecommerce' ) . '</strong></label></p>';
+	echo '<p><label for="belctech_product_new_colors"><input type="checkbox" id="belctech_product_new_colors" name="belctech_product_new_colors" value="1" ' . checked( $new_colors, true, false ) . '> <strong>' . esc_html__( 'Marcar como Nuevos colores', 'belctech-ecommerce' ) . '</strong></label></p>';
+	echo '<p class="description">' . esc_html__( 'Las etiquetas permanecen hasta que desmarques sus casillas. Sin la marca Nuevo, se conserva la regla automatica por fecha.', 'belctech-ecommerce' ) . '</p>';
+}
 
 function belctech_product_media_box( WP_Post $post ) {
 	wp_nonce_field( 'belctech_product_meta', 'belctech_product_nonce' );
@@ -18,10 +28,13 @@ function belctech_product_media_box( WP_Post $post ) {
 }
 
 function belctech_product_layout_box( WP_Post $post ) {
+	$customizer_url = admin_url( 'customize.php?autofocus[section]=belctech_product_layout' );
+	echo '<p class="description">' . wp_kses_post( sprintf( __( 'El fondo global se controla en <a href="%s">Apariencia &gt; Personalizar &gt; Single Product &gt; Product layout</a>. Mientras este activo &quot;Forzar este color&quot;, el fondo individual de abajo se ignora.', 'belctech-ecommerce' ), esc_url( $customizer_url ) ) ) . '</p>';
+
 	$fields = array(
 		'belctech_product_transparent_header' => array( 'Transparent header', array( '' => 'Global default', 'transparent' => 'Transparent' ) ),
 		'belctech_product_header_style' => array( 'Header text', array( '' => 'Global default', 'dark-title' => 'Dark', 'light-title' => 'Light' ) ),
-		'belctech_product_showcase_background' => array( 'Product info background', 'color' ),
+		'belctech_product_showcase_background' => array( 'Fondo individual del bloque superior', 'color' ),
 		'belctech_product_showcase_style' => array( 'Product info text', array( '' => 'Global default', 'dark-text' => 'Dark', 'light-text' => 'Light' ) ),
 		'belctech_product_layout_single' => array( 'Product layout', array( '' => 'Global default', 'regular' => 'Regular', 'showcase' => 'Showcase', 'no-padding' => 'No padding', 'full-width' => 'Full width' ) ),
 		'belctech_product_gallery_style' => array( 'Gallery', array( '' => 'Global default', 'carousel' => 'Slider', 'column' => 'Column', 'grid' => 'Grid' ) ),
@@ -61,3 +74,22 @@ function belctech_save_product_meta( $post_id ) {
 	}
 }
 add_action( 'save_post_product', 'belctech_save_product_meta' );
+
+function belctech_save_product_new_badge( $post_id ) {
+	if ( ! isset( $_POST['belctech_product_new_badge_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['belctech_product_new_badge_nonce'] ) ), 'belctech_product_new_badge' ) ) return;
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+	if ( ! current_user_can( 'edit_post', $post_id ) ) return;
+
+	if ( isset( $_POST['belctech_product_force_new'] ) ) {
+		update_post_meta( $post_id, 'belctech_product_force_new', '1' );
+	} else {
+		delete_post_meta( $post_id, 'belctech_product_force_new' );
+	}
+
+	if ( isset( $_POST['belctech_product_new_colors'] ) ) {
+		update_post_meta( $post_id, 'belctech_product_new_colors', '1' );
+	} else {
+		delete_post_meta( $post_id, 'belctech_product_new_colors' );
+	}
+}
+add_action( 'save_post_product', 'belctech_save_product_new_badge' );

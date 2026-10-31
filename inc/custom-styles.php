@@ -614,6 +614,20 @@ function belctech_custom_styles() {
 			color:<?php echo esc_attr( get_theme_mod('header_navigation_color_light', '#ffffff') ); ?>;
 		}
 	}
+	@media only screen and (min-width: 992px) {
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover {
+			background-color:<?php echo esc_attr( get_theme_mod('header_background_color', '#ffffff') ); ?>;
+		}
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover a,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .menu-toggle,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .icon,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .belctech-search button,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .et-header-text,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .et-switcher-container .selected,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover span.minicart-counter.et-count-zero {
+			color:<?php echo esc_attr( get_theme_mod('header_navigation_color', '#282828') ); ?>;
+		}
+	}
 	.et-header-menu .menu-label,
 	.mobile-menu .menu-label {
 		background-color:<?php echo esc_attr( get_theme_mod('header_navigation_tag_color', '#bbbbbb') ); ?>;
@@ -678,18 +692,16 @@ function belctech_custom_styles() {
 
 	/* Single product */
 	<?php
-		$showcase_bg = get_post_meta( $id, 'belctech_product_showcase_background', true);
+		$force_showcase_bg = (bool) get_theme_mod( 'product_force_showcase_background', true );
+		$global_showcase_bg = sanitize_hex_color( get_theme_mod( 'product_showcase_background_color', '#ffffff' ) ) ?: '#ffffff';
+		$product_showcase_bg = sanitize_hex_color( get_post_meta( $id, 'belctech_product_showcase_background', true ) );
+		$showcase_bg = $force_showcase_bg ? $global_showcase_bg : $product_showcase_bg;
 
-		if ( get_theme_mod('single_product_background', false) == true || $showcase_bg ) {
-			if (! $showcase_bg) { // use global value instead
-			$showcase_bg = get_theme_mod('single_product_background_color', '#f8f8f8');
-			}
+		if ( $showcase_bg ) {
 		?>
-		.easyzoom-flyout,
-		.single-product .pswp__bg,
-		.single-product .pswp__img--placeholder--blank,
-		.product-showcase {
-			background: <?php echo esc_attr( $showcase_bg ); ?>;
+		body.single-product .et-product-detail .product-showcase {
+			background-color: <?php echo esc_attr( $showcase_bg ); ?><?php echo $force_showcase_bg ? ' !important' : ''; ?>;
+			<?php if ( $force_showcase_bg ) { ?>background-image: none !important;<?php } ?>
 		}
 	<?php } ?>
 
@@ -767,7 +779,8 @@ function belctech_custom_styles() {
 	.et-product-detail .summary .badge.onsale {
 		border-color: <?php echo esc_attr( get_theme_mod('sale_badge_font_color', '#ef5c5c') ); ?>;
 	}
-	.product-inner .badge.new {
+	.product-inner .badge.new,
+	.product-inner .badge.new-colors {
 		color:<?php echo esc_attr( get_theme_mod('new_badge_font_color', '#585858') ); ?>;
 		background-color:<?php echo esc_attr( get_theme_mod('new_badge_background_color', '#ffffff') ); ?>;
 	}

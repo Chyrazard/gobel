@@ -1,6 +1,6 @@
 # Belctech Ecommerce
 
-Current version: 1.0.42.
+Current version: 1.0.53.
 
 Belctech Ecommerce is an installable WooCommerce theme derived from the existing
 site contract while replacing its setup framework and optional feature plugins
@@ -44,6 +44,7 @@ order and customer records are otherwise untouched.
 - Configurable Buy Now button with real checkout in an optional modal.
 - Carousel, column and grid product galleries.
 - Transparent header with a white sticky fade state.
+- Bundled VAAM wordmark as the safe default across every header preset.
 - Four block-widget footer columns and a Gutenberg footer pattern.
 
 ## Performance decisions

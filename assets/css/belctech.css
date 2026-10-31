@@ -470,7 +470,7 @@ select[data-belctech-native-select="1"] {
 
 .product .belctech-card-swatches .variable-item.disabled {
 	cursor: not-allowed;
-	opacity: .38;
+	opacity: 1 !important;
 }
 
 .product .belctech-card-swatches .variable-item.disabled .variable-item-contents::before,
@@ -1088,7 +1088,7 @@ body.belctech-checkout-modal-frame {
 
 	.single-product .sticky-product-bar-content.sticky-product-type-variable form.cart {
 		align-items: center;
-		column-gap: 14px;
+		column-gap: 20px;
 		flex: 1 1 auto;
 		justify-content: flex-end;
 		min-width: 0;
@@ -1103,16 +1103,39 @@ body.belctech-checkout-modal-frame {
 		min-width: 0;
 	}
 
+	.single-product .sticky-product-bar .variations {
+		flex: 1 1 auto;
+		width: 0;
+	}
+
+	.single-product .sticky-product-bar .variations tbody {
+		flex: 1 1 auto;
+		width: 100%;
+	}
+
 	.single-product .sticky-product-bar .variations tr {
 		align-items: center;
 		display: flex;
+		flex: 0 1 auto;
 		gap: 6px;
+		min-width: 0;
+	}
+
+	.single-product .sticky-product-bar .variations tr:has(.color-variable-items-wrapper),
+	.single-product .sticky-product-bar .variations tr:has(.image-variable-items-wrapper) {
+		flex: 1 1 auto;
 	}
 
 	.single-product .sticky-product-bar .variations th,
 	.single-product .sticky-product-bar .variations td {
 		border: 0;
+		min-width: 0;
 		padding: 0;
+	}
+
+	.single-product .sticky-product-bar .variations tr:has(.color-variable-items-wrapper) td.value,
+	.single-product .sticky-product-bar .variations tr:has(.image-variable-items-wrapper) td.value {
+		flex: 1 1 auto;
 	}
 
 	.single-product .sticky-product-bar .variations label {
@@ -1125,10 +1148,11 @@ body.belctech-checkout-modal-frame {
 		flex-wrap: nowrap;
 		gap: 4px;
 		margin: -3px 0;
-		max-width: 230px;
+		max-width: 100%;
 		overflow-x: auto;
 		padding: 3px;
 		scrollbar-width: none;
+		width: max-content;
 	}
 
 	.single-product .sticky-product-bar .variable-items-wrapper::-webkit-scrollbar {
@@ -1174,8 +1198,8 @@ body.belctech-checkout-modal-frame {
 	}
 
 	.single-product .sticky-product-bar .single_variation_wrap {
-		flex: 1 1 auto;
-		gap: 10px;
+		flex: 0 0 auto;
+		gap: 16px;
 		justify-content: flex-end;
 		min-width: 0;
 	}
@@ -1183,7 +1207,14 @@ body.belctech-checkout-modal-frame {
 	.single-product .sticky-product-bar .woocommerce-variation-add-to-cart {
 		align-items: center;
 		display: flex;
-		gap: 14px;
+		gap: 16px;
+	}
+
+	.single-product .sticky-product-bar .woocommerce-variation-add-to-cart .et-wishlist-div-open {
+		align-items: center;
+		display: flex;
+		flex: 0 0 auto;
+		gap: 12px;
 	}
 
 	.single-product .sticky-product-bar .stock {

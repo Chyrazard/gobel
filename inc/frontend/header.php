@@ -341,6 +341,44 @@ add_filter( 'belctech_header_class', 'belctech_header_classes' );
 /* Site Logo
 ---------------------------------------------------------- */
 
+/**
+ * Return the VAAM wordmark bundled with the theme.
+ *
+ * Keeping this asset local makes every header preset safe on a fresh install
+ * and avoids relying on the Media Library or an external URL for its fallback.
+ */
+function belctech_default_header_logo() {
+	return BELCTECH_THEME_URI . '/assets/img/vaam-logo.svg';
+}
+
+/**
+ * Prevent the retired bundled logo from resurfacing through legacy theme mods.
+ *
+ * Older releases used logo-light.png and logo-dark.png as their fallback. A
+ * saved URL can survive a theme update, so it must be resolved here as well as
+ * replacing the physical assets. Explicitly selected non-retired logos remain
+ * fully supported.
+ */
+function belctech_resolve_header_logo( $logo, $use_default = true ) {
+	if ( empty( $logo ) ) {
+		return $use_default ? belctech_default_header_logo() : '';
+	}
+
+	$logo_url = is_numeric( $logo ) ? wp_get_attachment_url( (int) $logo ) : (string) $logo;
+	$logo_url = rawurldecode( (string) $logo_url );
+	$logo_path = (string) wp_parse_url( $logo_url, PHP_URL_PATH );
+	$filename = strtolower( wp_basename( $logo_path ) );
+	$is_legacy_theme_logo = in_array( $filename, array( 'logo-light.png', 'logo-dark.png' ), true )
+		&& false !== strpos( strtolower( $logo_path ), '/assets/img/' );
+	$is_retired_brand = false !== strpos( strtolower( $logo_url ), 'goya' );
+
+	if ( $is_legacy_theme_logo || $is_retired_brand ) {
+		return belctech_default_header_logo();
+	}
+
+	return $logo;
+}
+
 function belctech_site_logo_dimensions( $logo ) {
 	static $cache = array();
 	if ( isset( $cache[ $logo ] ) ) return $cache[ $logo ];
@@ -364,6 +402,7 @@ function belctech_site_logo_dimensions( $logo ) {
 }
 
 function belctech_site_logo($logo,$color) {
+	$logo = belctech_resolve_header_logo( $logo );
 	$class = 'skip-lazy logoimg bg--'. esc_attr($color);
 	$site_name = get_bloginfo( 'name' );
 

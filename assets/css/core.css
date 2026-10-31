@@ -5466,6 +5466,41 @@
 			display: none;
 		}
 
+		/* Keep transparent headers readable while visitors explore the navigation. */
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover {
+			background-color: #fff;
+			transition-delay: 0s;
+		}
+		.page-header-transparent:not(.header_on_scroll) .site-header a,
+		.page-header-transparent:not(.header_on_scroll) .site-header .menu-toggle,
+		.page-header-transparent:not(.header_on_scroll) .site-header .icon,
+		.page-header-transparent:not(.header_on_scroll) .site-header .belctech-search button,
+		.page-header-transparent:not(.header_on_scroll) .site-header .et-header-text,
+		.page-header-transparent:not(.header_on_scroll) .site-header .et-switcher-container .selected {
+			transition: color .18s cubic-bezier(0.2, 0.06, 0.05, 0.95);
+		}
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover a,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .menu-toggle,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .icon,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .belctech-search button,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .et-header-text,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .et-switcher-container .selected,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover span.minicart-counter.et-count-zero {
+			color: #282828;
+		}
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .logolink .logoimg {
+			opacity: 1;
+			display: block;
+		}
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .logolink .logoimg.bg--dark,
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .logolink .logoimg.bg--alt {
+			opacity: 0;
+			display: none;
+		}
+		.page-header-transparent:not(.header_on_scroll) .site-header:hover .et-wishlist-counter.active {
+			background-color: rgba(0,0,0,.06);
+		}
+
 	}
 
 	/* Main Menu */
@@ -5556,7 +5591,8 @@
 	}
 	.big-menu > li:hover > .sub-menu,
 	.big-menu > li.active-big > .sub-menu,
-	.et-header-menu li:hover > .sub-menu {
+	.et-header-menu li:not(.menu-item-mega-parent):hover > .sub-menu,
+	.et-header-menu > li.menu-item-mega-parent.mega-menu-click-open > .sub-menu {
 		visibility: visible;
 		opacity: 1;
 	}
@@ -5617,7 +5653,7 @@
 		opacity: 1;
 		transition-delay: 0s;
 	}
-	.et-header-menu > li.menu-item-mega-parent:hover > .sub-menu > li .sub-menu {
+	.et-header-menu > li.menu-item-mega-parent.mega-menu-click-open > .sub-menu > li .sub-menu {
 		opacity: 1;
 		visibility: visible;
 	}
@@ -5645,7 +5681,7 @@
 	.menu-item.title-item > a {
 		margin-top: 20px;
 	}
-	.et-header-menu > li.menu-item-mega-parent:hover > .sub-menu {
+	.et-header-menu > li.menu-item-mega-parent.mega-menu-click-open > .sub-menu {
 		display: flex;
 		visibility: visible;
 		transition: all .18s cubic-bezier(0.2, 0.06, 0.05, 0.95);
@@ -5699,7 +5735,7 @@
 	}
 	.megamenu-column-animation .big-menu > li.menu-item-mega-parent:hover > .sub-menu > li,
 	.megamenu-column-animation .big-menu > li.menu-item-mega-parent.active-big > .sub-menu > li,
-	.megamenu-column-animation .et-header-menu > li.menu-item-mega-parent:hover > .sub-menu > li {
+	.megamenu-column-animation .et-header-menu > li.menu-item-mega-parent.mega-menu-click-open > .sub-menu > li {
 		opacity: 1;
 		transform: none;
 	}

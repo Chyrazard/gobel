@@ -148,6 +148,24 @@
 	.products .badge + .badge {
 		margin-top: 30px;
 	}
+	.products .belctech-new-badges {
+		display: flex;
+		gap: 6px;
+		left: 5%;
+		position: absolute;
+		top: 5%;
+		white-space: nowrap;
+		z-index: 2;
+	}
+	.products .belctech-new-badges .badge {
+		position: static;
+	}
+	.products .belctech-new-badges .badge + .badge {
+		margin-top: 0;
+	}
+	.products .belctech-new-badges + .badge {
+		margin-top: 30px;
+	}
 	.badge.onsale {
 		background: #fff;
 		color: #ef5c5c;
@@ -160,7 +178,8 @@
 		background: #fff;
 		color: #585858;
 	}
-	.badge.new {
+	.badge.new,
+	.badge.new-colors {
 		background: #fff;
 		color: #585858;
 	}
@@ -3369,6 +3388,7 @@
 	}
 	.et-product-detail .summary .onsale-before,
 	.et-product-detail .summary .badge.new,
+	.et-product-detail .summary .badge.new-colors,
 	.et-product-detail .summary .badge.out-of-stock {
 		display: none;
 	}
